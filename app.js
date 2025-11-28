@@ -1,3 +1,7 @@
+
+const APP_VERSION = "v1.2.0 - 2025-11-28";
+
+
 // ===================== AUDIO: BASISLETTERS =====================
 
 // Alleen losse letters hier. Klanken (korte/lange) worden automatisch

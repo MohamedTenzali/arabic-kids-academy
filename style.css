@@ -54,6 +54,16 @@ html, body {
   width: 100%;
   max-width: 900px;
 }
+.app-version {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #4f46e5; /* Paars (zelfde als je thema) */
+  font-weight: 600;
+  text-align: center;
+}
+
+
 
 @media (min-width: 768px) {
   .home-levels {
