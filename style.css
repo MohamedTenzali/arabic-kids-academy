@@ -1,27 +1,35 @@
+/* ============ BASIS / GLOBAL ============ */
 
 *,
-
-
 *::before,
 *::after {
   box-sizing: border-box;
 }
-.hidden {
-  display: none !important;
-}
 
-
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .view.hidden {
   display: none;
 }
 
-/* HOME VIEW */
+/* Kleine versie-tekst onder titel */
+.app-version {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+/* ============ HOME VIEW (NIVEAU-KIEZER) ============ */
 
 .home-view {
   min-height: 100vh;
@@ -54,16 +62,6 @@ html, body {
   width: 100%;
   max-width: 900px;
 }
-.app-version {
-  display: block;
-  margin-top: 4px;
-  font-size: 0.8rem;
-  color: #4f46e5; /* Paars (zelfde als je thema) */
-  font-weight: 600;
-  text-align: center;
-}
-
-
 
 @media (min-width: 768px) {
   .home-levels {
@@ -121,7 +119,7 @@ html, body {
   opacity: 0.9;
 }
 
-/* MAP VIEW */
+/* ============ MAP VIEW (ROADMAP + SLOTJES) ============ */
 
 .map-view {
   min-height: 100vh;
@@ -274,21 +272,7 @@ html, body {
   font-weight: 600;
 }
 
-/* ACTIVITY VIEW */
-.activity-view {
-  min-height: 100vh;
-  background: #f3f4ff;
-  display: flex;
-  flex-direction: column;
-}
-.activity-view {
-  min-height: 100vh;
-  background: #f3f4ff;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
+/* ============ ACTIVITY VIEW (LES + QUIZ + RESULTAAT) ============ */
 
 .activity-view {
   min-height: 100vh;
@@ -323,6 +307,8 @@ html, body {
   min-width: 160px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* quiz progress bar */
@@ -341,6 +327,13 @@ html, body {
   border-radius: inherit;
   width: 0%;
   transition: width 0.25s ease;
+}
+
+/* live score rechtsboven bij quiz */
+.quiz-score-live {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4b5563;
 }
 
 /* Algemene layout van activiteit */
@@ -373,6 +366,7 @@ html, body {
   color: #4f46e5;
   margin-bottom: 1.5rem;
   line-height: 1;
+  direction: rtl;
 }
 
 .lesson-name {
@@ -411,7 +405,7 @@ html, body {
   box-shadow: none;
 }
 
-/* Volgende / Afronden knop */
+/* Primaire knoppen */
 
 .primary-button {
   border: none;
@@ -438,7 +432,38 @@ html, body {
   box-shadow: 0 8px 16px rgba(79,70,229,0.35);
 }
 
-/* QUIZ */
+/* Secundaire variant (bv. 'Vorige') */
+
+.primary-button.secondary {
+  background: #fff;
+  color: #4f46e5;
+  border: 3px solid #4f46e5;
+  box-shadow: none;
+}
+
+.primary-button.secondary:hover {
+  background: #eef;
+  filter: brightness(1);
+}
+
+/* Navigatie-knoppen onder in de les */
+
+.lesson-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .lesson-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+}
+
+/* ============ QUIZ ============ */
 
 .quiz-question {
   font-size: 2.1rem;
@@ -510,7 +535,7 @@ html, body {
   color: #fb7185;
 }
 
-/* RESULT VIEW */
+/* ============ RESULT VIEW (OVERLAY) ============ */
 
 .result-view {
   position: absolute;
@@ -546,81 +571,13 @@ html, body {
 
 .result-score {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 1.25rem;
+  font-size: 1.0rem;
   margin-bottom: 1.75rem;
 }
 
-/* Animaties */
+/* ============ ANIMATIES ============ */
 
 @keyframes pulseSlow {
   0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234,179,8,0.5); }
   50%      { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(234,179,8,0); }
 }
-/* Navigatie-knoppen onder in de les */
-.lesson-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.primary-button.secondary {
-  background: #e5eee4;
-  color: #4f46e5;
-  border: 3px solid #4f46e5;
-  box-shadow: none;
-}
-
-.primary-button.secondary:hover {
-  background: #eef;
-  filter: brightness(1);
-}
-
-@media (max-width: 600px) {
-  .lesson-nav {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-}
-.quiz-score-live {
-  margin-left: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #4f46e5;
-  display: inline-flex;
-  align-items: center;
-}
-
-/* iets meer ruimte in de header */
-.activity-progress {
-  gap: 0.5rem;
-}
-
-/* op kleine schermen onder elkaar */
-@media (max-width: 640px) {
-  .activity-progress {
-    flex-direction: column;
-    align-items: flex-end;
-  }
-}
-.quiz-score-live {
-  margin-left: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #4f46e5;
-  display: inline-flex;
-  align-items: center;
-}
-
-.activity-progress {
-  gap: 0.5rem;
-}
-
-@media (max-width: 640px) {
-  .activity-progress {
-    flex-direction: column;
-    align-items: flex-end;
-  }
-}
-

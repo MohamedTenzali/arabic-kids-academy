@@ -6,27 +6,26 @@
   <title>Arabic Kids Academy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- PWA -->
+  <!-- ============ PWA / ICONS ============ -->
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#4f46e5" />
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- HOME VIEW -->
+  <!-- ============ HOME VIEW (NIVEAU-KIEZER) ============ -->
   <div id="homeView" class="view home-view">
     <div class="home-header">
       <h1>Arabic Kids Academy</h1>
       <p>Leer Arabische letters, klanken, woorden en zinnen – stap voor stap!</p>
-
-      <!-- VERSIE NUMMER -->
+      <!-- Versie-label van de app: handmatig bijwerken bij nieuwe release -->
       <small class="app-version">Versie: v1.2.0</small>
-
     </div>
 
     <div class="home-levels">
@@ -50,7 +49,7 @@
     </div>
   </div>
 
-  <!-- MAP VIEW -->
+  <!-- ============ MAP VIEW (SPEELBORD MET SLOTJES) ============ -->
   <div id="mapView" class="view map-view hidden">
     <button id="btnBackHome" class="back-home">⌂ Terug naar start</button>
     <h2 id="mapTitle" class="map-title"></h2>
@@ -61,26 +60,27 @@
     </div>
   </div>
 
-  <!-- ACTIVITY VIEW -->
+  <!-- ============ ACTIVITY VIEW (LES + QUIZ + RESULTAAT) ============ -->
   <div id="activityView" class="view activity-view hidden">
+    <!-- Bovenbalk met titel + voortgang -->
     <div class="activity-header">
       <button id="btnActivityBack" class="activity-back">Stop</button>
       <div id="activityTitle" class="activity-title"></div>
       <div id="activityProgress" class="activity-progress"></div>
     </div>
 
-    <!-- LESSON -->
+    <!-- LES-MODUS (letters, klanken, woorden, zinnen) -->
     <div id="lessonContent" class="activity-body hidden">
       <div class="lesson-card">
         <div id="lessonArabic" class="lesson-arabic"></div>
 
-        <div class="lesson-audio-buttons">
-          <button id="btnSpeak" class="tts-button">🔊 Afspelen</button>
-        </div>
+        <!-- TTS-knop: gebruikt lokale mp3-bestanden via app.js -->
+        <button id="btnSpeak" class="tts-button">🔊 Afspelen</button>
 
         <div id="lessonName" class="lesson-name"></div>
         <div id="lessonDesc" class="lesson-desc"></div>
 
+        <!-- Navigatie binnen de les -->
         <div class="lesson-nav">
           <button id="btnLessonPrev" class="primary-button secondary">Vorige</button>
           <button id="btnLessonNext" class="primary-button">Volgende</button>
@@ -88,15 +88,14 @@
       </div>
     </div>
 
-
-    <!-- QUIZ -->
+    <!-- QUIZ-MODUS (letters / klanken / eind-examen) -->
     <div id="quizContent" class="activity-body hidden">
       <h2 id="quizQuestion" class="quiz-question"></h2>
       <div id="quizOptions" class="quiz-options"></div>
       <div id="quizFeedback" class="quiz-feedback"></div>
     </div>
 
-    <!-- RESULTAAT -->
+    <!-- RESULTAAT-OVERLAY (na les of quiz) -->
     <div id="resultContent" class="result-view hidden">
       <div class="result-card">
         <div id="resultEmoji" class="result-emoji"></div>
@@ -108,9 +107,10 @@
     </div>
   </div>
 
-  <!-- SCRIPTS -->
+  <!-- ============ SCRIPTS ============ -->
   <script src="app.js"></script>
   <script>
+    // Service worker registratie voor PWA / offline
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("service-worker.js").catch(err => {
@@ -121,5 +121,4 @@
   </script>
 
 </body>
-
 </html>
