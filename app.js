@@ -838,11 +838,12 @@ function renderStickers() {
 btnResultPrimary.addEventListener("click", () => {
   const data = CONTENT_DATA[currentActivityStep.dataKey];
   const isLesson = data.type === "lesson";
-  const total = !isLesson ? data.questions.length : 0;
-  const percentage = !isLesson && total > 0
+  const isMemory = data.type === "memory";
+  const total = !isLesson && !isMemory ? data.questions.length : 0;
+  const percentage = !isLesson && !isMemory && total > 0
     ? Math.round((quizScore / total) * 100)
     : 100;
-  const passed = isLesson || percentage >= 70;
+  const passed = isLesson || isMemory || percentage >= 70;
 
   if (passed) {
     if (!completedSteps.includes(currentActivityStep.id)) {
