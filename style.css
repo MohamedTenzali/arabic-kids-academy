@@ -544,6 +544,7 @@ body {
   align-items: center;
   justify-content: center;
   background: rgba(79,70,229,0.95);
+  z-index: 1000;
 }
 
 .result-card {
