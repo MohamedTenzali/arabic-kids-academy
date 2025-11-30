@@ -12,6 +12,8 @@
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
@@ -118,24 +120,12 @@
   </div>
 
   <!-- ============ SCRIPTS ============ -->
-  <script src="app.js"></script>
-  <script>
-    // Service worker registratie voor PWA / offline
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js").catch(err => {
-          console.error("Service worker registratie fout:", err);
-        });
-      });
-    }
-  </script>
   <!-- UPDATE-BANNER (verborgen tot er een update is) -->
   <div id="updateBanner" class="update-banner hidden">
     <span>Nieuwe versie beschikbaar.</span>
     <button id="btnUpdateNow" class="update-button">Update</button>
   </div>
 
-  <!-- SCRIPTS -->
   <script src="app.js"></script>
   <script>
     // Service worker registratie + update-logica
@@ -180,12 +170,6 @@
       });
     }
   </script>
-
-</body>
-
-</html>
-
-
 </body>
 
 </html>
