@@ -758,3 +758,25 @@ body {
   opacity: 0.6;
   cursor: wait;
 }
+
+/* Lesson emoji display */
+.lesson-emoji {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+  animation: emojiPop 0.5s ease;
+}
+
+@keyframes emojiPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

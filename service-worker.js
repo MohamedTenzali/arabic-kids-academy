@@ -3,7 +3,7 @@
 // PWA updates + cache per versie
 // =====================================
 
-const APP_VERSION = "1.3.5"; // zelfde versie als in index.html
+const APP_VERSION = "1.4.0"; // zelfde versie als in index.html
 const CACHE_NAME = "arabic-kids-academy-v-" + APP_VERSION;
 
 // Bestanden die we vooraf cachen (app-shell)

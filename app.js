@@ -326,34 +326,34 @@ const CONTENT_DATA = {
     title: "Het Alfabet",
     type: "lesson",
     content: [
-      { arabic: "أ", name: "Alif", description: "Klinkt als een lange 'aa' (zoals in 'kaas')." },
-      { arabic: "ب", name: "Ba", description: "Klinkt als de 'b' in 'boom'." },
-      { arabic: "ت", name: "Ta", description: "Klinkt als de 't' in 'tafel'." },
-      { arabic: "ث", name: "Tha", description: "Klinkt als 'th' in 'think' (zachte th)." },
-      { arabic: "ج", name: "Jim", description: "Klinkt als de 'dj' in 'djoek' of 'djeep'." },
-      { arabic: "ح", name: "Ha (zacht)", description: "Een zachte 'h' uit de keel, zwaarder dan Nederlands." },
-      { arabic: "خ", name: "Kha", description: "Klinkt als een harde 'ch' in 'gracht'." },
-      { arabic: "د", name: "Dal", description: "Klinkt als de 'd' in 'deur'." },
-      { arabic: "ذ", name: "Dhal", description: "Klinkt als 'th' in 'this' (harde th)." },
-      { arabic: "ر", name: "Ra", description: "Een rollende 'r'." },
-      { arabic: "ز", name: "Zay", description: "Klinkt als de 'z' in 'zon'." },
-      { arabic: "س", name: "Sin", description: "Klinkt als de 's' in 'sok'." },
-      { arabic: "ش", name: "Shin", description: "Klinkt als 'sj' in 'sjaal'." },
-      { arabic: "ص", name: "Sad", description: "Een zware 's', dikker uitgesproken." },
-      { arabic: "ض", name: "Dad", description: "Zware 'd' (Arabische speciale letter)." },
-      { arabic: "ط", name: "Ta (dik)", description: "Zware/dikke 't'." },
-      { arabic: "ظ", name: "Za (dik)", description: "Zware 'z', lijkt op harde 'th' maar dikker." },
-      { arabic: "ع", name: "Ayn", description: "Keelklank, geen exacte Nederlandse klank." },
-      { arabic: "غ", name: "Ghayn", description: "Klinkt als Franse / Arabische 'gh'." },
-      { arabic: "ف", name: "Fa", description: "Klinkt als de 'f' in 'fiets'." },
-      { arabic: "ق", name: "Qaf", description: "Een harde 'k' uit de keel." },
-      { arabic: "ك", name: "Kaf", description: "Normale 'k' zoals in 'kat'." },
-      { arabic: "ل", name: "Lam", description: "Klinkt als de 'l' in 'lamp'." },
-      { arabic: "م", name: "Mim", description: "Klinkt als de 'm' in 'maan'." },
-      { arabic: "ن", name: "Nun", description: "Klinkt als de 'n' in 'neus'." },
-      { arabic: "هـ", name: "Ha", description: "Normale 'h' zoals in 'huis'." },
-      { arabic: "و", name: "Waw", description: "Klinkt als 'w' in 'water' of lange 'oe'." },
-      { arabic: "ي", name: "Ya", description: "Klinkt als 'j' in 'jas' of lange 'ie'." }
+      { arabic: "أ", name: "Alif", emoji: "🐰", description: "Klinkt als een lange 'aa' (zoals in 'kaas'). Arnab = Konijn" },
+      { arabic: "ب", name: "Ba", emoji: "🦆", description: "Klinkt als de 'b' in 'boom'. Batta = Eend" },
+      { arabic: "ت", name: "Ta", emoji: "🍎", description: "Klinkt als de 't' in 'tafel'. Tuffah = Appel" },
+      { arabic: "ث", name: "Tha", emoji: "🐍", description: "Klinkt als 'th' in 'think' (zachte th). Thu'ban = Slang" },
+      { arabic: "ج", name: "Jim", emoji: "🐪", description: "Klinkt als de 'dj' in 'djoek' of 'djeep'. Jamal = Kameel" },
+      { arabic: "ح", name: "Ha (zacht)", emoji: "🐴", description: "Een zachte 'h' uit de keel, zwaarder dan Nederlands. Hisan = Paard" },
+      { arabic: "خ", name: "Kha", emoji: "🥒", description: "Klinkt als een harde 'ch' in 'gracht'. Khiyar = Komkommer" },
+      { arabic: "د", name: "Dal", emoji: "🐻", description: "Klinkt als de 'd' in 'deur'. Dubb = Beer" },
+      { arabic: "ذ", name: "Dhal", emoji: "🐺", description: "Klinkt als 'th' in 'this' (harde th). Dhi'b = Wolf" },
+      { arabic: "ر", name: "Ra", emoji: "👨", description: "Een rollende 'r'. Rajul = Man" },
+      { arabic: "ز", name: "Zay", emoji: "🌸", description: "Klinkt als de 'z' in 'zon'. Zahra = Bloem" },
+      { arabic: "س", name: "Sin", emoji: "🐟", description: "Klinkt als de 's' in 'sok'. Samak = Vis" },
+      { arabic: "ش", name: "Shin", emoji: "☀️", description: "Klinkt als 'sj' in 'sjaal'. Shams = Zon" },
+      { arabic: "ص", name: "Sad", emoji: "🦅", description: "Een zware 's', dikker uitgesproken. Saqr = Valk" },
+      { arabic: "ض", name: "Dad", emoji: "🐸", description: "Zware 'd' (Arabische speciale letter). Difda' = Kikker" },
+      { arabic: "ط", name: "Ta (dik)", emoji: "🐦", description: "Zware/dikke 't'. Tayr = Vogel" },
+      { arabic: "ظ", name: "Za (dik)", emoji: "🦌", description: "Zware 'z', lijkt op harde 'th' maar dikker. Zabi = Hert" },
+      { arabic: "ع", name: "Ayn", emoji: "👁️", description: "Keelklank, geen exacte Nederlandse klank. Ayn = Oog" },
+      { arabic: "غ", name: "Ghayn", emoji: "☁️", description: "Klinkt als Franse / Arabische 'gh'. Ghaym = Wolk" },
+      { arabic: "ف", name: "Fa", emoji: "🐘", description: "Klinkt als de 'f' in 'fiets'. Fil = Olifant" },
+      { arabic: "ق", name: "Qaf", emoji: "🐒", description: "Een harde 'k' uit de keel. Qird = Aap" },
+      { arabic: "ك", name: "Kaf", emoji: "🐶", description: "Normale 'k' zoals in 'kat'. Kalb = Hond" },
+      { arabic: "ل", name: "Lam", emoji: "🦁", description: "Klinkt als de 'l' in 'lamp'. Layth = Leeuw" },
+      { arabic: "م", name: "Mim", emoji: "💧", description: "Klinkt als de 'm' in 'maan'. Maa = Water" },
+      { arabic: "ن", name: "Nun", emoji: "🐝", description: "Klinkt als de 'n' in 'neus'. Nahl = Bij" },
+      { arabic: "هـ", name: "Ha", emoji: "🏠", description: "Normale 'h' zoals in 'huis'. Bayt = Huis" },
+      { arabic: "و", name: "Waw", emoji: "🌹", description: "Klinkt als 'w' in 'water' of lange 'oe'. Warda = Roos" },
+      { arabic: "ي", name: "Ya", emoji: "✋", description: "Klinkt als 'j' in 'jas' of lange 'ie'. Yad = Hand" }
     ]
   },
 
@@ -912,7 +912,13 @@ function renderLessonSlide() {
   const data = CONTENT_DATA[currentActivityStep.dataKey];
   const slide = data.content[currentSlide];
 
-  lessonArabicEl.textContent = slide.arabic;
+  // Display emoji if present
+  if (slide.emoji) {
+    lessonArabicEl.innerHTML = `<div class="lesson-emoji">${slide.emoji}</div>${slide.arabic}`;
+  } else {
+    lessonArabicEl.textContent = slide.arabic;
+  }
+
   lessonNameEl.textContent = slide.name;
   lessonDescEl.textContent = slide.description;
 
