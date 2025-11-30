@@ -477,6 +477,22 @@ const CONTENT_DATA = {
         options: ["ت", "ب", "ن"], answer: "ت"
       }
     ]
+  },
+
+  // Memory Spel
+  memory_letters: {
+    title: "Memory Spel",
+    type: "memory",
+    pairs: [
+      { id: 1, content: "أ" },
+      { id: 2, content: "ب" },
+      { id: 3, content: "ت" },
+      { id: 4, content: "ج" },
+      { id: 5, content: "ح" },
+      { id: 6, content: "د" },
+      { id: 7, content: "ر" },
+      { id: 8, content: "س" }
+    ]
   }
 };
 
@@ -490,11 +506,12 @@ const ROADMAPS = {
   beginner: [
     { id: "step1", dataKey: "intro_letters", title: "1. 🔤 Letters leren", icon: "🔤" },
     { id: "step2", dataKey: "quiz_letters", title: "2. ⭐ Quiz: letters", icon: "⭐" },
-    { id: "step3", dataKey: "intro_vowels", title: "3. 🎵 Klanken", icon: "🎵" },
-    { id: "step4", dataKey: "quiz_vowels", title: "4. ⭐ Quiz: klanken", icon: "⭐" },
-    { id: "step5", dataKey: "make_words", title: "5. 🧩 Woorden maken", icon: "🧩" },
-    { id: "step6", dataKey: "sentences", title: "6. ✏️ Zinnen vormen", icon: "✏️" },
-    { id: "step7", dataKey: "final_exam", title: "7. 🏆 Eind examen", icon: "🏆", isFinal: true }
+    { id: "step2b", dataKey: "memory_letters", title: "3. 🎮 Memory Spel", icon: "🎮" },
+    { id: "step3", dataKey: "intro_vowels", title: "4. 🎵 Klanken", icon: "🎵" },
+    { id: "step4", dataKey: "quiz_vowels", title: "5. ⭐ Quiz: klanken", icon: "⭐" },
+    { id: "step5", dataKey: "make_words", title: "6. 🧩 Woorden maken", icon: "🧩" },
+    { id: "step6", dataKey: "sentences", title: "7. ✏️ Zinnen vormen", icon: "✏️" },
+    { id: "step7", dataKey: "final_exam", title: "8. 🏆 Eind examen", icon: "🏆", isFinal: true }
   ],
   advanced: [
     { id: "step3", dataKey: "intro_vowels", title: "1. Klanken", icon: "🔊" },
@@ -578,6 +595,8 @@ const activityProgressEl = document.getElementById("activityProgress");
 const lessonContentEl = document.getElementById("lessonContent");
 const quizContentEl = document.getElementById("quizContent");
 const resultContentEl = document.getElementById("resultContent");
+const memoryContentEl = document.getElementById("memoryContent");
+const memoryGridEl = document.getElementById("memoryGrid");
 
 const lessonArabicEl = document.getElementById("lessonArabic");
 const lessonNameEl = document.getElementById("lessonName");
@@ -866,15 +885,22 @@ function startActivity(step, retry) {
   quizFeedbackEl.textContent = "";
   quizFeedbackEl.className = "quiz-feedback";
 
-  // 6. kiezen tussen les of quiz
+  // 6. kiezen tussen les, quiz of memory
   if (data.type === "lesson") {
     lessonContentEl.classList.remove("hidden");
     quizContentEl.classList.add("hidden");
+    memoryContentEl.classList.add("hidden");
     renderLessonSlide();
-  } else {
+  } else if (data.type === "quiz") {
     lessonContentEl.classList.add("hidden");
     quizContentEl.classList.remove("hidden");
+    memoryContentEl.classList.add("hidden");
     renderQuizSlide();
+  } else if (data.type === "memory") {
+    lessonContentEl.classList.add("hidden");
+    quizContentEl.classList.add("hidden");
+    memoryContentEl.classList.remove("hidden");
+    renderMemoryGame();
   }
 }
 
@@ -1026,3 +1052,123 @@ function showResultForActivity() {
 
 setView("home");
 renderStickers();
+
+// =======================================================
+// MEMORY GAME LOGICA
+// =======================================================
+
+let memoryCards = [];
+let flippedCards = [];
+let matchedPairs = 0;
+
+function renderMemoryGame() {
+  const data = CONTENT_DATA[currentActivityStep.dataKey];
+  if (!data || data.type !== "memory") return;
+
+  // Reset game state
+  memoryCards = [];
+  flippedCards = [];
+  matchedPairs = 0;
+
+  // Maak paren: elk item 2x
+  const pairs = data.pairs;
+  const cards = [];
+  pairs.forEach((pair, index) => {
+    cards.push({ ...pair, pairId: index, uniqueId: `${index}-a` });
+    cards.push({ ...pair, pairId: index, uniqueId: `${index}-b` });
+  });
+
+  // Shuffle de kaarten
+  memoryCards = shuffleArray(cards);
+
+  // Render grid
+  memoryGridEl.innerHTML = "";
+  activityProgressEl.textContent = `Paren: 0 / ${pairs.length}`;
+
+  memoryCards.forEach((card) => {
+    const cardEl = document.createElement("div");
+    cardEl.className = "memory-card";
+    cardEl.dataset.uniqueId = card.uniqueId;
+    cardEl.dataset.pairId = card.pairId;
+
+    cardEl.innerHTML = `
+      <div class="memory-card-inner">
+        <div class="memory-card-front">?</div>
+        <div class="memory-card-back">${card.content}</div>
+      </div>
+    `;
+
+    cardEl.addEventListener("click", () => handleMemoryCardClick(cardEl, card));
+    memoryGridEl.appendChild(cardEl);
+  });
+}
+
+function handleMemoryCardClick(cardEl, card) {
+  // Negeer als kaart al geflipped of gematched is
+  if (cardEl.classList.contains("flipped") || cardEl.classList.contains("matched")) {
+    return;
+  }
+
+  // Negeer als er al 2 kaarten open zijn
+  if (flippedCards.length >= 2) {
+    return;
+  }
+
+  // Flip de kaart
+  cardEl.classList.add("flipped");
+  flippedCards.push({ cardEl, card });
+
+  // Als er nu 2 kaarten open zijn, check voor match
+  if (flippedCards.length === 2) {
+    setTimeout(checkMemoryMatch, 600);
+  }
+}
+
+function checkMemoryMatch() {
+  const [first, second] = flippedCards;
+
+  if (first.card.pairId === second.card.pairId) {
+    // Match!
+    first.cardEl.classList.add("matched");
+    second.cardEl.classList.add("matched");
+    playCorrectSound();
+    matchedPairs++;
+
+    const data = CONTENT_DATA[currentActivityStep.dataKey];
+    const totalPairs = data.pairs.length;
+    activityProgressEl.textContent = `Paren: ${matchedPairs} / ${totalPairs}`;
+
+    // Check of alle paren gevonden zijn
+    if (matchedPairs === totalPairs) {
+      setTimeout(showMemoryResult, 800);
+    }
+  } else {
+    // Geen match
+    playWrongSound();
+    setTimeout(() => {
+      first.cardEl.classList.remove("flipped");
+      second.cardEl.classList.remove("flipped");
+    }, 800);
+  }
+
+  flippedCards = [];
+}
+
+function showMemoryResult() {
+  resultContentEl.classList.remove("hidden");
+  resultEmojiEl.textContent = "🎉";
+  resultTitleEl.textContent = "Geweldig!";
+  resultTextEl.textContent = "Je hebt alle paren gevonden!";
+  resultScoreEl.textContent = "";
+  btnResultPrimary.textContent = "Ga verder";
+}
+
+// Shuffle helper
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
