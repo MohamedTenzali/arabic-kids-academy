@@ -730,3 +730,31 @@ body {
   color: #16a34a;
   border-color: #22c55e;
 }
+
+/* Quiz audio button */
+.quiz-audio-btn {
+  margin-left: 1rem;
+  border: none;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+  transition: transform 0.15s ease;
+  vertical-align: middle;
+}
+
+.quiz-audio-btn:hover {
+  transform: scale(1.05);
+}
+
+.quiz-audio-btn:active {
+  transform: scale(0.95);
+}
+
+.quiz-audio-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}

@@ -952,10 +952,30 @@ function renderQuizSlide() {
     return;
   }
 
-  quizQuestionEl.textContent = q.question;
+  quizQuestionEl.innerHTML = `
+    ${q.question}
+    <button class="quiz-audio-btn" id="quizAudioBtn" aria-label="Luister naar de letter">🔊</button>
+  `;
+
   quizOptionsEl.innerHTML = "";
   quizFeedbackEl.textContent = "";
   quizFeedbackEl.className = "quiz-feedback";
+
+  // Audio knop event listener
+  const audioBtn = document.getElementById("quizAudioBtn");
+  if (audioBtn && q.answer) {
+    audioBtn.addEventListener("click", () => {
+      speak(q.answer, (loading) => {
+        if (loading) {
+          audioBtn.textContent = "⏳";
+          audioBtn.disabled = true;
+        } else {
+          audioBtn.textContent = "🔊";
+          audioBtn.disabled = false;
+        }
+      });
+    });
+  }
 
   q.options.forEach((opt) => {
     const btn = document.createElement("button");
