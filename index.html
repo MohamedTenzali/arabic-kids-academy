@@ -25,7 +25,8 @@
       <h1>Arabic Kids Academy</h1>
       <p>Leer Arabische letters, klanken, woorden en zinnen – stap voor stap!</p>
       <!-- Versie-label van de app: handmatig bijwerken bij nieuwe release -->
-      <small class="app-version">Versie: v1.2.0</small>
+      <small class="app-version">Versie: v1.3.0</small>
+
     </div>
 
     <div class="home-levels">
@@ -119,6 +120,61 @@
       });
     }
   </script>
+    <!-- UPDATE-BANNER (verborgen tot er een update is) -->
+  <div id="updateBanner" class="update-banner hidden">
+    <span>Nieuwe versie beschikbaar.</span>
+    <button id="btnUpdateNow" class="update-button">Update</button>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="app.js"></script>
+  <script>
+    // Service worker registratie + update-logica
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
+        try {
+          const registration = await navigator.serviceWorker.register("service-worker.js");
+
+          let newWorker = null;
+
+          // Als er een nieuwe service worker wordt gevonden
+          registration.addEventListener("updatefound", () => {
+            newWorker = registration.installing;
+            newWorker.addEventListener("statechange", () => {
+              // 'installed' + al een controller = er is een nieuwe versie beschikbaar
+              if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                const banner = document.getElementById("updateBanner");
+                if (banner) banner.classList.remove("hidden");
+              }
+            });
+          });
+
+          // Als de nieuwe SW actief wordt, pagina herladen
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            window.location.reload();
+          });
+
+          const btnUpdateNow = document.getElementById("btnUpdateNow");
+          if (btnUpdateNow) {
+            btnUpdateNow.addEventListener("click", () => {
+              // Vraag de nieuwe SW om meteen actief te worden
+              if (registration.waiting) {
+                registration.waiting.postMessage({ type: "SKIP_WAITING" });
+              } else if (newWorker) {
+                newWorker.postMessage({ type: "SKIP_WAITING" });
+              }
+            });
+          }
+        } catch (err) {
+          console.error("Service worker registratie fout:", err);
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
