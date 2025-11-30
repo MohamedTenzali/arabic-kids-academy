@@ -19,31 +19,40 @@
 
 <body>
 
-  <!-- ============ HOME VIEW (NIVEAU-KIEZER) ============ -->
   <div id="homeView" class="view home-view">
     <div class="home-header">
       <h1>Arabic Kids Academy</h1>
       <p>Leer Arabische letters, klanken, woorden en zinnen – stap voor stap!</p>
       <!-- Versie-label van de app: handmatig bijwerken bij nieuwe release -->
       <small class="app-version">Versie: v1.3.0</small>
-
     </div>
 
+    <!-- NIEUW: beloningenbalk -->
+    <div class="reward-bar">
+      <span class="reward-label">Mijn stickers:</span>
+      <span id="rewardStickers" class="reward-stickers">Nog geen stickers…</span>
+    </div>
+
+
+
     <div class="home-levels">
-      <button class="level-card level-beginner" data-level="beginner">
-        <div class="level-icon">★</div>
+      <button class="level-card level-beginner" data-level="beginner"
+        aria-label="Niveau Beginner: Start bij 0, letters leren">
+        <div class="level-icon" aria-hidden="true">★</div>
         <h2>Beginner</h2>
         <p>Start bij 0: letters leren</p>
       </button>
 
-      <button class="level-card level-advanced" data-level="advanced">
-        <div class="level-icon">📖</div>
+      <button class="level-card level-advanced" data-level="advanced"
+        aria-label="Niveau Gevorderd: Begin bij klanken en lezen">
+        <div class="level-icon" aria-hidden="true">📖</div>
         <h2>Gevorderd</h2>
         <p>Begin bij klanken &amp; lezen</p>
       </button>
 
-      <button class="level-card level-expert" data-level="expert">
-        <div class="level-icon">🏆</div>
+      <button class="level-card level-expert" data-level="expert"
+        aria-label="Niveau De Beste: Direct naar woorden en zinnen">
+        <div class="level-icon" aria-hidden="true">🏆</div>
         <h2>De Beste</h2>
         <p>Direct naar woorden &amp; zinnen</p>
       </button>
@@ -120,7 +129,7 @@
       });
     }
   </script>
-    <!-- UPDATE-BANNER (verborgen tot er een update is) -->
+  <!-- UPDATE-BANNER (verborgen tot er een update is) -->
   <div id="updateBanner" class="update-banner hidden">
     <span>Nieuwe versie beschikbaar.</span>
     <button id="btnUpdateNow" class="update-button">Update</button>
@@ -173,8 +182,10 @@
   </script>
 
 </body>
+
 </html>
 
 
 </body>
+
 </html>

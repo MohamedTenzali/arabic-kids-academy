@@ -121,9 +121,9 @@ const LONG_VOWELS = [
 
 // Alle basisletters waarvoor we klanken genereren
 const BASE_LETTERS = [
-  "أ","ب","ت","ث","ج","ح","خ","د","ذ","ر","ز",
-  "س","ش","ص","ض","ط","ظ","ع","غ","ف","ق",
-  "ك","ل","م","ن","ه","و","ي"
+  "أ", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز",
+  "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق",
+  "ك", "ل", "م", "ن", "ه", "و", "ي"
 ];
 
 // Bouw voor elke (letter, klinker) de uitleg-slides
@@ -179,35 +179,35 @@ function resolveVowelAudio(arabicText) {
 
 // Basis-woordenlijst: id wordt gebruikt in bestandsnaam: audio/word_<id>.mp3
 const WORD_ITEMS = [
-  { id: "baab",   arabic: "بَاب",   name: "Baab",   nl: "Deur" },
-  { id: "bayt",   arabic: "بَيْت",  name: "Bayt",   nl: "Huis" },
+  { id: "baab", arabic: "بَاب", name: "Baab", nl: "Deur" },
+  { id: "bayt", arabic: "بَيْت", name: "Bayt", nl: "Huis" },
   { id: "kitaab", arabic: "كِتَاب", name: "Kitaab", nl: "Boek" },
-  { id: "ab",     arabic: "أَب",    name: "Ab",     nl: "Vader" },
-  { id: "umm",    arabic: "أُمّ",   name: "Umm",    nl: "Moeder" },
-  { id: "walad",  arabic: "وَلَد",  name: "Walad",  nl: "Jongen" },
-  { id: "bint",   arabic: "بِنْت",  name: "Bint",   nl: "Meisje" },
-  { id: "madrasa",arabic: "مَدْرَسَة", name: "Madrasa", nl: "School" },
-  { id: "kursi",  arabic: "كُرْسِيّ", name: "Kursi", nl: "Stoel" },
-  { id: "maktab", arabic: "مَكْتَب",  name: "Maktab", nl: "Bureau" },
-  { id: "qalb",   arabic: "قَلْب",   name: "Qalb",   nl: "Hart" },
-  { id: "yad",    arabic: "يَد",     name: "Yad",    nl: "Hand" },
-  { id: "ain",    arabic: "عَيْن",   name: "Ayn",    nl: "Oog" },
-  { id: "ras",    arabic: "رَأْس",   name: "Ra’s",   nl: "Hoofd" },
-  { id: "samaa",  arabic: "سَمَاء",  name: "Samaa",  nl: "Lucht" },
-  { id: "shams",  arabic: "شَمْس",   name: "Shams",  nl: "Zon" },
-  { id: "qamar",  arabic: "قَمَر",   name: "Qamar",  nl: "Maan" },
-  { id: "maa",    arabic: "مَاء",    name: "Maa",    nl: "Water" },
-  { id: "laban",  arabic: "لَبَن",   name: "Laban",  nl: "Melk" },
+  { id: "ab", arabic: "أَب", name: "Ab", nl: "Vader" },
+  { id: "umm", arabic: "أُمّ", name: "Umm", nl: "Moeder" },
+  { id: "walad", arabic: "وَلَد", name: "Walad", nl: "Jongen" },
+  { id: "bint", arabic: "بِنْت", name: "Bint", nl: "Meisje" },
+  { id: "madrasa", arabic: "مَدْرَسَة", name: "Madrasa", nl: "School" },
+  { id: "kursi", arabic: "كُرْسِيّ", name: "Kursi", nl: "Stoel" },
+  { id: "maktab", arabic: "مَكْتَب", name: "Maktab", nl: "Bureau" },
+  { id: "qalb", arabic: "قَلْب", name: "Qalb", nl: "Hart" },
+  { id: "yad", arabic: "يَد", name: "Yad", nl: "Hand" },
+  { id: "ain", arabic: "عَيْن", name: "Ayn", nl: "Oog" },
+  { id: "ras", arabic: "رَأْس", name: "Ra’s", nl: "Hoofd" },
+  { id: "samaa", arabic: "سَمَاء", name: "Samaa", nl: "Lucht" },
+  { id: "shams", arabic: "شَمْس", name: "Shams", nl: "Zon" },
+  { id: "qamar", arabic: "قَمَر", name: "Qamar", nl: "Maan" },
+  { id: "maa", arabic: "مَاء", name: "Maa", nl: "Water" },
+  { id: "laban", arabic: "لَبَن", name: "Laban", nl: "Melk" },
   { id: "tuffah", arabic: "تُفَّاح", name: "Tuffah", nl: "Appel" },
-  { id: "khubz",  arabic: "خُبْز",   name: "Khubz",  nl: "Brood" },
-  { id: "sukar",  arabic: "سُكَّر",  name: "Sukkar", nl: "Suiker" },
-  { id: "qahwa",  arabic: "قَهْوَة", name: "Qahwa",  nl: "Koffie" },
-  { id: "halib",  arabic: "حَلِيب",  name: "Halib",  nl: "Melk (ander woord)" },
-  { id: "sayyara",arabic: "سَيَّارَة", name: "Sayyara", nl: "Auto" },
-  { id: "babun",  arabic: "بَابٌ",  name: "Baab (onbep.)", nl: "Een deur" },
+  { id: "khubz", arabic: "خُبْز", name: "Khubz", nl: "Brood" },
+  { id: "sukar", arabic: "سُكَّر", name: "Sukkar", nl: "Suiker" },
+  { id: "qahwa", arabic: "قَهْوَة", name: "Qahwa", nl: "Koffie" },
+  { id: "halib", arabic: "حَلِيب", name: "Halib", nl: "Melk (ander woord)" },
+  { id: "sayyara", arabic: "سَيَّارَة", name: "Sayyara", nl: "Auto" },
+  { id: "babun", arabic: "بَابٌ", name: "Baab (onbep.)", nl: "Een deur" },
   { id: "baytun", arabic: "بَيْتٌ", name: "Bayt (onbep.)", nl: "Een huis" },
   { id: "ustadh", arabic: "أُسْتَاذ", name: "Ustadh", nl: "Leraar" },
-  { id: "talib",  arabic: "طَالِب", name: "Talib", nl: "Leerling" }
+  { id: "talib", arabic: "طَالِب", name: "Talib", nl: "Leerling" }
 ];
 
 // Slides voor woorden-les (met audio-pad)
@@ -265,7 +265,7 @@ function speak(target, setLoading) {
     return;
   }
 
-  // eventueel vorige audio stoppen
+  // vorige audio stoppen
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
@@ -275,23 +275,41 @@ function speak(target, setLoading) {
   const audio = new Audio(src);
   currentAudio = audio;
 
+  // knop laten “pulsen” tijdens afspelen
+  if (btnSpeak) {
+    btnSpeak.classList.add("playing");
+  }
+
   audio.addEventListener("ended", () => {
     currentAudio = null;
+    if (btnSpeak) btnSpeak.classList.remove("playing");
     setLoading(false);
   });
 
   audio.addEventListener("error", () => {
     console.error("Kon audio niet afspelen:", src);
     currentAudio = null;
+    if (btnSpeak) btnSpeak.classList.remove("playing");
     setLoading(false);
   });
 
   audio.play().catch(err => {
     console.error("Fout bij starten audio:", err);
     currentAudio = null;
+    if (btnSpeak) btnSpeak.classList.remove("playing");
     setLoading(false);
   });
 }
+
+// Geluidseffecten voor quiz
+function playCorrectSound() {
+  new Audio("audio/sfx_correct.mp3").play().catch(() => { });
+}
+
+function playWrongSound() {
+  new Audio("audio/sfx_wrong.mp3").play().catch(() => { });
+}
+
 
 // =======================================================
 // CONTENT DATA (LESSONS & QUIZZEN)
@@ -308,34 +326,34 @@ const CONTENT_DATA = {
     title: "Het Alfabet",
     type: "lesson",
     content: [
-      { arabic: "أ", name: "Alif",      description: "Klinkt als een lange 'aa' (zoals in 'kaas')." },
-      { arabic: "ب", name: "Ba",        description: "Klinkt als de 'b' in 'boom'." },
-      { arabic: "ت", name: "Ta",        description: "Klinkt als de 't' in 'tafel'." },
-      { arabic: "ث", name: "Tha",       description: "Klinkt als 'th' in 'think' (zachte th)." },
-      { arabic: "ج", name: "Jim",       description: "Klinkt als de 'dj' in 'djoek' of 'djeep'." },
-      { arabic: "ح", name: "Ha (zacht)",description: "Een zachte 'h' uit de keel, zwaarder dan Nederlands." },
-      { arabic: "خ", name: "Kha",       description: "Klinkt als een harde 'ch' in 'gracht'." },
-      { arabic: "د", name: "Dal",       description: "Klinkt als de 'd' in 'deur'." },
-      { arabic: "ذ", name: "Dhal",      description: "Klinkt als 'th' in 'this' (harde th)." },
-      { arabic: "ر", name: "Ra",        description: "Een rollende 'r'." },
-      { arabic: "ز", name: "Zay",       description: "Klinkt als de 'z' in 'zon'." },
-      { arabic: "س", name: "Sin",       description: "Klinkt als de 's' in 'sok'." },
-      { arabic: "ش", name: "Shin",      description: "Klinkt als 'sj' in 'sjaal'." },
-      { arabic: "ص", name: "Sad",       description: "Een zware 's', dikker uitgesproken." },
-      { arabic: "ض", name: "Dad",       description: "Zware 'd' (Arabische speciale letter)." },
-      { arabic: "ط", name: "Ta (dik)",  description: "Zware/dikke 't'." },
-      { arabic: "ظ", name: "Za (dik)",  description: "Zware 'z', lijkt op harde 'th' maar dikker." },
-      { arabic: "ع", name: "Ayn",       description: "Keelklank, geen exacte Nederlandse klank." },
-      { arabic: "غ", name: "Ghayn",     description: "Klinkt als Franse / Arabische 'gh'." },
-      { arabic: "ف", name: "Fa",        description: "Klinkt als de 'f' in 'fiets'." },
-      { arabic: "ق", name: "Qaf",       description: "Een harde 'k' uit de keel." },
-      { arabic: "ك", name: "Kaf",       description: "Normale 'k' zoals in 'kat'." },
-      { arabic: "ل", name: "Lam",       description: "Klinkt als de 'l' in 'lamp'." },
-      { arabic: "م", name: "Mim",       description: "Klinkt als de 'm' in 'maan'." },
-      { arabic: "ن", name: "Nun",       description: "Klinkt als de 'n' in 'neus'." },
-      { arabic: "هـ", name: "Ha",       description: "Normale 'h' zoals in 'huis'." },
-      { arabic: "و", name: "Waw",       description: "Klinkt als 'w' in 'water' of lange 'oe'." },
-      { arabic: "ي", name: "Ya",        description: "Klinkt als 'j' in 'jas' of lange 'ie'." }
+      { arabic: "أ", name: "Alif", description: "Klinkt als een lange 'aa' (zoals in 'kaas')." },
+      { arabic: "ب", name: "Ba", description: "Klinkt als de 'b' in 'boom'." },
+      { arabic: "ت", name: "Ta", description: "Klinkt als de 't' in 'tafel'." },
+      { arabic: "ث", name: "Tha", description: "Klinkt als 'th' in 'think' (zachte th)." },
+      { arabic: "ج", name: "Jim", description: "Klinkt als de 'dj' in 'djoek' of 'djeep'." },
+      { arabic: "ح", name: "Ha (zacht)", description: "Een zachte 'h' uit de keel, zwaarder dan Nederlands." },
+      { arabic: "خ", name: "Kha", description: "Klinkt als een harde 'ch' in 'gracht'." },
+      { arabic: "د", name: "Dal", description: "Klinkt als de 'd' in 'deur'." },
+      { arabic: "ذ", name: "Dhal", description: "Klinkt als 'th' in 'this' (harde th)." },
+      { arabic: "ر", name: "Ra", description: "Een rollende 'r'." },
+      { arabic: "ز", name: "Zay", description: "Klinkt als de 'z' in 'zon'." },
+      { arabic: "س", name: "Sin", description: "Klinkt als de 's' in 'sok'." },
+      { arabic: "ش", name: "Shin", description: "Klinkt als 'sj' in 'sjaal'." },
+      { arabic: "ص", name: "Sad", description: "Een zware 's', dikker uitgesproken." },
+      { arabic: "ض", name: "Dad", description: "Zware 'd' (Arabische speciale letter)." },
+      { arabic: "ط", name: "Ta (dik)", description: "Zware/dikke 't'." },
+      { arabic: "ظ", name: "Za (dik)", description: "Zware 'z', lijkt op harde 'th' maar dikker." },
+      { arabic: "ع", name: "Ayn", description: "Keelklank, geen exacte Nederlandse klank." },
+      { arabic: "غ", name: "Ghayn", description: "Klinkt als Franse / Arabische 'gh'." },
+      { arabic: "ف", name: "Fa", description: "Klinkt als de 'f' in 'fiets'." },
+      { arabic: "ق", name: "Qaf", description: "Een harde 'k' uit de keel." },
+      { arabic: "ك", name: "Kaf", description: "Normale 'k' zoals in 'kat'." },
+      { arabic: "ل", name: "Lam", description: "Klinkt als de 'l' in 'lamp'." },
+      { arabic: "م", name: "Mim", description: "Klinkt als de 'm' in 'maan'." },
+      { arabic: "ن", name: "Nun", description: "Klinkt als de 'n' in 'neus'." },
+      { arabic: "هـ", name: "Ha", description: "Normale 'h' zoals in 'huis'." },
+      { arabic: "و", name: "Waw", description: "Klinkt als 'w' in 'water' of lange 'oe'." },
+      { arabic: "ي", name: "Ya", description: "Klinkt als 'j' in 'jas' of lange 'ie'." }
     ]
   },
 
@@ -344,26 +362,26 @@ const CONTENT_DATA = {
     title: "Quiz: Letters",
     type: "quiz",
     questions: [
-      { question: "Welke letter heet 'Alif'?",        options: ["ب", "أ", "ت"], answer: "أ" },
-      { question: "Welke letter heet 'Ba'?",          options: ["ت", "ب", "ث"], answer: "ب" },
-      { question: "Welke letter heet 'Ta'?",          options: ["ت", "ب", "ن"], answer: "ت" },
-      { question: "Welke letter heet 'Tha'?",         options: ["ث", "ف", "ح"], answer: "ث" },
-      { question: "Welke letter heet 'Jim'?",         options: ["ح", "ج", "خ"], answer: "ج" },
-      { question: "Welke letter heet 'Ha (zacht)'?",  options: ["ح", "ه", "ع"], answer: "ح" },
-      { question: "Welke letter heet 'Kha'?",         options: ["خ", "ح", "غ"], answer: "خ" },
-      { question: "Welke letter heet 'Dal'?",         options: ["د", "ك", "ذ"], answer: "د" },
-      { question: "Welke letter heet 'Dhal'?",        options: ["ذ", "ز", "د"], answer: "ذ" },
-      { question: "Welke letter heet 'Ra'?",          options: ["ر", "ز", "و"], answer: "ر" },
-      { question: "Welke letter heet 'Zay'?",         options: ["ز", "ر", "ذ"], answer: "ز" },
-      { question: "Welke letter heet 'Sin'?",         options: ["س", "ش", "ص"], answer: "س" },
-      { question: "Welke letter heet 'Shin'?",        options: ["ش", "ص", "س"], answer: "ش" },
-      { question: "Welke letter heet 'Sad'?",         options: ["ض", "ص", "س"], answer: "ص" },
-      { question: "Welke letter heet 'Dad'?",         options: ["ص", "ض", "ط"], answer: "ض" },
-      { question: "Welke letter heet 'Ta (dik)'?",    options: ["ط", "ت", "ظ"], answer: "ط" },
-      { question: "Welke letter heet 'Za (dik)'?",    options: ["ظ", "ز", "ذ"], answer: "ظ" },
-      { question: "Welke letter heet 'Ayn'?",         options: ["ع", "غ", "ا"], answer: "ع" },
-      { question: "Welke letter heet 'Ghayn'?",       options: ["غ", "ع", "ق"], answer: "غ" },
-      { question: "Welke letter heet 'Fa'?",          options: ["ف", "ق", "غ"], answer: "ف" }
+      { question: "Welke letter heet 'Alif'?", options: ["ب", "أ", "ت"], answer: "أ" },
+      { question: "Welke letter heet 'Ba'?", options: ["ت", "ب", "ث"], answer: "ب" },
+      { question: "Welke letter heet 'Ta'?", options: ["ت", "ب", "ن"], answer: "ت" },
+      { question: "Welke letter heet 'Tha'?", options: ["ث", "ف", "ح"], answer: "ث" },
+      { question: "Welke letter heet 'Jim'?", options: ["ح", "ج", "خ"], answer: "ج" },
+      { question: "Welke letter heet 'Ha (zacht)'?", options: ["ح", "ه", "ع"], answer: "ح" },
+      { question: "Welke letter heet 'Kha'?", options: ["خ", "ح", "غ"], answer: "خ" },
+      { question: "Welke letter heet 'Dal'?", options: ["د", "ك", "ذ"], answer: "د" },
+      { question: "Welke letter heet 'Dhal'?", options: ["ذ", "ز", "د"], answer: "ذ" },
+      { question: "Welke letter heet 'Ra'?", options: ["ر", "ز", "و"], answer: "ر" },
+      { question: "Welke letter heet 'Zay'?", options: ["ز", "ر", "ذ"], answer: "ز" },
+      { question: "Welke letter heet 'Sin'?", options: ["س", "ش", "ص"], answer: "س" },
+      { question: "Welke letter heet 'Shin'?", options: ["ش", "ص", "س"], answer: "ش" },
+      { question: "Welke letter heet 'Sad'?", options: ["ض", "ص", "س"], answer: "ص" },
+      { question: "Welke letter heet 'Dad'?", options: ["ص", "ض", "ط"], answer: "ض" },
+      { question: "Welke letter heet 'Ta (dik)'?", options: ["ط", "ت", "ظ"], answer: "ط" },
+      { question: "Welke letter heet 'Za (dik)'?", options: ["ظ", "ز", "ذ"], answer: "ظ" },
+      { question: "Welke letter heet 'Ayn'?", options: ["ع", "غ", "ا"], answer: "ع" },
+      { question: "Welke letter heet 'Ghayn'?", options: ["غ", "ع", "ق"], answer: "غ" },
+      { question: "Welke letter heet 'Fa'?", options: ["ف", "ق", "غ"], answer: "ف" }
     ]
   },
 
@@ -381,12 +399,12 @@ const CONTENT_DATA = {
       { question: "Welke klank is بَ ?", options: ["ba", "bi", "boe"], answer: "ba" },
       { question: "Welke klank is بِ ?", options: ["ba", "bi", "boe"], answer: "bi" },
       { question: "Welke klank is بُ ?", options: ["ba", "bi", "boe"], answer: "boe" },
-      { question: "Welke korte klank is de 'a'?",  options: ["بَ", "بِ", "بُ"], answer: "بَ" },
-      { question: "Welke korte klank is de 'i'?",  options: ["بَ", "بِ", "بُ"], answer: "بِ" },
+      { question: "Welke korte klank is de 'a'?", options: ["بَ", "بِ", "بُ"], answer: "بَ" },
+      { question: "Welke korte klank is de 'i'?", options: ["بَ", "بِ", "بُ"], answer: "بِ" },
       { question: "Welke korte klank is de 'oe'?", options: ["بَ", "بِ", "بُ"], answer: "بُ" },
-      { question: "Welke maakt een lange 'aa'?",   options: ["بَا", "بِ", "بُ"], answer: "بَا" },
-      { question: "Welke maakt een lange 'ie'?",   options: ["بَا", "بِي", "بُ"], answer: "بِي" },
-      { question: "Welke maakt een lange 'oe'?",   options: ["بَا", "بِي", "بُو"], answer: "بُو" }
+      { question: "Welke maakt een lange 'aa'?", options: ["بَا", "بِ", "بُ"], answer: "بَا" },
+      { question: "Welke maakt een lange 'ie'?", options: ["بَا", "بِي", "بُ"], answer: "بِي" },
+      { question: "Welke maakt een lange 'oe'?", options: ["بَا", "بِي", "بُو"], answer: "بُو" }
     ]
   },
 
@@ -402,9 +420,9 @@ const CONTENT_DATA = {
     title: "Zinnen Vormen",
     type: "lesson",
     content: [
-      { arabic: "أَنَا أُحِبُّ أَبِي",   name: "Ana uhibbu abi",   description: "Ik hou van mijn vader." },
-      { arabic: "أَنَا أُحِبُّ أُمِّي", name: "Ana uhibbu ummi",  description: "Ik hou van mijn moeder." },
-      { arabic: "الْبَيْتُ كَبِيرٌ",    name: "Al-baytu kabirun", description: "Het huis is groot." }
+      { arabic: "أَنَا أُحِبُّ أَبِي", name: "Ana uhibbu abi", description: "Ik hou van mijn vader." },
+      { arabic: "أَنَا أُحِبُّ أُمِّي", name: "Ana uhibbu ummi", description: "Ik hou van mijn moeder." },
+      { arabic: "الْبَيْتُ كَبِيرٌ", name: "Al-baytu kabirun", description: "Het huis is groot." }
     ]
   },
 
@@ -413,11 +431,11 @@ const CONTENT_DATA = {
     title: "Eind Examen",
     type: "quiz",
     questions: [
-      { question: "Welke letter heet 'Alif'?",  options: ["أ", "ب", "ت"], answer: "أ" },
-      { question: "Welke letter heet 'Ba'?",    options: ["ث", "ب", "ن"], answer: "ب" },
-      { question: "Welke letter heet 'Shin'?",  options: ["س", "ش", "ص"], answer: "ش" },
-      { question: "Welke letter heet 'Qaf'?",   options: ["ق", "ك", "ف"], answer: "ق" },
-      { question: "Welke letter heet 'Ayn'?",   options: ["ع", "غ", "ا"], answer: "ع" },
+      { question: "Welke letter heet 'Alif'?", options: ["أ", "ب", "ت"], answer: "أ" },
+      { question: "Welke letter heet 'Ba'?", options: ["ث", "ب", "ن"], answer: "ب" },
+      { question: "Welke letter heet 'Shin'?", options: ["س", "ش", "ص"], answer: "ش" },
+      { question: "Welke letter heet 'Qaf'?", options: ["ق", "ك", "ف"], answer: "ق" },
+      { question: "Welke letter heet 'Ayn'?", options: ["ع", "غ", "ا"], answer: "ع" },
       { question: "Welke letter heet 'Ghayn'?", options: ["ق", "غ", "ف"], answer: "غ" },
 
       { question: "Welke klank is بَ ?", options: ["ba", "bi", "boe"], answer: "ba" },
@@ -425,29 +443,39 @@ const CONTENT_DATA = {
       { question: "Welke klank is بُ ?", options: ["ba", "bi", "boe"], answer: "boe" },
       { question: "Welke geeft een lange 'aa'?", options: ["بَا", "بِ", "بُ"], answer: "بَا" },
 
-      { question: "Wat betekent 'Baab' (بَاب) ?",   options: ["Huis", "Deur", "Boek"], answer: "Deur" },
-      { question: "Wat betekent 'Bayt' (بَيْت) ?",  options: ["Huis", "Vader", "Moeder"], answer: "Huis" },
+      { question: "Wat betekent 'Baab' (بَاب) ?", options: ["Huis", "Deur", "Boek"], answer: "Deur" },
+      { question: "Wat betekent 'Bayt' (بَيْت) ?", options: ["Huis", "Vader", "Moeder"], answer: "Huis" },
       { question: "Wat betekent 'Kitaab' (كِتَاب) ?", options: ["Boek", "Deur", "Huis"], answer: "Boek" },
-      { question: "Wat betekent 'Ab' (أَب) ?",      options: ["Vader", "Moeder", "Kind"], answer: "Vader" },
-      { question: "Wat betekent 'Umm' (أُمّ) ?",    options: ["Vader", "Moeder", "Zoon"], answer: "Moeder" },
+      { question: "Wat betekent 'Ab' (أَب) ?", options: ["Vader", "Moeder", "Kind"], answer: "Vader" },
+      { question: "Wat betekent 'Umm' (أُمّ) ?", options: ["Vader", "Moeder", "Zoon"], answer: "Moeder" },
 
-      { question: "Wat betekent: أَنَا أُحِبُّ أَبِي ?",
+      {
+        question: "Wat betekent: أَنَا أُحِبُّ أَبِي ?",
         options: ["Ik hou van mijn vader.", "Het huis is groot.", "Ik lees een boek."],
-        answer: "Ik hou van mijn vader." },
+        answer: "Ik hou van mijn vader."
+      },
 
-      { question: "Wat betekent: أَنَا أُحِبُّ أُمِّي ?",
+      {
+        question: "Wat betekent: أَنَا أُحِبُّ أُمِّي ?",
         options: ["Ik hou van mijn moeder.", "Ik ga naar school.", "Het huis is klein."],
-        answer: "Ik hou van mijn moeder." },
+        answer: "Ik hou van mijn moeder."
+      },
 
-      { question: "Wat betekent: الْبَيْتُ كَبِيرٌ ?",
+      {
+        question: "Wat betekent: الْبَيْتُ كَبِيرٌ ?",
         options: ["Het huis is groot.", "De deur is gesloten.", "Het boek is mooi."],
-        answer: "Het huis is groot." },
+        answer: "Het huis is groot."
+      },
 
-      { question: "Welke letter hoort aan het begin van 'Bayt' (بَيْت)?",
-        options: ["ب", "ت", "ك"], answer: "ب" },
+      {
+        question: "Welke letter hoort aan het begin van 'Bayt' (بَيْت)?",
+        options: ["ب", "ت", "ك"], answer: "ب"
+      },
 
-      { question: "Welke letter hoor je in het midden van 'Kitaab' (كِتَاب)?",
-        options: ["ت", "ب", "ن"], answer: "ت" }
+      {
+        question: "Welke letter hoor je in het midden van 'Kitaab' (كِتَاب)?",
+        options: ["ت", "ب", "ن"], answer: "ت"
+      }
     ]
   }
 };
@@ -460,25 +488,25 @@ const CONTENT_DATA = {
 
 const ROADMAPS = {
   beginner: [
-    { id: "step1", dataKey: "intro_letters", title: "1. Letters Leren",  icon: "📖" },
-    { id: "step2", dataKey: "quiz_letters",  title: "2. Quiz: Letters",  icon: "★" },
-    { id: "step3", dataKey: "intro_vowels",  title: "3. Klanken",        icon: "🔊" },
-    { id: "step4", dataKey: "quiz_vowels",   title: "4. Quiz: Klanken",  icon: "★" },
-    { id: "step5", dataKey: "make_words",    title: "5. Woorden Maken",  icon: "📖" },
-    { id: "step6", dataKey: "sentences",     title: "6. Zinnen",         icon: "📖" },
-    { id: "step7", dataKey: "final_exam",    title: "7. Eind Examen",    icon: "🏆", isFinal: true }
+    { id: "step1", dataKey: "intro_letters", title: "1. 🔤 Letters leren", icon: "🔤" },
+    { id: "step2", dataKey: "quiz_letters", title: "2. ⭐ Quiz: letters", icon: "⭐" },
+    { id: "step3", dataKey: "intro_vowels", title: "3. 🎵 Klanken", icon: "🎵" },
+    { id: "step4", dataKey: "quiz_vowels", title: "4. ⭐ Quiz: klanken", icon: "⭐" },
+    { id: "step5", dataKey: "make_words", title: "5. 🧩 Woorden maken", icon: "🧩" },
+    { id: "step6", dataKey: "sentences", title: "6. ✏️ Zinnen vormen", icon: "✏️" },
+    { id: "step7", dataKey: "final_exam", title: "7. 🏆 Eind examen", icon: "🏆", isFinal: true }
   ],
   advanced: [
-    { id: "step3", dataKey: "intro_vowels",  title: "1. Klanken",        icon: "🔊" },
-    { id: "step4", dataKey: "quiz_vowels",   title: "2. Quiz: Klanken",  icon: "★" },
-    { id: "step5", dataKey: "make_words",    title: "3. Woorden Maken",  icon: "📖" },
-    { id: "step6", dataKey: "sentences",     title: "4. Zinnen",         icon: "📖" },
-    { id: "step7", dataKey: "final_exam",    title: "5. Eind Examen",    icon: "🏆", isFinal: true }
+    { id: "step3", dataKey: "intro_vowels", title: "1. Klanken", icon: "🔊" },
+    { id: "step4", dataKey: "quiz_vowels", title: "2. Quiz: Klanken", icon: "★" },
+    { id: "step5", dataKey: "make_words", title: "3. Woorden Maken", icon: "📖" },
+    { id: "step6", dataKey: "sentences", title: "4. Zinnen", icon: "📖" },
+    { id: "step7", dataKey: "final_exam", title: "5. Eind Examen", icon: "🏆", isFinal: true }
   ],
   expert: [
-    { id: "step5", dataKey: "make_words",    title: "1. Woorden Maken",  icon: "📖" },
-    { id: "step6", dataKey: "sentences",     title: "2. Zinnen",         icon: "📖" },
-    { id: "step7", dataKey: "final_exam",    title: "3. Eind Examen",    icon: "🏆", isFinal: true }
+    { id: "step5", dataKey: "make_words", title: "1. Woorden Maken", icon: "📖" },
+    { id: "step6", dataKey: "sentences", title: "2. Zinnen", icon: "📖" },
+    { id: "step7", dataKey: "final_exam", title: "3. Eind Examen", icon: "🏆", isFinal: true }
   ]
 };
 
@@ -535,6 +563,8 @@ function markStepCompleted(stepId) {
 // =======================================================
 
 const homeView = document.getElementById("homeView");
+const rewardStickersEl = document.getElementById("rewardStickers");
+
 const mapView = document.getElementById("mapView");
 const activityView = document.getElementById("activityView");
 
@@ -611,8 +641,8 @@ function renderMap() {
     "Niveau: " + (currentLevel === "beginner"
       ? "Beginner"
       : currentLevel === "advanced"
-      ? "Gevorderd"
-      : "De Beste");
+        ? "Gevorderd"
+        : "De Beste");
 
   mapStepsEl.innerHTML = "";
 
@@ -650,6 +680,17 @@ function renderMap() {
       iconSpan.textContent = step.icon;
       icon.classList.add("icon-active");
     }
+    icon.setAttribute("role", "button");
+    icon.setAttribute("tabindex", "0");
+    icon.setAttribute("aria-label", `Start ${step.title}`);
+
+    // Enter-toets support
+    icon.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        handleClick();
+      }
+    });
+
     icon.appendChild(iconSpan);
 
     const card = document.createElement("div");
@@ -667,8 +708,8 @@ function renderMap() {
     p.textContent = isLocked
       ? "Maak eerst de vorige opdracht af"
       : isVisited
-      ? "Al een keer geoefend"
-      : "Klik om te starten";
+        ? "Al een keer geoefend"
+        : "Klik om te starten";
 
     card.appendChild(title);
     card.appendChild(p);
@@ -739,6 +780,40 @@ btnSpeak.addEventListener("click", () => {
     }
   });
 });
+// ===== STICKERS / BELONINGEN =====
+
+// bron voor stickers: als visitedSteps bestaat en gevuld is, gebruik die,
+// anders gewoon completedSteps in deze sessie.
+function getStickerSource() {
+  if (typeof visitedSteps !== "undefined" &&
+    Array.isArray(visitedSteps) &&
+    visitedSteps.length > 0) {
+    return visitedSteps;
+  }
+  return completedSteps;
+}
+
+function renderStickers() {
+  if (!rewardStickersEl) return;
+
+  const source = getStickerSource();
+  const count = source.length;
+
+  if (!count) {
+    rewardStickersEl.textContent = "Nog geen stickers…";
+    return;
+  }
+
+  const maxIcons = 10;
+  const icons = "⭐".repeat(Math.min(count, maxIcons));
+
+  if (count > maxIcons) {
+    rewardStickersEl.textContent = `${icons} x${count}`;
+  } else {
+    rewardStickersEl.textContent = icons;
+  }
+}
+
 
 // Result-knop: verder of opnieuw
 btnResultPrimary.addEventListener("click", () => {
@@ -751,8 +826,13 @@ btnResultPrimary.addEventListener("click", () => {
   const passed = isLesson || percentage >= 70;
 
   if (passed) {
-    // stap als voltooid markeren en opslaan
-    markStepCompleted(currentActivityStep.id);
+    if (!completedSteps.includes(currentActivityStep.id)) {
+      completedSteps.push(currentActivityStep.id);
+    }
+
+    // stickers opnieuw tekenen
+    renderStickers();
+
     resultContentEl.classList.add("hidden");
     setView("map");
     renderMap();
@@ -881,10 +961,12 @@ function handleQuizAnswer(option, correct) {
     quizScore++;
     quizFeedbackEl.textContent = "Goed zo! 🎉";
     quizFeedbackEl.classList.add("good");
+    playCorrectSound();
   } else {
     quizScore = Math.max(0, quizScore - 1);
     quizFeedbackEl.textContent = "Niet helemaal...";
     quizFeedbackEl.classList.add("bad");
+    playWrongSound();
   }
 
   renderQuizHeader(total);
@@ -943,3 +1025,4 @@ function showResultForActivity() {
 // =======================================================
 
 setView("home");
+renderStickers();

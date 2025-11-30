@@ -610,3 +610,43 @@ body {
 .update-button:hover {
   filter: brightness(1.05);
 }
+/* === Geluidsknop animatie bij afspelen === */
+.tts-button.playing {
+  animation: ttsPulse 1s infinite;
+  box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.6);
+}
+
+@keyframes ttsPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.6);
+  }
+  70% {
+    transform: scale(1.04);
+    box-shadow: 0 0 0 12px rgba(79, 70, 229, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+  }
+}
+/* Beloningenbalk op de startpagina */
+.reward-bar {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.18);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.reward-label {
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.reward-stickers {
+  font-size: 1.1rem;
+}
