@@ -207,7 +207,18 @@ const WORD_ITEMS = [
   { id: "babun", arabic: "بَابٌ", name: "Baab (onbep.)", nl: "Een deur" },
   { id: "baytun", arabic: "بَيْتٌ", name: "Bayt (onbep.)", nl: "Een huis" },
   { id: "ustadh", arabic: "أُسْتَاذ", name: "Ustadh", nl: "Leraar" },
-  { id: "talib", arabic: "طَالِب", name: "Talib", nl: "Leerling" }
+  { id: "talib", arabic: "طَالِب", name: "Talib", nl: "Leerling" },
+  // Nieuwe woorden
+  { id: "qitt", arabic: "قِطّ", name: "Qitt", nl: "Kat" },
+  { id: "kalb", arabic: "كَلْب", name: "Kalb", nl: "Hond" },
+  { id: "asfur", arabic: "عُصْفُور", name: "Asfur", nl: "Vogel" },
+  { id: "samak", arabic: "سَمَك", name: "Samak", nl: "Vis" },
+  { id: "ahmar", arabic: "أَحْمَر", name: "Ahmar", nl: "Rood" },
+  { id: "azraq", arabic: "أَزْرَق", name: "Azraq", nl: "Blauw" },
+  { id: "akhdar", arabic: "أَخْضَر", name: "Akhdar", nl: "Groen" },
+  { id: "wahid", arabic: "وَاحِد", name: "Wahid", nl: "Eén" },
+  { id: "ithnan", arabic: "اِثْنَان", name: "Ithnan", nl: "Twee" },
+  { id: "thalatha", arabic: "ثَلَاثَة", name: "Thalatha", nl: "Drie" }
 ];
 
 // Slides voor woorden-les (met audio-pad)
@@ -287,18 +298,46 @@ function speak(target, setLoading) {
   });
 
   audio.addEventListener("error", () => {
-    console.error("Kon audio niet afspelen:", src);
-    currentAudio = null;
-    if (btnSpeak) btnSpeak.classList.remove("playing");
-    setLoading(false);
+    console.warn("Kon audio niet afspelen, probeer TTS fallback:", src);
+    // Fallback naar browser TTS
+    speakNative(arabicText, setLoading);
   });
 
   audio.play().catch(err => {
     console.error("Fout bij starten audio:", err);
-    currentAudio = null;
-    if (btnSpeak) btnSpeak.classList.remove("playing");
-    setLoading(false);
+    // Fallback
+    speakNative(arabicText, setLoading);
   });
+}
+
+function speakNative(text, setLoading) {
+  if (!text) {
+    if (setLoading) setLoading(false);
+    return;
+  }
+
+  // Stop eventuele lopende audio
+  if (currentAudio) {
+    currentAudio = null;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "ar-SA"; // Arabisch
+  utterance.rate = 0.9; // Iets langzamer
+
+  utterance.onend = () => {
+    if (btnSpeak) btnSpeak.classList.remove("playing");
+    if (setLoading) setLoading(false);
+  };
+
+  utterance.onerror = (e) => {
+    console.error("TTS Error:", e);
+    if (btnSpeak) btnSpeak.classList.remove("playing");
+    if (setLoading) setLoading(false);
+  };
+
+  if (btnSpeak) btnSpeak.classList.add("playing");
+  window.speechSynthesis.speak(utterance);
 }
 
 // Geluidseffecten voor quiz
@@ -493,6 +532,22 @@ const CONTENT_DATA = {
       { id: 7, content: "ر" },
       { id: 8, content: "س" }
     ]
+  },
+
+  // Nieuwe roadmap items
+  writing_practice: {
+    title: "Schrijfoefening",
+    type: "writing"
+  },
+
+  flashcards_mix: {
+    title: "Flitskaarten",
+    type: "flashcards"
+  },
+
+  sticker_check: {
+    title: "Stickerboek",
+    type: "sticker"
   }
 };
 
@@ -505,13 +560,16 @@ const CONTENT_DATA = {
 const ROADMAPS = {
   beginner: [
     { id: "step1", dataKey: "intro_letters", title: "1. 🔤 Letters leren", icon: "🔤" },
-    { id: "step2", dataKey: "quiz_letters", title: "2. ⭐ Quiz: letters", icon: "⭐" },
-    { id: "step2b", dataKey: "memory_letters", title: "3. 🎮 Memory Spel", icon: "🎮" },
-    { id: "step3", dataKey: "intro_vowels", title: "4. 🎵 Klanken", icon: "🎵" },
-    { id: "step4", dataKey: "quiz_vowels", title: "5. ⭐ Quiz: klanken", icon: "⭐" },
-    { id: "step5", dataKey: "make_words", title: "6. 🧩 Woorden maken", icon: "🧩" },
-    { id: "step6", dataKey: "sentences", title: "7. ✏️ Zinnen vormen", icon: "✏️" },
-    { id: "step7", dataKey: "final_exam", title: "8. 🏆 Eind examen", icon: "🏆", isFinal: true }
+    { id: "step_write", dataKey: "writing_practice", title: "2. ✏️ Schrijven", icon: "✏️" },
+    { id: "step2", dataKey: "quiz_letters", title: "3. ⭐ Quiz: letters", icon: "⭐" },
+    { id: "step2b", dataKey: "memory_letters", title: "4. 🎮 Memory Spel", icon: "🎮" },
+    { id: "step_flash", dataKey: "flashcards_mix", title: "5. ⚡ Flitskaarten", icon: "⚡" },
+    { id: "step3", dataKey: "intro_vowels", title: "6. 🎵 Klanken", icon: "🎵" },
+    { id: "step4", dataKey: "quiz_vowels", title: "7. ⭐ Quiz: klanken", icon: "⭐" },
+    { id: "step5", dataKey: "make_words", title: "8. 🧩 Woorden maken", icon: "🧩" },
+    { id: "step6", dataKey: "sentences", title: "9. ✏️ Zinnen vormen", icon: "✏️" },
+    { id: "step_sticker", dataKey: "sticker_check", title: "10. 🌟 Stickerboek", icon: "🌟" },
+    { id: "step7", dataKey: "final_exam", title: "11. 🏆 Eind examen", icon: "🏆", isFinal: true }
   ],
   advanced: [
     { id: "step3", dataKey: "intro_vowels", title: "1. Klanken", icon: "🔊" },
@@ -527,6 +585,53 @@ const ROADMAPS = {
   ]
 };
 
+// ============ STICKERS ============
+const STICKER_DATA = [
+  { id: "s1", name: "Beginner", emoji: "🌟", desc: "Start je avontuur", unlockStep: "step1" },
+  { id: "s2", name: "Letter Kampioen", emoji: "🅰️", desc: "Ken je letters", unlockStep: "step2" },
+  { id: "s3", name: "Geheugen Meester", emoji: "🧠", desc: "Memory uitgespeeld", unlockStep: "step2b" },
+  { id: "s4", name: "Klank Kenner", emoji: "🎵", desc: "Alle klanken geleerd", unlockStep: "step3" },
+  { id: "s5", name: "Super Oren", emoji: "👂", desc: "Klanken quiz gehaald", unlockStep: "step4" },
+  { id: "s6", name: "Woord Bouwer", emoji: "🧱", desc: "Woorden gemaakt", unlockStep: "step5" },
+  { id: "s7", name: "Zinnen Maker", emoji: "📝", desc: "Zinnen gevormd", unlockStep: "step6" },
+  { id: "s8", name: "Arabisch Expert", emoji: "🏆", desc: "Eind examen gehaald!", unlockStep: "step7" }
+];
+
+function getUnlockedStickerCount() {
+  return STICKER_DATA.filter(s => completedSteps.includes(s.unlockStep)).length;
+}
+
+function renderStickerBook() {
+  const grid = document.getElementById("stickerGrid");
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  STICKER_DATA.forEach(sticker => {
+    const isUnlocked = completedSteps.includes(sticker.unlockStep);
+
+    const el = document.createElement("div");
+    el.className = `sticker-item ${isUnlocked ? "unlocked" : "locked"}`;
+
+    el.innerHTML = `
+      <div class="sticker-icon">${isUnlocked ? sticker.emoji : "🔒"}</div>
+      <div class="sticker-name">${sticker.name}</div>
+      <div class="sticker-desc">${sticker.desc}</div>
+    `;
+
+    grid.appendChild(el);
+  });
+}
+
+function updateRewardBar() {
+  const count = getUnlockedStickerCount();
+  const total = STICKER_DATA.length;
+  const el = document.getElementById("rewardStickers");
+  if (el) {
+    el.textContent = `${count} / ${total} stickers ➜`;
+  }
+}
+
 // =======================================================
 // STATE & PERSISTENTE PROGRESS (SLOT-LOGICA)
 // - currentView, currentLevel, completedSteps, quizScore, ...
@@ -539,6 +644,7 @@ const STORAGE_KEY = "aka_completedSteps_v1";
 let currentView = "home";
 let currentLevel = null;
 let completedSteps = loadProgressFromStorage(); // array van step-id's
+updateRewardBar(); // initiele update
 let currentActivityStep = null;
 let currentSlide = 0;
 let quizScore = 0;
@@ -572,6 +678,7 @@ function markStepCompleted(stepId) {
   if (!completedSteps.includes(stepId)) {
     completedSteps.push(stepId);
     saveProgressToStorage();
+    updateRewardBar(); // Update UI direct
   }
 }
 
@@ -621,15 +728,55 @@ const btnActivityBack = document.getElementById("btnActivityBack");
 // VIEW WISSEL
 // =======================================================
 
+const btnBackFromStickers = document.getElementById("btnBackFromStickers");
+const rewardBar = document.getElementById("rewardBar");
+const stickerView = document.getElementById("stickerView");
+
+// ============ VIEW WISSEL ============
+
 function setView(view) {
   currentView = view;
   homeView.classList.add("hidden");
   mapView.classList.add("hidden");
   activityView.classList.add("hidden");
+  stickerView.classList.add("hidden");
 
-  if (view === "home") homeView.classList.remove("hidden");
+  if (view === "home") {
+    homeView.classList.remove("hidden");
+    updateRewardBar(); // update count on home
+  }
   if (view === "map") mapView.classList.remove("hidden");
   if (view === "activity") activityView.classList.remove("hidden");
+  if (view === "sticker") {
+    stickerView.classList.remove("hidden");
+    renderStickerBook();
+  }
+  if (view === "writing") {
+    writingView.classList.remove("hidden");
+  }
+  if (view === "flashcard") {
+    flashcardView.classList.remove("hidden");
+  }
+}
+
+// Sticker navigatie
+if (rewardBar) {
+  rewardBar.addEventListener("click", () => {
+    setView("sticker");
+  });
+}
+
+if (btnBackFromStickers) {
+  btnBackFromStickers.addEventListener("click", () => {
+    if (currentActivityStep && currentActivityStep.dataKey === "sticker_check") {
+      // Kwam vanuit roadmap
+      markStepCompleted(currentActivityStep.id);
+      setView("map");
+      renderMap();
+    } else {
+      setView("home");
+    }
+  });
 }
 
 // =======================================================
@@ -886,7 +1033,7 @@ function startActivity(step, retry) {
   quizFeedbackEl.textContent = "";
   quizFeedbackEl.className = "quiz-feedback";
 
-  // 6. kiezen tussen les, quiz of memory
+  // 6. kiezen tussen les, quiz, memory of nieuwe types
   if (data.type === "lesson") {
     lessonContentEl.classList.remove("hidden");
     quizContentEl.classList.add("hidden");
@@ -902,6 +1049,12 @@ function startActivity(step, retry) {
     quizContentEl.classList.add("hidden");
     memoryContentEl.classList.remove("hidden");
     renderMemoryGame();
+  } else if (data.type === "writing") {
+    startWritingSession();
+  } else if (data.type === "flashcards") {
+    startFlashcardsSession();
+  } else if (data.type === "sticker") {
+    setView("sticker");
   }
 }
 
@@ -1199,3 +1352,272 @@ function shuffleArray(array) {
   }
   return shuffled;
 }
+
+// ============ WRITING EXERCISES ============
+
+const writingView = document.getElementById("writingView");
+const btnStartWriting = document.getElementById("btnStartWriting");
+const btnBackFromWriting = document.getElementById("btnBackFromWriting");
+const btnClearCanvas = document.getElementById("btnClearCanvas");
+const btnNextWriting = document.getElementById("btnNextWriting");
+const writingCanvas = document.getElementById("writingCanvas");
+const writingOverlay = document.getElementById("writingOverlay");
+const writingLetterDisplay = document.getElementById("writingLetterDisplay");
+
+let writingCtx = null;
+let isDrawing = false;
+let currentWritingIndex = 0;
+
+// Letters om te oefenen (kan uitgebreid worden)
+const WRITING_LETTERS = [
+  // Basis
+  "أ", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض",
+  "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي",
+
+  // Lange klanken (Alif, Ya, Waw)
+  "بَا", "بِي", "بُو", // Ba
+  "تَا", "تِي", "تُو", // Ta
+  "ثَا", "ثِي", "ثُو", // Tha
+  "جَا", "جِي", "جُو", // Jim
+  "حَا", "حِي", "حُو", // Ha
+  "خَا", "خِي", "خُو", // Kha
+  "دَا", "دِي", "دُو", // Dal
+  "ذَا", "ذِي", "ذُو", // Dhal
+  "رَا", "رِي", "رُو", // Ra
+  "زَا", "زِي", "زُو", // Zay
+  "سَا", "سِي", "سُو", // Sin
+  "شَا", "شِي", "شُو", // Shin
+  "صَا", "صِي", "صُو", // Sad
+  "ضَا", "ضِي", "ضُو", // Dad
+  "طَا", "طِي", "طُو", // Ta (dik)
+  "ظَا", "ظِي", "ظُو", // Za (dik)
+  "عَا", "عِي", "عُو", // Ayn
+  "غَا", "غِي", "غُو", // Ghayn
+  "فَا", "فِي", "فُو", // Fa
+  "قَا", "قِي", "قُو", // Qaf
+  "كَا", "كِي", "كُو", // Kaf
+  "لَا", "لِي", "لُو", // Lam
+  "مَا", "مِي", "مُو", // Mim
+  "نَا", "نِي", "نُو", // Nun
+  "هَا", "هِي", "هُو", // Ha
+  "وَا", "وِي", "وُو", // Waw
+  "يَا", "يِي", "يُو"  // Ya
+];
+
+function initWriting() {
+  if (!writingCanvas) return;
+  writingCtx = writingCanvas.getContext("2d");
+
+  // Canvas events
+  writingCanvas.addEventListener("mousedown", startDraw);
+  writingCanvas.addEventListener("mousemove", draw);
+  writingCanvas.addEventListener("mouseup", stopDraw);
+  writingCanvas.addEventListener("mouseout", stopDraw);
+
+  // Touch events
+  writingCanvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    startDraw(e.touches[0]);
+  });
+  writingCanvas.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    draw(e.touches[0]);
+  });
+  writingCanvas.addEventListener("touchend", stopDraw);
+
+  // Knoppen
+  if (btnStartWriting) {
+    btnStartWriting.addEventListener("click", () => {
+      currentWritingIndex = 0;
+      startWritingSession();
+    });
+  }
+
+  if (btnBackFromWriting) {
+    btnBackFromWriting.addEventListener("click", () => {
+      if (currentActivityStep) {
+        // Als we vanuit de map kwamen, markeer als gedaan?
+        // Of gewoon terug. Laten we het als 'gedaan' markeren als ze tenminste iets gedaan hebben?
+        // Voor nu: gewoon terug naar map en markeer als visited/completed.
+        // Schrijven is oefenen, dus als je stopt is het 'klaar'.
+        markStepCompleted(currentActivityStep.id);
+        setView("map");
+        renderMap(); // update slotjes
+      } else {
+        setView("home");
+      }
+    });
+  }
+
+  if (btnClearCanvas) {
+    btnClearCanvas.addEventListener("click", clearCanvas);
+  }
+
+  if (btnNextWriting) {
+    btnNextWriting.addEventListener("click", () => {
+      currentWritingIndex = (currentWritingIndex + 1) % WRITING_LETTERS.length;
+      loadWritingLetter();
+    });
+  }
+}
+
+function startWritingSession() {
+  setView("writing");
+  // Wacht even tot view zichtbaar is voor correcte canvas afmetingen
+  setTimeout(() => {
+    resizeCanvas();
+    loadWritingLetter();
+  }, 50);
+}
+
+function resizeCanvas() {
+  // Zorg dat canvas resolutie matcht met weergave
+  const rect = writingCanvas.getBoundingClientRect();
+  writingCanvas.width = rect.width;
+  writingCanvas.height = rect.height;
+
+  // Stijl instellen
+  writingCtx.lineWidth = 12;
+  writingCtx.lineCap = "round";
+  writingCtx.lineJoin = "round";
+  writingCtx.strokeStyle = "#4f46e5"; // Kleur van de pen
+}
+
+function loadWritingLetter() {
+  clearCanvas();
+  const letter = WRITING_LETTERS[currentWritingIndex];
+  writingOverlay.textContent = letter;
+  writingLetterDisplay.textContent = letter;
+}
+
+function clearCanvas() {
+  if (!writingCtx) return;
+  writingCtx.clearRect(0, 0, writingCanvas.width, writingCanvas.height);
+}
+
+function startDraw(e) {
+  isDrawing = true;
+  const rect = writingCanvas.getBoundingClientRect();
+  const x = (e.clientX || e.pageX) - rect.left;
+  const y = (e.clientY || e.pageY) - rect.top;
+
+  writingCtx.beginPath();
+  writingCtx.moveTo(x, y);
+}
+
+function draw(e) {
+  if (!isDrawing) return;
+  const rect = writingCanvas.getBoundingClientRect();
+  const x = (e.clientX || e.pageX) - rect.left;
+  const y = (e.clientY || e.pageY) - rect.top;
+
+  writingCtx.lineTo(x, y);
+  writingCtx.stroke();
+}
+
+function stopDraw() {
+  isDrawing = false;
+  writingCtx.closePath();
+}
+
+// Init aanroepen
+initWriting();
+
+// ============ FLASHCARDS ============
+
+const flashcardView = document.getElementById("flashcardView");
+const btnStartFlashcards = document.getElementById("btnStartFlashcards");
+const btnBackFromFlashcards = document.getElementById("btnBackFromFlashcards");
+const btnNextFlashcard = document.getElementById("btnNextFlashcard");
+const flashcardEl = document.getElementById("flashcard");
+const flashcardFrontContent = document.getElementById("flashcardFrontContent");
+const flashcardBackContent = document.getElementById("flashcardBackContent");
+
+// Combineer letters en woorden voor flashcards
+function getFlashcardItems() {
+  const letters = CONTENT_DATA.intro_letters.content.map(c => ({
+    front: c.arabic,
+    back: c.name,
+    type: "letter",
+    audio: c.arabic // letter key for audio
+  }));
+
+  const words = WORD_ITEMS.map(w => ({
+    front: w.arabic,
+    back: w.nl,
+    type: "word",
+    audio: w.id // word id for audio
+  }));
+
+  return [...letters, ...words];
+}
+
+let flashcardItems = [];
+let currentFlashcardItem = null;
+
+function initFlashcards() {
+  if (btnStartFlashcards) {
+    btnStartFlashcards.addEventListener("click", startFlashcardsSession);
+  }
+
+  if (btnBackFromFlashcards) {
+    btnBackFromFlashcards.addEventListener("click", () => {
+      if (currentActivityStep) {
+        markStepCompleted(currentActivityStep.id);
+        setView("map");
+        renderMap();
+      } else {
+        setView("home");
+      }
+    });
+  }
+
+  if (flashcardEl) {
+    flashcardEl.addEventListener("click", () => {
+      flashcardEl.classList.toggle("flipped");
+      if (currentFlashcardItem) {
+        // Optioneel: speel audio bij klik
+      }
+    });
+  }
+
+  if (btnNextFlashcard) {
+    btnNextFlashcard.addEventListener("click", nextFlashcard);
+  }
+}
+
+function startFlashcardsSession() {
+  flashcardItems = getFlashcardItems();
+  setView("flashcard");
+  nextFlashcard();
+}
+
+function nextFlashcard() {
+  // Reset flip
+  if (flashcardEl) flashcardEl.classList.remove("flipped");
+
+  // Wacht even op animatie als hij geflipped was
+  setTimeout(() => {
+    // Kies willekeurig item
+    const idx = Math.floor(Math.random() * flashcardItems.length);
+    currentFlashcardItem = flashcardItems[idx];
+
+    // Render
+    flashcardFrontContent.textContent = currentFlashcardItem.front;
+    flashcardBackContent.textContent = currentFlashcardItem.back;
+
+    // Speel audio
+    let speakTarget = null;
+    if (currentFlashcardItem.type === "letter") {
+      speakTarget = currentFlashcardItem.front;
+    } else {
+      speakTarget = { audio: `audio/word_${currentFlashcardItem.audio}.mp3` };
+    }
+
+    speak(speakTarget, () => { });
+
+  }, 200);
+}
+
+// Init
+initFlashcards();

@@ -30,9 +30,10 @@
     </div>
 
     <!-- NIEUW: beloningenbalk -->
-    <div class="reward-bar">
-      <span class="reward-label">Mijn stickers:</span>
-      <span id="rewardStickers" class="reward-stickers">Nog geen stickers…</span>
+    <!-- NIEUW: beloningenbalk (klikbaar voor stickerboek) -->
+    <div id="rewardBar" class="reward-bar clickable">
+      <span class="reward-label">Mijn Stickerboek:</span>
+      <span id="rewardStickers" class="reward-stickers">Bekijk je stickers ➜</span>
     </div>
 
 
@@ -59,6 +60,7 @@
         <p>Direct naar woorden &amp; zinnen</p>
       </button>
     </div>
+
   </div>
 
   <!-- ============ MAP VIEW (SPEELBORD MET SLOTJES) ============ -->
@@ -121,6 +123,71 @@
     <!-- MEMORY GAME MODUS -->
     <div id="memoryContent" class="activity-body hidden">
       <div id="memoryGrid" class="memory-grid"></div>
+    </div>
+  </div>
+
+  <!-- ============ STICKER BOOK VIEW ============ -->
+  <div id="stickerView" class="view sticker-view hidden">
+    <button id="btnBackFromStickers" class="back-home">⌂ Terug</button>
+    <h2 class="sticker-title">Mijn Stickerboek</h2>
+    <p class="sticker-subtitle">Verzamel stickers door lessen en quizzen af te maken!</p>
+
+    <div id="stickerGrid" class="sticker-grid">
+      <!-- Stickers worden hier gegenereerd -->
+    </div>
+  </div>
+
+  <!-- ============ WRITING VIEW ============ -->
+  <div id="writingView" class="view writing-view hidden">
+    <div class="activity-header">
+      <button id="btnBackFromWriting" class="activity-back">Stop</button>
+      <div class="activity-title">Schrijven</div>
+      <div></div>
+    </div>
+
+    <div class="writing-container">
+      <div class="writing-header">
+        <h2 id="writingLetterDisplay">أ</h2>
+        <p>Trek de letter over!</p>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="writingCanvas" width="300" height="300"></canvas>
+        <div id="writingOverlay" class="writing-overlay">أ</div>
+      </div>
+
+      <div class="writing-controls">
+        <button id="btnClearCanvas" class="primary-button secondary">Wissen</button>
+        <button id="btnNextWriting" class="primary-button">Volgende</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FLASHCARD VIEW ============ -->
+  <div id="flashcardView" class="view flashcard-view hidden">
+    <div class="activity-header">
+      <button id="btnBackFromFlashcards" class="activity-back">Stop</button>
+      <div class="activity-title">Flitskaarten</div>
+      <div></div>
+    </div>
+
+    <div class="flashcard-container">
+      <div id="flashcard" class="flashcard">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div id="flashcardFrontContent">?</div>
+          </div>
+          <div class="flashcard-back">
+            <div id="flashcardBackContent">...</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="flashcard-hint">Tik op de kaart om te draaien</p>
+
+      <div class="flashcard-controls">
+        <button id="btnNextFlashcard" class="primary-button">Volgende Kaart</button>
+      </div>
     </div>
   </div>
 
