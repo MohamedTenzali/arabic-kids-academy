@@ -776,6 +776,8 @@ const btnActivityBack = document.getElementById("btnActivityBack");
 const btnBackFromStickers = document.getElementById("btnBackFromStickers");
 const rewardBar = document.getElementById("rewardBar");
 const stickerView = document.getElementById("stickerView");
+const writingView = document.getElementById("writingView");
+const flashcardView = document.getElementById("flashcardView");
 
 // ============ VIEW WISSEL ============
 
@@ -1402,7 +1404,7 @@ function shuffleArray(array) {
 
 // ============ WRITING EXERCISES ============
 
-const writingView = document.getElementById("writingView");
+// writingView already declared at top
 const btnStartWriting = document.getElementById("btnStartWriting");
 const btnBackFromWriting = document.getElementById("btnBackFromWriting");
 const btnClearCanvas = document.getElementById("btnClearCanvas");
@@ -1572,7 +1574,7 @@ initWriting();
 
 // ============ FLASHCARDS ============
 
-const flashcardView = document.getElementById("flashcardView");
+// flashcardView already declared at top
 const btnStartFlashcards = document.getElementById("btnStartFlashcards");
 const btnBackFromFlashcards = document.getElementById("btnBackFromFlashcards");
 const btnNextFlashcard = document.getElementById("btnNextFlashcard");
