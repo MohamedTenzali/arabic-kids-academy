@@ -310,6 +310,43 @@ function speak(target, setLoading) {
   });
 }
 
+// iOS Audio Unlock
+let audioContext = null;
+function unlockAudioContext() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+  // Play silent buffer to unlock
+  const buffer = audioContext.createBuffer(1, 1, 22050);
+  const source = audioContext.createBufferSource();
+  source.buffer = buffer;
+  source.connect(audioContext.destination);
+  source.start(0);
+
+  // Remove listeners after first interaction
+  document.removeEventListener('click', unlockAudioContext);
+  document.removeEventListener('touchstart', unlockAudioContext);
+  document.removeEventListener('keydown', unlockAudioContext);
+}
+
+// Add listeners for unlock
+document.addEventListener('click', unlockAudioContext);
+document.addEventListener('touchstart', unlockAudioContext);
+document.addEventListener('keydown', unlockAudioContext);
+
+// TTS Voices Loading
+let voices = [];
+function loadVoices() {
+  voices = window.speechSynthesis.getVoices();
+}
+loadVoices();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+
 function speakNative(text, setLoading) {
   if (!text) {
     if (setLoading) setLoading(false);
@@ -320,8 +357,16 @@ function speakNative(text, setLoading) {
   if (currentAudio) {
     currentAudio = null;
   }
+  window.speechSynthesis.cancel(); // Stop vorige TTS
 
   const utterance = new SpeechSynthesisUtterance(text);
+
+  // Zoek beste Arabische stem
+  const arVoice = voices.find(v => v.lang.includes('ar'));
+  if (arVoice) {
+    utterance.voice = arVoice;
+  }
+
   utterance.lang = "ar-SA"; // Arabisch
   utterance.rate = 0.9; // Iets langzamer
 
@@ -740,6 +785,8 @@ function setView(view) {
   mapView.classList.add("hidden");
   activityView.classList.add("hidden");
   stickerView.classList.add("hidden");
+  if (writingView) writingView.classList.add("hidden");
+  if (flashcardView) flashcardView.classList.add("hidden");
 
   if (view === "home") {
     homeView.classList.remove("hidden");
