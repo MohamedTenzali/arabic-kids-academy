@@ -18,7 +18,7 @@
     <script src="js/app.js" defer></script>
   </head>
   <body>
-    <header class="site-header">
+    <header class="site-header home-header">
       <a class="brand" href="index.html" aria-label="Arabic Kids Academy home">
         <span class="brand-mark" aria-hidden="true">ا</span>
         <span>
@@ -28,43 +28,58 @@
       </a>
     </header>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">Welkom</p>
-        <h1 id="hero-title">Kies je leerroute</h1>
-        <p class="hero-text">
-          Begin rustig, groei stap voor stap en leer Arabisch op een manier die
-          duidelijk en vrolijk aanvoelt.
-        </p>
-        <p class="arabic-example" lang="ar" dir="rtl">مرحبا بكم</p>
-      </section>
-
-      <section class="level-section" aria-labelledby="level-title">
-        <div class="section-heading">
-          <h2 id="level-title">Selecteer je niveau</h2>
-          <p id="selected-level">Nog geen niveau gekozen.</p>
+    <main class="home-main">
+      <section class="hero hero-home" aria-labelledby="hero-title">
+        <div class="letter-arc" lang="ar" dir="rtl" aria-hidden="true">
+          <span style="--left: 18%; --top: 76%; --rotate: -48deg; --delay: 900ms; --z: 1;">ز</span>
+          <span style="--left: 23%; --top: 59%; --rotate: -42deg; --delay: 810ms; --z: 2;">ر</span>
+          <span style="--left: 29%; --top: 43%; --rotate: -34deg; --delay: 720ms; --z: 3;">ذ</span>
+          <span style="--left: 36%; --top: 29%; --rotate: -24deg; --delay: 630ms; --z: 4;">د</span>
+          <span style="--left: 44%; --top: 19%; --rotate: -13deg; --delay: 540ms; --z: 5;">خ</span>
+          <span style="--left: 52%; --top: 15%; --rotate: 0deg; --delay: 450ms; --z: 6;">ح</span>
+          <span style="--left: 60%; --top: 19%; --rotate: 13deg; --delay: 360ms; --z: 5;">ج</span>
+          <span style="--left: 68%; --top: 29%; --rotate: 24deg; --delay: 270ms; --z: 4;">ث</span>
+          <span style="--left: 75%; --top: 43%; --rotate: 34deg; --delay: 180ms; --z: 3;">ت</span>
+          <span style="--left: 81%; --top: 59%; --rotate: 42deg; --delay: 90ms; --z: 2;">ب</span>
+          <span style="--left: 86%; --top: 76%; --rotate: 48deg; --delay: 0ms; --z: 1;">ا</span>
         </div>
 
-        <div class="level-grid">
-          <button class="level-card" type="button" data-level="Beginner" aria-pressed="false">
-            <span class="level-name">Beginner</span>
-            <span class="level-copy">Voor kinderen die net starten.</span>
-          </button>
-
-          <button class="level-card" type="button" data-level="Gevorderd" aria-pressed="false">
-            <span class="level-name">Gevorderd</span>
-            <span class="level-copy">Voor kinderen die al wat herkennen.</span>
-          </button>
-
-          <button class="level-card" type="button" data-level="Expert" aria-pressed="false">
-            <span class="level-name">Expert</span>
-            <span class="level-copy">Voor kinderen die extra uitdaging willen.</span>
-          </button>
+        <div class="hero-content">
+          <p class="eyebrow">Welkom bij Arabic Kids Academy</p>
+          <h1 id="hero-title">Leer Arabisch stap voor stap</h1>
+          <p class="hero-text">
+            Kies je niveau en begin met letters, klanken en oefenen.
+          </p>
+          <p class="arabic-example" lang="ar" dir="rtl">مرحبا بكم</p>
         </div>
 
-        <a class="start-link is-disabled" href="pages/roadmap.html" aria-disabled="true">
-          Start leerroute
-        </a>
+        <section class="level-section home-levels" aria-labelledby="level-title">
+          <div class="section-heading">
+            <h2 id="level-title">Kies je niveau</h2>
+            <p id="selected-level">Nog geen niveau gekozen.</p>
+          </div>
+
+          <div class="level-grid">
+            <button class="level-card" type="button" data-level="Beginner" aria-pressed="false">
+              <span class="level-name">Beginner</span>
+              <span class="level-copy">Ik begin net met Arabisch.</span>
+            </button>
+
+            <button class="level-card" type="button" data-level="Gevorderd" aria-pressed="false">
+              <span class="level-name">Gevorderd</span>
+              <span class="level-copy">Ik ken al een paar letters.</span>
+            </button>
+
+            <button class="level-card" type="button" data-level="Expert" aria-pressed="false">
+              <span class="level-name">Expert</span>
+              <span class="level-copy">Ik wil extra uitdaging.</span>
+            </button>
+          </div>
+
+          <a class="start-link is-disabled" href="pages/roadmap.html" aria-disabled="true">
+            Start leerroute
+          </a>
+        </section>
       </section>
     </main>
   </body>

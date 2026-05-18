@@ -24,6 +24,10 @@ body {
   font-family: "Nunito", Arial, sans-serif;
 }
 
+body:has(.home-main) {
+  background: #111827;
+}
+
 button,
 input,
 textarea,
@@ -82,6 +86,215 @@ main {
   padding: 28px 0 34px;
 }
 
+.home-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+}
+
+.home-header .brand {
+  color: #ffffff;
+}
+
+.home-header .brand-subtitle {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.home-main {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-home {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  align-content: end;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(15, 139, 141, 0.22), transparent 34rem),
+    #111827;
+  padding: 300px 20px 44px;
+}
+
+.hero-home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 45%),
+    radial-gradient(circle at 50% 50%, transparent 36%, rgba(0, 0, 0, 0.16) 68%);
+}
+
+.hero-content,
+.home-levels {
+  position: relative;
+  z-index: 5;
+  width: min(100%, 980px);
+  margin: 0 auto;
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.floating-letter {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.48);
+  color: var(--color-brand-dark);
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  animation: floatLetter 5.5s ease-in-out infinite;
+}
+
+.letter-arc {
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  z-index: 2;
+  width: min(1420px, 168vw);
+  height: 470px;
+  pointer-events: none;
+  transform: translateX(calc(-50% - 18px));
+  animation: arcTravel 10s ease-in-out infinite;
+}
+
+.letter-arc span {
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+  display: grid;
+  width: clamp(94px, 16vw, 178px);
+  height: clamp(118px, 20vw, 218px);
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.74);
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(255, 246, 220, 0.78));
+  color: #0f8b8d;
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0;
+  z-index: var(--z);
+  box-shadow:
+    0 20px 42px rgba(0, 0, 0, 0.26),
+    inset 0 0 0 1px rgba(15, 139, 141, 0.08);
+  transform: translate(-50%, -50%) rotate(var(--rotate));
+  animation:
+    arcLetterIn 700ms ease-out forwards,
+    arcLetterFloat 3.4s ease-in-out infinite;
+  animation-delay: var(--delay), calc(var(--delay) + 700ms);
+}
+
+.letter-one {
+  top: 18%;
+  right: 9%;
+}
+
+.letter-two {
+  top: 34%;
+  left: 6%;
+  animation-delay: -1.4s;
+}
+
+.letter-three {
+  right: 12%;
+  bottom: 28%;
+  animation-delay: -2.8s;
+}
+
+.letter-four {
+  bottom: 18%;
+  left: 12%;
+  animation-delay: -4s;
+}
+
+.hero-home .eyebrow {
+  color: #f2b84b;
+}
+
+.hero-home h1 {
+  max-width: 780px;
+  margin-inline: auto;
+  color: #ffffff;
+  font-size: 3.15rem;
+  line-height: 1.02;
+}
+
+.hero-home .hero-text {
+  margin-inline: auto;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.hero-home .arabic-example {
+  border-color: rgba(15, 139, 141, 0.2);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--shadow-soft);
+}
+
+.home-levels {
+  margin-top: 28px;
+}
+
+.home-levels .section-heading {
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.home-levels #selected-level {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.home-levels .level-card {
+  min-height: 128px;
+  border-color: rgba(15, 139, 141, 0.18);
+  background: rgba(255, 255, 255, 0.82);
+  transform: translateY(0);
+}
+
+.home-levels .level-card:nth-child(1) {
+  border-top: 7px solid #f2b84b;
+}
+
+.home-levels .level-card:nth-child(2) {
+  border-top: 7px solid #0f8b8d;
+}
+
+.home-levels .level-card:nth-child(3) {
+  border-top: 7px solid #e06c8c;
+}
+
+.home-levels .level-card:hover,
+.home-levels .level-card:focus-visible {
+  transform: translateY(-5px) rotate(-1deg);
+}
+
+.home-levels .level-card.is-selected {
+  background: #ffffff;
+  box-shadow: 0 18px 46px rgba(15, 139, 141, 0.18);
+}
+
+.home-levels .start-link {
+  box-shadow: 0 14px 30px rgba(15, 139, 141, 0.22);
+}
+
 .eyebrow {
   margin: 0 0 10px;
   color: var(--color-brand-dark);
@@ -99,7 +312,7 @@ p {
 h1 {
   max-width: 640px;
   margin-bottom: 14px;
-  font-size: clamp(2.45rem, 18vw, 4.9rem);
+  font-size: 2.65rem;
   line-height: 0.95;
 }
 
@@ -276,6 +489,10 @@ h2 {
   margin-top: 28px;
 }
 
+.letters-grid {
+  direction: rtl;
+}
+
 .letter-card,
 .vowel-card {
   display: grid;
@@ -284,6 +501,10 @@ h2 {
   border-radius: 8px;
   background: var(--color-surface);
   padding: 18px;
+}
+
+.letter-card {
+  direction: ltr;
 }
 
 .letter-symbol,
@@ -331,6 +552,35 @@ h2 {
     padding-top: 48px;
   }
 
+  h1 {
+    font-size: 4.25rem;
+  }
+
+  .hero-home {
+    padding: 380px 32px 64px;
+  }
+
+  .hero-home h1 {
+    font-size: 5.05rem;
+  }
+
+  .letter-arc {
+    top: 36px;
+    width: min(1680px, 124vw);
+    height: 560px;
+  }
+
+  .letter-arc span {
+    border-radius: 28px;
+  }
+
+  .floating-letter {
+    width: 86px;
+    height: 86px;
+    border-radius: 24px;
+    font-size: 3.3rem;
+  }
+
   .level-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -342,5 +592,63 @@ h2 {
   .letters-grid,
   .vowels-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@keyframes floatLetter {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(5deg);
+  }
+}
+
+@keyframes arcTravel {
+  0%,
+  100% {
+    transform: translateX(calc(-50% - 42px));
+  }
+
+  50% {
+    transform: translateX(calc(-50% + 42px));
+  }
+}
+
+@keyframes arcLetterIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 28px)) rotate(var(--rotate)) scale(0.86);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--rotate)) scale(1);
+  }
+}
+
+@keyframes arcLetterFloat {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--rotate));
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, calc(-50% - 12px)) rotate(calc(var(--rotate) + 4deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
   }
 }
