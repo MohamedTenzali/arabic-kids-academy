@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arabic Kids Academy</title>
+    <meta
+      name="description"
+      content="Arabic Kids Academy helpt kinderen stap voor stap Arabisch leren."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Arabic Kids Academy home">
+        <span class="brand-mark" aria-hidden="true">ا</span>
+        <span>
+          <span class="brand-name">Arabic Kids Academy</span>
+          <span class="brand-subtitle">Arabisch leren voor kinderen</span>
+        </span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Welkom</p>
+        <h1 id="hero-title">Kies je leerroute</h1>
+        <p class="hero-text">
+          Begin rustig, groei stap voor stap en leer Arabisch op een manier die
+          duidelijk en vrolijk aanvoelt.
+        </p>
+        <p class="arabic-example" lang="ar" dir="rtl">مرحبا بكم</p>
+      </section>
+
+      <section class="level-section" aria-labelledby="level-title">
+        <div class="section-heading">
+          <h2 id="level-title">Selecteer je niveau</h2>
+          <p id="selected-level">Nog geen niveau gekozen.</p>
+        </div>
+
+        <div class="level-grid">
+          <button class="level-card" type="button" data-level="Beginner" aria-pressed="false">
+            <span class="level-name">Beginner</span>
+            <span class="level-copy">Voor kinderen die net starten.</span>
+          </button>
+
+          <button class="level-card" type="button" data-level="Gevorderd" aria-pressed="false">
+            <span class="level-name">Gevorderd</span>
+            <span class="level-copy">Voor kinderen die al wat herkennen.</span>
+          </button>
+
+          <button class="level-card" type="button" data-level="Expert" aria-pressed="false">
+            <span class="level-name">Expert</span>
+            <span class="level-copy">Voor kinderen die extra uitdaging willen.</span>
+          </button>
+        </div>
+
+        <a class="start-link is-disabled" href="pages/roadmap.html" aria-disabled="true">
+          Start leerroute
+        </a>
+      </section>
+    </main>
+  </body>
+</html>
