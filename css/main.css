@@ -683,6 +683,199 @@ h2 {
   margin-top: 42px;
 }
 
+.letter-sounds-index {
+  display: grid;
+  direction: rtl;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.letter-index-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(15, 139, 141, 0.16);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 242, 0.92));
+  box-shadow: 0 14px 30px rgba(36, 48, 68, 0.08);
+  color: var(--color-text);
+  direction: ltr;
+  padding: 14px;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.letter-index-card:hover,
+.letter-index-card:focus-visible {
+  border-color: rgba(15, 139, 141, 0.38);
+  box-shadow: 0 18px 36px rgba(15, 139, 141, 0.13);
+  transform: translateY(-2px);
+}
+
+.letter-index-symbol {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 30% 25%, #ffffff 0 20%, transparent 21%),
+    linear-gradient(145deg, #dff7f1, #fff0bf);
+  color: var(--color-brand-dark);
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.letter-index-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.letter-index-copy span {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.letter-detail-hero,
+.forms-section {
+  position: relative;
+}
+
+.letter-forms {
+  display: grid;
+  direction: rtl;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.letter-form-card {
+  display: grid;
+  min-height: 168px;
+  place-items: center;
+  border: 1px solid rgba(15, 139, 141, 0.18);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 250, 242, 0.9));
+  box-shadow: 0 16px 34px rgba(36, 48, 68, 0.08);
+  padding: 18px;
+}
+
+.letter-form-symbol {
+  margin: 0;
+  color: #111827;
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 5.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.letter-form-label {
+  margin: 6px 0 0;
+  color: var(--color-muted);
+  direction: ltr;
+  font-weight: 800;
+  text-align: center;
+}
+
+.letter-word-examples {
+  margin-top: 24px;
+}
+
+.letter-word-examples h3 {
+  margin: 0 0 14px;
+  color: var(--color-text);
+  direction: ltr;
+  font-size: 1.25rem;
+  text-align: left;
+}
+
+.letter-word-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.letter-word-card {
+  display: grid;
+  min-height: 132px;
+  place-items: center;
+  border: 1px solid rgba(242, 184, 75, 0.34);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(242, 184, 75, 0.2), transparent 34%),
+    linear-gradient(145deg, #ffffff, #eefafa);
+  box-shadow: 0 14px 30px rgba(36, 48, 68, 0.08);
+  padding: 16px;
+}
+
+.letter-word-symbol {
+  margin: 0;
+  color: var(--color-brand-dark);
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.letter-download {
+  margin-top: 22px;
+}
+
+.worksheet-download-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: 1px solid rgba(15, 139, 141, 0.22);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(242, 184, 75, 0.24), transparent 34%),
+    linear-gradient(135deg, #ffffff, #eefafa);
+  box-shadow: 0 16px 34px rgba(36, 48, 68, 0.1);
+  color: var(--color-brand-dark);
+  padding: 16px;
+  text-decoration: none;
+  transition:
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.worksheet-download-button:hover,
+.worksheet-download-button:focus-visible {
+  box-shadow: 0 20px 38px rgba(15, 139, 141, 0.15);
+  transform: translateY(-2px);
+}
+
+.worksheet-download-button span:last-child {
+  display: grid;
+  gap: 2px;
+}
+
+.worksheet-download-button small {
+  color: var(--color-muted);
+  font-weight: 800;
+}
+
+.worksheet-download-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--color-brand);
+  color: #ffffff;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
 .sounds-grid {
   display: grid;
   direction: rtl;
@@ -690,9 +883,13 @@ h2 {
   margin-top: 28px;
 }
 
+.sounds-grid-detail {
+  grid-template-columns: 1fr;
+}
+
 .sound-letter-card {
   border: 1px solid rgba(15, 139, 141, 0.16);
-  border-radius: 8px;
+  border-radius: 28px;
   background:
     linear-gradient(180deg, #ffffff, #fffaf2);
   box-shadow: 0 14px 34px rgba(36, 48, 68, 0.08);
@@ -707,12 +904,23 @@ h2 {
   margin-bottom: 18px;
 }
 
+.sounds-grid-detail .sound-letter-heading {
+  direction: rtl;
+  justify-content: flex-start;
+  text-align: right;
+}
+
+.sounds-grid-detail .sound-letter-copy {
+  direction: ltr;
+  text-align: right;
+}
+
 .sound-letter-symbol {
   display: grid;
   width: 70px;
   height: 70px;
   place-items: center;
-  border-radius: 20px;
+  border-radius: 26px;
   background:
     linear-gradient(145deg, #eefafa, #fff3d4);
   color: var(--color-brand-dark);
@@ -735,7 +943,7 @@ h2 {
   gap: 4px;
   place-items: center;
   border: 2px solid rgba(231, 218, 199, 0.95);
-  border-radius: 8px;
+  border-radius: 24px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 250, 242, 0.88));
   color: var(--color-text);
@@ -785,7 +993,7 @@ h2 {
   min-width: 58px;
   min-height: 58px;
   place-items: center;
-  border-radius: 18px;
+  border-radius: 24px;
   background: rgba(15, 139, 141, 0.08);
   color: var(--color-brand-dark);
   font-family: "Noto Naskh Arabic", serif;
@@ -817,6 +1025,42 @@ h2 {
 
 .sound-button.is-missing .sound-status {
   color: #b42318;
+}
+
+.letter-page-nav {
+  display: grid;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.letter-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(15, 139, 141, 0.18);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 12px 26px rgba(36, 48, 68, 0.08);
+  color: var(--color-brand-dark);
+  font-weight: 900;
+  padding: 13px 18px;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.letter-nav-button:hover,
+.letter-nav-button:focus-visible {
+  background: #eefafa;
+  box-shadow: 0 16px 30px rgba(15, 139, 141, 0.14);
+  transform: translateY(-2px);
+}
+
+.letter-nav-top {
+  background: linear-gradient(135deg, #fff3d4, #eefafa);
 }
 
 @media (min-width: 720px) {
@@ -878,7 +1122,27 @@ h2 {
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .letter-sounds-index {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .letter-forms {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .letter-word-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .sounds-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sounds-grid-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .letter-page-nav {
     grid-template-columns: repeat(3, 1fr);
   }
 }

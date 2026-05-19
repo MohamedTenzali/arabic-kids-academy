@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Letterklanken | Arabic Kids Academy</title>
+    <meta
+      name="description"
+      content="Oefen per Arabische letter de korte en lange klinkers bij Arabic Kids Academy."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../data/letter-sounds.js" defer></script>
+    <script src="../js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Arabic Kids Academy home">
+        <img class="brand-logo" src="../images/icons/icon.png" alt="">
+        <span>
+          <span class="brand-name">Arabic Kids Academy</span>
+          <span class="brand-subtitle">Arabisch leren voor kinderen</span>
+        </span>
+      </a>
+    </header>
+
+    <main class="page-shell" id="top">
+      <a class="back-link" href="vowels.html">Terug naar alle letters</a>
+
+      <section class="letter-detail-hero" aria-labelledby="letter-detail-title">
+        <p class="eyebrow">Letters</p>
+        <h1 id="letter-detail-title">Korte en lange klinkers</h1>
+        <p class="hero-text" id="letter-detail-description">
+          Kies een letter om de klanken te oefenen.
+        </p>
+      </section>
+
+      <section class="forms-section" aria-labelledby="forms-title">
+        <p class="eyebrow">Informatie</p>
+        <h2 id="forms-title">Letters in het begin, midden en eind van een woord</h2>
+        <p class="hero-text">
+          Arabische letters kunnen van vorm veranderen door hun plek in een woord.
+          De klinkertekens fatha, kasra en damma helpen je om de klank goed te lezen.
+        </p>
+
+        <div class="letter-forms" id="letter-forms" dir="rtl" aria-live="polite"></div>
+        <div class="letter-word-examples" id="letter-word-examples" dir="rtl" aria-live="polite"></div>
+        <div class="letter-download" id="letter-download"></div>
+      </section>
+
+      <section class="practice-section" aria-labelledby="sound-practice-title">
+        <p class="eyebrow">Oefenen</p>
+        <h2 id="sound-practice-title">Luister naar de klanken</h2>
+        <div class="sounds-grid sounds-grid-detail" id="sounds-grid" aria-live="polite"></div>
+      </section>
+
+      <nav class="letter-page-nav" id="letter-page-nav" aria-label="Letter navigatie"></nav>
+    </main>
+  </body>
+</html>
