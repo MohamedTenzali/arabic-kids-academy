@@ -76,3 +76,84 @@ if (vowelsGrid && window.vowels) {
 
   vowelsGrid.innerHTML = vowelCards;
 }
+
+const soundsGrid = document.querySelector("#sounds-grid");
+let activeSound = null;
+let activeSoundButton = null;
+let activeSoundStopHandler = null;
+
+if (soundsGrid && window.letterSounds) {
+  const soundGroups = window.letterSounds
+    .map(
+      (letter) => `
+        <article class="sound-letter-card">
+          <div class="sound-letter-heading">
+            <p class="sound-letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
+            <div>
+              <h2>${letter.nameNl}</h2>
+              <p class="letter-meta">8 klanken</p>
+            </div>
+          </div>
+
+          <div class="sound-buttons" dir="rtl">
+            ${letter.sounds
+              .map(
+                (sound) => `
+                  <button
+                    class="sound-button"
+                    type="button"
+                    data-src="${sound.src}"
+                  >
+                    <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
+                    <span class="sound-name">${sound.nameNl}</span>
+                    <span class="sound-copy">${sound.soundNl}</span>
+                    <span class="sound-status">Luister</span>
+                  </button>
+                `,
+              )
+              .join("")}
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+
+  soundsGrid.innerHTML = soundGroups;
+
+  soundsGrid.addEventListener("click", (event) => {
+    const button = event.target.closest(".sound-button");
+
+    if (!button) {
+      return;
+    }
+
+    if (activeSound) {
+      activeSound.pause();
+      activeSound.removeEventListener("timeupdate", activeSoundStopHandler);
+    }
+
+    if (activeSoundButton) {
+      activeSoundButton.classList.remove("is-playing");
+    }
+
+    activeSound = new Audio(button.dataset.src);
+    activeSoundButton = button;
+    button.classList.add("is-playing");
+
+    activeSound.addEventListener("ended", () => {
+      button.classList.remove("is-playing");
+    });
+
+    activeSound.addEventListener("error", () => {
+      button.classList.remove("is-playing");
+      button.classList.add("is-missing");
+      button.querySelector(".sound-status").textContent = "Audio mist";
+    });
+
+    activeSound.play().catch(() => {
+      button.classList.remove("is-playing");
+      button.classList.add("is-missing");
+      button.querySelector(".sound-status").textContent = "Audio mist";
+    });
+  });
+}

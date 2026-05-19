@@ -16,12 +16,13 @@
     >
     <link rel="stylesheet" href="../css/main.css">
     <script src="../data/vowels.js" defer></script>
+    <script src="../data/letter-sounds.js" defer></script>
     <script src="../js/app.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="../index.html" aria-label="Arabic Kids Academy home">
-        <span class="brand-mark" aria-hidden="true">ا</span>
+        <img class="brand-logo" src="../images/icons/icon.png" alt="">
         <span>
           <span class="brand-name">Arabic Kids Academy</span>
           <span class="brand-subtitle">Arabisch leren voor kinderen</span>
@@ -41,6 +42,16 @@
         </p>
 
         <div class="vowels-grid" id="vowels-grid" aria-live="polite"></div>
+
+        <section class="practice-section" aria-labelledby="sound-practice-title">
+          <p class="eyebrow">Test</p>
+          <h2 id="sound-practice-title">Klanken per letter</h2>
+          <p class="hero-text">
+            Oefen de eerste drie letters met korte en lange klanken.
+          </p>
+
+          <div class="sounds-grid" id="sounds-grid" aria-live="polite"></div>
+        </section>
       </section>
     </main>
   </body>
