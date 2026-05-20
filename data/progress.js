@@ -11,22 +11,34 @@ const learningLevels = [
         href: "letters.html",
       },
       {
+        id: "letter-quiz",
+        title: "Letter Quiz",
+        description: "Luister goed en kies de juiste letter.",
+        href: "quiz.html?mode=letters",
+      },
+      {
         id: "short-vowels",
-        title: "Korte klinkers",
+        title: "Korte klanken",
         description: "Oefen fatha, kasra en damma per letter.",
         href: "vowels.html?type=short",
       },
       {
+        id: "short-vowels-quiz",
+        title: "Klanken Quiz",
+        description: "Test fatha, kasra en damma met audio.",
+        href: "quiz.html?mode=short",
+      },
+      {
         id: "long-vowels",
-        title: "Lange klinkers",
+        title: "Lange klanken",
         description: "Oefen aa, ie en oe per letter.",
         href: "vowels.html?type=long",
       },
       {
-        id: "mixed-quiz",
-        title: "Mixed quiz",
-        description: "Mix letters en klinkers tot je 20 punten haalt.",
-        href: "quiz.html?mode=mixed",
+        id: "long-vowels-quiz",
+        title: "Lange klanken Quiz",
+        description: "Test aa, ie en oe tot je genoeg punten hebt.",
+        href: "quiz.html?mode=long",
       },
     ],
   },
@@ -76,6 +88,7 @@ const progressStore = {
 
     completed.add(stepId);
     progress.completedSteps[levelId] = [...completed];
+    progress.selectedLevel = progress.selectedLevel || levelId;
     writeProgress(progress);
   },
 
@@ -106,6 +119,41 @@ const progressStore = {
 
     const previousStep = level.steps[stepIndex - 1];
     return this.isStepComplete(level.id, previousStep.id);
+  },
+
+  getLevelProgress(levelId) {
+    const level = this.getLevel(levelId);
+
+    if (!level) {
+      return {
+        completed: 0,
+        total: 0,
+        percent: 0,
+      };
+    }
+
+    const completed = level.steps.filter((step) => this.isStepComplete(level.id, step.id)).length;
+    const total = level.steps.length;
+
+    return {
+      completed,
+      total,
+      percent: total ? Math.round((completed / total) * 100) : 0,
+    };
+  },
+
+  getStepStars(levelId, stepId) {
+    return this.isStepComplete(levelId, stepId) ? 3 : 0;
+  },
+
+  getNextStep(levelId) {
+    const level = this.getLevel(levelId);
+
+    if (!level || level.locked) {
+      return null;
+    }
+
+    return level.steps.find((step, index) => this.isStepUnlocked(level, index) && !this.isStepComplete(level.id, step.id)) || null;
   },
 
   selectLevel(levelId) {

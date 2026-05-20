@@ -59,43 +59,71 @@ levelButtons.forEach((button) => {
 
 const roadmapLevelText = document.querySelector("#roadmap-level");
 const roadmapList = document.querySelector("#roadmap-list");
+const roadmapProgress = document.querySelector("#roadmap-progress");
+const roadmapNextStep = document.querySelector("#roadmap-next-step");
 
-if (roadmapLevelText) {
+const getSelectedRoadmapLevel = () => {
   const params = new URLSearchParams(window.location.search);
   const selectedLevelId = params.get("level") || appProgress?.getSelectedLevel() || "beginner";
   const requestedLevel = appProgress?.getLevel(selectedLevelId);
-  const selectedLevel = requestedLevel && !requestedLevel.locked ? requestedLevel : appProgress?.getLevel("beginner");
 
-  roadmapLevelText.textContent = selectedLevel
-    ? `Je leerroute: ${selectedLevel.name}`
-    : "Kies eerst een niveau op de homepage.";
-}
+  return requestedLevel && !requestedLevel.locked ? requestedLevel : appProgress?.getLevel("beginner");
+};
 
 if (roadmapList && appProgress) {
-  const params = new URLSearchParams(window.location.search);
-  const selectedLevelId = params.get("level") || appProgress.getSelectedLevel() || "beginner";
-  const requestedLevel = appProgress.getLevel(selectedLevelId);
-  const selectedLevel = requestedLevel && !requestedLevel.locked ? requestedLevel : appProgress.getLevel("beginner");
-  const beginnerLevel = appProgress.getLevel("beginner");
-  const beginnerItems = beginnerLevel.steps
+  const selectedLevel = getSelectedRoadmapLevel();
+  const levelProgress = appProgress.getLevelProgress(selectedLevel.id);
+  const nextStep = appProgress.getNextStep(selectedLevel.id);
+
+  if (roadmapLevelText) {
+    roadmapLevelText.textContent = `Je leerroute: ${selectedLevel.name}. Speel alle levels vrij in de juiste volgorde.`;
+  }
+
+  if (roadmapProgress) {
+    roadmapProgress.innerHTML = `
+      <span class="roadmap-progress-label">Voortgang</span>
+      <strong>${levelProgress.percent}%</strong>
+      <div class="progress-bar roadmap-progress-track" aria-label="${levelProgress.completed} van ${levelProgress.total} stappen klaar">
+        <span style="width: ${levelProgress.percent}%"></span>
+      </div>
+      <p>${levelProgress.completed} / ${levelProgress.total} levels klaar</p>
+    `;
+  }
+
+  if (roadmapNextStep) {
+    roadmapNextStep.textContent = nextStep
+      ? `Volgende level: ${nextStep.title}`
+      : "Alle beginner levels zijn klaar.";
+  }
+
+  const beginnerItems = selectedLevel.steps
     .map((step, index) => {
-      const isComplete = appProgress.isStepComplete(beginnerLevel.id, step.id);
-      const isUnlocked = appProgress.isStepUnlocked(beginnerLevel, index);
+      const isComplete = appProgress.isStepComplete(selectedLevel.id, step.id);
+      const isUnlocked = appProgress.isStepUnlocked(selectedLevel, index);
+      const stars = appProgress.getStepStars(selectedLevel.id, step.id);
       const stateText = isComplete ? "Klaar" : isUnlocked ? "Open" : "Op slot";
+      const stepNumber = index + 1;
+      const cardContent = `
+        <span class="roadmap-node" aria-hidden="true">${isComplete ? "OK" : isUnlocked ? stepNumber : "Slot"}</span>
+        <span class="roadmap-card-copy">
+          <strong>Level ${stepNumber}: ${step.title}</strong>
+          <span>${step.description}</span>
+        </span>
+        <span class="roadmap-card-meta">
+          <span class="star-badge roadmap-stars" aria-label="${stars} van 3 sterren">
+            <span aria-hidden="true">${Array.from({ length: 3 }, (_, starIndex) => (starIndex < stars ? "&#9733;" : "&#9734;")).join("")}</span>
+          </span>
+          <em>${stateText}</em>
+        </span>
+      `;
 
       return `
-        <li class="roadmap-item ${isComplete ? "is-complete" : ""} ${isUnlocked ? "is-unlocked" : "is-locked"}">
+        <li class="roadmap-card roadmap-item roadmap-step-${stepNumber} ${isComplete ? "is-complete" : ""} ${isUnlocked ? "is-unlocked" : "is-locked locked-level"}">
           ${
             isUnlocked
-              ? `<a class="roadmap-link" href="${step.href}">
-                  <strong>Stap ${index + 1}: ${step.title}</strong>
-                  <span>${step.description}</span>
-                  <em>${stateText}</em>
-                </a>`
+              ? `<a class="roadmap-link" href="${step.href}">${cardContent}</a>`
               : `<div class="roadmap-link" aria-disabled="true">
-                  <strong>Stap ${index + 1}: ${step.title}</strong>
-                  <span>${step.description}</span>
-                  <em>${stateText}</em>
+                  ${cardContent}
                 </div>`
           }
         </li>
@@ -106,7 +134,7 @@ if (roadmapList && appProgress) {
     .filter((level) => level.id !== selectedLevel.id && level.locked)
     .map(
       (level) => `
-        <li class="roadmap-item is-locked">
+        <li class="roadmap-card roadmap-item is-locked locked-level">
           <div class="roadmap-link" aria-disabled="true">
             <strong>${level.name}</strong>
             <span>Dit niveau komt later.</span>
@@ -202,7 +230,7 @@ if (lettersGrid && appLetters.length) {
   const letterCards = appLetters
     .map(
       (letter) => `
-        <article class="letter-card">
+        <article class="lesson-card letter-card">
           <p class="letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
           <div>
             <h2>${getLetterName(letter)}</h2>
@@ -241,7 +269,7 @@ if (letterSoundsIndex && appLetters.length) {
       }`;
 
       return `
-        <article class="sound-letter-card">
+        <article class="lesson-card sound-letter-card">
           <div class="sound-letter-heading">
             <a class="letter-index-symbol" lang="ar" dir="rtl" href="${detailHref}">
               ${letter.arabic}
@@ -334,7 +362,7 @@ if (soundsGrid && appLetters.length) {
     ]
       .map(
         (form) => `
-          <article class="letter-form-card">
+          <article class="lesson-card letter-form-card">
             <p class="letter-form-symbol" lang="ar" dir="rtl">${form.value}</p>
             <p class="letter-form-label">${form.label}</p>
           </article>
@@ -349,7 +377,7 @@ if (soundsGrid && appLetters.length) {
       const exampleCards = examples
         .map(
           (example) => `
-            <article class="letter-word-card">
+            <article class="lesson-card letter-word-card">
               <p class="letter-word-symbol" lang="ar" dir="rtl">${example.word}</p>
               <p class="letter-form-label">Voorbeeld ${example.label.toLowerCase()}</p>
             </article>
@@ -430,7 +458,7 @@ if (soundsGrid && appLetters.length) {
       const sounds = getVowelSounds(letter, activeVowelGroup);
 
       return `
-        <article class="sound-letter-card">
+        <article class="lesson-card sound-letter-card">
           <div class="sound-letter-heading">
             <p class="sound-letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
             <div class="sound-letter-copy">
@@ -497,7 +525,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
           <span>Vraag ${state.questionCount}</span>
           <strong>${state.score} / ${state.finishScore} punten</strong>
         </div>
-        <div class="quiz-progress-track" aria-hidden="true">
+        <div class="progress-bar quiz-progress-track" aria-hidden="true">
           <span style="width: ${percent}%"></span>
         </div>
       </div>
@@ -531,9 +559,15 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
   const renderQuizResult = () => {
     const state = quiz.state;
+    const completedQuizSteps = {
+      letters: "letter-quiz",
+      short: "short-vowels-quiz",
+      long: "long-vowels-quiz",
+    };
+    const completedStepId = completedQuizSteps[state.mode];
 
-    if (state.mode === "mixed") {
-      appProgress?.completeStep("beginner", "mixed-quiz");
+    if (completedStepId) {
+      appProgress?.completeStep("beginner", completedStepId);
     }
 
     quizCard.innerHTML = `
@@ -541,7 +575,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       <div class="quiz-result">
         <p class="eyebrow">Klaar</p>
         <h2>Je hebt ${state.finishScore} punten gehaald</h2>
-        <div class="quiz-progress-track" aria-label="Eindscore 100%">
+        <div class="progress-bar quiz-progress-track" aria-label="Eindscore 100%">
           <span style="width: 100%"></span>
         </div>
         <p class="letter-meta">Goed geoefend. Je kunt de quiz nog een keer doen.</p>
