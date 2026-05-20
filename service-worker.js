@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabic-kids-academy-v3";
+const CACHE_VERSION = "arabic-kids-academy-v4";
 const CORE_CACHE = [
   "/",
   "/index.html",
@@ -17,7 +17,9 @@ const CORE_CACHE = [
   "/pages/sounds.html",
   "/pages/vowel-letter.html",
   "/pages/vowels.html",
-  "/images/icons/icon.png",
+  "/images/icons/apple-touch-icon.png",
+  "/images/icons/icon-192.png",
+  "/images/icons/icon-512.png",
 ];
 
 const isAudioRequest = (request) => {
