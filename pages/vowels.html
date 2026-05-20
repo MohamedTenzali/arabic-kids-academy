@@ -6,8 +6,13 @@
     <title>Klinkers | Arabic Kids Academy</title>
     <meta
       name="description"
-      content="Leer de korte en lange Arabische klinkers bij Arabic Kids Academy."
+      content="Oefen korte en lange Arabische klinkers per letter met kindvriendelijke audio."
     >
+    <meta name="theme-color" content="#0f8b8d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Arabic Kids">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../images/icons/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,22 +20,32 @@
       rel="stylesheet"
     >
     <link rel="stylesheet" href="../css/main.css">
+    <script src="../data/progress.js" defer></script>
+    <script src="../data/letters.js" defer></script>
     <script src="../data/vowels.js" defer></script>
-    <script src="../data/letter-sounds.js" defer></script>
+    <script src="../js/audio-player.js" defer></script>
+    <script src="../js/pwa-update.js" defer></script>
     <script src="../js/app.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Naar de inhoud</a>
     <header class="site-header">
       <a class="brand" href="../index.html" aria-label="Arabic Kids Academy home">
-        <img class="brand-logo" src="../images/icons/icon.png" alt="">
+        <img class="brand-logo" src="../images/icons/icon.png" alt="Arabic Kids Academy logo">
         <span>
           <span class="brand-name">Arabic Kids Academy</span>
           <span class="brand-subtitle">Arabisch leren voor kinderen</span>
         </span>
       </a>
+      <nav class="site-nav" aria-label="Hoofdnavigatie">
+        <a href="../index.html">Home</a>
+        <a href="roadmap.html">Leerroute</a>
+        <a href="letters.html">Letters</a>
+        <a href="quiz.html">Quiz</a>
+      </nav>
     </header>
 
-    <main class="page-shell">
+    <main class="page-shell" id="main-content">
       <a class="back-link" href="roadmap.html">Terug naar leerroute</a>
 
       <section aria-labelledby="vowels-title">
@@ -53,5 +68,8 @@
         </section>
       </section>
     </main>
+    <footer class="site-footer">
+      <p>Geen login, geen advertenties en geen persoonlijke gegevens van kinderen.</p>
+    </footer>
   </body>
 </html>

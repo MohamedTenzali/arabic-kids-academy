@@ -1,0 +1,21 @@
+{
+  "name": "Arabic Kids Academy",
+  "short_name": "Arabic Kids",
+  "description": "Arabisch leren voor kinderen met letters, klinkers en quizzen.",
+  "lang": "nl",
+  "dir": "ltr",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fffaf2",
+  "theme_color": "#0f8b8d",
+  "icons": [
+    {
+      "src": "/images/icons/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

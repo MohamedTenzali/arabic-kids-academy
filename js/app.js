@@ -1,53 +1,219 @@
 const levelButtons = document.querySelectorAll("[data-level]");
 const selectedLevelText = document.querySelector("#selected-level");
 const startLink = document.querySelector(".start-link");
+const appProgress = window.progressStore;
+const appLevels = window.learningLevels || [];
+
+if (levelButtons.length && appProgress) {
+  const selectedLevelId = appProgress.getSelectedLevel();
+
+  levelButtons.forEach((button) => {
+    const level = appProgress.getLevel(button.dataset.level);
+    const isLocked = !level || level.locked;
+    const isSelected = level?.id === selectedLevelId;
+
+    button.classList.toggle("is-locked", isLocked);
+    button.classList.toggle("is-selected", isSelected);
+    button.setAttribute("aria-pressed", isSelected ? "true" : "false");
+    button.setAttribute("aria-disabled", isLocked ? "true" : "false");
+
+    if (isLocked) {
+      button.querySelector(".level-route").textContent = "Nog op slot";
+    }
+  });
+
+  if (selectedLevelId && startLink) {
+    const selectedLevel = appProgress.getLevel(selectedLevelId);
+
+    selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel.name}`;
+    startLink.classList.remove("is-disabled");
+    startLink.removeAttribute("aria-disabled");
+    startLink.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`;
+  }
+}
 
 levelButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const selectedLevel = button.dataset.level;
+    const selectedLevelId = button.dataset.level;
+    const selectedLevel = appProgress?.getLevel(selectedLevelId);
+
+    if (!selectedLevel || selectedLevel.locked || !appProgress.selectLevel(selectedLevel.id)) {
+      selectedLevelText.textContent = `${selectedLevel?.name || "Dit niveau"} is nog op slot.`;
+      return;
+    }
 
     levelButtons.forEach((item) => {
       item.classList.toggle("is-selected", item === button);
       item.setAttribute("aria-pressed", item === button ? "true" : "false");
     });
 
-    selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel}`;
-    localStorage.setItem("selectedLevel", selectedLevel);
+    selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel.name}`;
 
     if (startLink) {
       startLink.classList.remove("is-disabled");
       startLink.removeAttribute("aria-disabled");
-      startLink.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel)}`;
+      startLink.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`;
     }
   });
 });
 
 const roadmapLevelText = document.querySelector("#roadmap-level");
+const roadmapList = document.querySelector("#roadmap-list");
 
 if (roadmapLevelText) {
   const params = new URLSearchParams(window.location.search);
-  const selectedLevel = params.get("level") || localStorage.getItem("selectedLevel");
+  const selectedLevelId = params.get("level") || appProgress?.getSelectedLevel() || "beginner";
+  const requestedLevel = appProgress?.getLevel(selectedLevelId);
+  const selectedLevel = requestedLevel && !requestedLevel.locked ? requestedLevel : appProgress?.getLevel("beginner");
 
   roadmapLevelText.textContent = selectedLevel
-    ? `Je leerroute: ${selectedLevel}`
+    ? `Je leerroute: ${selectedLevel.name}`
     : "Kies eerst een niveau op de homepage.";
 }
 
+if (roadmapList && appProgress) {
+  const params = new URLSearchParams(window.location.search);
+  const selectedLevelId = params.get("level") || appProgress.getSelectedLevel() || "beginner";
+  const requestedLevel = appProgress.getLevel(selectedLevelId);
+  const selectedLevel = requestedLevel && !requestedLevel.locked ? requestedLevel : appProgress.getLevel("beginner");
+  const beginnerLevel = appProgress.getLevel("beginner");
+  const beginnerItems = beginnerLevel.steps
+    .map((step, index) => {
+      const isComplete = appProgress.isStepComplete(beginnerLevel.id, step.id);
+      const isUnlocked = appProgress.isStepUnlocked(beginnerLevel, index);
+      const stateText = isComplete ? "Klaar" : isUnlocked ? "Open" : "Op slot";
+
+      return `
+        <li class="roadmap-item ${isComplete ? "is-complete" : ""} ${isUnlocked ? "is-unlocked" : "is-locked"}">
+          ${
+            isUnlocked
+              ? `<a class="roadmap-link" href="${step.href}">
+                  <strong>Stap ${index + 1}: ${step.title}</strong>
+                  <span>${step.description}</span>
+                  <em>${stateText}</em>
+                </a>`
+              : `<div class="roadmap-link" aria-disabled="true">
+                  <strong>Stap ${index + 1}: ${step.title}</strong>
+                  <span>${step.description}</span>
+                  <em>${stateText}</em>
+                </div>`
+          }
+        </li>
+      `;
+    })
+    .join("");
+  const lockedLevelItems = appLevels
+    .filter((level) => level.id !== selectedLevel.id && level.locked)
+    .map(
+      (level) => `
+        <li class="roadmap-item is-locked">
+          <div class="roadmap-link" aria-disabled="true">
+            <strong>${level.name}</strong>
+            <span>Dit niveau komt later.</span>
+            <em>Op slot</em>
+          </div>
+        </li>
+      `,
+    )
+    .join("");
+
+  roadmapList.innerHTML = beginnerItems + lockedLevelItems;
+}
+
+const appLetters = [...(window.letters || [])].sort((a, b) => a.order - b.order);
+const appVowelTypes = window.vowelTypes || [];
+const vowelTypesById = window.vowelTypesById || Object.fromEntries(appVowelTypes.map((vowel) => [vowel.id, vowel]));
+const audioPlayer = window.audioPlayer;
+const playAudio = window.playAudio || ((src, options = {}) => audioPlayer?.play(src, options.button));
+const preloadAudio = window.preloadAudio || (() => false);
+const pageParams = new URLSearchParams(window.location.search);
+const activeVowelGroup = pageParams.get("type");
+
+const setText = (selector, text) => {
+  const element = document.querySelector(selector);
+
+  if (element) {
+    element.textContent = text;
+  }
+};
+
+const getLetterName = (letter) => letter.nameDutch || letter.nameNl || letter.id;
+const getVowelType = (sound) => vowelTypesById[sound.type] || { nameNl: sound.nameNl || sound.type };
+const escapeAttribute = (value) =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+const getVowelSounds = (letter, group = "") =>
+  appVowelTypes
+    .filter((vowel) => !group || vowel.group === group)
+    .filter((vowel) => letter.vowelAudio?.[vowel.id])
+    .map((vowel) => ({
+      type: vowel.id,
+      soundNl: vowel.soundNl,
+      example: `${letter.arabic}${vowel.mark || ""}`,
+      src: letter.vowelAudio[vowel.id],
+    }));
+
+const renderAudioButton = ({ src, label = "Luister", ariaLabel, className = "sound-button", content }) => `
+  <button
+    class="${className}"
+    type="button"
+    data-audio-src="${src || ""}"
+    aria-label="${escapeAttribute(ariaLabel || label)}"
+  >
+    ${content}
+    <span class="sound-status" data-audio-status>${label}</span>
+  </button>
+`;
+
+document.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-audio-src]");
+
+  if (!button || !audioPlayer) {
+    return;
+  }
+
+  playAudio(button.dataset.audioSrc, { button });
+});
+
+document.addEventListener("pointerenter", (event) => {
+  const button = event.target.closest?.("[data-audio-src]");
+
+  if (button) {
+    preloadAudio(button.dataset.audioSrc);
+  }
+}, true);
+
+document.addEventListener("focusin", (event) => {
+  const button = event.target.closest?.("[data-audio-src]");
+
+  if (button) {
+    preloadAudio(button.dataset.audioSrc);
+  }
+});
+
 const lettersGrid = document.querySelector("#letters-grid");
 
-if (lettersGrid && window.letters) {
-  const letterCards = window.letters
+if (lettersGrid && appLetters.length) {
+  appProgress?.completeStep("beginner", "letters");
+
+  const letterCards = appLetters
     .map(
       (letter) => `
         <article class="letter-card">
           <p class="letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
           <div>
-            <h2>${letter.nameNl}</h2>
+            <h2>${getLetterName(letter)}</h2>
             <p class="letter-meta">${letter.transliteration}</p>
           </div>
-          <audio class="letter-audio" controls preload="none" src="${letter.audioSrc}">
-            Je browser ondersteunt geen audio.
-          </audio>
+          ${renderAudioButton({
+            src: letter.baseAudio,
+            ariaLabel: `Luister naar de letter ${getLetterName(letter)}`,
+            className: "sound-button letter-audio-button",
+            content: '<span class="sound-name">Letter</span>',
+          })}
         </article>
       `,
     )
@@ -56,210 +222,56 @@ if (lettersGrid && window.letters) {
   lettersGrid.innerHTML = letterCards;
 }
 
-const vowelsGrid = document.querySelector("#vowels-grid");
-
-if (vowelsGrid && window.vowels) {
-  const vowelCards = window.vowels
-    .map(
-      (vowel) => `
-        <article class="vowel-card">
-          <p class="vowel-symbol" lang="ar" dir="rtl">${vowel.arabic}</p>
-          <div>
-            <h2>${vowel.nameNl}</h2>
-            <p class="letter-meta">${vowel.soundNl}</p>
-          </div>
-          <p class="vowel-example">Voorbeeld: ${vowel.exampleNl}</p>
-        </article>
-      `,
-    )
-    .join("");
-
-  vowelsGrid.innerHTML = vowelCards;
-}
-
-const letterForms = {
-  alif: { isolated: "ا", start: "ا", middle: "ـا", end: "ـا" },
-  baa: { isolated: "ب", start: "بـ", middle: "ـبـ", end: "ـب" },
-  taa: { isolated: "ت", start: "تـ", middle: "ـتـ", end: "ـت" },
-  thaa: { isolated: "ث", start: "ثـ", middle: "ـثـ", end: "ـث" },
-  jeem: { isolated: "ج", start: "جـ", middle: "ـجـ", end: "ـج" },
-  haa: { isolated: "ح", start: "حـ", middle: "ـحـ", end: "ـح" },
-  khaa: { isolated: "خ", start: "خـ", middle: "ـخـ", end: "ـخ" },
-  dal: { isolated: "د", start: "د", middle: "ـد", end: "ـد" },
-  dhal: { isolated: "ذ", start: "ذ", middle: "ـذ", end: "ـذ" },
-  raa: { isolated: "ر", start: "ر", middle: "ـر", end: "ـر" },
-  zay: { isolated: "ز", start: "ز", middle: "ـز", end: "ـز" },
-  seen: { isolated: "س", start: "سـ", middle: "ـسـ", end: "ـس" },
-  sheen: { isolated: "ش", start: "شـ", middle: "ـشـ", end: "ـش" },
-  saad: { isolated: "ص", start: "صـ", middle: "ـصـ", end: "ـص" },
-  daad: { isolated: "ض", start: "ضـ", middle: "ـضـ", end: "ـض" },
-  "taa-heavy": { isolated: "ط", start: "طـ", middle: "ـطـ", end: "ـط" },
-  "zaa-heavy": { isolated: "ظ", start: "ظـ", middle: "ـظـ", end: "ـظ" },
-  ain: { isolated: "ع", start: "عـ", middle: "ـعـ", end: "ـع" },
-  ghain: { isolated: "غ", start: "غـ", middle: "ـغـ", end: "ـغ" },
-  faa: { isolated: "ف", start: "فـ", middle: "ـفـ", end: "ـف" },
-  qaaf: { isolated: "ق", start: "قـ", middle: "ـقـ", end: "ـق" },
-  kaaf: { isolated: "ك", start: "كـ", middle: "ـكـ", end: "ـك" },
-  laam: { isolated: "ل", start: "لـ", middle: "ـلـ", end: "ـل" },
-  meem: { isolated: "م", start: "مـ", middle: "ـمـ", end: "ـم" },
-  noon: { isolated: "ن", start: "نـ", middle: "ـنـ", end: "ـن" },
-  waw: { isolated: "و", start: "و", middle: "ـو", end: "ـو" },
-  yaa: { isolated: "ي", start: "يـ", middle: "ـيـ", end: "ـي" },
-};
-
-const letterWordExamples = {
-  alif: [
-    { label: "Begin", word: "أَكَلَ" },
-    { label: "Midden", word: "سَأَلَ" },
-    { label: "Eind", word: "قَرَأَ" },
-  ],
-  baa: [
-    { label: "Begin", word: "بَتَرَ" },
-    { label: "Midden", word: "سَحَبَ" },
-    { label: "Eind", word: "ضَرَبَ" },
-  ],
-  taa: [
-    { label: "Begin", word: "تَرَكَ" },
-    { label: "Midden", word: "كَتَبَ" },
-    { label: "Eind", word: "نَبَتَ" },
-  ],
-  thaa: [
-    { label: "Begin", word: "ثَمَرَ" },
-    { label: "Midden", word: "مَثَلَ" },
-    { label: "Eind", word: "حَرَثَ" },
-  ],
-  jeem: [
-    { label: "Begin", word: "جَبَلَ" },
-    { label: "Midden", word: "شَجَرَ" },
-    { label: "Eind", word: "خَرَجَ" },
-  ],
-  haa: [
-    { label: "Begin", word: "حَمَلَ" },
-    { label: "Midden", word: "سَمَحَ" },
-    { label: "Eind", word: "فَتَحَ" },
-  ],
-  khaa: [
-    { label: "Begin", word: "خَرَجَ" },
-    { label: "Midden", word: "صَرَخَ" },
-    { label: "Eind", word: "طَبَخَ" },
-  ],
-  dal: [
-    { label: "Begin", word: "دَرَسَ" },
-    { label: "Midden", word: "مَدَحَ" },
-    { label: "Eind", word: "بَلَدَ" },
-  ],
-  dhal: [
-    { label: "Begin", word: "ذَهَبَ" },
-    { label: "Midden", word: "أَذِنَ" },
-    { label: "Eind", word: "نَبَذَ" },
-  ],
-  raa: [
-    { label: "Begin", word: "رَسَمَ" },
-    { label: "Midden", word: "قَرَأَ" },
-    { label: "Eind", word: "سَفَرَ" },
-  ],
-  zay: [
-    { label: "Begin", word: "زَرَعَ" },
-    { label: "Midden", word: "وَزَنَ" },
-    { label: "Eind", word: "خَبَزَ" },
-  ],
-  seen: [
-    { label: "Begin", word: "سَنَحَ" },
-    { label: "Midden", word: "نَسَرَ" },
-    { label: "Eind", word: "كَنَسَ" },
-  ],
-  sheen: [
-    { label: "Begin", word: "شَجَرَ" },
-    { label: "Midden", word: "نَشَرَ" },
-    { label: "Eind", word: "فَرَشَ" },
-  ],
-  saad: [
-    { label: "Begin", word: "صَبَرَ" },
-    { label: "Midden", word: "نَصَحَ" },
-    { label: "Eind", word: "قَنَصَ" },
-  ],
-  daad: [
-    { label: "Begin", word: "ضَرَبَ" },
-    { label: "Midden", word: "حَضَرَ" },
-    { label: "Eind", word: "قَرَضَ" },
-  ],
-  "taa-heavy": [
-    { label: "Begin", word: "طَرَبَ" },
-    { label: "Midden", word: "بَطَنَ" },
-    { label: "Eind", word: "رَبَطَ" },
-  ],
-  "zaa-heavy": [
-    { label: "Begin", word: "ظَهَرَ" },
-    { label: "Midden", word: "نَظَرَ" },
-    { label: "Eind", word: "حَفِظَ" },
-  ],
-  ain: [
-    { label: "Begin", word: "عَبَدَ" },
-    { label: "Midden", word: "نَعَمَ" },
-    { label: "Eind", word: "دَفَعَ" },
-  ],
-  ghain: [
-    { label: "Begin", word: "غَسَلَ" },
-    { label: "Midden", word: "رَغِبَ" },
-    { label: "Eind", word: "فَرَغَ" },
-  ],
-  faa: [
-    { label: "Begin", word: "فَرَضَ" },
-    { label: "Midden", word: "نَفَحَ" },
-    { label: "Eind", word: "وَقَفَ" },
-  ],
-  qaaf: [
-    { label: "Begin", word: "قَلَمَ" },
-    { label: "Midden", word: "نَسَقَ" },
-    { label: "Eind", word: "سَبَقَ" },
-  ],
-  kaaf: [
-    { label: "Begin", word: "كَتَبَ" },
-    { label: "Midden", word: "بَكَرَ" },
-    { label: "Eind", word: "دَلَكَ" },
-  ],
-  laam: [
-    { label: "Begin", word: "لَعِبَ" },
-    { label: "Midden", word: "كَلَمَ" },
-    { label: "Eind", word: "عَمَلَ" },
-  ],
-  meem: [
-    { label: "Begin", word: "مَنَحَ" },
-    { label: "Midden", word: "نَمَرَ" },
-    { label: "Eind", word: "قَلَمَ" },
-  ],
-  noon: [
-    { label: "Begin", word: "نَبَتَ" },
-    { label: "Midden", word: "مَنَعَ" },
-    { label: "Eind", word: "دَرَنَ" },
-  ],
-  waw: [
-    { label: "Begin", word: "وَجَدَ" },
-    { label: "Midden", word: "رَوَعَ" },
-    { label: "Eind", word: "دَلْوٌ" },
-  ],
-  yaa: [
-    { label: "Begin", word: "يَسَرَ" },
-    { label: "Midden", word: "لَيِّنٌ" },
-    { label: "Eind", word: "رَضِيَ" },
-  ],
-};
-
 const letterSoundsIndex = document.querySelector("#letter-sounds-index");
 
-if (letterSoundsIndex && window.letterSounds) {
-  const letterLinks = window.letterSounds
-    .map(
-      (letter) => `
-        <a class="letter-index-card" href="vowel-letter.html?letter=${encodeURIComponent(letter.id)}">
-          <span class="letter-index-symbol" lang="ar" dir="rtl">${letter.arabic}</span>
-          <span class="letter-index-copy">
-            <strong>${letter.nameNl}</strong>
-            <span>${letter.sounds.length} klanken</span>
-          </span>
-        </a>
-      `,
-    )
+if (letterSoundsIndex && appLetters.length) {
+  if (activeVowelGroup === "short") {
+    appProgress?.completeStep("beginner", "short-vowels");
+  }
+
+  if (activeVowelGroup === "long") {
+    appProgress?.completeStep("beginner", "long-vowels");
+  }
+
+  const letterLinks = appLetters
+    .map((letter) => {
+      const sounds = getVowelSounds(letter, activeVowelGroup);
+      const detailHref = `vowel-letter.html?letter=${encodeURIComponent(letter.id)}${
+        activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""
+      }`;
+
+      return `
+        <article class="sound-letter-card">
+          <div class="sound-letter-heading">
+            <a class="letter-index-symbol" lang="ar" dir="rtl" href="${detailHref}">
+              ${letter.arabic}
+            </a>
+            <div class="sound-letter-copy">
+              <h2>${getLetterName(letter)}</h2>
+              <p class="letter-meta">${sounds.length} klanken</p>
+            </div>
+          </div>
+
+          <div class="sound-buttons" dir="rtl">
+            ${sounds
+              .map((sound) => {
+                const vowelType = getVowelType(sound);
+
+                return renderAudioButton({
+                  src: sound.src,
+                  ariaLabel: `Luister naar ${getLetterName(letter)} met ${vowelType.nameNl}`,
+                  content: `
+                    <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
+                    <span class="sound-name">${vowelType.nameNl}</span>
+                    <span class="sound-copy">${sound.soundNl}</span>
+                  `,
+                });
+              })
+              .join("")}
+          </div>
+        </article>
+      `;
+    })
     .join("");
 
   letterSoundsIndex.innerHTML = letterLinks;
@@ -272,25 +284,22 @@ const letterFormsGrid = document.querySelector("#letter-forms");
 const letterWordExamplesGrid = document.querySelector("#letter-word-examples");
 const letterDownload = document.querySelector("#letter-download");
 const letterPageNav = document.querySelector("#letter-page-nav");
-let activeSound = null;
-let activeSoundButton = null;
-let activeSoundStopHandler = null;
 
-if (soundsGrid && window.letterSounds) {
+if (soundsGrid && appLetters.length) {
   const params = new URLSearchParams(window.location.search);
   const selectedLetterId = params.get("letter");
   const selectedLetter = selectedLetterId
-    ? window.letterSounds.find((letter) => letter.id === selectedLetterId)
+    ? appLetters.find((letter) => letter.id === selectedLetterId)
     : null;
   const lettersToRender = selectedLetter
     ? [selectedLetter]
     : letterDetailTitle
       ? []
-      : window.letterSounds;
+      : appLetters;
 
   if (letterDetailTitle) {
     if (selectedLetter) {
-      letterDetailTitle.textContent = `${selectedLetter.nameNl}: korte en lange klinkers`;
+      letterDetailTitle.textContent = `${getLetterName(selectedLetter)}: korte en lange klinkers`;
     } else {
       letterDetailTitle.textContent = "Letter niet gevonden";
     }
@@ -298,12 +307,20 @@ if (soundsGrid && window.letterSounds) {
 
   if (letterDetailDescription) {
     letterDetailDescription.textContent = selectedLetter
-      ? `Oefen ${selectedLetter.nameNl} met fatha, kasra, damma, lange klanken en tanween.`
+      ? `Oefen ${getLetterName(selectedLetter)} met fatha, kasra, damma en lange klanken.`
       : "Ga terug en kies een letter uit het overzicht.";
   }
 
+  if (selectedLetter && activeVowelGroup === "short") {
+    appProgress?.completeStep("beginner", "short-vowels");
+  }
+
+  if (selectedLetter && activeVowelGroup === "long") {
+    appProgress?.completeStep("beginner", "long-vowels");
+  }
+
   if (letterFormsGrid && selectedLetter) {
-    const forms = letterForms[selectedLetter.id] || {
+    const forms = selectedLetter.forms || {
       isolated: selectedLetter.arabic,
       start: selectedLetter.arabic,
       middle: selectedLetter.arabic,
@@ -328,7 +345,7 @@ if (soundsGrid && window.letterSounds) {
     letterFormsGrid.innerHTML = formCards;
 
     if (letterWordExamplesGrid) {
-      const examples = letterWordExamples[selectedLetter.id] || [];
+      const examples = selectedLetter.wordExamples || [];
       const exampleCards = examples
         .map(
           (example) => `
@@ -350,12 +367,20 @@ if (soundsGrid && window.letterSounds) {
       letterDownload.innerHTML = `
         <a
           class="worksheet-download-button"
-          href="../docs/letter-worksheets/${encodeURIComponent(selectedLetter.id)}.pdf"
+          href="${selectedLetter.worksheetSrc || `../docs/letter-worksheets/${encodeURIComponent(selectedLetter.id)}.pdf`}"
           download
+          aria-label="Download oefenblad voor ${getLetterName(selectedLetter)}"
         >
-          <span class="worksheet-download-icon" aria-hidden="true">↓</span>
-          <span>
-            <strong>Download oefen-PDF</strong>
+          <span class="worksheet-spinner-dot" aria-hidden="true"></span>
+          <span class="worksheet-download-icon" aria-hidden="true">
+            <span class="worksheet-progress-fill"></span>
+            <svg class="worksheet-download-svg" viewBox="0 0 24 24" focusable="false">
+              <path d="M12 5v14m0 0-4-4m4 4 4-4" />
+            </svg>
+            <span class="worksheet-loading-block"></span>
+          </span>
+          <span class="worksheet-download-label">
+            <strong>Download</strong>
             <small>Oefening baart kunst</small>
           </span>
         </a>
@@ -364,97 +389,284 @@ if (soundsGrid && window.letterSounds) {
   }
 
   if (letterPageNav && selectedLetter) {
-    const currentIndex = window.letterSounds.findIndex((letter) => letter.id === selectedLetter.id);
-    const previousLetter = window.letterSounds[(currentIndex + window.letterSounds.length - 1) % window.letterSounds.length];
-    const nextLetter = window.letterSounds[(currentIndex + 1) % window.letterSounds.length];
+    const currentIndex = appLetters.findIndex((letter) => letter.id === selectedLetter.id);
+    const previousLetter = appLetters[(currentIndex + appLetters.length - 1) % appLetters.length];
+    const nextLetter = appLetters[(currentIndex + 1) % appLetters.length];
+    const pageLinks = appLetters
+      .map((letter, index) => {
+        const pageNumber = index + 1;
+        const isCurrent = index === currentIndex;
+
+        return `
+          <a
+            class="letter-page-number${isCurrent ? " is-current" : ""}"
+            href="vowel-letter.html?letter=${encodeURIComponent(letter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}"
+            aria-label="Letter ${pageNumber}"
+            ${isCurrent ? 'aria-current="page"' : ""}
+          >${pageNumber}</a>
+        `;
+      })
+      .join("");
 
     letterPageNav.innerHTML = `
-      <a class="letter-nav-button" href="vowel-letter.html?letter=${encodeURIComponent(previousLetter.id)}">
-        <span aria-hidden="true">←</span>
-        <span>Vorige</span>
+      <a class="letter-page-arrow" aria-label="Vorige" href="vowel-letter.html?letter=${encodeURIComponent(previousLetter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}">
+        <svg width="9" height="16" viewBox="0 0 12 18" aria-hidden="true" focusable="false">
+          <path d="M11 1L2 9.24L11 17" />
+        </svg>
       </a>
-      <a class="letter-nav-button letter-nav-top" href="#top">
-        <span aria-hidden="true">↑</span>
-        <span>Naar boven</span>
-      </a>
-      <a class="letter-nav-button" href="vowel-letter.html?letter=${encodeURIComponent(nextLetter.id)}">
-        <span>Volgende</span>
-        <span aria-hidden="true">→</span>
+      <div class="letter-page-numbers" aria-label="Letter pagina's">
+        ${pageLinks}
+      </div>
+      <a class="letter-page-arrow" aria-label="Volgende" href="vowel-letter.html?letter=${encodeURIComponent(nextLetter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}">
+        <svg width="9" height="16" viewBox="0 0 12 18" aria-hidden="true" focusable="false">
+          <path d="M1 1L10 9.24L1 17" />
+        </svg>
       </a>
     `;
   }
 
   const soundGroups = lettersToRender
-    .map(
-      (letter) => `
+    .map((letter) => {
+      const sounds = getVowelSounds(letter, activeVowelGroup);
+
+      return `
         <article class="sound-letter-card">
           <div class="sound-letter-heading">
             <p class="sound-letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
             <div class="sound-letter-copy">
-              <h2>${letter.nameNl}</h2>
-              <p class="letter-meta">8 klanken</p>
+              <h2>${getLetterName(letter)}</h2>
+              <p class="letter-meta">${sounds.length} klanken</p>
             </div>
           </div>
 
           <div class="sound-buttons" dir="rtl">
-            ${letter.sounds
+            ${sounds
               .map(
-                (sound) => `
-                  <button
-                    class="sound-button"
-                    type="button"
-                    data-src="${sound.src}"
-                  >
-                    <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
-                    <span class="sound-name">${sound.nameNl}</span>
-                    <span class="sound-copy">${sound.soundNl}</span>
-                    <span class="sound-status">Luister</span>
-                  </button>
-                `,
+                (sound) => {
+                  const vowelType = getVowelType(sound);
+
+                  return renderAudioButton({
+                    src: sound.src,
+                    ariaLabel: `Luister naar ${getLetterName(letter)} met ${vowelType.nameNl}`,
+                    content: `
+                      <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
+                      <span class="sound-name">${vowelType.nameNl}</span>
+                      <span class="sound-copy">${sound.soundNl}</span>
+                    `,
+                  });
+                },
               )
               .join("")}
           </div>
         </article>
-      `,
-    )
+      `;
+    })
     .join("");
 
   soundsGrid.innerHTML = soundGroups;
+}
 
-  soundsGrid.addEventListener("click", (event) => {
-    const button = event.target.closest(".sound-button");
+const quizCard = document.querySelector("#quiz-card");
 
-    if (!button) {
+if (quizCard && appLetters.length && window.createLetterQuiz) {
+  const initialQuizMode = pageParams.get("mode") || "letters";
+  const quiz = window.createLetterQuiz(appLetters, {
+    difficulty: "medium",
+    finishScore: 20,
+    mode: initialQuizMode,
+  });
+  const modeOptions = [
+    ["letters", "Letters"],
+    ["short", "Korte klinkers"],
+    ["long", "Lange klinkers"],
+    ["mixed", "Mix"],
+  ];
+  const difficultyOptions = [
+    ["easy", "Makkelijk"],
+    ["medium", "Normaal"],
+    ["hard", "Moeilijk"],
+  ];
+
+  const renderQuizProgress = () => {
+    const state = quiz.state;
+    const percent = Math.min(100, Math.round((state.score / state.finishScore) * 100));
+
+    return `
+      <div class="quiz-progress" aria-label="Quiz voortgang">
+        <div class="quiz-progress-copy">
+          <span>Vraag ${state.questionCount}</span>
+          <strong>${state.score} / ${state.finishScore} punten</strong>
+        </div>
+        <div class="quiz-progress-track" aria-hidden="true">
+          <span style="width: ${percent}%"></span>
+        </div>
+      </div>
+    `;
+  };
+
+  const renderQuizControls = () => {
+    const state = quiz.state;
+
+    return `
+      <div class="quiz-controls" aria-label="Quiz instellingen">
+        <label>
+          <span>Quiz</span>
+          <select id="quiz-mode">
+            ${modeOptions
+              .map(([value, label]) => `<option value="${value}"${state.mode === value ? " selected" : ""}>${label}</option>`)
+              .join("")}
+          </select>
+        </label>
+        <label>
+          <span>Niveau</span>
+          <select id="quiz-difficulty">
+            ${difficultyOptions
+              .map(([value, label]) => `<option value="${value}"${state.difficulty === value ? " selected" : ""}>${label}</option>`)
+              .join("")}
+          </select>
+        </label>
+      </div>
+    `;
+  };
+
+  const renderQuizResult = () => {
+    const state = quiz.state;
+
+    if (state.mode === "mixed") {
+      appProgress?.completeStep("beginner", "mixed-quiz");
+    }
+
+    quizCard.innerHTML = `
+      ${renderQuizControls()}
+      <div class="quiz-result">
+        <p class="eyebrow">Klaar</p>
+        <h2>Je hebt ${state.finishScore} punten gehaald</h2>
+        <div class="quiz-progress-track" aria-label="Eindscore 100%">
+          <span style="width: 100%"></span>
+        </div>
+        <p class="letter-meta">Goed geoefend. Je kunt de quiz nog een keer doen.</p>
+        <button class="primary-button" type="button" id="restart-quiz">Opnieuw starten</button>
+      </div>
+    `;
+  };
+
+  const renderQuestion = () => {
+    const question = quiz.createQuestion();
+    const state = quiz.state;
+
+    if (!question) {
+      renderQuizResult();
       return;
     }
 
-    if (activeSound) {
-      activeSound.pause();
-      activeSound.removeEventListener("timeupdate", activeSoundStopHandler);
+    quizCard.innerHTML = `
+      ${renderQuizControls()}
+      ${renderQuizProgress()}
+
+      <div class="sound-letter-heading">
+        <p class="sound-letter-symbol" lang="ar" dir="rtl">؟</p>
+        <div class="sound-letter-copy">
+          <h2>${question.prompt}</h2>
+          <p class="letter-meta">${state.modeLabel} - ${state.choiceCount} keuzes</p>
+        </div>
+      </div>
+
+      ${renderAudioButton({
+        src: question.answer.audioSrc,
+        ariaLabel: "Luister naar de quizvraag",
+        className: "sound-button quiz-audio-button",
+        content: '<span class="sound-name">Luister naar de vraag</span>',
+      })}
+
+      <div class="sound-buttons quiz-choices" dir="rtl">
+        ${question.choices
+          .map(
+            (choice) => `
+              <button class="sound-button quiz-choice" type="button" data-quiz-answer="${choice.id}">
+                <span class="sound-example" lang="ar" dir="rtl">${choice.arabic}</span>
+                <span class="sound-name">${choice.title}</span>
+                <span class="sound-copy">${choice.subtitle}</span>
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+
+      <p class="letter-meta" id="quiz-feedback" role="status"></p>
+      <button class="primary-button is-disabled" type="button" id="next-quiz-question" disabled>Volgende vraag</button>
+    `;
+  };
+
+  quizCard.addEventListener("click", (event) => {
+    const answerButton = event.target.closest("[data-quiz-answer]");
+
+    if (answerButton) {
+      const result = quiz.answerQuestion(answerButton.dataset.quizAnswer);
+
+      if (!result) {
+        return;
+      }
+
+      const nextButton = document.querySelector("#next-quiz-question");
+      const choices = quizCard.querySelectorAll("[data-quiz-answer]");
+
+      choices.forEach((choice) => {
+        choice.disabled = true;
+        choice.classList.toggle("is-playing", choice.dataset.quizAnswer === result.answer.id);
+        choice.classList.toggle("is-missing", choice === answerButton && !result.isCorrect);
+      });
+
+      setText("#quiz-feedback", result.isCorrect ? "+1 punt. Goed gedaan!" : `-1 punt. Het goede antwoord was ${result.answer.title}.`);
+
+      if (nextButton) {
+        nextButton.disabled = false;
+        nextButton.classList.remove("is-disabled");
+        nextButton.textContent = result.isFinished ? "Bekijk resultaat" : "Volgende vraag";
+      }
     }
 
-    if (activeSoundButton) {
-      activeSoundButton.classList.remove("is-playing");
+    if (event.target.closest("#next-quiz-question")) {
+      renderQuestion();
     }
 
-    activeSound = new Audio(button.dataset.src);
-    activeSoundButton = button;
-    button.classList.add("is-playing");
-
-    activeSound.addEventListener("ended", () => {
-      button.classList.remove("is-playing");
-    });
-
-    activeSound.addEventListener("error", () => {
-      button.classList.remove("is-playing");
-      button.classList.add("is-missing");
-      button.querySelector(".sound-status").textContent = "Audio mist";
-    });
-
-    activeSound.play().catch(() => {
-      button.classList.remove("is-playing");
-      button.classList.add("is-missing");
-      button.querySelector(".sound-status").textContent = "Audio mist";
-    });
+    if (event.target.closest("#restart-quiz")) {
+      quiz.reset();
+      renderQuestion();
+    }
   });
+
+  quizCard.addEventListener("change", (event) => {
+    if (event.target.matches("#quiz-mode")) {
+      quiz.setMode(event.target.value);
+      renderQuestion();
+    }
+
+    if (event.target.matches("#quiz-difficulty")) {
+      quiz.setDifficulty(event.target.value);
+      renderQuestion();
+    }
+  });
+
+  renderQuestion();
 }
+
+document.addEventListener("click", (event) => {
+  const downloadButton = event.target.closest(".worksheet-download-button");
+
+  if (!downloadButton) {
+    return;
+  }
+
+  if (downloadButton.classList.contains("is-downloading")) {
+    event.preventDefault();
+    return;
+  }
+
+  downloadButton.classList.add("is-downloading");
+  downloadButton.setAttribute("aria-busy", "true");
+
+  window.setTimeout(() => {
+    downloadButton.classList.remove("is-downloading");
+    downloadButton.removeAttribute("aria-busy");
+  }, 3500);
+});
