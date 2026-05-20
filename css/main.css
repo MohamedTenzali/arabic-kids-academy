@@ -241,12 +241,32 @@ select:focus-visible {
 }
 
 .motion-correct {
-  animation: correctPop 560ms var(--ease-bounce) both;
+  position: relative;
+  animation: correctPop 760ms var(--ease-bounce) both;
 }
 
 .motion-wrong,
 .motion-shake {
-  animation: shakeSoft 420ms var(--ease-soft) both;
+  position: relative;
+  animation: shakeSoft 560ms var(--ease-soft) both;
+}
+
+.motion-correct::after,
+.motion-wrong::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  z-index: 6;
+  border: 4px solid rgba(255, 209, 102, 0.72);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.86);
+  animation: feedbackRing 1100ms var(--ease-soft) forwards;
+}
+
+.motion-wrong::after {
+  border-color: rgba(255, 122, 144, 0.68);
 }
 
 .tap-feedback,
@@ -279,20 +299,20 @@ select:focus-visible {
   background: var(--piece-color, var(--color-accent));
   opacity: 0;
   transform: translate3d(0, 0, 0) rotate(0deg) scale(0.8);
-  animation: confettiDrift 900ms var(--ease-soft) forwards;
+  animation: confettiDrift 1400ms var(--ease-soft) forwards;
 }
 
 .star-piece {
   display: grid;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   place-items: center;
   border-radius: 0;
   background: transparent;
   color: var(--piece-color, var(--color-accent));
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 900;
-  animation: starPop 760ms var(--ease-bounce) forwards;
+  animation: starPop 1200ms var(--ease-bounce) forwards;
 }
 
 .star-piece::before {
@@ -387,6 +407,18 @@ select:focus-visible {
   color: var(--color-muted);
   font-size: 0.78rem;
   font-weight: 800;
+}
+
+.mascot.mascot-celebrate .mascot-svg {
+  animation:
+    mascotCelebrate 900ms var(--ease-bounce) both,
+    mascotFloat 3.4s ease-in-out 900ms infinite;
+}
+
+.mascot.mascot-celebrate .mascot-bubble {
+  animation:
+    mascotBubblePop 900ms var(--ease-bounce) both,
+    mascotBubblePulse 3.6s ease-in-out 900ms infinite;
 }
 
 .success-sparkle {
@@ -2406,12 +2438,32 @@ h2 {
     transform: translate3d(0, 0, 0) scale(1);
   }
 
-  45% {
-    transform: translate3d(0, -5px, 0) scale(1.04);
+  34% {
+    transform: translate3d(0, -10px, 0) scale(1.08) rotate(-1deg);
+  }
+
+  66% {
+    transform: translate3d(0, 2px, 0) scale(0.99) rotate(1deg);
   }
 
   100% {
     transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes feedbackRing {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.16);
   }
 }
 
@@ -2421,16 +2473,16 @@ h2 {
     transform: translate3d(0, 0, 0);
   }
 
-  22% {
-    transform: translate3d(-5px, 0, 0);
+  18% {
+    transform: translate3d(-8px, 0, 0) rotate(-1deg);
   }
 
-  48% {
-    transform: translate3d(4px, 0, 0);
+  42% {
+    transform: translate3d(7px, 0, 0) rotate(1deg);
   }
 
-  72% {
-    transform: translate3d(-2px, 0, 0);
+  68% {
+    transform: translate3d(-4px, 0, 0) rotate(-0.5deg);
   }
 }
 
@@ -2553,6 +2605,38 @@ h2 {
 
   50% {
     transform: translate3d(-3px, 0, 0) scale(1.015);
+  }
+}
+
+@keyframes mascotCelebrate {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+
+  28% {
+    transform: translate3d(0, -14px, 0) scale(1.12) rotate(-6deg);
+  }
+
+  58% {
+    transform: translate3d(0, 4px, 0) scale(0.98) rotate(5deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes mascotBubblePop {
+  0% {
+    transform: translate3d(10px, 0, 0) scale(0.92);
+  }
+
+  42% {
+    transform: translate3d(-8px, 0, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 

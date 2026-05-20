@@ -169,8 +169,8 @@
     for (let index = 0; index < count; index += 1) {
       const piece = document.createElement("span");
       const angle = (Math.PI * 2 * index) / count;
-      const distance = 52 + Math.random() * 58;
-      const isStar = index % 4 === 0;
+      const distance = 72 + Math.random() * 92;
+      const isStar = index % 3 === 0;
 
       piece.className = isStar ? "star-piece" : "confetti-piece";
       piece.style.setProperty("--x", `${x}px`);
@@ -181,8 +181,22 @@
       piece.style.setProperty("--size", `${Math.round(7 + Math.random() * 7)}px`);
       piece.style.setProperty("--piece-color", colors[index % colors.length]);
       layer.append(piece);
-      window.setTimeout(() => piece.remove(), 1100);
+      window.setTimeout(() => piece.remove(), 1600);
     }
+  };
+
+  const animateMascot = () => {
+    if (reduceMotion) return;
+
+    const mascot = document.querySelector("#mascot-root .mascot");
+
+    if (!mascot) return;
+
+    mascot.classList.remove("mascot-celebrate");
+    window.requestAnimationFrame(() => {
+      mascot.classList.add("mascot-celebrate");
+      window.setTimeout(() => mascot.classList.remove("mascot-celebrate"), 1100);
+    });
   };
 
   const celebrateSuccess = (detail = {}) => {
@@ -192,7 +206,8 @@
     const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
 
     setMascotMessage(detail.type === "unlock" ? "unlock" : "success");
-    createBurst({ x, y, count: detail.count || 18 });
+    animateMascot();
+    createBurst({ x, y, count: detail.count || 26 });
     playSuccessSound();
   };
 
@@ -212,13 +227,14 @@
     const rect = card?.getBoundingClientRect();
 
     setMascotMessage("letter");
-    addTemporaryClass(card, "motion-correct", 560);
+    animateMascot();
+    addTemporaryClass(card, "motion-correct", 920);
 
     if (rect && !reduceMotion) {
       createBurst({
         x: rect.left + rect.width / 2,
         y: rect.top + Math.min(rect.height * 0.42, 90),
-        count: 7,
+        count: 16,
       });
     }
   };
@@ -228,7 +244,8 @@
     const isCorrect = Boolean(detail.isCorrect);
 
     setMascotMessage(isCorrect ? "correct" : "wrong");
-    addTemporaryClass(target, isCorrect ? "motion-correct" : "motion-wrong", isCorrect ? 620 : 460);
+    animateMascot();
+    addTemporaryClass(target, isCorrect ? "motion-correct" : "motion-wrong", isCorrect ? 980 : 720);
 
     if (isCorrect) {
       const rect = target?.getBoundingClientRect();
@@ -237,14 +254,14 @@
         createBurst({
           x: rect.left + rect.width / 2,
           y: rect.top + rect.height / 2,
-          count: 10,
+          count: 22,
         });
       }
 
       return;
     }
 
-    addTemporaryClass(document.querySelector(".quiz-card"), "motion-shake", 460);
+    addTemporaryClass(document.querySelector(".quiz-card"), "motion-shake", 720);
   };
 
   const markUnlockedLevels = () => {
