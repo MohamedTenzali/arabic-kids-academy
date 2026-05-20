@@ -1,30 +1,33 @@
-const CACHE_VERSION = "arabic-kids-academy-v4";
+const CACHE_VERSION = "arabic-kids-academy-v5";
+const APP_ROOT = self.registration.scope;
+const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/css/main.css",
-  "/data/letters.js",
-  "/data/progress.js",
-  "/data/vowels.js",
-  "/js/app.js",
-  "/js/audio-player.js",
-  "/js/pwa-update.js",
-  "/js/quiz-engine.js",
-  "/pages/letters.html",
-  "/pages/quiz.html",
-  "/pages/roadmap.html",
-  "/pages/sounds.html",
-  "/pages/vowel-letter.html",
-  "/pages/vowels.html",
-  "/images/icons/apple-touch-icon.png",
-  "/images/icons/icon-192.png",
-  "/images/icons/icon-512.png",
+  "./",
+  "index.html",
+  "manifest.json",
+  "css/main.css",
+  "data/letters.js",
+  "data/progress.js",
+  "data/vowels.js",
+  "js/app.js",
+  "js/audio-player.js",
+  "js/pwa-update.js",
+  "js/quiz-engine.js",
+  "pages/letters.html",
+  "pages/quiz.html",
+  "pages/roadmap.html",
+  "pages/sounds.html",
+  "pages/vowel-letter.html",
+  "pages/vowels.html",
+  "images/icons/apple-touch-icon.png",
+  "images/icons/icon-192.png",
+  "images/icons/icon-512.png",
 ];
 
 const isAudioRequest = (request) => {
   const url = new URL(request.url);
-  return url.pathname.startsWith("/audio/") || request.destination === "audio";
+  const audioPath = new URL("audio/", APP_ROOT).pathname;
+  return url.pathname.startsWith(audioPath) || request.destination === "audio";
 };
 
 self.addEventListener("message", (event) => {
@@ -72,7 +75,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("/index.html"))),
+        .catch(() => caches.match(request).then((cached) => cached || caches.match(INDEX_URL))),
     );
     return;
   }
