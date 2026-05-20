@@ -54,6 +54,8 @@ levelButtons.forEach((button) => {
       startLink.removeAttribute("aria-disabled");
       startLink.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`;
     }
+
+    window.location.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`;
   });
 });
 

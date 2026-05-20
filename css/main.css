@@ -59,8 +59,9 @@ body {
 
 body:has(.home-main) {
   background:
-    radial-gradient(circle at 50% 12%, rgba(255, 209, 102, 0.22), transparent 300px),
-    linear-gradient(180deg, #143f5f 0%, #102d45 100%);
+    radial-gradient(circle at 14% 0%, rgba(255, 209, 102, 0.22), transparent 280px),
+    radial-gradient(circle at 86% 10%, rgba(105, 201, 255, 0.18), transparent 300px),
+    var(--gradient-app);
 }
 
 button,
@@ -331,34 +332,37 @@ main {
 }
 
 .home-header {
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
   z-index: 20;
   width: 100%;
+  border-bottom: 1px solid rgba(36, 48, 68, 0.08);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(18px);
 }
 
 .home-header .brand {
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .home-header .brand-subtitle {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--color-muted);
 }
 
 .home-header .site-nav a {
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .home-header .site-nav a:hover,
 .home-header .site-nav a:focus-visible,
 .home-header .site-nav a[aria-current="page"] {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
+  background: var(--color-brand-soft);
+  color: var(--color-brand-dark);
 }
 
 .home-footer {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--color-muted);
 }
 
 .home-main {
@@ -371,14 +375,14 @@ main {
 .hero-home {
   position: relative;
   display: grid;
-  min-height: 100vh;
+  min-height: calc(100vh - 82px);
   align-content: end;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 18%, rgba(255, 209, 102, 0.28), transparent 34rem),
-    radial-gradient(circle at 12% 44%, rgba(105, 201, 255, 0.2), transparent 22rem),
-    linear-gradient(180deg, #173f62 0%, #0f2d45 100%);
-  padding: 300px 20px 44px;
+    radial-gradient(circle at 50% 18%, rgba(255, 209, 102, 0.26), transparent 34rem),
+    radial-gradient(circle at 12% 44%, rgba(18, 165, 148, 0.12), transparent 22rem),
+    linear-gradient(180deg, #ffffff 0%, #f6fffb 58%, #fff8ed 100%);
+  padding: 250px 20px 44px;
 }
 
 .hero-home::before {
@@ -387,8 +391,8 @@ main {
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 45%),
-    radial-gradient(circle at 50% 50%, transparent 36%, rgba(0, 0, 0, 0.16) 68%);
+    linear-gradient(180deg, rgba(18, 165, 148, 0.06), transparent 45%),
+    radial-gradient(circle at 50% 50%, transparent 38%, rgba(18, 165, 148, 0.05) 72%);
 }
 
 .hero-content,
@@ -472,7 +476,7 @@ main {
   opacity: 0;
   z-index: var(--z);
   box-shadow:
-    0 20px 42px rgba(0, 0, 0, 0.26),
+    0 18px 36px rgba(36, 48, 68, 0.16),
     0 12px 26px color-mix(in srgb, var(--card-color) 35%, transparent),
     inset 0 0 0 1px rgba(15, 139, 141, 0.08);
   transform: translate(-50%, -50%) rotate(var(--rotate));
@@ -506,20 +510,20 @@ main {
 }
 
 .hero-home .eyebrow {
-  color: var(--color-accent);
+  color: var(--color-brand-dark);
 }
 
 .hero-home h1 {
   max-width: 780px;
   margin-inline: auto;
-  color: #ffffff;
+  color: var(--color-text);
   font-size: 3.15rem;
   line-height: 1.02;
 }
 
 .hero-home .hero-text {
   margin-inline: auto;
-  color: rgba(255, 255, 255, 0.74);
+  color: var(--color-muted);
 }
 
 .hero-home .arabic-example {
@@ -532,15 +536,41 @@ main {
   width: fit-content;
   margin: 18px auto 18px;
   padding: 10px 24px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(18, 165, 148, 0.12);
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.08);
-  color: #f8fbff;
+  background: #ffffff;
+  color: var(--color-brand-dark);
   font-family: "Noto Naskh Arabic", serif;
   font-size: 2.4rem;
   font-weight: 700;
   line-height: 1.15;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
+  box-shadow: var(--shadow-card);
+}
+
+.learning-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: var(--space-5) auto 0;
+}
+
+.learning-stat {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: var(--space-2);
+  border: 2px solid rgba(18, 165, 148, 0.14);
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  box-shadow: 0 6px 0 rgba(36, 48, 68, 0.08);
+  color: var(--color-muted);
+  font-weight: 900;
+  padding: 0 var(--space-4);
+}
+
+.learning-stat strong {
+  color: var(--color-brand-dark);
 }
 
 .home-levels {
@@ -548,12 +578,12 @@ main {
 }
 
 .home-levels .section-heading {
-  color: #ffffff;
+  color: var(--color-text);
   margin-bottom: 16px;
 }
 
 .home-levels #selected-level {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--color-muted);
 }
 
 .home-levels .level-card {
@@ -563,6 +593,9 @@ main {
   border-color: rgba(255, 255, 255, 0.32);
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(244, 251, 248, 0.92));
+  box-shadow:
+    0 8px 0 rgba(36, 48, 68, 0.09),
+    var(--shadow-card);
   transform: translateY(0);
 }
 
@@ -617,7 +650,8 @@ main {
 }
 
 .home-levels .start-link {
-  box-shadow: 0 14px 30px rgba(15, 139, 141, 0.22);
+  width: min(100%, 360px);
+  box-shadow: var(--shadow-button);
 }
 
 .eyebrow {
@@ -900,8 +934,9 @@ h2 {
 
 .roadmap-list {
   display: grid;
-  gap: 18px;
-  margin: 22px 0 0;
+  gap: 22px;
+  width: min(100%, 680px);
+  margin: 22px auto 0;
   padding: 0;
   list-style: none;
 }
@@ -911,7 +946,9 @@ h2 {
   border: 2px solid rgba(18, 165, 148, 0.14);
   border-radius: var(--radius-lg);
   background: var(--gradient-card);
-  box-shadow: var(--shadow-card);
+  box-shadow:
+    0 8px 0 rgba(36, 48, 68, 0.08),
+    var(--shadow-card);
   overflow: hidden;
 }
 
@@ -927,11 +964,11 @@ h2 {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -22px;
-  width: 6px;
-  height: 22px;
+  bottom: -26px;
+  width: 8px;
+  height: 26px;
   border-radius: 999px;
-  background: linear-gradient(180deg, var(--roadmap-color, var(--color-brand)), transparent);
+  background: linear-gradient(180deg, var(--roadmap-color, var(--color-brand)), rgba(18, 165, 148, 0.14));
   transform: translateX(-50%);
 }
 
@@ -965,12 +1002,12 @@ h2 {
 
 .roadmap-link {
   display: grid;
-  grid-template-columns: 62px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: var(--space-4);
   align-items: center;
   min-height: 100%;
   color: var(--color-text);
-  padding: 26px 18px 18px;
+  padding: 28px 20px 20px;
   text-decoration: none;
 }
 
@@ -993,14 +1030,17 @@ h2 {
 
 .roadmap-node {
   display: grid;
-  width: 62px;
-  height: 62px;
+  width: 72px;
+  height: 72px;
   place-items: center;
-  border-radius: var(--radius-lg);
+  border-radius: 28px;
   background:
     radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.9) 0 18%, transparent 19%),
     var(--roadmap-color, var(--color-brand));
   color: #ffffff !important;
+  box-shadow:
+    inset 0 -6px 0 rgba(36, 48, 68, 0.14),
+    0 10px 20px color-mix(in srgb, var(--roadmap-color, var(--color-brand)) 28%, transparent);
   font-size: 0.88rem;
   font-weight: 900;
   line-height: 1;
@@ -1029,6 +1069,13 @@ h2 {
 
 .roadmap-item.is-locked {
   opacity: 0.68;
+}
+
+.roadmap-item.is-locked .roadmap-node {
+  background: linear-gradient(180deg, #cfd8e3, #aeb9c8);
+  box-shadow:
+    inset 0 -6px 0 rgba(36, 48, 68, 0.12),
+    0 10px 20px rgba(36, 48, 68, 0.08);
 }
 
 .roadmap-item.is-locked .roadmap-link {
@@ -1818,14 +1865,14 @@ h2 {
   }
 
   .roadmap-link {
-    grid-template-columns: 54px minmax(0, 1fr);
+    grid-template-columns: 58px minmax(0, 1fr);
     padding: 24px 14px 16px;
   }
 
   .roadmap-node {
-    width: 54px;
-    height: 54px;
-    border-radius: 18px;
+    width: 58px;
+    height: 58px;
+    border-radius: 22px;
     font-size: 0.78rem;
   }
 }
@@ -1848,7 +1895,7 @@ h2 {
   }
 
   .hero-home {
-    padding: 320px 32px 64px;
+    padding: 300px 32px 64px;
   }
 
   .hero-home h1 {
@@ -1886,11 +1933,15 @@ h2 {
   }
 
   .roadmap-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
-  .roadmap-item::after {
-    display: none;
+  .roadmap-item:nth-child(even) {
+    margin-left: 72px;
+  }
+
+  .roadmap-item:nth-child(odd) {
+    margin-right: 72px;
   }
 
   .letters-grid,
