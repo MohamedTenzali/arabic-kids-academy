@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabic-kids-academy-v10";
+const CACHE_VERSION = "arabic-kids-academy-v13";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -11,6 +11,7 @@ const CORE_CACHE = [
   "data/vowels.js",
   "js/app.js",
   "js/audio-player.js",
+  "js/motion.js",
   "js/pwa-update.js",
   "js/quiz-engine.js",
   "pages/letters.html",

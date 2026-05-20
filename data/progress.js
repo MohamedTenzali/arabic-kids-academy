@@ -113,12 +113,24 @@ const progressStore = {
       return false;
     }
 
-    if (stepIndex === 0) {
+    const step = level.steps[stepIndex];
+
+    if (!step) {
+      return false;
+    }
+
+    if (["letters", "short-vowels", "long-vowels"].includes(step.id)) {
       return true;
     }
 
-    const previousStep = level.steps[stepIndex - 1];
-    return this.isStepComplete(level.id, previousStep.id);
+    const quizRequirements = {
+      "letter-quiz": "letters",
+      "short-vowels-quiz": "short-vowels",
+      "long-vowels-quiz": "long-vowels",
+    };
+    const requiredStepId = quizRequirements[step.id];
+
+    return requiredStepId ? this.isStepComplete(level.id, requiredStepId) : false;
   },
 
   getLevelProgress(levelId) {

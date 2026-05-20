@@ -167,6 +167,54 @@ const setText = (selector, text) => {
   }
 };
 
+const dispatchAppEvent = (name, detail = {}) => {
+  let event;
+
+  if (typeof window.CustomEvent === "function") {
+    event = new CustomEvent(name, { detail });
+  } else if (typeof document.createEvent === "function") {
+    event = document.createEvent("CustomEvent");
+    event.initCustomEvent(name, false, false, detail);
+  } else {
+    return;
+  }
+
+  window.dispatchEvent(event);
+};
+
+const completeStepWithFeedback = (levelId, stepId, target) => {
+  if (!appProgress || !stepId) {
+    return false;
+  }
+
+  const wasComplete = appProgress.isStepComplete(levelId, stepId);
+  appProgress.completeStep(levelId, stepId);
+
+  if (wasComplete) {
+    return false;
+  }
+
+  dispatchAppEvent("aka:level-complete", {
+    levelId,
+    stepId,
+    target,
+  });
+
+  const nextStep = appProgress.getNextStep(levelId);
+
+  if (nextStep) {
+    window.setTimeout(() => {
+      dispatchAppEvent("aka:unlock", {
+        levelId,
+        stepId: nextStep.id,
+        target,
+      });
+    }, 520);
+  }
+
+  return true;
+};
+
 const getLetterName = (letter) => letter.nameDutch || letter.nameNl || letter.id;
 const getVowelType = (sound) => vowelTypesById[sound.type] || { nameNl: sound.nameNl || sound.type };
 const escapeAttribute = (value) =>
@@ -206,6 +254,12 @@ document.addEventListener("click", (event) => {
   }
 
   playAudio(button.dataset.audioSrc, { button });
+
+  if (button.closest(".letter-card, .sound-letter-card")) {
+    dispatchAppEvent("aka:letter-tap", {
+      target: button,
+    });
+  }
 });
 
 document.addEventListener("pointerenter", (event) => {
@@ -567,9 +621,18 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       long: "long-vowels-quiz",
     };
     const completedStepId = completedQuizSteps[state.mode];
+    let completedNow = false;
 
     if (completedStepId) {
-      appProgress?.completeStep("beginner", completedStepId);
+      completedNow = completeStepWithFeedback("beginner", completedStepId, quizCard);
+    }
+
+    if (!completedNow) {
+      dispatchAppEvent("aka:success", {
+        type: "quiz",
+        message: "Quiz gehaald",
+        target: quizCard,
+      });
     }
 
     quizCard.innerHTML = `
@@ -650,9 +713,17 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         choice.disabled = true;
         choice.classList.toggle("is-playing", choice.dataset.quizAnswer === result.answer.id);
         choice.classList.toggle("is-missing", choice === answerButton && !result.isCorrect);
+        choice.classList.toggle("is-correct", choice.dataset.quizAnswer === result.answer.id);
+        choice.classList.toggle("is-wrong", choice === answerButton && !result.isCorrect);
       });
 
       setText("#quiz-feedback", result.isCorrect ? "+1 punt. Goed gedaan!" : `-1 punt. Het goede antwoord was ${result.answer.title}.`);
+
+      dispatchAppEvent("aka:quiz-answer", {
+        isCorrect: result.isCorrect,
+        target: answerButton,
+        answerId: result.answer.id,
+      });
 
       if (nextButton) {
         nextButton.disabled = false;

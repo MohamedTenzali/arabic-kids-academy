@@ -53,7 +53,7 @@ const letters = [
     "arabic": "ث",
     "nameDutch": "Thaa",
     "transliteration": "tha",
-    "baseAudio": "../audio/letters/tha.mp3",
+    "baseAudio": "../audio/vowels/tha_aa.mp3",
     "vowelAudio": {
       "fatha": "../audio/vowels/tha_fatha.mp3",
       "kasra": "../audio/vowels/tha_kasra.mp3",
