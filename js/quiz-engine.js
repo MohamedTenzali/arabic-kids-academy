@@ -137,9 +137,12 @@ const createLetterQuiz = (letters, options = {}) => {
       return null;
     }
 
-    answered = true;
     const isCorrect = question.answer.id === choiceId;
-    score = Math.max(0, score + (isCorrect ? 1 : -1));
+
+    if (isCorrect) {
+      answered = true;
+      score += 1;
+    }
 
     return {
       isCorrect,

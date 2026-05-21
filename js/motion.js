@@ -185,6 +185,30 @@
     }
   };
 
+  const showQuizPoppet = ({ target, isCorrect }) => {
+    const layer = getMotionLayer();
+    const rect = target?.getBoundingClientRect();
+    const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+    const y = rect ? rect.top + Math.min(rect.height * 0.35, 84) : window.innerHeight / 2;
+    const poppet = document.createElement("div");
+
+    poppet.className = `quiz-poppet ${isCorrect ? "is-happy" : "is-sad"}`;
+    poppet.style.setProperty("--x", `${x}px`);
+    poppet.style.setProperty("--y", `${y}px`);
+    poppet.setAttribute("role", "status");
+    poppet.innerHTML = `
+      <span class="quiz-poppet-face" aria-hidden="true">
+        <span class="quiz-poppet-eye"></span>
+        <span class="quiz-poppet-eye"></span>
+        <span class="quiz-poppet-mouth"></span>
+      </span>
+      <strong>${isCorrect ? "Yes!" : "Nog eens"}</strong>
+    `;
+
+    layer.append(poppet);
+    window.setTimeout(() => poppet.remove(), isCorrect ? 1500 : 1250);
+  };
+
   const animateMascot = () => {
     if (reduceMotion) return;
 
@@ -245,6 +269,7 @@
 
     setMascotMessage(isCorrect ? "correct" : "wrong");
     animateMascot();
+    showQuizPoppet({ target, isCorrect });
     addTemporaryClass(target, isCorrect ? "motion-correct" : "motion-wrong", isCorrect ? 980 : 720);
 
     if (isCorrect) {

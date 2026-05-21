@@ -306,6 +306,26 @@ if (lettersGrid && appLetters.length) {
   lettersGrid.innerHTML = letterCards;
 }
 
+const lettersScrollButton = document.querySelector("[data-letters-scroll]");
+
+if (lettersScrollButton && lettersGrid) {
+  const updateLettersScrollButton = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const canScrollDown = scrollTop < 160;
+
+    lettersScrollButton.classList.toggle("is-up", !canScrollDown);
+    lettersScrollButton.href = canScrollDown ? "#letters-page-bottom" : "#main-content";
+    lettersScrollButton.setAttribute(
+      "aria-label",
+      canScrollDown ? "Scroll naar beneden" : "Scroll naar boven",
+    );
+  };
+
+  updateLettersScrollButton();
+  window.addEventListener("scroll", updateLettersScrollButton, { passive: true });
+  window.addEventListener("resize", updateLettersScrollButton);
+}
+
 const letterSoundsIndex = document.querySelector("#letter-sounds-index");
 
 if (letterSoundsIndex && appLetters.length) {
@@ -709,15 +729,20 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       const nextButton = document.querySelector("#next-quiz-question");
       const choices = quizCard.querySelectorAll("[data-quiz-answer]");
 
-      choices.forEach((choice) => {
-        choice.disabled = true;
-        choice.classList.toggle("is-playing", choice.dataset.quizAnswer === result.answer.id);
-        choice.classList.toggle("is-missing", choice === answerButton && !result.isCorrect);
-        choice.classList.toggle("is-correct", choice.dataset.quizAnswer === result.answer.id);
-        choice.classList.toggle("is-wrong", choice === answerButton && !result.isCorrect);
-      });
+      if (result.isCorrect) {
+        choices.forEach((choice) => {
+          choice.disabled = true;
+          choice.classList.toggle("is-playing", choice.dataset.quizAnswer === result.answer.id);
+          choice.classList.toggle("is-correct", choice.dataset.quizAnswer === result.answer.id);
+          choice.classList.remove("is-missing", "is-wrong");
+        });
 
-      setText("#quiz-feedback", result.isCorrect ? "+1 punt. Goed gedaan!" : `-1 punt. Het goede antwoord was ${result.answer.title}.`);
+        setText("#quiz-feedback", "+1 punt. Goed gedaan!");
+      } else {
+        answerButton.disabled = true;
+        answerButton.classList.add("is-wrong", "is-missing");
+        setText("#quiz-feedback", "Nog niet goed. Luister nog een keer en probeer opnieuw.");
+      }
 
       dispatchAppEvent("aka:quiz-answer", {
         isCorrect: result.isCorrect,
@@ -725,7 +750,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         answerId: result.answer.id,
       });
 
-      if (nextButton) {
+      if (nextButton && result.isCorrect) {
         nextButton.disabled = false;
         nextButton.classList.remove("is-disabled");
         nextButton.textContent = result.isFinished ? "Bekijk resultaat" : "Volgende vraag";

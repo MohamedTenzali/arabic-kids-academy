@@ -4,6 +4,7 @@ const createAudioPlayer = () => {
   let activeAudio = null;
   let activeButton = null;
   let activeSource = "";
+  let playRequestId = 0;
 
   const defaultMessages = {
     idle: "Luister",
@@ -101,17 +102,32 @@ const createAudioPlayer = () => {
 
     if (!audioCache.has(validation.src)) {
       const audio = new Audio(validation.src);
-      audio.preload = "none";
+      audio.preload = "auto";
       audioCache.set(validation.src, audio);
     }
 
     return audioCache.get(validation.src);
   };
 
+  const resetAudio = (audio) => {
+    if (!audio) {
+      return;
+    }
+
+    audio.pause();
+
+    try {
+      audio.currentTime = 0;
+    } catch {
+      // Some browsers do not allow seeking until metadata is ready.
+    }
+  };
+
   const stopAudio = () => {
+    playRequestId += 1;
+
     if (activeAudio) {
-      activeAudio.pause();
-      activeAudio.currentTime = 0;
+      resetAudio(activeAudio);
     }
 
     if (activeButton) {
@@ -127,27 +143,27 @@ const createAudioPlayer = () => {
     setButtonState(button, "missing", message);
   };
 
-  const wireAudioEvents = (audio, src, button) => {
+  const wireAudioEvents = (audio, src, button, requestId) => {
     audio.onwaiting = () => {
-      if (activeAudio === audio) {
+      if (activeAudio === audio && playRequestId === requestId) {
         setButtonState(button, "loading", defaultMessages.loading);
       }
     };
 
     audio.onplaying = () => {
-      if (activeAudio === audio) {
+      if (activeAudio === audio && playRequestId === requestId) {
         setButtonState(button, "playing", defaultMessages.playing);
       }
     };
 
     audio.onended = () => {
-      if (activeAudio === audio) {
+      if (activeAudio === audio && playRequestId === requestId) {
         stopAudio();
       }
     };
 
     audio.onerror = () => {
-      if (activeAudio === audio || activeSource === src) {
+      if ((activeAudio === audio || activeSource === src) && playRequestId === requestId) {
         stopAudio();
         markMissing(button);
       }
@@ -164,13 +180,6 @@ const createAudioPlayer = () => {
       return Promise.resolve(false);
     }
 
-    if (activeAudio && activeSource === validation.src) {
-      stopAudio();
-      return Promise.resolve(false);
-    }
-
-    stopAudio();
-
     const audio = getAudio(validation.src);
 
     if (!audio) {
@@ -178,23 +187,34 @@ const createAudioPlayer = () => {
       return Promise.resolve(false);
     }
 
+    if (activeAudio && activeAudio !== audio) {
+      resetAudio(activeAudio);
+    }
+
+    if (activeButton && activeButton !== button) {
+      setButtonState(activeButton, "idle", defaultMessages.idle);
+    }
+
+    playRequestId += 1;
+    const requestId = playRequestId;
+
     activeAudio = audio;
     activeButton = button;
     activeSource = validation.src;
-    audio.currentTime = 0;
-    wireAudioEvents(audio, validation.src, button);
+    resetAudio(audio);
+    wireAudioEvents(audio, validation.src, button, requestId);
     setButtonState(button, "loading", defaultMessages.loading);
 
     return audio.play().then(
       () => {
-        if (activeAudio === audio) {
+        if (activeAudio === audio && playRequestId === requestId) {
           setButtonState(button, "playing", defaultMessages.playing);
         }
 
         return true;
       },
       (error) => {
-        if (activeAudio === audio) {
+        if (activeAudio === audio && playRequestId === requestId) {
           stopAudio();
           markMissing(
             button,
@@ -214,7 +234,11 @@ const createAudioPlayer = () => {
       return false;
     }
 
-    audio.preload = "metadata";
+    if (audio === activeAudio || audio.readyState > 0) {
+      return true;
+    }
+
+    audio.preload = "auto";
     audio.load();
     return true;
   };
