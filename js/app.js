@@ -19,6 +19,9 @@ if (levelButtons.length && appProgress) {
 
     if (isLocked) {
       button.querySelector(".level-route").textContent = "Nog op slot";
+      button.setAttribute("aria-label", `Niveau ${level?.name || button.dataset.level} is nog op slot`);
+    } else {
+      button.setAttribute("aria-label", `Kies niveau ${level.name}`);
     }
   });
 
@@ -95,7 +98,7 @@ if (roadmapList && appProgress) {
   if (roadmapNextStep) {
     roadmapNextStep.textContent = nextStep
       ? `Volgende level: ${nextStep.title}`
-      : "Alle beginner levels zijn klaar.";
+      : `Alle ${selectedLevel.name.toLowerCase()} levels zijn klaar.`;
   }
 
   const beginnerItems = selectedLevel.steps
@@ -104,7 +107,7 @@ if (roadmapList && appProgress) {
       const isUnlocked = appProgress.isStepUnlocked(selectedLevel, index);
       const stars = appProgress.getStepStars(selectedLevel.id, step.id);
       const stateText = isComplete ? "Klaar" : isUnlocked ? "Open" : "Op slot";
-      const stepNumber = index + 1;
+      const stepNumber = step.levelNumber || index + 1;
       const cardContent = `
         <span class="roadmap-node" aria-hidden="true">${isComplete ? "OK" : isUnlocked ? stepNumber : "Slot"}</span>
         <span class="roadmap-card-copy">
@@ -133,13 +136,14 @@ if (roadmapList && appProgress) {
     })
     .join("");
   const lockedLevelItems = appLevels
-    .filter((level) => level.id !== selectedLevel.id && level.locked)
+    .map((level) => appProgress.getLevel(level.id))
+    .filter((level) => level && level.id !== selectedLevel.id && level.locked)
     .map(
       (level) => `
         <li class="roadmap-card roadmap-item is-locked locked-level">
           <div class="roadmap-link" aria-disabled="true">
             <strong>${level.name}</strong>
-            <span>Dit niveau komt later.</span>
+            <span>Speel eerst de vorige quiz vrij.</span>
             <em>Op slot</em>
           </div>
         </li>
@@ -158,6 +162,8 @@ const playAudio = window.playAudio || ((src, options = {}) => audioPlayer?.play(
 const preloadAudio = window.preloadAudio || (() => false);
 const pageParams = new URLSearchParams(window.location.search);
 const activeVowelGroup = pageParams.get("type");
+const activeLearningLevelId = pageParams.get("level") || appProgress?.getSelectedLevel() || "beginner";
+const activeProgressLevelId = appProgress?.getLevel(activeLearningLevelId)?.id || "beginner";
 
 const setText = (selector, text) => {
   const element = document.querySelector(selector);
@@ -330,11 +336,11 @@ const letterSoundsIndex = document.querySelector("#letter-sounds-index");
 
 if (letterSoundsIndex && appLetters.length) {
   if (activeVowelGroup === "short") {
-    appProgress?.completeStep("beginner", "short-vowels");
+    appProgress?.completeStep(activeProgressLevelId, "short-vowels");
   }
 
   if (activeVowelGroup === "long") {
-    appProgress?.completeStep("beginner", "long-vowels");
+    appProgress?.completeStep(activeProgressLevelId, "long-vowels");
   }
 
   const letterLinks = appLetters
@@ -342,7 +348,7 @@ if (letterSoundsIndex && appLetters.length) {
       const sounds = getVowelSounds(letter, activeVowelGroup);
       const detailHref = `vowel-letter.html?letter=${encodeURIComponent(letter.id)}${
         activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""
-      }`;
+      }&level=${encodeURIComponent(activeProgressLevelId)}`;
 
       return `
         <article class="lesson-card sound-letter-card">
@@ -416,11 +422,11 @@ if (soundsGrid && appLetters.length) {
   }
 
   if (selectedLetter && activeVowelGroup === "short") {
-    appProgress?.completeStep("beginner", "short-vowels");
+    appProgress?.completeStep(activeProgressLevelId, "short-vowels");
   }
 
   if (selectedLetter && activeVowelGroup === "long") {
-    appProgress?.completeStep("beginner", "long-vowels");
+    appProgress?.completeStep(activeProgressLevelId, "long-vowels");
   }
 
   if (letterFormsGrid && selectedLetter) {
@@ -504,7 +510,7 @@ if (soundsGrid && appLetters.length) {
         return `
           <a
             class="letter-page-number${isCurrent ? " is-current" : ""}"
-            href="vowel-letter.html?letter=${encodeURIComponent(letter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}"
+            href="vowel-letter.html?letter=${encodeURIComponent(letter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}&level=${encodeURIComponent(activeProgressLevelId)}"
             aria-label="Letter ${pageNumber}"
             ${isCurrent ? 'aria-current="page"' : ""}
           >${pageNumber}</a>
@@ -513,7 +519,7 @@ if (soundsGrid && appLetters.length) {
       .join("");
 
     letterPageNav.innerHTML = `
-      <a class="letter-page-arrow" aria-label="Vorige" href="vowel-letter.html?letter=${encodeURIComponent(previousLetter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}">
+      <a class="letter-page-arrow" aria-label="Vorige" href="vowel-letter.html?letter=${encodeURIComponent(previousLetter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}&level=${encodeURIComponent(activeProgressLevelId)}">
         <svg width="9" height="16" viewBox="0 0 12 18" aria-hidden="true" focusable="false">
           <path d="M11 1L2 9.24L11 17" />
         </svg>
@@ -521,7 +527,7 @@ if (soundsGrid && appLetters.length) {
       <div class="letter-page-numbers" aria-label="Letter pagina's">
         ${pageLinks}
       </div>
-      <a class="letter-page-arrow" aria-label="Volgende" href="vowel-letter.html?letter=${encodeURIComponent(nextLetter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}">
+      <a class="letter-page-arrow" aria-label="Volgende" href="vowel-letter.html?letter=${encodeURIComponent(nextLetter.id)}${activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""}&level=${encodeURIComponent(activeProgressLevelId)}">
         <svg width="9" height="16" viewBox="0 0 12 18" aria-hidden="true" focusable="false">
           <path d="M1 1L10 9.24L1 17" />
         </svg>
@@ -639,12 +645,13 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       letters: "letter-quiz",
       short: "short-vowels-quiz",
       long: "long-vowels-quiz",
+      mixed: "mixed-quiz",
     };
     const completedStepId = completedQuizSteps[state.mode];
     let completedNow = false;
 
     if (completedStepId) {
-      completedNow = completeStepWithFeedback("beginner", completedStepId, quizCard);
+      completedNow = completeStepWithFeedback(activeProgressLevelId, completedStepId, quizCard);
     }
 
     if (!completedNow) {

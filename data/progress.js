@@ -15,6 +15,7 @@ const learningLevels = [
         title: "Letter Quiz",
         description: "Luister goed en kies de juiste letter.",
         href: "quiz.html?mode=letters",
+        requires: "letters",
       },
       {
         id: "short-vowels",
@@ -27,6 +28,7 @@ const learningLevels = [
         title: "Klanken Quiz",
         description: "Test fatha, kasra en damma met audio.",
         href: "quiz.html?mode=short",
+        requires: "short-vowels",
       },
       {
         id: "long-vowels",
@@ -39,20 +41,64 @@ const learningLevels = [
         title: "Lange klanken Quiz",
         description: "Test aa, ie en oe tot je genoeg punten hebt.",
         href: "quiz.html?mode=long",
+        requires: "long-vowels",
       },
     ],
   },
   {
     id: "advanced",
     name: "Gevorderd",
-    locked: true,
-    steps: [],
+    locked: false,
+    steps: [
+      {
+        id: "short-vowels",
+        title: "Korte klanken",
+        description: "Oefen fatha, kasra en damma als niveau 2.",
+        href: "vowels.html?type=short&level=advanced",
+      },
+      {
+        id: "short-vowels-quiz",
+        title: "Korte klanken Quiz",
+        description: "Luister goed en verbeter je korte klanken.",
+        href: "quiz.html?mode=short&level=advanced",
+        requires: "short-vowels",
+      },
+      {
+        id: "long-vowels",
+        title: "Lange klanken",
+        description: "Oefen aa, ie en oe met elke letter.",
+        href: "vowels.html?type=long&level=advanced",
+        requires: "short-vowels-quiz",
+      },
+      {
+        id: "long-vowels-quiz",
+        title: "Lange klanken Quiz",
+        description: "Test de lange klanken tot het soepel gaat.",
+        href: "quiz.html?mode=long&level=advanced",
+        requires: "long-vowels",
+      },
+      {
+        id: "mixed-quiz",
+        title: "Mix Quiz",
+        description: "Mix letters, korte klanken en lange klanken.",
+        href: "quiz.html?mode=mixed&level=advanced",
+        requires: "long-vowels-quiz",
+      },
+    ],
   },
   {
     id: "expert",
     name: "Expert",
-    locked: true,
-    steps: [],
+    locked: false,
+    steps: [
+      {
+        id: "mixed-quiz",
+        title: "Mix Quiz",
+        description: "Ga direct naar level 5 en mix letters met alle klanken.",
+        href: "quiz.html?mode=mixed&level=expert",
+        levelNumber: 5,
+      },
+    ],
   },
 ];
 
@@ -97,11 +143,35 @@ const progressStore = {
   },
 
   getLevel(levelId) {
-    return learningLevels.find((level) => level.id === levelId);
+    const level = learningLevels.find((item) => item.id === levelId);
+
+    return level ? { ...level, locked: this.isLevelLocked(level) } : undefined;
   },
 
   getSelectedLevel() {
     return readProgress().selectedLevel;
+  },
+
+  isLevelLocked(levelOrId) {
+    const level = typeof levelOrId === "string"
+      ? learningLevels.find((item) => item.id === levelOrId)
+      : levelOrId;
+
+    if (!level) {
+      return true;
+    }
+
+    if (!level.locked) {
+      return false;
+    }
+
+    const requirement = level.unlockRequirement;
+
+    if (!requirement) {
+      return true;
+    }
+
+    return !this.isStepComplete(requirement.levelId, requirement.stepId);
   },
 
   isStepComplete(levelId, stepId) {
@@ -109,7 +179,7 @@ const progressStore = {
   },
 
   isStepUnlocked(level, stepIndex) {
-    if (!level || level.locked) {
+    if (!level || this.isLevelLocked(level)) {
       return false;
     }
 
@@ -119,18 +189,15 @@ const progressStore = {
       return false;
     }
 
-    if (["letters", "short-vowels", "long-vowels"].includes(step.id)) {
-      return true;
-    }
+    const requirements = Array.isArray(step.requires)
+      ? step.requires
+      : step.requires
+        ? [step.requires]
+        : [];
 
-    const quizRequirements = {
-      "letter-quiz": "letters",
-      "short-vowels-quiz": "short-vowels",
-      "long-vowels-quiz": "long-vowels",
-    };
-    const requiredStepId = quizRequirements[step.id];
-
-    return requiredStepId ? this.isStepComplete(level.id, requiredStepId) : false;
+    return requirements.length
+      ? requirements.every((requiredStepId) => this.isStepComplete(level.id, requiredStepId))
+      : true;
   },
 
   getLevelProgress(levelId) {
