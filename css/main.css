@@ -621,13 +621,16 @@ select:focus-visible {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--space-3) var(--space-4);
+  padding: 10px 16px;
   background: rgba(255, 209, 102, 0.1);
   border-bottom: 2px solid var(--color-accent);
 }
 
 .download-section a {
   white-space: nowrap;
+  font-size: 0.95rem;
+  padding: 0 16px;
+  min-height: 40px;
 }
 
 main {
