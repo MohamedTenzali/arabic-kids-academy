@@ -1,0 +1,37 @@
+Use the Arabic Kids Academy brand system.
+
+STYLE:
+- modern educational kids app
+- premium but playful
+- rounded UI
+- soft shadows
+- purple/green/yellow palette
+- clean spacing
+- child friendly
+- minimal but warm
+
+COLORS:
+Primary Purple: #6B3BF5
+Green: #8BC34A
+Yellow: #FFC83D
+Pink: #FF6FAE
+Blue: #4DB6FF
+Background: #F8F7FF
+Text: #2D2D2D
+
+TYPOGRAPHY:
+Headings: Baloo 2 or Fredoka
+Body: Poppins or Nunito
+
+RULES:
+- no sharp corners
+- no dark heavy UI
+- no clutter
+- large touch targets
+- consistent spacing
+- consistent card style
+- educational but playful
+
+TARGET:
+Children age 4-9
+Parents should trust the app immediately.

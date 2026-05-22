@@ -621,16 +621,72 @@ select:focus-visible {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 16px;
-  background: rgba(255, 209, 102, 0.1);
-  border-bottom: 2px solid var(--color-accent);
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(107, 59, 245, 0.12);
+  background:
+    linear-gradient(135deg, rgba(107, 59, 245, 0.1), rgba(139, 195, 74, 0.1)),
+    #f8f7ff;
 }
 
-.download-section a {
-  white-space: nowrap;
-  font-size: 0.95rem;
-  padding: 0 16px;
-  min-height: 40px;
+.download-book-button {
+  display: inline-flex;
+  min-height: 64px;
+  max-width: min(100%, 720px);
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 2px solid rgba(107, 59, 245, 0.12);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 200, 61, 0.96), rgba(255, 111, 174, 0.86)),
+    #ffffff;
+  box-shadow: 0 12px 0 rgba(107, 59, 245, 0.14), 0 18px 42px rgba(45, 45, 45, 0.1);
+  color: #2d2d2d;
+  font-weight: 900;
+  line-height: 1.15;
+  padding: 10px 20px;
+  text-align: left;
+  text-decoration: none;
+  transition:
+    box-shadow var(--motion-pop),
+    transform var(--motion-pop);
+}
+
+.download-book-button:hover,
+.download-book-button:focus-visible {
+  box-shadow: 0 8px 0 rgba(107, 59, 245, 0.14), 0 22px 48px rgba(107, 59, 245, 0.16);
+  transform: translateY(4px);
+}
+
+.download-book-icon {
+  display: inline-grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #6b3bf5, #4db6ff);
+  box-shadow: inset 0 -4px 0 rgba(45, 45, 45, 0.12);
+  color: #ffffff;
+  font-family: "Nunito", Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.download-book-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.download-book-copy strong {
+  font-size: clamp(0.98rem, 2.2vw, 1.12rem);
+}
+
+.download-book-copy small {
+  color: rgba(45, 45, 45, 0.74);
+  font-size: 0.88rem;
+  font-weight: 800;
 }
 
 main {

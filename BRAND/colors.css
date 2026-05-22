@@ -1,0 +1,35 @@
+:root {
+  --primary-purple: #6b3bf5;
+  --growth-green: #8bc34a;
+  --playful-yellow: #ffc83d;
+  --friendly-pink: #ff6fae;
+  --sky-blue: #4db6ff;
+
+  --background-soft: #f8f7ff;
+  --surface-white: #ffffff;
+
+  --text-dark: #2d2d2d;
+  --text-light: #666666;
+
+  --success: #8bc34a;
+  --warning: #ffc83d;
+  --danger: #ff6b6b;
+
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  --radius-large: 24px;
+  --radius-medium: 18px;
+  --radius-small: 12px;
+
+  --aka-purple: #6b3bf5;
+  --aka-green: #8bc34a;
+  --aka-yellow: #ffc83d;
+  --aka-pink: #ff6fae;
+  --aka-blue: #4db6ff;
+  --aka-background: #f8f7ff;
+  --aka-text: #2d2d2d;
+  --aka-white: #ffffff;
+  --aka-shadow-soft: 0 18px 42px rgba(45, 45, 45, 0.1);
+  --aka-radius-card: 28px;
+  --aka-radius-button: 999px;
+}
