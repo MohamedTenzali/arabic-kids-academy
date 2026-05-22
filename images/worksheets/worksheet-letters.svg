@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">Werkblad voorbeeld letters</title>
+  <desc id="desc">Kleurig voorbeeld van een Arabische letters werkblad.</desc>
+  <rect width="720" height="520" rx="36" fill="#fff8df"/>
+  <rect x="42" y="42" width="636" height="436" rx="28" fill="#fff" stroke="#e2ddf6" stroke-width="6"/>
+  <circle cx="585" cy="114" r="58" fill="#eee8ff"/>
+  <text x="86" y="124" fill="#4d2ac0" font-family="Nunito, Arial, sans-serif" font-size="42" font-weight="900">Letters oefenen</text>
+  <text x="92" y="268" fill="#4d2ac0" font-family="Noto Naskh Arabic, Arial, sans-serif" font-size="132" font-weight="700">ا ب ت</text>
+  <g fill="none" stroke="#ffc83d" stroke-linecap="round" stroke-width="8">
+    <path d="M92 338h520"/>
+    <path d="M92 392h520"/>
+  </g>
+  <g fill="#8bc34a">
+    <circle cx="104" cy="444" r="14"/>
+    <circle cx="154" cy="444" r="14"/>
+    <circle cx="204" cy="444" r="14"/>
+  </g>
+</svg>

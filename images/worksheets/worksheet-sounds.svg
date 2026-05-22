@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">Werkblad voorbeeld klanken</title>
+  <desc id="desc">Kleurig voorbeeld van een korte en lange klanken werkblad.</desc>
+  <rect width="720" height="520" rx="36" fill="#eef9ff"/>
+  <rect x="42" y="42" width="636" height="436" rx="28" fill="#fff" stroke="#d9edff" stroke-width="6"/>
+  <text x="86" y="124" fill="#4d2ac0" font-family="Nunito, Arial, sans-serif" font-size="42" font-weight="900">Klanken luisteren</text>
+  <g transform="translate(92 178)">
+    <rect width="150" height="150" rx="28" fill="#eee8ff"/>
+    <text x="75" y="104" text-anchor="middle" fill="#4d2ac0" font-family="Noto Naskh Arabic, Arial, sans-serif" font-size="72" font-weight="700">بَ</text>
+  </g>
+  <g transform="translate(286 178)">
+    <rect width="150" height="150" rx="28" fill="#fff4ce"/>
+    <text x="75" y="104" text-anchor="middle" fill="#b87900" font-family="Noto Naskh Arabic, Arial, sans-serif" font-size="72" font-weight="700">بِ</text>
+  </g>
+  <g transform="translate(480 178)">
+    <rect width="150" height="150" rx="28" fill="#e9f8dc"/>
+    <text x="75" y="104" text-anchor="middle" fill="#4d7c0f" font-family="Noto Naskh Arabic, Arial, sans-serif" font-size="72" font-weight="700">بُ</text>
+  </g>
+  <path d="M100 404h520" stroke="#ff6fae" stroke-width="10" stroke-linecap="round" stroke-dasharray="24 18"/>
+</svg>

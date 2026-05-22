@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabic-kids-academy-v37";
+const CACHE_VERSION = "arabic-kids-academy-v44";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -29,6 +29,14 @@ const CORE_CACHE = [
   "images/icons/apple-touch-icon.png",
   "images/icons/icon-192.png",
   "images/icons/icon-512.png",
+  "images/books/mijn-arabische-letters-boekje.png.png",
+  "images/worksheets/worksheet-letters.svg",
+  "images/worksheets/worksheet-sounds.svg",
+  "images/worksheets/worksheet-words.svg",
+  "pdf/worksheets/gratis-letters-placeholder.pdf",
+  "pdf/worksheets/niveau-1-placeholder.pdf",
+  "pdf/worksheets/niveau-2-placeholder.pdf",
+  "pdf/worksheets/niveau-3-placeholder.pdf",
 ];
 
 const isAudioRequest = (request) => {

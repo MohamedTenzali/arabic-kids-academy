@@ -23,7 +23,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=34">
+    <link rel="stylesheet" href="../css/main.css?v=40">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js" defer></script>
     <script src="../js/motion.js?v=15" defer></script>
@@ -49,8 +49,8 @@
         <a href="contact.html">Contact</a>
       </nav>
     </header>
-    <section class="download-section" aria-label="Download ons leerboekje">
-      <a class="download-book-button" href="../pdf/mijn-arabische-letters-boekje.pdf" download>
+    <section class="download-section" aria-label="Bekijk ons leerboekje">
+      <a class="download-book-button" href="boeken.html">
         <span class="download-book-icon" aria-hidden="true">ABC</span>
         <span class="download-book-copy">
           <strong>Download ons boekje om te leren schrijven</strong>
@@ -83,17 +83,55 @@
         <ul class="roadmap-list" id="roadmap-list" aria-label="Leerroute onderdelen"></ul>
       </section>
     </main>
-    <footer class="site-footer">
-      <nav class="footer-nav" aria-label="Footer navigatie">
-        <a href="../index.html">Home</a>
-        <a href="niveaus.html">Niveaus</a>
-        <a href="roadmap.html" aria-current="page">Lessen</a>
-        <a href="werkbladen.html">Werkbladen</a>
-        <a href="boeken.html">Boeken</a>
-        <a href="about.html">Over ons</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <p>Geen login, geen advertenties en geen persoonlijke gegevens van kinderen.</p>
+    <footer class="aka-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="../images/icons/icon-192.png" alt="Arabic Kids Academy logo" class="footer-logo">
+          <h2>Arabic Kids Academy</h2>
+          <p>Leer Arabisch op een leuke en interactieve manier. Speciaal ontworpen voor kinderen.</p>
+          <div class="footer-socials" aria-label="Social media">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+            <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Snelle links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="letters.html">Arabische letters</a></li>
+            <li><a href="vowels.html">Korte &amp; lange klanken</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+            <li><a href="boeken.html">Boek downloaden</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Meer</h3>
+          <ul>
+            <li><a href="niveaus.html">Niveaus</a></li>
+            <li><a href="werkbladen.html">Werkbladen</a></li>
+            <li><a href="about.html">Over ons</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-newsletter">
+          <h3>Blijf op de hoogte</h3>
+          <p>Ontvang nieuwe lessen, updates en gratis oefeningen.</p>
+          <form action="mailto:info@arabickidsacademy.com" method="post" enctype="text/plain">
+            <label class="sr-only" for="footer-email">Jouw e-mailadres</label>
+            <input id="footer-email" name="E-mailadres" type="email" placeholder="Jouw e-mailadres" required>
+            <button type="submit">Aanmelden</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Arabic Kids Academy. Alle rechten voorbehouden.</p>
+      </div>
     </footer>
   </body>
 </html>

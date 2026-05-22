@@ -392,12 +392,48 @@ if (letterSoundsIndex && appLetters.length) {
     appProgress?.completeStep(activeProgressLevelId, "long-vowels");
   }
 
-  const letterLinks = appLetters
+  const vowelPageNav = document.querySelector("#vowel-page-nav");
+  const vowelPageSize = 3;
+  const vowelLastPageSize = 4;
+  const vowelPageCount = Math.ceil((appLetters.length - vowelLastPageSize) / vowelPageSize) + 1;
+  const requestedVowelPage = Number.parseInt(pageParams.get("page") || "1", 10);
+  const activeVowelPage = Math.min(
+    Math.max(Number.isNaN(requestedVowelPage) ? 1 : requestedVowelPage, 1),
+    vowelPageCount,
+  );
+  const vowelPageStart = activeVowelPage === vowelPageCount
+    ? Math.max(0, appLetters.length - vowelLastPageSize)
+    : (activeVowelPage - 1) * vowelPageSize;
+  const vowelPageEnd = activeVowelPage === vowelPageCount
+    ? appLetters.length
+    : vowelPageStart + vowelPageSize;
+  const visibleVowelLetters = appLetters.slice(vowelPageStart, vowelPageEnd);
+  const getVowelPageHref = (pageNumber) => {
+    const params = new URLSearchParams();
+
+    if (activeVowelGroup) {
+      params.set("type", activeVowelGroup);
+    }
+
+    if (activeProgressLevelId) {
+      params.set("level", activeProgressLevelId);
+    }
+
+    if (pageNumber > 1) {
+      params.set("page", String(pageNumber));
+    }
+
+    const query = params.toString();
+
+    return `vowels.html${query ? `?${query}` : ""}`;
+  };
+
+  const letterLinks = visibleVowelLetters
     .map((letter) => {
       const sounds = getVowelSounds(letter, activeVowelGroup);
       const detailHref = `vowel-letter.html?letter=${encodeURIComponent(letter.id)}${
         activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""
-      }&level=${encodeURIComponent(activeProgressLevelId)}`;
+      }&level=${encodeURIComponent(activeProgressLevelId)}&page=${encodeURIComponent(activeVowelPage)}`;
 
       return `
         <article class="lesson-card sound-letter-card">
@@ -434,6 +470,40 @@ if (letterSoundsIndex && appLetters.length) {
     .join("");
 
   letterSoundsIndex.innerHTML = letterLinks;
+
+  if (vowelPageNav) {
+    const previousPage = Math.max(1, activeVowelPage - 1);
+    const nextPage = Math.min(vowelPageCount, activeVowelPage + 1);
+    const pageLinks = Array.from({ length: vowelPageCount }, (_, index) => {
+      const pageNumber = index + 1;
+      const isCurrent = pageNumber === activeVowelPage;
+
+      return `
+        <a
+          class="letter-page-number${isCurrent ? " is-current" : ""}"
+          href="${getVowelPageHref(pageNumber)}"
+          aria-label="Klinker pagina ${pageNumber}"
+          ${isCurrent ? 'aria-current="page"' : ""}
+        >${pageNumber}</a>
+      `;
+    }).join("");
+
+    vowelPageNav.innerHTML = `
+      <a class="letter-page-arrow ${activeVowelPage === 1 ? "is-disabled" : ""}" aria-label="Vorige pagina" href="${getVowelPageHref(previousPage)}" ${activeVowelPage === 1 ? 'aria-disabled="true"' : ""}>
+        <svg width="9" height="16" viewBox="0 0 12 18" aria-hidden="true" focusable="false">
+          <path d="M11 1L2 9.24L11 17" />
+        </svg>
+      </a>
+      <div class="letter-page-numbers" aria-label="Klinker pagina's">
+        ${pageLinks}
+      </div>
+      <a class="letter-page-arrow ${activeVowelPage === vowelPageCount ? "is-disabled" : ""}" aria-label="Volgende pagina" href="${getVowelPageHref(nextPage)}" ${activeVowelPage === vowelPageCount ? 'aria-disabled="true"' : ""}>
+        <svg width="9" height="16" viewBox="0 0 12 18" aria-hidden="true" focusable="false">
+          <path d="M1 1L10 9.24L1 17" />
+        </svg>
+      </a>
+    `;
+  }
 }
 
 const soundsGrid = document.querySelector("#sounds-grid");
