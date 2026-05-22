@@ -3,21 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Klanken | Arabic Kids Academy</title>
+    <title>Boeken | Arabic Kids Academy</title>
     <meta
       name="description"
-      content="Deze verplaatste klankenpagina stuurt kinderen door naar de klinkerroute."
+      content="Download het Arabic Kids Academy letterboekje als PDF en oefen thuis met Arabische letters."
     >
     <meta name="theme-color" content="#6b3bf5">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Arabic Kids">
-    <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="../manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="../images/icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../images/icons/icon-512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icons/apple-touch-icon.png">
-    <meta http-equiv="refresh" content="0; url=vowels.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -25,8 +20,10 @@
       rel="stylesheet"
     >
     <link rel="stylesheet" href="../css/main.css?v=34">
+    <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js" defer></script>
-    <script src="../js/motion.js?v=15" defer></script>
+    <script src="../js/motion.js?v=20" defer></script>
+    <script src="../js/app.js?v=31" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -43,43 +40,71 @@
         <a href="niveaus.html">Niveaus</a>
         <a href="roadmap.html">Lessen</a>
         <a href="werkbladen.html">Werkbladen</a>
-        <a href="boeken.html">Boeken</a>
+        <a href="boeken.html" aria-current="page">Boeken</a>
         <a href="about.html">Over ons</a>
         <a href="contact.html">Contact</a>
       </nav>
     </header>
-    <section class="download-section" aria-label="Download ons leerboekje">
-      <a class="download-book-button" href="../pdf/mijn-arabische-letters-boekje.pdf" download>
-        <span class="download-book-icon" aria-hidden="true">ABC</span>
-        <span class="download-book-copy">
-          <strong>Download ons boekje om te leren schrijven</strong>
-          <small>Want oefenen baart kunst.</small>
-        </span>
-      </a>
-    </section>
+
     <div class="motion-layer" id="motion-layer" aria-hidden="true"></div>
     <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
 
-    <main class="page-shell" id="main-content">
-      <a class="secondary-button back-link" href="roadmap.html">Terug naar leerroute</a>
+    <main class="page-shell books-shell" id="main-content">
+      <a class="secondary-button back-link" href="../index.html">Terug naar home</a>
 
-      <section aria-labelledby="sounds-title">
-        <p class="eyebrow">Beginner</p>
-        <h1 id="sounds-title">Korte en lange klinkers</h1>
-        <p class="hero-text">
-          Deze pagina is verplaatst. Ga verder naar de nieuwe klinkerroute.
-        </p>
+      <section class="books-hero" aria-labelledby="books-title">
+        <div>
+          <p class="eyebrow">PDF boek</p>
+          <h1 id="books-title">Mijn Arabische letters boekje</h1>
+          <p class="hero-text">
+            Een printbaar oefenboekje waarmee kinderen stap voor stap Arabische letters kunnen herkennen,
+            luisteren en schrijven.
+          </p>
+        </div>
+      </section>
 
-        <a class="primary-button" href="vowels.html">Ga naar korte en lange klinkers</a>
+      <section class="book-card" aria-labelledby="book-title">
+        <div class="book-cover" aria-hidden="true">
+          <span class="book-cover-mark">ABC</span>
+          <span class="book-cover-arabic" lang="ar" dir="rtl">ا ب ت</span>
+        </div>
+
+        <div class="book-copy">
+          <div class="book-heading">
+            <h2 id="book-title">Mijn Arabische letters boekje</h2>
+            <span class="book-price">Nu gratis</span>
+          </div>
+
+          <p>
+            Download het complete PDF-boekje en gebruik het thuis of in de les om letters rustig te oefenen.
+          </p>
+
+          <ul class="book-points">
+            <li>Printbaar PDF-bestand</li>
+            <li>Oefenen met Arabische letters</li>
+            <li>Geschikt voor kinderen en beginners</li>
+          </ul>
+
+          <p class="book-price-note">Later wordt dit boekje €5.</p>
+
+          <a
+            class="primary-button book-download"
+            href="../pdf/mijn-arabische-letters-boekje.pdf"
+            download
+          >
+            Download PDF boek
+          </a>
+        </div>
       </section>
     </main>
+
     <footer class="site-footer">
       <nav class="footer-nav" aria-label="Footer navigatie">
         <a href="../index.html">Home</a>
         <a href="niveaus.html">Niveaus</a>
         <a href="roadmap.html">Lessen</a>
         <a href="werkbladen.html">Werkbladen</a>
-        <a href="boeken.html">Boeken</a>
+        <a href="boeken.html" aria-current="page">Boeken</a>
         <a href="about.html">Over ons</a>
         <a href="contact.html">Contact</a>
       </nav>

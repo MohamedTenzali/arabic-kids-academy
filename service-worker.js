@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabic-kids-academy-v32";
+const CACHE_VERSION = "arabic-kids-academy-v37";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -10,16 +10,22 @@ const CORE_CACHE = [
   "data/progress.js",
   "data/vowels.js",
   "js/app.js",
+  "js/file-operations.js",
   "js/audio-player.js",
   "js/motion.js",
   "js/pwa-update.js",
   "js/quiz-engine.js",
+  "pages/about.html",
   "pages/letters.html",
+  "pages/boeken.html",
+  "pages/contact.html",
+  "pages/niveaus.html",
   "pages/quiz.html",
   "pages/roadmap.html",
   "pages/sounds.html",
   "pages/vowel-letter.html",
   "pages/vowels.html",
+  "pages/werkbladen.html",
   "images/icons/apple-touch-icon.png",
   "images/icons/icon-192.png",
   "images/icons/icon-512.png",
@@ -29,6 +35,16 @@ const isAudioRequest = (request) => {
   const url = new URL(request.url);
   const audioPath = new URL("audio/", APP_ROOT).pathname;
   return url.pathname.startsWith(audioPath) || request.destination === "audio";
+};
+
+const isPdfRequest = (request) => {
+  const url = new URL(request.url);
+  return url.pathname.endsWith(".pdf") || request.destination === "document";
+};
+
+const isImageRequest = (request) => {
+  return request.destination === "image" || 
+         request.url.match(/\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i);
 };
 
 self.addEventListener("message", (event) => {
@@ -64,7 +80,26 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  // Don't cache audio files - stream them directly
   if (isAudioRequest(request)) {
+    return;
+  }
+
+  // For PDFs: bypass cache to ensure fresh downloads on iPhone PWA
+  if (isPdfRequest(request)) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // Return fresh PDF without caching
+          return response;
+        })
+        .catch(() => {
+          // Offline fallback - try cache
+          return caches.match(request).catch(() => {
+            return new Response("PDF not available offline", { status: 503 });
+          });
+        })
+    );
     return;
   }
 

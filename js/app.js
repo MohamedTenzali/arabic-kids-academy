@@ -3,6 +3,8 @@ const selectedLevelText = document.querySelector("#selected-level");
 const startLink = document.querySelector(".start-link");
 const appProgress = window.progressStore;
 const appLevels = window.learningLevels || [];
+const isPagesPath = window.location.pathname.includes("/pages/");
+const getPageHref = (page) => `${isPagesPath ? "" : "pages/"}${page}`;
 
 if (levelButtons.length && appProgress) {
   const selectedLevelId = appProgress.getSelectedLevel();
@@ -28,10 +30,12 @@ if (levelButtons.length && appProgress) {
   if (selectedLevelId && startLink) {
     const selectedLevel = appProgress.getLevel(selectedLevelId);
 
-    selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel.name}`;
+    if (selectedLevelText) {
+      selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel.name}`;
+    }
     startLink.classList.remove("is-disabled");
     startLink.removeAttribute("aria-disabled");
-    startLink.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`;
+    startLink.href = getPageHref(`roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`);
   }
 }
 
@@ -41,7 +45,9 @@ levelButtons.forEach((button) => {
     const selectedLevel = appProgress?.getLevel(selectedLevelId);
 
     if (!selectedLevel || selectedLevel.locked || !appProgress.selectLevel(selectedLevel.id)) {
-      selectedLevelText.textContent = `${selectedLevel?.name || "Dit niveau"} is nog op slot.`;
+      if (selectedLevelText) {
+        selectedLevelText.textContent = `${selectedLevel?.name || "Dit niveau"} is nog op slot.`;
+      }
       return;
     }
 
@@ -50,15 +56,17 @@ levelButtons.forEach((button) => {
       item.setAttribute("aria-pressed", item === button ? "true" : "false");
     });
 
-    selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel.name}`;
+    if (selectedLevelText) {
+      selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel.name}`;
+    }
 
     if (startLink) {
       startLink.classList.remove("is-disabled");
       startLink.removeAttribute("aria-disabled");
-      startLink.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`;
+      startLink.href = getPageHref(`roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`);
     }
 
-    window.location.href = `pages/roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`;
+    window.location.href = getPageHref(`roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`);
   });
 });
 
@@ -515,27 +523,58 @@ if (soundsGrid && appLetters.length) {
     }
 
     if (letterDownload) {
-      letterDownload.innerHTML = `
-        <a
-          class="worksheet-download-button"
-          href="${selectedLetter.worksheetSrc || `../docs/letter-worksheets/${encodeURIComponent(selectedLetter.id)}.pdf`}"
-          download
-          aria-label="Download oefenblad voor ${getLetterName(selectedLetter)}"
-        >
-          <span class="worksheet-spinner-dot" aria-hidden="true"></span>
-          <span class="worksheet-download-icon" aria-hidden="true">
-            <span class="worksheet-progress-fill"></span>
-            <svg class="worksheet-download-svg" viewBox="0 0 24 24" focusable="false">
-              <path d="M12 5v14m0 0-4-4m4 4 4-4" />
-            </svg>
-            <span class="worksheet-loading-block"></span>
-          </span>
-          <span class="worksheet-download-label">
-            <strong>Download</strong>
-            <small>Oefening baart kunst</small>
-          </span>
-        </a>
+      const worksheetUrl = selectedLetter.worksheetSrc || `../docs/letter-worksheets/${encodeURIComponent(selectedLetter.id)}.pdf`;
+      const fileName = `${getLetterName(selectedLetter)}-oefenblad.pdf`;
+      
+      letterDownload.innerHTML = "";
+      
+      // Create action buttons container
+      const actionContainer = document.createElement("div");
+      actionContainer.style.display = "flex";
+      actionContainer.style.justifyContent = "center";
+      actionContainer.style.marginTop = "22px";
+      
+      // Create download button
+      const downloadBtn = document.createElement("button");
+      downloadBtn.className = "worksheet-download-button";
+      downloadBtn.setAttribute("aria-label", `Download oefenblad voor ${getLetterName(selectedLetter)}`);
+      downloadBtn.innerHTML = `
+        <span class="worksheet-spinner-dot" aria-hidden="true"></span>
+        <span class="worksheet-download-icon" aria-hidden="true">
+          <span class="worksheet-progress-fill"></span>
+          <svg class="worksheet-download-svg" viewBox="0 0 24 24" focusable="false">
+            <path d="M12 5v14m0 0-4-4m4 4 4-4" />
+          </svg>
+          <span class="worksheet-loading-block"></span>
+        </span>
+        <span class="worksheet-download-label">
+          <strong>Download</strong>
+          <small>Oefening baart kunst</small>
+        </span>
       `;
+      
+      downloadBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (downloadBtn.classList.contains("is-downloading")) return;
+        
+        downloadBtn.classList.add("is-downloading");
+        downloadBtn.setAttribute("aria-busy", "true");
+        
+        FileOperations.downloadFile(worksheetUrl, fileName, {
+          onComplete: () => {
+            downloadBtn.classList.remove("is-downloading");
+            downloadBtn.removeAttribute("aria-busy");
+          },
+          onError: (err) => {
+            downloadBtn.classList.remove("is-downloading");
+            downloadBtn.removeAttribute("aria-busy");
+            console.error("Download failed:", err);
+          }
+        });
+      });
+      
+      actionContainer.appendChild(downloadBtn);
+      letterDownload.appendChild(actionContainer);
     }
   }
 

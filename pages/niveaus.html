@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Niveaus | Arabic Kids Academy</title>
+    <meta
+      name="description"
+      content="Kies je niveau en start je Arabische leerroute met letters, klanken en quizzen."
+    >
+    <meta name="theme-color" content="#6b3bf5">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="../images/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../images/icons/icon-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icons/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../css/main.css?v=34">
+    <script src="../data/progress.js?v=26" defer></script>
+    <script src="../js/pwa-update.js" defer></script>
+    <script src="../js/motion.js?v=20" defer></script>
+    <script src="../js/app.js?v=31" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Naar de inhoud</a>
+    <header class="site-header home-header">
+      <a class="brand" href="../index.html" aria-label="Arabic Kids Academy home">
+        <img class="brand-logo" src="../images/icons/icon-192.png" alt="Arabic Kids Academy logo">
+        <span>
+          <span class="brand-name">Arabic Kids Academy</span>
+          <span class="brand-subtitle">Arabisch leren voor kinderen</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Hoofdnavigatie">
+        <a href="../index.html">Home</a>
+        <a href="niveaus.html" aria-current="page">Niveaus</a>
+        <a href="roadmap.html">Lessen</a>
+        <a href="werkbladen.html">Werkbladen</a>
+        <a href="boeken.html">Boeken</a>
+        <a href="about.html">Over ons</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <div class="motion-layer" id="motion-layer" aria-hidden="true"></div>
+    <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
+
+    <main class="home-main" id="main-content">
+      <section class="hero hero-home levels-hero" aria-labelledby="level-title">
+        <div class="hero-content">
+          <p class="hero-text">
+            Kies je niveau en begin met letters, klanken en oefenen.
+          </p>
+
+          <div class="learning-stats" aria-label="Wat je kunt oefenen">
+            <span class="learning-stat"><strong>28</strong> letters</span>
+            <span class="learning-stat"><strong>6</strong> levels</span>
+            <span class="learning-stat"><strong>Audio</strong> oefenen</span>
+          </div>
+        </div>
+
+        <section class="level-section home-levels" aria-labelledby="level-title">
+          <div class="section-heading">
+            <h1 id="level-title">Kies je niveau</h1>
+            <p id="selected-level">Nog geen niveau gekozen.</p>
+          </div>
+
+          <div class="level-grid">
+            <button class="level-card" type="button" data-level="beginner" aria-label="Kies niveau Beginner" aria-pressed="false">
+              <span class="level-badge" lang="ar" dir="rtl">ا</span>
+              <span class="level-name">Beginner</span>
+              <span class="level-copy">Ik begin net met Arabisch.</span>
+              <span class="level-route">Letters leren</span>
+            </button>
+
+            <button class="level-card" type="button" data-level="advanced" aria-label="Kies niveau Gevorderd" aria-pressed="false">
+              <span class="level-badge" lang="ar" dir="rtl">بَ</span>
+              <span class="level-name">Gevorderd</span>
+              <span class="level-copy">Ik ken al een paar letters.</span>
+              <span class="level-route">Klanken oefenen</span>
+            </button>
+
+            <button class="level-card" type="button" data-level="expert" aria-label="Kies niveau Expert" aria-pressed="false">
+              <span class="level-badge" lang="ar" dir="rtl">تُ</span>
+              <span class="level-name">Expert</span>
+              <span class="level-copy">Ik wil extra uitdaging.</span>
+              <span class="level-route">Mix Quiz</span>
+            </button>
+          </div>
+
+          <a class="primary-button start-link is-disabled" href="roadmap.html" aria-disabled="true">
+            Start leerroute
+          </a>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer home-footer">
+      <nav class="footer-nav" aria-label="Footer navigatie">
+        <a href="../index.html">Home</a>
+        <a href="niveaus.html" aria-current="page">Niveaus</a>
+        <a href="roadmap.html">Lessen</a>
+        <a href="werkbladen.html">Werkbladen</a>
+        <a href="boeken.html">Boeken</a>
+        <a href="about.html">Over ons</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p>Geen login, geen advertenties en geen persoonlijke gegevens van kinderen.</p>
+    </footer>
+  </body>
+</html>
