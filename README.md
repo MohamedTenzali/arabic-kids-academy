@@ -36,7 +36,7 @@ Vereiste bestandsnamen:
 alif.mp3
 ba.mp3
 ta.mp3
-tha.mp3
+004-tha.mp3
 jeem.mp3
 haa.mp3
 khaa.mp3
@@ -69,6 +69,13 @@ De paden in `data/letters.js` moeten relatief blijven, bijvoorbeeld:
 ../audio/letters/alif.mp3
 ../audio/letters/ba.mp3
 ../audio/letters/ta.mp3
+../audio/letters/004-tha.mp3
+```
+
+Run de lokale asset-check voor publicatie:
+
+```text
+node scripts/verify-static-assets.mjs
 ```
 
 Testen op GitHub Pages:

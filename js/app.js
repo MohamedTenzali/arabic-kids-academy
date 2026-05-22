@@ -239,6 +239,36 @@ const getVowelSounds = (letter, group = "") =>
       example: `${letter.arabic}${vowel.mark || ""}`,
       src: letter.vowelAudio[vowel.id],
     }));
+const letterWorksheetPaths = {
+  ain: "../pdf/pdf-letters/Ain.pdf.pdf",
+  alif: "../pdf/pdf-letters/alif.pdf.pdf",
+  baa: "../pdf/pdf-letters/baa.pdf.pdf",
+  daad: "../pdf/pdf-letters/Daad.pdf.pdf",
+  dal: "../pdf/pdf-letters/Dal.pdf.pdf",
+  dhal: "../pdf/pdf-letters/Dhal.pdf.pdf",
+  faa: "../pdf/pdf-letters/Faa.pdf.pdf",
+  ghain: "../pdf/pdf-letters/Ghain.pdf.pdf",
+  ha: "../pdf/pdf-letters/Ha.pdf.pdf",
+  haa: "../pdf/pdf-letters/Haa.pdf.pdf",
+  jeem: "../pdf/pdf-letters/Jeem.pdf.pdf",
+  kaaf: "../pdf/pdf-letters/Kaaf.pdf.pdf",
+  khaa: "../pdf/pdf-letters/Khaa.pdf.pdf",
+  laam: "../pdf/pdf-letters/Laam.pdf.pdf",
+  meem: "../pdf/pdf-letters/Meem.pdf.pdf",
+  noon: "../pdf/pdf-letters/Noon.pdf.pdf",
+  qaaf: "../pdf/pdf-letters/Qaaf.pdf.pdf",
+  raa: "../pdf/pdf-letters/Raa.pdf.pdf",
+  saad: "../pdf/pdf-letters/Saad.pdf.pdf",
+  seen: "../pdf/pdf-letters/Seen.pdf.pdf",
+  sheen: "../pdf/pdf-letters/Sheen.pdf.pdf",
+  taa: "../pdf/pdf-letters/taa.pdf.pdf",
+  thaa: "../pdf/pdf-letters/Thaa.pdf.pdf",
+  "taa-heavy": "../pdf/pdf-letters/Taa%20zwaar.pdf.pdf",
+  waw: "../pdf/pdf-letters/Waw.pdf.pdf",
+  zay: "../pdf/pdf-letters/Zay.pdf.pdf",
+  "zaa-heavy": "../pdf/pdf-letters/Zaa%20zwaar.pdf.pdf",
+};
+const getLetterWorksheetPath = (letter) => letter.worksheetSrc || letterWorksheetPaths[letter.id] || "";
 
 const renderAudioButton = ({ src, label = "Luister", ariaLabel, className = "sound-button", content }) => `
   <button
@@ -290,23 +320,34 @@ if (lettersGrid && appLetters.length) {
   appProgress?.completeStep("beginner", "letters");
 
   const letterCards = appLetters
-    .map(
-      (letter) => `
+    .map((letter) => {
+      const worksheetPath = getLetterWorksheetPath(letter);
+
+      return `
         <article class="lesson-card letter-card">
           <p class="letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
           <div>
             <h2>${getLetterName(letter)}</h2>
             <p class="letter-meta">${letter.transliteration}</p>
           </div>
-          ${renderAudioButton({
-            src: letter.baseAudio,
-            ariaLabel: `Luister naar de letter ${getLetterName(letter)}`,
-            className: "sound-button letter-audio-button",
-            content: '<span class="sound-name">Letter</span>',
-          })}
+          <div class="letter-card-actions">
+            ${renderAudioButton({
+              src: letter.baseAudio,
+              ariaLabel: `Luister naar de letter ${getLetterName(letter)}`,
+              className: "sound-button letter-audio-button",
+              content: '<span class="sound-name">🔊 Luister</span>',
+            })}
+            ${
+              worksheetPath
+                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" download aria-label="Download oefenblad voor ${getLetterName(letter)}">
+                    <span class="sound-name">✍️ Oefen schrijven</span>
+                  </a>`
+                : ""
+            }
+          </div>
         </article>
-      `,
-    )
+      `;
+    })
     .join("");
 
   lettersGrid.innerHTML = letterCards;
