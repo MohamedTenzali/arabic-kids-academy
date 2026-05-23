@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the complete implementation of the download/print/share flow for PDFs and images in the Arabic Kids Academy PWA, with specific optimization for iPhone Safari and Add-to-Home-Screen PWA usage.
+This document describes the complete implementation of the download/print/share flow for PDFs and images in the ArabicoKids PWA, with specific optimization for iPhone Safari and Add-to-Home-Screen PWA usage.
 
 ## Features Implemented
 
@@ -150,7 +150,7 @@ FileOperations.downloadFile(fileUrl, fileName, {
 if (navigator.share) {
   // Use native share
   navigator.share({
-    title: "Arabic Kids Academy",
+    title: "ArabicoKids",
     text: "Check this worksheet!",
     files: [file]
   });

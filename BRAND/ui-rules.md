@@ -1,4 +1,4 @@
-# Arabic Kids Academy UI Rules
+# ArabicoKids UI Rules
 
 1. Use rounded corners everywhere.
 2. Use soft shadows only.

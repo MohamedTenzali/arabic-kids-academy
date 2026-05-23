@@ -1,6 +1,6 @@
-# Arabic Kids Academy
+# ArabicoKids
 
-Arabic Kids Academy is een kindvriendelijke leerapp voor Arabische letters,
+ArabicoKids is een kindvriendelijke leerapp voor Arabische letters,
 korte klinkers, lange klinkers en quiz-oefeningen. De app werkt zonder account
 en gebruikt alleen lokale voortgang in de browser.
 
@@ -12,6 +12,11 @@ en gebruikt alleen lokale voortgang in de browser.
 - Er zijn geen advertenties.
 - Er is nog geen analytics toegevoegd.
 - Voortgang wordt lokaal opgeslagen met `localStorage` op het apparaat van de gebruiker.
+
+## Contact
+
+- Publiek contactadres: `info@arabicokids.com`
+- Backup/recovery mail: `arabicokids.contact@gmail.com`
 
 ## Huidige inhoud
 

@@ -29,4 +29,4 @@ Mini words
 
 ## Footer
 
-Arabic Kids Academy
+ArabicoKids

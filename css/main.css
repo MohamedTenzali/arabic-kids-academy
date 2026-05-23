@@ -771,14 +771,16 @@ main {
 }
 
 .footer-brand p,
-.footer-newsletter p {
+.footer-newsletter p,
+.footer-contact p {
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.8;
   margin-bottom: 15px;
 }
 
 .footer-links h3,
-.footer-newsletter h3 {
+.footer-newsletter h3,
+.footer-contact h3 {
   margin: 0 0 18px;
   color: #ffffff;
   font-size: 1.25rem;
@@ -805,6 +807,28 @@ main {
 .footer-links a:focus-visible {
   opacity: 0.75;
   transform: translateX(5px);
+}
+
+.footer-contact a {
+  display: inline-flex;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-weight: 900;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+.footer-contact a:hover,
+.footer-contact a:focus-visible {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.footer-premium-note {
+  margin-top: var(--space-4);
+  font-weight: 900;
 }
 
 .footer-socials {
@@ -1131,6 +1155,116 @@ main {
 
 .learning-stat strong {
   color: var(--color-brand-dark);
+}
+
+.home-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: var(--space-6) auto 0;
+}
+
+.home-info-section,
+.home-premium-teaser {
+  position: relative;
+  z-index: 5;
+  width: min(100%, var(--page-max));
+  margin: var(--space-8) auto 0;
+}
+
+.home-info-section {
+  border: 1px solid rgba(107, 59, 245, 0.12);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 12px 32px rgba(36, 48, 68, 0.08);
+  padding: clamp(18px, 4vw, 28px);
+}
+
+.home-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.home-card-grid article {
+  min-height: 154px;
+  border: 1px solid rgba(107, 59, 245, 0.12);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  padding: var(--space-5);
+}
+
+.home-card-grid span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--gradient-sunny);
+  color: var(--color-text);
+  font-weight: 900;
+}
+
+.home-card-grid h3,
+.home-card-grid p {
+  margin-bottom: 0;
+}
+
+.home-card-grid h3 {
+  margin-top: var(--space-4);
+  font-size: 1.08rem;
+}
+
+.home-card-grid p,
+.parent-trust p {
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.home-pill-grid,
+.trust-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+}
+
+.home-pill-grid a,
+.trust-list li {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  border: 2px solid rgba(107, 59, 245, 0.14);
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  color: var(--color-brand-dark);
+  font-weight: 900;
+  padding: 0 var(--space-4);
+  text-decoration: none;
+}
+
+.parent-trust {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.trust-list {
+  list-style: none;
+}
+
+.home-premium-teaser {
+  border: 2px dashed rgba(107, 59, 245, 0.22);
+  border-radius: var(--radius-lg);
+  background: #fff8de;
+  color: var(--color-text);
+  font-weight: 800;
+  line-height: 1.45;
+  padding: var(--space-5);
+  text-align: center;
 }
 
 .home-levels {
@@ -3037,6 +3171,16 @@ h2 {
   color: #ffffff;
 }
 
+@media (max-width: 980px) {
+  .home-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .parent-trust {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 719px) {
   body {
     padding-bottom: env(safe-area-inset-bottom);
@@ -3053,6 +3197,10 @@ h2 {
   .footer-links ul,
   .footer-newsletter form {
     justify-items: center;
+  }
+
+  .footer-contact a {
+    justify-content: center;
   }
 
   .footer-newsletter input,
@@ -3098,6 +3246,21 @@ h2 {
 
   .site-nav a {
     padding-inline: 8px;
+  }
+
+  .home-card-grid,
+  .parent-trust {
+    grid-template-columns: 1fr;
+  }
+
+  .home-info-section,
+  .home-premium-teaser {
+    margin-top: var(--space-6);
+  }
+
+  .home-cta-row .primary-button,
+  .home-cta-row .secondary-button {
+    width: min(100%, 320px);
   }
 
   .roadmap-shell {

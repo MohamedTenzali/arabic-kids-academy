@@ -1,6 +1,6 @@
-# Arabic Kids Academy Brand Guidelines
+# ArabicoKids Brand Guidelines
 
-Arabic Kids Academy is a modern educational kids app for children aged 4-9. The brand should feel playful, warm, trustworthy, and premium without becoming busy or heavy.
+ArabicoKids is a modern educational kids app for children aged 4-9. The brand should feel playful, warm, trustworthy, and premium without becoming busy or heavy.
 
 ## Personality
 

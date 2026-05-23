@@ -1,4 +1,4 @@
-# Arabic Kids Academy Release Checklist
+# ArabicoKids Release Checklist
 
 Use this checklist before publishing to GitHub Pages.
 

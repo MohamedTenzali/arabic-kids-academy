@@ -3,12 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contact Ons | Arabic Kids Academy</title>
+    <title>Contact | ArabicoKids</title>
     <meta
       name="description"
-      content="Neem contact op met Arabic Kids Academy voor vragen over lessen, werkboeken, audio, downloads en ondersteuning."
+      content="Neem contact op met ArabicoKids voor vragen over lessen, werkboeken, audio, downloads en ondersteuning."
     >
+    <link rel="canonical" href="https://arabicokids.com/pages/contact.html">
+    <meta property="og:site_name" content="ArabicoKids">
+    <meta property="og:title" content="Contact | ArabicoKids">
+    <meta property="og:description" content="Neem contact op met ArabicoKids voor vragen over lessen, werkboeken, audio, downloads en ondersteuning.">
+    <meta property="og:url" content="https://arabicokids.com/pages/contact.html">
+    <meta property="og:type" content="website">
     <meta name="theme-color" content="#6b3bf5">
+    <meta name="application-name" content="ArabicoKids">
     <link rel="manifest" href="../manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="../images/icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../images/icons/icon-512.png">
@@ -19,7 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=40">
+    <link rel="stylesheet" href="../css/main.css?v=42">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js" defer></script>
     <script src="../js/motion.js?v=20" defer></script>
@@ -28,10 +35,10 @@
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="Arabic Kids Academy home">
-        <img class="brand-logo" src="../images/icons/icon-192.png" alt="Arabic Kids Academy logo">
+      <a class="brand" href="../index.html" aria-label="ArabicoKids home">
+        <img class="brand-logo" src="../images/icons/icon-192.png" alt="ArabicoKids logo">
         <span>
-          <span class="brand-name">Arabic Kids Academy</span>
+          <span class="brand-name">ArabicoKids</span>
           <span class="brand-subtitle">Arabisch leren voor kinderen</span>
         </span>
       </a>
@@ -52,166 +59,78 @@
     <main class="page-shell contact-shell" id="main-content">
       <a class="secondary-button back-link" href="../index.html">Terug naar home</a>
 
-      <section class="contact-hero" aria-labelledby="contact-title">
-        <p class="eyebrow">Contact Ons</p>
-        <h1 id="contact-title">Neem contact met ons op</h1>
+      <section class="contact-hero contact-simple" aria-labelledby="contact-title">
+        <p class="eyebrow">Voor ouders</p>
+        <h1 id="contact-title">Contact</h1>
         <p class="hero-text">
-          Heb je vragen over de lessen, werkboeken of het gebruik van Arabic Kids Academy?
-          Neem gerust contact met ons op. Wij helpen je graag verder.
+          Ouders kunnen ons bereiken via <a href="mailto:info@arabicokids.com">info@arabicokids.com</a>
+          voor vragen over lessen, werkbladen, audio of technische hulp.
         </p>
+        <a class="primary-button" href="mailto:info@arabicokids.com">info@arabicokids.com</a>
       </section>
 
       <section class="contact-grid" aria-label="Contact informatie">
         <article class="contact-panel">
-          <h2>Contactgegevens</h2>
-          <dl class="contact-details">
-            <div>
-              <dt>E-mail</dt>
-              <dd><a href="mailto:info@arabickidsacademy.com">info@arabickidsacademy.com</a></dd>
-            </div>
-            <div>
-              <dt>Reactietijd</dt>
-              <dd>binnen 24 tot 48 uur</dd>
-            </div>
-          </dl>
-        </article>
-
-        <article class="contact-panel">
-          <h2>Waarmee kunnen wij helpen?</h2>
+          <h2>Waarvoor kun je mailen?</h2>
           <ul class="contact-topic-list">
-            <li>Vragen over de lessen</li>
-            <li>Problemen met audio of downloads</li>
-            <li>Informatie over werkboeken</li>
-            <li>Toegang tot niveaus</li>
-            <li>Technische ondersteuning</li>
-            <li>Samenwerkingen of suggesties</li>
+            <li>vragen over lessen of levels</li>
+            <li>vragen over werkbladen of downloads</li>
+            <li>audio die niet goed afspeelt</li>
+            <li>technische problemen op mobiel, tablet of computer</li>
           </ul>
         </article>
-      </section>
 
-      <section class="contact-panel contact-form-panel" aria-labelledby="contact-form-title">
-        <div>
-          <p class="eyebrow">Bericht sturen</p>
-          <h2 id="contact-form-title">Contactformulier</h2>
-        </div>
-
-        <form id="contact-form" class="contact-form" action="mailto:info@arabickidsacademy.com" method="post" enctype="text/plain">
-          <label class="form-row" for="contact-name">
-            <span>Naam</span>
-            <input id="contact-name" name="Naam" type="text" autocomplete="name" required>
-          </label>
-
-          <label class="form-row" for="contact-email">
-            <span>E-mailadres</span>
-            <input id="contact-email" name="E-mailadres" type="email" autocomplete="email" required>
-          </label>
-
-          <label class="form-row" for="contact-subject">
-            <span>Onderwerp</span>
-            <input id="contact-subject" name="Onderwerp" type="text" required>
-          </label>
-
-          <label class="form-row form-row-full" for="contact-message">
-            <span>Bericht</span>
-            <textarea id="contact-message" name="Bericht" rows="6" required></textarea>
-          </label>
-
-          <button class="primary-button contact-submit" type="submit">Verstuur bericht</button>
-        </form>
-      </section>
-
-      <section class="contact-panel faq-panel" aria-labelledby="faq-title">
-        <div>
-          <p class="eyebrow">Veelgestelde vragen</p>
-          <h2 id="faq-title">FAQ</h2>
-        </div>
-
-        <div class="faq-list">
-          <details>
-            <summary>Kan ik gratis starten?</summary>
-            <p>Ja, een deel van de lessen en oefeningen is gratis beschikbaar.</p>
-          </details>
-
-          <details>
-            <summary>Zijn de werkboeken digitaal of fysiek?</summary>
-            <p>Werkboeken kunnen later digitaal of fysiek aangeboden worden.</p>
-          </details>
-
-          <details>
-            <summary>Werkt de website op mobiel en tablet?</summary>
-            <p>Ja, Arabic Kids Academy werkt op mobiel, tablet en computer.</p>
-          </details>
-
-          <details>
-            <summary>Is audio inbegrepen?</summary>
-            <p>Ja, veel lessen bevatten audio-uitspraak om kinderen beter te helpen oefenen.</p>
-          </details>
-        </div>
-      </section>
-
-      <section class="contact-panel social-panel" aria-labelledby="social-title">
-        <div>
-          <p class="eyebrow">Volg ons</p>
-          <h2 id="social-title">Social media</h2>
-          <p>Volg Arabic Kids Academy voor updates over nieuwe lessen, werkboeken en oefeningen.</p>
-        </div>
-
-        <div class="social-links" aria-label="Social media links">
-          <a class="secondary-button" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-          <a class="secondary-button" href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
-          <a class="secondary-button" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
-        </div>
+        <article class="contact-panel faq-panel" aria-labelledby="faq-title">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Korte uitleg</h2>
+          <div class="faq-list">
+            <details>
+              <summary>Zijn de lessen gratis te gebruiken?</summary>
+              <p>Je kunt direct starten met de beschikbare lessen, audio, quizzen en werkbladen.</p>
+            </details>
+            <details>
+              <summary>Komen er extra werkbladen?</summary>
+              <p>Ja. Binnenkort komen er extra werkbladen, levels en premium lessen. Er is nu geen betaling of login actief.</p>
+            </details>
+            <details>
+              <summary>Wat doe ik bij een technisch probleem?</summary>
+              <p>Mail naar <a href="mailto:info@arabicokids.com">info@arabicokids.com</a> wat er misgaat, welke pagina je gebruikt en op welk apparaat je kijkt.</p>
+            </details>
+          </div>
+        </article>
       </section>
     </main>
 
     <footer class="aka-footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <img src="../images/icons/icon-192.png" alt="Arabic Kids Academy logo" class="footer-logo">
-          <h2>Arabic Kids Academy</h2>
-          <p>Leer Arabisch op een leuke en interactieve manier. Speciaal ontworpen voor kinderen.</p>
-          <div class="footer-socials" aria-label="Social media">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-            <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
-          </div>
+          <img src="../images/icons/icon-192.png" alt="ArabicoKids logo" class="footer-logo">
+          <h2>ArabicoKids</h2>
+          <p>Kindvriendelijk Arabisch leren met letters, audio, quizzen, werkbladen en levels voor thuis.</p>
         </div>
 
         <div class="footer-links">
-          <h3>Snelle links</h3>
+          <h3>Navigatie</h3>
           <ul>
             <li><a href="../index.html">Home</a></li>
-            <li><a href="letters.html">Arabische letters</a></li>
-            <li><a href="vowels.html">Korte &amp; lange klanken</a></li>
-            <li><a href="quiz.html">Quiz</a></li>
-            <li><a href="boeken.html">Boek downloaden</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-links">
-          <h3>Meer</h3>
-          <ul>
-            <li><a href="niveaus.html">Niveaus</a></li>
+            <li><a href="roadmap.html">Lessen</a></li>
             <li><a href="werkbladen.html">Werkbladen</a></li>
             <li><a href="about.html">Over ons</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
           </ul>
         </div>
 
-        <div class="footer-newsletter">
-          <h3>Blijf op de hoogte</h3>
-          <p>Ontvang nieuwe lessen, updates en gratis oefeningen.</p>
-          <form action="mailto:info@arabickidsacademy.com" method="post" enctype="text/plain">
-            <label class="sr-only" for="footer-email">Jouw e-mailadres</label>
-            <input id="footer-email" name="E-mailadres" type="email" placeholder="Jouw e-mailadres" required>
-            <button type="submit">Aanmelden</button>
-          </form>
+        <div class="footer-contact">
+          <h3>Contact</h3>
+          <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
+          <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
+          <p class="footer-premium-note">Binnenkort: extra werkbladen, levels en premium lessen.</p>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 Arabic Kids Academy. Alle rechten voorbehouden.</p>
+        <p>&copy; 2026 ArabicoKids. Alle rechten voorbehouden.</p>
       </div>
     </footer>
   </body>

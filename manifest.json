@@ -1,7 +1,7 @@
 {
-  "name": "Arabic Kids Academy",
-  "short_name": "Arabic Kids",
-  "description": "Arabisch leren voor kinderen met letters, klinkers en quizzen.",
+  "name": "ArabicoKids",
+  "short_name": "ArabicoKids",
+  "description": "Kindvriendelijk Arabisch leren met letters, audio, quizzen, werkbladen en levels.",
   "lang": "nl",
   "dir": "ltr",
   "start_url": "./",

@@ -1,10 +1,10 @@
-# Arabic Kids Academy Stabilization Roadmap
+# ArabicoKids Stabilization Roadmap
 
 Status date: 2026-05-22
 
 ## Product Rule
 
-Arabic Kids Academy is now in stabilization mode.
+ArabicoKids is now in stabilization mode.
 
 Primary focus:
 

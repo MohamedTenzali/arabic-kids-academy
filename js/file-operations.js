@@ -176,7 +176,7 @@ const FileOperations = (() => {
 
           // Build share data
           const data = {
-            title: title || "Arabic Kids Academy",
+            title: title || "ArabicoKids",
             text: text || "Check this out!",
             files: [file],
           };
@@ -293,8 +293,8 @@ const FileOperations = (() => {
       shareFile(
         fileUrl,
         {
-          title: "Arabic Kids Academy",
-          text: "Check out this worksheet from Arabic Kids Academy!",
+          title: "ArabicoKids",
+          text: "Check out this worksheet from ArabicoKids!",
           fileName: fileName,
         },
         {

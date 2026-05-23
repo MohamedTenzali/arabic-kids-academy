@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabic-kids-academy-v44";
+const CACHE_VERSION = "arabicokids-v46";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -20,6 +20,7 @@ const CORE_CACHE = [
   "pages/boeken.html",
   "pages/contact.html",
   "pages/niveaus.html",
+  "pages/privacy.html",
   "pages/quiz.html",
   "pages/roadmap.html",
   "pages/sounds.html",
