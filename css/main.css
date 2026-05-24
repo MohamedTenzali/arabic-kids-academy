@@ -596,7 +596,9 @@ select:focus-visible {
 }
 
 .site-nav a {
-  min-height: 40px;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   border-radius: var(--radius-pill);
   color: var(--color-text);
   font-size: 0.95rem;
@@ -795,6 +797,9 @@ main {
 }
 
 .footer-links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   color: #ffffff;
   font-weight: 800;
   text-decoration: none;
@@ -811,6 +816,8 @@ main {
 
 .footer-contact a {
   display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   max-width: 100%;
   overflow-wrap: anywhere;
   border-radius: var(--radius-pill);
@@ -1882,7 +1889,7 @@ h2 {
 
 .worksheet-actions .primary-button,
 .worksheet-actions .secondary-button {
-  min-height: 46px;
+  min-height: var(--touch-target);
   padding-inline: var(--space-4);
 }
 
@@ -2045,9 +2052,12 @@ h2 {
 }
 
 .faq-list summary {
+  min-height: 44px;
   color: var(--color-text);
   cursor: pointer;
   font-weight: 900;
+  line-height: 1.35;
+  padding: 10px 0;
 }
 
 .faq-list p {
@@ -2342,6 +2352,45 @@ h2 {
   direction: rtl;
 }
 
+.letters-progress-card {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  border: 1px solid rgba(107, 59, 245, 0.16);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(107, 59, 245, 0.09), rgba(77, 182, 255, 0.1)),
+    #ffffff;
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+}
+
+.letters-progress-card h2 {
+  margin: 0 0 6px;
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  line-height: 1.1;
+}
+
+.letters-progress-card p {
+  margin: 0;
+}
+
+.letters-progress-meter {
+  overflow: hidden;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  background: #e8edf8;
+}
+
+.letters-progress-meter span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--gradient-sunny);
+  transition: width 260ms var(--ease-soft);
+}
+
 .letter-card,
 .vowel-card {
   display: grid;
@@ -2375,8 +2424,12 @@ h2 {
   direction: ltr;
   position: relative;
   overflow: hidden;
-  border-color: #ded6c7;
-  background: var(--gradient-card);
+  min-height: 330px;
+  align-content: space-between;
+  border-color: rgba(107, 59, 245, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(255, 200, 61, 0.18), transparent 42%),
+    linear-gradient(180deg, #ffffff 0%, #fbf9ff 100%);
   box-shadow: var(--shadow-card);
   transition:
     border-color 160ms ease,
@@ -2390,6 +2443,72 @@ h2 {
   inset: 0 0 auto;
   height: 6px;
   background: linear-gradient(90deg, var(--color-brand), var(--color-accent));
+}
+
+.letter-card::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  z-index: 0;
+  border-radius: calc(var(--radius-lg) - 8px);
+  background: rgba(255, 255, 255, 0.42);
+  pointer-events: none;
+}
+
+.letter-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.letter-card:nth-child(3n + 2) {
+  background:
+    radial-gradient(circle at top right, rgba(77, 182, 255, 0.18), transparent 44%),
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+
+.letter-card:nth-child(3n + 3) {
+  background:
+    radial-gradient(circle at top right, rgba(255, 111, 174, 0.14), transparent 44%),
+    linear-gradient(180deg, #ffffff 0%, #fff9ed 100%);
+}
+
+.letter-card.is-tapped {
+  animation: letterCardTap 360ms var(--ease-bounce) both;
+}
+
+.letter-complete-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 2px solid rgba(139, 195, 74, 0.42);
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  box-shadow: 0 8px 18px rgba(36, 48, 68, 0.12);
+  color: #4d7c0f;
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity 180ms var(--ease-soft),
+    transform 180ms var(--ease-bounce);
+}
+
+.letter-complete-badge svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.letter-card.is-complete .letter-complete-badge {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .letter-card:hover,
@@ -2409,9 +2528,13 @@ h2 {
   margin: 0;
   color: var(--color-brand-dark);
   font-family: "Noto Naskh Arabic", serif;
-  font-size: 4rem;
+  font-size: clamp(5.4rem, 13vw, 7.2rem);
   font-weight: 700;
   line-height: 1;
+  padding-top: 14px;
+  text-shadow:
+    0 8px 24px rgba(107, 59, 245, 0.18),
+    0 0 22px rgba(107, 59, 245, 0.16);
   transform-origin: center;
 }
 
@@ -2462,7 +2585,13 @@ h2 {
 }
 
 .letter-audio-button {
-  min-height: 56px;
+  min-height: 64px;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  border-color: rgba(107, 59, 245, 0.26);
+  background: var(--gradient-brand);
+  color: #ffffff;
+  box-shadow: 0 8px 0 rgba(107, 59, 245, 0.18);
 }
 
 .letter-card-actions {
@@ -2471,13 +2600,37 @@ h2 {
 }
 
 .letter-write-button {
-  min-height: 56px;
+  min-height: 54px;
+  grid-template-columns: auto auto;
+  justify-content: center;
   border-color: rgba(107, 59, 245, 0.16);
   background:
     linear-gradient(135deg, rgba(107, 59, 245, 0.1), rgba(77, 182, 255, 0.14)),
     #ffffff;
   color: #4d2ac0;
   text-decoration: none;
+}
+
+.letter-button-icon {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+}
+
+.letter-button-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.3;
+}
+
+.letter-audio-button .letter-button-icon svg path:first-child {
+  fill: currentColor;
+  stroke: none;
 }
 
 .letter-write-button:hover,
@@ -2949,6 +3102,14 @@ h2 {
   background: #fff1f1;
 }
 
+.letter-card .letter-audio-button {
+  min-height: 68px;
+}
+
+.letter-card .letter-write-button {
+  min-height: 54px;
+}
+
 .sound-example {
   display: grid;
   min-width: 58px;
@@ -3140,8 +3301,8 @@ h2 {
 }
 
 .letter-page-number {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
 }
 
 .letter-page-number.is-current {
@@ -3253,6 +3414,19 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .letters-grid {
+    gap: var(--space-3);
+  }
+
+  .letter-card {
+    min-height: 300px;
+    padding: var(--space-4);
+  }
+
+  .letter-symbol {
+    font-size: clamp(5rem, 24vw, 6.3rem);
+  }
+
   .home-info-section,
   .home-premium-teaser {
     margin-top: var(--space-6);
@@ -3290,6 +3464,12 @@ h2 {
     height: 58px;
     border-radius: 22px;
     font-size: 0.78rem;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 719px) {
+  .letters-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -3594,6 +3774,23 @@ h2 {
 
   100% {
     transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes letterCardTap {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    box-shadow: var(--shadow-card);
+  }
+
+  42% {
+    transform: translate3d(0, -5px, 0) scale(1.025);
+    box-shadow: 0 18px 42px rgba(107, 59, 245, 0.2);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    box-shadow: var(--shadow-card);
   }
 }
 

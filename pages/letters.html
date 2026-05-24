@@ -30,13 +30,13 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=42">
+    <link rel="stylesheet" href="../css/main.css?v=45">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../data/letters.js?v=12" defer></script>
-    <script src="../js/audio-player.js?v=22" defer></script>
-    <script src="../js/pwa-update.js" defer></script>
+    <script src="../js/audio-player.js?v=23" defer></script>
+    <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=20" defer></script>
-    <script src="../js/app.js?v=29" defer></script>
+    <script src="../js/app.js?v=46" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -80,6 +80,17 @@
           Bekijk elke letter en druk op luisteren om de uitspraak te horen.
         </p>
 
+        <section class="letters-progress-card" aria-labelledby="letters-progress-title">
+          <div>
+            <p class="eyebrow">Jouw voortgang</p>
+            <h2 id="letters-progress-title">Luister naar alle letters</h2>
+            <p id="letters-progress-text">Je hebt 0 van 28 letters beluisterd.</p>
+          </div>
+          <div class="letters-progress-meter" aria-hidden="true">
+            <span id="letters-progress-fill"></span>
+          </div>
+        </section>
+
         <div class="letters-grid" id="letters-grid" aria-live="polite"></div>
       </section>
 
@@ -115,7 +126,7 @@
           <h3>Contact</h3>
           <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
           <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
-          <p class="footer-premium-note">Binnenkort: extra werkbladen, levels en premium lessen.</p>
+          <p class="footer-premium-note">Gratis basis beschikbaar. Premium materiaal volgt later.</p>
         </div>
       </div>
 

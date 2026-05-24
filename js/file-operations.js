@@ -6,6 +6,8 @@
 
 const FileOperations = (() => {
   const DEBUG = false;
+  const scriptUrl = document.currentScript?.src || new URL("js/file-operations.js", document.baseURI).href;
+  const stylesheetUrl = new URL("../css/main.css", scriptUrl).href;
 
   const log = (...args) => {
     if (DEBUG) console.log("[FileOps]", ...args);
@@ -109,7 +111,7 @@ const FileOperations = (() => {
         const printWindow = window.open("", "", "height=600,width=800");
         printWindow.document.write("<html><head><title>Print</title>");
         printWindow.document.write(
-          `<link rel="stylesheet" href="${document.location.origin}/css/main.css">`,
+          `<link rel="stylesheet" href="${stylesheetUrl}">`,
         );
         printWindow.document.write("</head><body>");
         printWindow.document.write(element.innerHTML);

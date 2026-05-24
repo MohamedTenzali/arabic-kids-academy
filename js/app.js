@@ -273,10 +273,56 @@ const letterWorksheetPaths = {
   thaa: "../pdf/pdf-letters/Thaa.pdf.pdf",
   "taa-heavy": "../pdf/pdf-letters/Taa%20zwaar.pdf.pdf",
   waw: "../pdf/pdf-letters/Waw.pdf.pdf",
+  yaa: "../docs/letter-worksheets/yaa.pdf",
   zay: "../pdf/pdf-letters/Zay.pdf.pdf",
   "zaa-heavy": "../pdf/pdf-letters/Zaa%20zwaar.pdf.pdf",
 };
 const getLetterWorksheetPath = (letter) => letter.worksheetSrc || letterWorksheetPaths[letter.id] || "";
+const listenedLettersStorageKey = "arabicKidsListenedLetters";
+const getListenedLetters = () => {
+  try {
+    const value = JSON.parse(localStorage.getItem(listenedLettersStorageKey) || "[]");
+    return new Set(Array.isArray(value) ? value : []);
+  } catch {
+    return new Set();
+  }
+};
+const saveListenedLetters = (listenedLetters) => {
+  try {
+    localStorage.setItem(listenedLettersStorageKey, JSON.stringify([...listenedLetters]));
+  } catch {
+    // Letter progress is helpful, but the page should still work if storage is blocked.
+  }
+};
+const updateLettersProgress = () => {
+  const progressText = document.querySelector("#letters-progress-text");
+  const progressFill = document.querySelector("#letters-progress-fill");
+
+  if (!progressText || !progressFill || !appLetters.length) {
+    return;
+  }
+
+  const listenedLetters = getListenedLetters();
+  const completedCount = appLetters.filter((letter) => listenedLetters.has(letter.id)).length;
+  const percent = Math.round((completedCount / appLetters.length) * 100);
+
+  progressText.textContent = `Je hebt ${completedCount} van ${appLetters.length} letters beluisterd.`;
+  progressFill.style.width = `${percent}%`;
+
+  document.querySelectorAll("[data-letter-id]").forEach((card) => {
+    card.classList.toggle("is-complete", listenedLetters.has(card.dataset.letterId));
+  });
+};
+const markLetterListened = (letterId) => {
+  if (!letterId) {
+    return;
+  }
+
+  const listenedLetters = getListenedLetters();
+  listenedLetters.add(letterId);
+  saveListenedLetters(listenedLetters);
+  updateLettersProgress();
+};
 
 const renderAudioButton = ({ src, label = "Luister", ariaLabel, className = "sound-button", content }) => `
   <button
@@ -304,12 +350,25 @@ document.addEventListener("click", (event) => {
       target: button,
     });
   }
+
+  const letterCard = button.closest(".letter-card");
+
+  if (letterCard) {
+    letterCard.classList.remove("is-tapped");
+    void letterCard.offsetWidth;
+    letterCard.classList.add("is-tapped");
+    markLetterListened(letterCard.dataset.letterId);
+  }
 });
 
 document.addEventListener("pointerenter", (event) => {
   const button = event.target.closest?.("[data-audio-src]");
 
   if (button) {
+    if (button.closest(".letter-card")) {
+      return;
+    }
+
     preloadAudio(button.dataset.audioSrc);
   }
 }, true);
@@ -318,6 +377,10 @@ document.addEventListener("focusin", (event) => {
   const button = event.target.closest?.("[data-audio-src]");
 
   if (button) {
+    if (button.closest(".letter-card")) {
+      return;
+    }
+
     preloadAudio(button.dataset.audioSrc);
   }
 });
@@ -332,7 +395,12 @@ if (lettersGrid && appLetters.length) {
       const worksheetPath = getLetterWorksheetPath(letter);
 
       return `
-        <article class="lesson-card letter-card">
+        <article class="lesson-card letter-card" data-letter-id="${escapeAttribute(letter.id)}">
+          <span class="letter-complete-badge" aria-label="Beluisterd">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M5 12.5l4.2 4L19 7" />
+            </svg>
+          </span>
           <p class="letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
           <div>
             <h2>${getLetterName(letter)}</h2>
@@ -343,12 +411,27 @@ if (lettersGrid && appLetters.length) {
               src: letter.baseAudio,
               ariaLabel: `Luister naar de letter ${getLetterName(letter)}`,
               className: "sound-button letter-audio-button",
-              content: '<span class="sound-name">🔊 Luister</span>',
+              content: `
+                <span class="letter-button-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M4 9v6h4l5 4V5L8 9H4Z" />
+                    <path d="M16 9.5c.8.7 1.3 1.5 1.3 2.5s-.5 1.8-1.3 2.5" />
+                    <path d="M18.5 7c1.4 1.3 2.2 3 2.2 5s-.8 3.7-2.2 5" />
+                  </svg>
+                </span>
+                <span class="sound-name">Luister</span>
+              `,
             })}
             ${
               worksheetPath
                 ? `<a class="sound-button letter-write-button" href="${worksheetPath}" download aria-label="Download oefenblad voor ${getLetterName(letter)}">
-                    <span class="sound-name">✍️ Oefen schrijven</span>
+                    <span class="letter-button-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M4 20h5l10-10a2.8 2.8 0 0 0-4-4L5 16l-1 4Z" />
+                        <path d="M13.5 7.5l3 3" />
+                      </svg>
+                    </span>
+                    <span class="sound-name">Oefen schrijven</span>
                   </a>`
                 : ""
             }
@@ -359,6 +442,7 @@ if (lettersGrid && appLetters.length) {
     .join("");
 
   lettersGrid.innerHTML = letterCards;
+  updateLettersProgress();
 }
 
 const lettersScrollButton = document.querySelector("[data-letters-scroll]");
@@ -593,7 +677,7 @@ if (soundsGrid && appLetters.length) {
     }
 
     if (letterDownload) {
-      const worksheetUrl = selectedLetter.worksheetSrc || `../docs/letter-worksheets/${encodeURIComponent(selectedLetter.id)}.pdf`;
+      const worksheetUrl = getLetterWorksheetPath(selectedLetter);
       const fileName = `${getLetterName(selectedLetter)}-oefenblad.pdf`;
       
       letterDownload.innerHTML = "";

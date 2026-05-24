@@ -1,22 +1,9 @@
-const showPwaUpdateNotice = (registration) => {
-  if (document.querySelector(".pwa-update-notice")) {
+const requestPwaRefresh = (registration) => {
+  if (!registration.waiting || pwaRefreshPending) {
     return;
   }
 
-  const notice = document.createElement("div");
-  notice.className = "pwa-update-notice";
-  notice.setAttribute("role", "status");
-  notice.innerHTML = `
-    <span>Er is een nieuwe versie klaar.</span>
-    <button type="button">Vernieuwen</button>
-  `;
-
-  notice.querySelector("button").addEventListener("click", () => {
-    notice.querySelector("button").disabled = true;
-    registration.waiting?.postMessage({ type: "SKIP_WAITING" });
-  });
-
-  document.body.appendChild(notice);
+  registration.waiting.postMessage({ type: "SKIP_WAITING" });
 };
 
 const pwaUpdateScriptUrl = document.currentScript?.src || new URL("pwa-update.js", window.location.href).href;
@@ -38,7 +25,7 @@ if ("serviceWorker" in navigator) {
 
     navigator.serviceWorker.register(swUrl, { scope }).then((registration) => {
       if (registration.waiting) {
-        showPwaUpdateNotice(registration);
+        requestPwaRefresh(registration);
       }
 
       registration.addEventListener("updatefound", () => {
@@ -46,7 +33,7 @@ if ("serviceWorker" in navigator) {
 
         worker?.addEventListener("statechange", () => {
           if (worker.state === "installed" && navigator.serviceWorker.controller) {
-            showPwaUpdateNotice(registration);
+            requestPwaRefresh(registration);
           }
         });
       });

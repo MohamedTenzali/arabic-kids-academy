@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v46";
+const CACHE_VERSION = "arabicokids-v49";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -38,6 +38,34 @@ const CORE_CACHE = [
   "pdf/worksheets/niveau-1-placeholder.pdf",
   "pdf/worksheets/niveau-2-placeholder.pdf",
   "pdf/worksheets/niveau-3-placeholder.pdf",
+  "pdf/pdf-letters/Ain.pdf.pdf",
+  "pdf/pdf-letters/alif.pdf.pdf",
+  "pdf/pdf-letters/baa.pdf.pdf",
+  "pdf/pdf-letters/Daad.pdf.pdf",
+  "pdf/pdf-letters/Dal.pdf.pdf",
+  "pdf/pdf-letters/Dhal.pdf.pdf",
+  "pdf/pdf-letters/Faa.pdf.pdf",
+  "pdf/pdf-letters/Ghain.pdf.pdf",
+  "pdf/pdf-letters/Ha.pdf.pdf",
+  "pdf/pdf-letters/Haa.pdf.pdf",
+  "pdf/pdf-letters/Jeem.pdf.pdf",
+  "pdf/pdf-letters/Kaaf.pdf.pdf",
+  "pdf/pdf-letters/Khaa.pdf.pdf",
+  "pdf/pdf-letters/Laam.pdf.pdf",
+  "pdf/pdf-letters/Meem.pdf.pdf",
+  "pdf/pdf-letters/Noon.pdf.pdf",
+  "pdf/pdf-letters/Qaaf.pdf.pdf",
+  "pdf/pdf-letters/Raa.pdf.pdf",
+  "pdf/pdf-letters/Saad.pdf.pdf",
+  "pdf/pdf-letters/Seen.pdf.pdf",
+  "pdf/pdf-letters/Sheen.pdf.pdf",
+  "pdf/pdf-letters/taa.pdf.pdf",
+  "pdf/pdf-letters/Thaa.pdf.pdf",
+  "pdf/pdf-letters/Taa%20zwaar.pdf.pdf",
+  "pdf/pdf-letters/Waw.pdf.pdf",
+  "docs/letter-worksheets/yaa.pdf",
+  "pdf/pdf-letters/Zay.pdf.pdf",
+  "pdf/pdf-letters/Zaa%20zwaar.pdf.pdf",
 ];
 
 const isAudioRequest = (request) => {

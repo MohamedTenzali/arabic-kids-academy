@@ -102,7 +102,7 @@ const createAudioPlayer = () => {
 
     if (!audioCache.has(validation.src)) {
       const audio = new Audio(validation.src);
-      audio.preload = "auto";
+      audio.preload = "none";
       audioCache.set(validation.src, audio);
     }
 
@@ -238,7 +238,7 @@ const createAudioPlayer = () => {
       return true;
     }
 
-    audio.preload = "auto";
+    audio.preload = "metadata";
     audio.load();
     return true;
   };
