@@ -163,8 +163,17 @@ if (roadmapList && appProgress) {
 }
 
 const appLetters = [...(window.letters || [])].sort((a, b) => a.order - b.order);
+const appLetterForms = [...(window.arabicLetterForms || [])].sort((a, b) => a.order - b.order);
+const appLetterFormsById =
+  window.arabicLetterFormsById || Object.fromEntries(appLetterForms.map((letter) => [letter.id, letter]));
 const appVowelTypes = window.vowelTypes || [];
 const vowelTypesById = window.vowelTypesById || Object.fromEntries(appVowelTypes.map((vowel) => [vowel.id, vowel]));
+const vowelPracticeGroups = {
+  short: ["fatha", "kasra", "damma"],
+  long: ["aa", "ii", "uu"],
+  // TODO: Add tanween ["an", "in", "un"] when audio/data is available.
+  all: ["fatha", "kasra", "damma", "aa", "ii", "uu"],
+};
 const audioPlayer = window.audioPlayer;
 const playAudio = window.playAudio || ((src, options = {}) => audioPlayer?.play(src, options.button));
 const preloadAudio = window.preloadAudio || (() => false);
@@ -306,7 +315,7 @@ const updateLettersProgress = () => {
   const completedCount = appLetters.filter((letter) => listenedLetters.has(letter.id)).length;
   const percent = Math.round((completedCount / appLetters.length) * 100);
 
-  progressText.textContent = `Je hebt ${completedCount} van ${appLetters.length} letters beluisterd.`;
+  progressText.textContent = `Je hebt nog ${completedCount} van de ${appLetters.length} letters beluisterd.`;
   progressFill.style.width = `${percent}%`;
 
   document.querySelectorAll("[data-letter-id]").forEach((card) => {
@@ -323,13 +332,83 @@ const markLetterListened = (letterId) => {
   saveListenedLetters(listenedLetters);
   updateLettersProgress();
 };
+const practicedVowelsStorageKey = "arabicKidsPracticedVowels";
+const getActiveVowelTypes = () => {
+  const group = activeVowelGroup && vowelPracticeGroups[activeVowelGroup] ? activeVowelGroup : "all";
+  return appVowelTypes.filter((vowel) => vowelPracticeGroups[group].includes(vowel.id));
+};
+const getPracticedVowels = () => {
+  try {
+    const value = JSON.parse(localStorage.getItem(practicedVowelsStorageKey) || "[]");
+    return new Set(Array.isArray(value) ? value : []);
+  } catch {
+    return new Set();
+  }
+};
+const savePracticedVowels = (practicedVowels) => {
+  try {
+    localStorage.setItem(practicedVowelsStorageKey, JSON.stringify([...practicedVowels]));
+  } catch {
+    // Vowel progress is optional; audio practice should continue without storage.
+  }
+};
+const getVowelPracticeItems = () => {
+  const activeTypes = new Set(getActiveVowelTypes().map((vowel) => vowel.id));
 
-const renderAudioButton = ({ src, label = "Luister", ariaLabel, className = "sound-button", content }) => `
+  return appLetters.flatMap((letter) =>
+    Object.entries(letter.vowelAudio || {})
+      .filter(([type]) => activeTypes.has(type))
+      .map(([type]) => ({
+        key: `${letter.id}:${type}`,
+        letterId: letter.id,
+        type,
+      })),
+  );
+};
+const updateVowelsProgress = () => {
+  const progressText = document.querySelector("#vowels-progress-text");
+  const progressFill = document.querySelector("#vowels-progress-fill");
+
+  if (!progressText || !progressFill || !appLetters.length) {
+    return;
+  }
+
+  const practicedVowels = getPracticedVowels();
+  const items = getVowelPracticeItems();
+  const completedCount = items.filter((item) => practicedVowels.has(item.key)).length;
+  const percent = items.length ? Math.round((completedCount / items.length) * 100) : 0;
+
+  progressText.textContent = `Je hebt ${completedCount} van ${items.length} klanken geoefend.`;
+  progressFill.style.width = `${percent}%`;
+
+  document.querySelectorAll("[data-vowel-key]").forEach((button) => {
+    button.classList.toggle("is-complete", practicedVowels.has(button.dataset.vowelKey));
+  });
+
+  document.querySelectorAll("[data-vowel-letter-card]").forEach((card) => {
+    const buttons = [...card.querySelectorAll("[data-vowel-key]")];
+    const isComplete = buttons.length > 0 && buttons.every((button) => practicedVowels.has(button.dataset.vowelKey));
+    card.classList.toggle("is-complete", isComplete);
+  });
+};
+const markVowelPracticed = (vowelKey) => {
+  if (!vowelKey) {
+    return;
+  }
+
+  const practicedVowels = getPracticedVowels();
+  practicedVowels.add(vowelKey);
+  savePracticedVowels(practicedVowels);
+  updateVowelsProgress();
+};
+
+const renderAudioButton = ({ src, label = "Luister", ariaLabel, className = "sound-button", content, attributes = "" }) => `
   <button
     class="${className}"
     type="button"
     data-audio-src="${src || ""}"
     aria-label="${escapeAttribute(ariaLabel || label)}"
+    ${attributes}
   >
     ${content}
     <span class="sound-status" data-audio-status>${label}</span>
@@ -358,6 +437,17 @@ document.addEventListener("click", (event) => {
     void letterCard.offsetWidth;
     letterCard.classList.add("is-tapped");
     markLetterListened(letterCard.dataset.letterId);
+  }
+
+  const vowelKey = button.dataset.vowelKey;
+
+  if (vowelKey) {
+    const soundCard = button.closest(".sound-button");
+    soundCard?.classList.remove("is-tapped");
+    void soundCard?.offsetWidth;
+    soundCard?.classList.add("is-tapped", "is-active-sound");
+    window.setTimeout(() => soundCard?.classList.remove("is-active-sound"), 900);
+    markVowelPracticed(vowelKey);
   }
 });
 
@@ -518,9 +608,10 @@ if (letterSoundsIndex && appLetters.length) {
       const detailHref = `vowel-letter.html?letter=${encodeURIComponent(letter.id)}${
         activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""
       }&level=${encodeURIComponent(activeProgressLevelId)}&page=${encodeURIComponent(activeVowelPage)}`;
+      const formsHref = `letter-forms.html?letter=${encodeURIComponent(letter.id)}`;
 
       return `
-        <article class="lesson-card sound-letter-card">
+        <article class="lesson-card sound-letter-card" data-vowel-letter-card="${escapeAttribute(letter.id)}">
           <div class="sound-letter-heading">
             <a class="letter-index-symbol" lang="ar" dir="rtl" href="${detailHref}">
               ${letter.arabic}
@@ -539,7 +630,11 @@ if (letterSoundsIndex && appLetters.length) {
                 return renderAudioButton({
                   src: sound.src,
                   ariaLabel: `Luister naar ${getLetterName(letter)} met ${vowelType.nameNl}`,
+                  attributes: `data-vowel-key="${escapeAttribute(`${letter.id}:${sound.type}`)}"`,
                   content: `
+                    <span class="sound-complete-badge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false"><path d="M5 12.5l4.2 4L19 7" /></svg>
+                    </span>
                     <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
                     <span class="sound-name">${vowelType.nameNl}</span>
                     <span class="sound-copy">${sound.soundNl}</span>
@@ -548,12 +643,18 @@ if (letterSoundsIndex && appLetters.length) {
               })
               .join("")}
           </div>
+          <a class="sound-button forms-link-button" href="${formsHref}" aria-label="Bekijk vormen van ${getLetterName(letter)}">
+            <span class="forms-link-icon" aria-hidden="true">Aa</span>
+            <span class="sound-name">Bekijk vormen</span>
+            <span class="sound-copy">Los, begin, midden en eind</span>
+          </a>
         </article>
       `;
     })
     .join("");
 
   letterSoundsIndex.innerHTML = letterLinks;
+  updateVowelsProgress();
 
   if (vowelPageNav) {
     const previousPage = Math.max(1, activeVowelPage - 1);
@@ -774,7 +875,7 @@ if (soundsGrid && appLetters.length) {
       const sounds = getVowelSounds(letter, activeVowelGroup);
 
       return `
-        <article class="lesson-card sound-letter-card">
+        <article class="lesson-card sound-letter-card" data-vowel-letter-card="${escapeAttribute(letter.id)}">
           <div class="sound-letter-heading">
             <p class="sound-letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
             <div class="sound-letter-copy">
@@ -792,7 +893,11 @@ if (soundsGrid && appLetters.length) {
                   return renderAudioButton({
                     src: sound.src,
                     ariaLabel: `Luister naar ${getLetterName(letter)} met ${vowelType.nameNl}`,
+                    attributes: `data-vowel-key="${escapeAttribute(`${letter.id}:${sound.type}`)}"`,
                     content: `
+                      <span class="sound-complete-badge" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M5 12.5l4.2 4L19 7" /></svg>
+                      </span>
                       <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
                       <span class="sound-name">${vowelType.nameNl}</span>
                       <span class="sound-copy">${sound.soundNl}</span>
@@ -808,6 +913,277 @@ if (soundsGrid && appLetters.length) {
     .join("");
 
   soundsGrid.innerHTML = soundGroups;
+  updateVowelsProgress();
+}
+
+const letterFormsPage = document.querySelector("#letter-forms-page");
+
+if (letterFormsPage && appLetterForms.length) {
+  const formsContent = document.querySelector("#letter-forms-content");
+  const formsPicker = document.querySelector("#forms-letter-picker");
+  const formsProgressText = document.querySelector("#forms-progress-text");
+  const formsProgressFill = document.querySelector("#forms-progress-fill");
+  const formsTitle = document.querySelector("#letter-forms-title");
+  const formsDescription = document.querySelector("#letter-forms-description");
+  const formLabels = [
+    {
+      key: "isolated",
+      label: "Los",
+      className: "is-isolated",
+      description: "Zo ziet de letter eruit als hij alleen staat.",
+    },
+    {
+      key: "beginning",
+      label: "Begin",
+      className: "is-beginning",
+      description: "Zo ziet de letter eruit aan het begin van een woord.",
+    },
+    {
+      key: "middle",
+      label: "Midden",
+      className: "is-middle",
+      description: "Zo ziet de letter eruit tussen twee letters.",
+    },
+    {
+      key: "end",
+      label: "Eind",
+      className: "is-end",
+      description: "Zo ziet de letter eruit aan het einde van een woord.",
+    },
+  ];
+  const exerciseChoices = formLabels.filter((form) => form.key !== "isolated");
+  const requestedLetterId = pageParams.get("letter");
+  const selectedFormsLetter =
+    appLetterFormsById[requestedLetterId] || appLetterForms.find((letter) => letter.id === requestedLetterId) || appLetterForms[0];
+  const selectedFormsLetterId = selectedFormsLetter.id;
+
+  const getFormSeenKey = (letterId) => `aka_forms_seen_${letterId}`;
+  const getFormPracticedKey = (letterId) => `aka_forms_practiced_${letterId}`;
+  const setLocalFlag = (key) => {
+    try {
+      localStorage.setItem(key, "true");
+    } catch {
+      // Letter form progress should never block the lesson if storage is unavailable.
+    }
+  };
+  const getLocalFlag = (key) => {
+    try {
+      return localStorage.getItem(key) === "true";
+    } catch {
+      return false;
+    }
+  };
+  const getFormsProgressCount = () =>
+    appLetterForms.filter((letter) => getLocalFlag(getFormPracticedKey(letter.id))).length;
+  const updateFormsProgress = () => {
+    if (!formsProgressText || !formsProgressFill) {
+      return;
+    }
+
+    const completedCount = getFormsProgressCount();
+    const percent = Math.round((completedCount / appLetterForms.length) * 100);
+
+    formsProgressText.textContent = `Je hebt ${completedCount} van ${appLetterForms.length} lettervormen geoefend.`;
+    formsProgressFill.style.width = `${percent}%`;
+
+    document.querySelectorAll("[data-form-letter-link]").forEach((link) => {
+      const letterId = link.getAttribute("data-form-letter-link");
+      link.classList.toggle("is-seen", getLocalFlag(getFormSeenKey(letterId)));
+      link.classList.toggle("is-practiced", getLocalFlag(getFormPracticedKey(letterId)));
+    });
+  };
+  const getExerciseTarget = (letter) => exerciseChoices[letter.order % exerciseChoices.length];
+  const getExercisePositionText = (formKey) => ({
+    beginning: "aan het begin",
+    middle: "in het midden",
+    end: "aan het einde",
+  })[formKey] || "op de juiste plek";
+  const renderExample = (letter) => {
+    if (!letter.exampleWord || !Array.isArray(letter.exampleParts)) {
+      return `
+        <article class="forms-example-card">
+          <p class="eyebrow">Voorbeeld</p>
+          <h2>Voorbeeldwoord volgt</h2>
+          <p class="letter-meta">TODO: add child-friendly word example</p>
+        </article>
+      `;
+    }
+
+    return `
+      <article class="forms-example-card">
+        <p class="eyebrow">Voorbeeldwoord</p>
+        <h2>Bekijk de letter in een woord</h2>
+        <p class="forms-example-equation" lang="ar" dir="rtl">
+          ${letter.exampleParts.join(" + ")} = <strong>${letter.exampleWord}</strong>
+        </p>
+      </article>
+    `;
+  };
+  const renderLetterForms = (letter) => {
+    const exerciseTarget = getExerciseTarget(letter);
+    const nonJoiningNote = letter.connectsAfter
+      ? ""
+      : `<p class="forms-hand-note">Deze letter geeft geen handje aan de volgende letter. Daarom verandert hij minder.</p>`;
+    const formCards = formLabels
+      .map(
+        (form) => `
+          <article class="form-card ${form.className}" data-form-key="${form.key}">
+            <span class="form-card-label">${form.label}</span>
+            <p class="form-card-symbol" lang="ar" dir="rtl">${letter[form.key]}</p>
+            <p>${form.description}</p>
+          </article>
+        `,
+      )
+      .join("");
+
+    return `
+      <section class="forms-workspace" aria-labelledby="active-letter-title">
+        <article class="forms-hero-card">
+          <div>
+            <p class="eyebrow">Letter ${letter.order} van ${appLetterForms.length}</p>
+            <h2 id="active-letter-title">${letter.name}: zo verandert de letter</h2>
+            <p class="letter-meta">Van los naar begin, midden en eind. Kijk vooral naar de kleine handjes aan de zijkant.</p>
+            ${nonJoiningNote}
+          </div>
+          <p class="forms-hero-symbol" lang="ar" dir="rtl">${letter.isolated}</p>
+        </article>
+
+        <div class="forms-grid">
+          ${formCards}
+        </div>
+
+        <article class="forms-magic-card">
+          <div>
+            <p class="eyebrow">Magic transformation</p>
+            <h2>Laat de letter veranderen</h2>
+          </div>
+          <div class="forms-transform-strip" aria-live="polite">
+            ${formLabels
+              .map(
+                (form, index) => `
+                  <span class="forms-transform-symbol${index === 0 ? " is-active" : ""}" data-transform-step="${index}" lang="ar" dir="rtl">
+                    ${letter[form.key]}
+                  </span>
+                  ${index < formLabels.length - 1 ? '<span class="forms-transform-arrow" aria-hidden="true">-&gt;</span>' : ""}
+                `,
+              )
+              .join("")}
+          </div>
+          <button class="primary-button forms-magic-button" type="button" data-forms-magic>
+            Laat de letter veranderen
+          </button>
+        </article>
+
+        ${renderExample(letter)}
+
+        <article class="forms-exercise-card" data-forms-exercise data-correct-form="${exerciseTarget.key}">
+          <p class="eyebrow">Mini-oefening</p>
+          <h2>Waar staat deze letter?</h2>
+          <p class="forms-exercise-symbol" lang="ar" dir="rtl">${letter[exerciseTarget.key]}</p>
+          <div class="forms-exercise-answers" role="group" aria-label="Kies de positie van de letter">
+            ${exerciseChoices
+              .map(
+                (choice) => `
+                  <button class="secondary-button forms-answer-button" type="button" data-form-answer="${choice.key}">
+                    ${choice.label}
+                  </button>
+                `,
+              )
+              .join("")}
+          </div>
+          <p class="forms-exercise-feedback" role="status"></p>
+        </article>
+      </section>
+    `;
+  };
+
+  setLocalFlag(getFormSeenKey(selectedFormsLetterId));
+
+  if (formsTitle) {
+    formsTitle.textContent = `Zo verandert ${selectedFormsLetter.name}`;
+  }
+
+  if (formsDescription) {
+    formsDescription.textContent = `${selectedFormsLetter.name} kan los staan, aan het begin komen, in het midden staan of aan het einde komen.`;
+  }
+
+  if (formsPicker) {
+    formsPicker.innerHTML = appLetterForms
+      .map(
+        (letter) => `
+          <a
+            class="forms-letter-link${letter.id === selectedFormsLetterId ? " is-current" : ""}"
+            href="letter-forms.html?letter=${encodeURIComponent(letter.id)}"
+            data-form-letter-link="${escapeAttribute(letter.id)}"
+            aria-label="Bekijk vormen van ${letter.name}"
+            ${letter.id === selectedFormsLetterId ? 'aria-current="page"' : ""}
+          >
+            <span lang="ar" dir="rtl">${letter.isolated}</span>
+            <small>${letter.name}</small>
+          </a>
+        `,
+      )
+      .join("");
+  }
+
+  if (formsContent) {
+    formsContent.innerHTML = renderLetterForms(selectedFormsLetter);
+  }
+
+  updateFormsProgress();
+
+  letterFormsPage.addEventListener("click", (event) => {
+    const magicButton = event.target.closest("[data-forms-magic]");
+
+    if (magicButton) {
+      const workspace = magicButton.closest(".forms-workspace");
+      const cards = [...workspace.querySelectorAll("[data-form-key]")];
+      const symbols = [...workspace.querySelectorAll("[data-transform-step]")];
+
+      magicButton.disabled = true;
+      cards.forEach((card) => card.classList.remove("is-active"));
+      symbols.forEach((symbol) => symbol.classList.remove("is-active"));
+
+      formLabels.forEach((form, index) => {
+        window.setTimeout(() => {
+          cards.forEach((card) => card.classList.toggle("is-active", card.dataset.formKey === form.key));
+          symbols.forEach((symbol) => symbol.classList.toggle("is-active", symbol.dataset.transformStep === String(index)));
+
+          if (index === formLabels.length - 1) {
+            magicButton.disabled = false;
+          }
+        }, index * 520);
+      });
+    }
+
+    const answerButton = event.target.closest("[data-form-answer]");
+
+    if (answerButton) {
+      const exercise = answerButton.closest("[data-forms-exercise]");
+      const feedback = exercise.querySelector(".forms-exercise-feedback");
+      const isCorrect = answerButton.dataset.formAnswer === exercise.dataset.correctForm;
+      const correctChoice = exerciseChoices.find((choice) => choice.key === exercise.dataset.correctForm);
+
+      exercise.querySelectorAll("[data-form-answer]").forEach((button) => {
+        button.classList.toggle("is-correct", button.dataset.formAnswer === exercise.dataset.correctForm);
+        button.classList.toggle("is-wrong", button === answerButton && !isCorrect);
+      });
+
+      if (isCorrect) {
+        setLocalFlag(getFormPracticedKey(selectedFormsLetterId));
+        feedback.textContent = `Goed gedaan! Deze letter staat ${getExercisePositionText(correctChoice.key)}.`;
+        exercise.classList.add("is-complete");
+        dispatchAppEvent("aka:success", {
+          type: "letter-forms",
+          message: "Lettervorm geoefend",
+          target: exercise,
+        });
+        updateFormsProgress();
+      } else {
+        feedback.textContent = "Bijna! Kijk goed naar de handjes aan de zijkant.";
+      }
+    }
+  });
 }
 
 const quizCard = document.querySelector("#quiz-card");
@@ -830,6 +1206,17 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
     ["medium", "Normaal"],
     ["hard", "Moeilijk"],
   ];
+  let quizStreak = 0;
+  let correctAnswers = 0;
+  let wrongAnswers = 0;
+  const quizMistakeCounts = new Map();
+
+  const resetQuizSessionStats = () => {
+    quizStreak = 0;
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    quizMistakeCounts.clear();
+  };
 
   const renderQuizProgress = () => {
     const state = quiz.state;
@@ -840,6 +1227,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         <div class="quiz-progress-copy">
           <span>Vraag ${state.questionCount}</span>
           <strong>${state.score} / ${state.finishScore} punten</strong>
+          <em class="quiz-streak" aria-live="polite">${quizStreak ? `${quizStreak} goed op rij` : "Start je reeks"}</em>
         </div>
         <div class="progress-bar quiz-progress-track" aria-hidden="true">
           <span style="width: ${percent}%"></span>
@@ -900,12 +1288,19 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       ${renderQuizControls()}
       <div class="quiz-result">
         <p class="eyebrow">Klaar</p>
-        <h2>Je hebt ${state.finishScore} punten gehaald</h2>
+        <h2>Je hebt ${state.score} punten gehaald</h2>
         <div class="progress-bar quiz-progress-track" aria-label="Eindscore 100%">
           <span style="width: 100%"></span>
         </div>
-        <p class="letter-meta">Goed geoefend. Je kunt de quiz nog een keer doen.</p>
-        <button class="primary-button" type="button" id="restart-quiz">Opnieuw starten</button>
+        <div class="quiz-result-stats" aria-label="Quiz resultaat">
+          <span><strong>${correctAnswers}</strong> goed</span>
+          <span><strong>${wrongAnswers}</strong> nog oefenen</span>
+        </div>
+        <p class="letter-meta">Mooi geoefend. Elke ronde maakt letters en klanken vertrouwder.</p>
+        <div class="quiz-result-actions">
+          <button class="primary-button" type="button" id="restart-quiz">Opnieuw spelen</button>
+          <a class="secondary-button" href="roadmap.html">Terug naar leerroute</a>
+        </div>
       </div>
     `;
   };
@@ -935,24 +1330,36 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         src: question.answer.audioSrc,
         ariaLabel: "Luister naar de quizvraag",
         className: "sound-button quiz-audio-button",
-        content: '<span class="sound-name">Luister naar de vraag</span>',
+        content: `
+          <span class="quiz-audio-label">
+            <span class="letter-button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" />
+                <path d="M16 9.5c.8.7 1.3 1.5 1.3 2.5s-.5 1.8-1.3 2.5" />
+                <path d="M18.5 7c1.4 1.3 2.2 3 2.2 5s-.8 3.7-2.2 5" />
+              </svg>
+            </span>
+            <span class="sound-name">Luister naar de vraag</span>
+          </span>
+        `,
       })}
 
       <div class="sound-buttons quiz-choices" dir="rtl">
         ${question.choices
           .map(
             (choice) => `
-              <button class="sound-button quiz-choice" type="button" data-quiz-answer="${choice.id}">
+              <button class="sound-button quiz-choice" type="button" data-quiz-answer="${choice.id}" aria-label="${escapeAttribute(`Kies ${choice.title}: ${choice.subtitle}`)}">
                 <span class="sound-example" lang="ar" dir="rtl">${choice.arabic}</span>
                 <span class="sound-name">${choice.title}</span>
                 <span class="sound-copy">${choice.subtitle}</span>
+                <span class="quiz-choice-mark" aria-hidden="true"></span>
               </button>
             `,
           )
           .join("")}
       </div>
 
-      <p class="letter-meta" id="quiz-feedback" role="status"></p>
+      <p class="quiz-feedback" id="quiz-feedback" role="status"></p>
       <button class="primary-button is-disabled" type="button" id="next-quiz-question" disabled>Volgende vraag</button>
     `;
   };
@@ -971,6 +1378,9 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       const choices = quizCard.querySelectorAll("[data-quiz-answer]");
 
       if (result.isCorrect) {
+        quizStreak += 1;
+        correctAnswers += 1;
+
         choices.forEach((choice) => {
           choice.disabled = true;
           choice.classList.toggle("is-playing", choice.dataset.quizAnswer === result.answer.id);
@@ -978,11 +1388,21 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
           choice.classList.remove("is-missing", "is-wrong");
         });
 
-        setText("#quiz-feedback", "+1 punt. Goed gedaan!");
+        setText("#quiz-feedback", `Goed gedaan! ${quizStreak} goed op rij.`);
       } else {
-        answerButton.disabled = true;
+        quizStreak = 0;
+        wrongAnswers += 1;
+        quizMistakeCounts.set(result.answer.letterId, (quizMistakeCounts.get(result.answer.letterId) || 0) + 1);
+        // TODO: Use quizMistakeCounts later to repeat letters or klanken that need extra practice.
+
+        choices.forEach((choice) => {
+          choice.disabled = true;
+          choice.classList.toggle("is-correct", choice.dataset.quizAnswer === result.answer.id);
+          choice.classList.toggle("is-wrong", choice === answerButton);
+          choice.classList.remove("is-playing");
+        });
         answerButton.classList.add("is-wrong", "is-missing");
-        setText("#quiz-feedback", "Nog niet goed. Luister nog een keer en probeer opnieuw.");
+        setText("#quiz-feedback", "Bijna. Het juiste antwoord is gemarkeerd, probeer de volgende.");
       }
 
       dispatchAppEvent("aka:quiz-answer", {
@@ -991,9 +1411,10 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         answerId: result.answer.id,
       });
 
-      if (nextButton && result.isCorrect) {
+      if (nextButton) {
         nextButton.disabled = false;
         nextButton.classList.remove("is-disabled");
+        nextButton.classList.add("is-ready");
         nextButton.textContent = result.isFinished ? "Bekijk resultaat" : "Volgende vraag";
       }
     }
@@ -1004,6 +1425,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
     if (event.target.closest("#restart-quiz")) {
       quiz.reset();
+      resetQuizSessionStats();
       renderQuestion();
     }
   });
@@ -1011,11 +1433,13 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
   quizCard.addEventListener("change", (event) => {
     if (event.target.matches("#quiz-mode")) {
       quiz.setMode(event.target.value);
+      resetQuizSessionStats();
       renderQuestion();
     }
 
     if (event.target.matches("#quiz-difficulty")) {
       quiz.setDifficulty(event.target.value);
+      resetQuizSessionStats();
       renderQuestion();
     }
   });

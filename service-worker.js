@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v49";
+const CACHE_VERSION = "arabicokids-v52";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -9,6 +9,7 @@ const CORE_CACHE = [
   "data/letters.js",
   "data/progress.js",
   "data/vowels.js",
+  "js/arabic-letters-data.js",
   "js/app.js",
   "js/file-operations.js",
   "js/audio-player.js",
@@ -17,6 +18,7 @@ const CORE_CACHE = [
   "js/quiz-engine.js",
   "pages/about.html",
   "pages/letters.html",
+  "pages/letter-forms.html",
   "pages/boeken.html",
   "pages/contact.html",
   "pages/niveaus.html",

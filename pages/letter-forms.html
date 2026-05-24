@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Letters | ArabicoKids</title>
+    <title>Lettervormen | ArabicoKids</title>
     <meta
       name="description"
-      content="Bekijk de Arabische letters, oefen herkenning en luister naar de uitspraak per letter."
+      content="Ontdek hoe Arabische letters veranderen aan het begin, midden en einde van een woord."
     >
-    <link rel="canonical" href="https://arabicokids.com/pages/letters.html">
+    <link rel="canonical" href="https://arabicokids.com/pages/letter-forms.html">
     <meta property="og:site_name" content="ArabicoKids">
-    <meta property="og:title" content="Letters | ArabicoKids">
-    <meta property="og:description" content="Bekijk de Arabische letters, oefen herkenning en luister naar de uitspraak per letter.">
-    <meta property="og:url" content="https://arabicokids.com/pages/letters.html">
+    <meta property="og:title" content="Lettervormen | ArabicoKids">
+    <meta property="og:description" content="Speels oefenen met losse, begin-, midden- en eindvormen van Arabische letters.">
+    <meta property="og:url" content="https://arabicokids.com/pages/letter-forms.html">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#6b3bf5">
     <meta name="application-name" content="ArabicoKids">
@@ -30,13 +30,15 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=45">
+    <link rel="stylesheet" href="../css/main.css?v=48">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../data/letters.js?v=12" defer></script>
+    <script src="../data/vowels.js" defer></script>
+    <script src="../js/arabic-letters-data.js?v=1" defer></script>
     <script src="../js/audio-player.js?v=23" defer></script>
     <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=20" defer></script>
-    <script src="../js/app.js?v=46" defer></script>
+    <script src="../js/app.js?v=49" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -71,41 +73,34 @@
     <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
 
     <main class="page-shell" id="main-content">
-      <a class="secondary-button back-link" href="roadmap.html">Terug naar leerroute</a>
+      <a class="secondary-button back-link" href="vowels.html">Terug naar klinkers</a>
 
-      <section aria-labelledby="letters-title">
-        <p class="eyebrow">Beginner</p>
-        <h1 id="letters-title">Arabische letters</h1>
-        <p class="hero-text">
-          Bekijk elke letter en druk op luisteren om de uitspraak te horen.
+      <section class="letter-forms-page" id="letter-forms-page" aria-labelledby="letter-forms-title">
+        <p class="eyebrow">Lettervormen</p>
+        <h1 id="letter-forms-title">Zo verandert de letter</h1>
+        <p class="hero-text" id="letter-forms-description">
+          Een Arabische letter kan er anders uitzien als hij los staat, begint, in het midden staat of eindigt.
         </p>
 
-        <section class="letters-progress-card" aria-labelledby="letters-progress-title">
+        <section class="letters-progress-card forms-progress-card" aria-labelledby="forms-progress-title">
           <div>
             <p class="eyebrow">Jouw voortgang</p>
-            <h2 id="letters-progress-title">Luister naar alle letters</h2>
-            <p>Luister naar alle letters en ontdek stap voor stap het Arabische alfabet.</p>
-            <p id="letters-progress-text">Je hebt nog 0 van de 28 letters beluisterd.</p>
+            <h2 id="forms-progress-title">Oefen lettervormen</h2>
+            <p id="forms-progress-text">Je hebt 0 van 28 lettervormen geoefend.</p>
           </div>
           <div class="letters-progress-meter" aria-hidden="true">
-            <span id="letters-progress-fill"></span>
-          </div>
-          <div class="letters-writing-copy">
-            <h2>Oefen schrijven</h2>
-            <p>Oefening baart kunst! Download de PDF-werkbladen van de letters en leer stap voor stap Arabisch schrijven.</p>
+            <span id="forms-progress-fill"></span>
           </div>
         </section>
 
-        <div class="letters-grid" id="letters-grid" aria-live="polite"></div>
+        <section class="forms-picker-section" aria-labelledby="forms-picker-title">
+          <p class="eyebrow">Kies een letter</p>
+          <h2 id="forms-picker-title">Alle letters</h2>
+          <div class="forms-letter-picker" id="forms-letter-picker" dir="rtl"></div>
+        </section>
+
+        <div id="letter-forms-content" aria-live="polite"></div>
       </section>
-
-      <span id="letters-page-bottom" aria-hidden="true"></span>
-
-      <a class="letters-scroll-button" href="#letters-page-bottom" data-letters-scroll aria-label="Scroll naar beneden">
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28">
-          <path d="M12 5v14M6 13l6 6 6-6" />
-        </svg>
-      </a>
     </main>
     <footer class="aka-footer">
       <div class="footer-container">
@@ -120,6 +115,7 @@
           <ul>
             <li><a href="../index.html">Home</a></li>
             <li><a href="roadmap.html">Lessen</a></li>
+            <li><a href="vowels.html">Klinkers</a></li>
             <li><a href="werkbladen.html">Werkbladen</a></li>
             <li><a href="about.html">Over ons</a></li>
             <li><a href="contact.html">Contact</a></li>
