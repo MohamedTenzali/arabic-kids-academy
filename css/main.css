@@ -814,7 +814,9 @@ main {
   transform: translateX(5px);
 }
 
-.footer-contact a {
+.aka-footer .footer-contact a,
+.aka-footer .footer-contact a:link,
+.aka-footer .footer-contact a:visited {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
@@ -828,9 +830,11 @@ main {
   text-decoration: none;
 }
 
-.footer-contact a:hover,
-.footer-contact a:focus-visible {
+.aka-footer .footer-contact a:hover,
+.aka-footer .footer-contact a:focus-visible {
   background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .footer-premium-note {
