@@ -2690,7 +2690,8 @@ h2 {
   transform: translateY(3px);
 }
 
-#letters-page-bottom {
+#letters-page-bottom,
+#letter-forms-page-bottom {
   display: block;
   height: 1px;
 }

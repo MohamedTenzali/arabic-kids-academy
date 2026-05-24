@@ -537,13 +537,14 @@ if (lettersGrid && appLetters.length) {
 
 const lettersScrollButton = document.querySelector("[data-letters-scroll]");
 
-if (lettersScrollButton && lettersGrid) {
+if (lettersScrollButton) {
+  const scrollTargetId = lettersScrollButton.dataset.scrollTarget || "letters-page-bottom";
   const updateLettersScrollButton = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const canScrollDown = scrollTop < 160;
 
     lettersScrollButton.classList.toggle("is-up", !canScrollDown);
-    lettersScrollButton.href = canScrollDown ? "#letters-page-bottom" : "#main-content";
+    lettersScrollButton.href = canScrollDown ? `#${scrollTargetId}` : "#main-content";
     lettersScrollButton.setAttribute(
       "aria-label",
       canScrollDown ? "Scroll naar beneden" : "Scroll naar boven",
