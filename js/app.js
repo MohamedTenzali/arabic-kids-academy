@@ -287,6 +287,37 @@ const letterWorksheetPaths = {
   "zaa-heavy": "../pdf/pdf-letters/Zaa%20zwaar.pdf.pdf",
 };
 const getLetterWorksheetPath = (letter) => letter.worksheetSrc || letterWorksheetPaths[letter.id] || "";
+const letterFormWorksheetPaths = {
+  ain: "../pdf/lettervormen/ain.pdf",
+  alif: "../pdf/lettervormen/alif.pdf",
+  baa: "../pdf/lettervormen/baa.pdf",
+  daad: "../pdf/lettervormen/daad.pdf",
+  dal: "../pdf/lettervormen/daal.pdf",
+  dhal: "../pdf/lettervormen/dhaal.pdf",
+  faa: "../pdf/lettervormen/faa.pdf",
+  ghain: "../pdf/lettervormen/ghain.pdf",
+  ha: "../pdf/lettervormen/ha.pdf",
+  haa: "../pdf/lettervormen/haa.pdf",
+  jeem: "../pdf/lettervormen/jeem.pdf",
+  kaaf: "../pdf/lettervormen/kaaf.pdf",
+  khaa: "../pdf/lettervormen/khaa.pdf",
+  laam: "../pdf/lettervormen/laam.pdf",
+  meem: "../pdf/lettervormen/meem.pdf",
+  noon: "../pdf/lettervormen/noon.pdf",
+  qaaf: "../pdf/lettervormen/qaaf.pdf",
+  raa: "../pdf/lettervormen/raa.pdf",
+  saad: "../pdf/lettervormen/saad.pdf",
+  seen: "../pdf/lettervormen/seen.pdf",
+  sheen: "../pdf/lettervormen/sheen.pdf",
+  taa: "../pdf/lettervormen/taa.pdf",
+  thaa: "../pdf/lettervormen/thaa.pdf",
+  "taa-heavy": "../pdf/lettervormen/taa%20zwaar.pdf",
+  waw: "../pdf/lettervormen/waaw.pdf",
+  yaa: "../pdf/lettervormen/yaa.pdf",
+  zay: "../pdf/lettervormen/zay.pdf",
+  "zaa-heavy": "../pdf/lettervormen/zaa%20zwaar.pdf",
+};
+const getLetterFormWorksheetPath = (letter) => letter.formWorksheetSrc || letterFormWorksheetPaths[letter.id] || "";
 const listenedLettersStorageKey = "arabicKidsListenedLetters";
 const getListenedLetters = () => {
   try {
@@ -610,6 +641,7 @@ if (letterSoundsIndex && appLetters.length) {
         activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""
       }&level=${encodeURIComponent(activeProgressLevelId)}&page=${encodeURIComponent(activeVowelPage)}`;
       const formsHref = `letter-forms.html?letter=${encodeURIComponent(letter.id)}`;
+      const formWorksheetPath = getLetterFormWorksheetPath(letter);
 
       return `
         <article class="lesson-card sound-letter-card" data-vowel-letter-card="${escapeAttribute(letter.id)}">
@@ -649,6 +681,21 @@ if (letterSoundsIndex && appLetters.length) {
             <span class="sound-name">Bekijk vormen</span>
             <span class="sound-copy">Los, begin, midden en eind</span>
           </a>
+          ${
+            formWorksheetPath
+              ? `<a class="sound-button forms-link-button form-download-button" href="${formWorksheetPath}" download aria-label="Download schrijf-PDF voor ${getLetterName(letter)}">
+                  <span class="forms-link-icon form-download-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M12 5v11" />
+                      <path d="M8 12l4 4 4-4" />
+                      <path d="M5 20h14" />
+                    </svg>
+                  </span>
+                  <span class="sound-name">Download schrijfblad</span>
+                  <span class="sound-copy">Los, begin en eind oefenen</span>
+                </a>`
+              : ""
+          }
         </article>
       `;
     })
@@ -1022,6 +1069,7 @@ if (letterFormsPage && appLetterForms.length) {
   };
   const renderLetterForms = (letter) => {
     const exerciseTarget = getExerciseTarget(letter);
+    const formWorksheetPath = getLetterFormWorksheetPath(letter);
     const nonJoiningNote = letter.connectsAfter
       ? ""
       : `<p class="forms-hand-note">Deze letter geeft geen handje aan de volgende letter. Daarom verandert hij minder.</p>`;
@@ -1041,7 +1089,26 @@ if (letterFormsPage && appLetterForms.length) {
       <section class="forms-workspace" aria-labelledby="active-letter-title">
         <article class="forms-hero-card">
           <div>
-            <p class="eyebrow">Letter ${letter.order} van ${appLetterForms.length}</p>
+            <div class="forms-hero-topline">
+              <p class="eyebrow">Letter ${letter.order} van ${appLetterForms.length}</p>
+              ${
+                formWorksheetPath
+                  ? `<a class="forms-download-button" href="${formWorksheetPath}" download aria-label="Download schrijfblad voor ${letter.name}">
+                      <span class="forms-download-button-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                          <path d="M12 5v11" />
+                          <path d="M8 12l4 4 4-4" />
+                          <path d="M5 20h14" />
+                        </svg>
+                      </span>
+                      <span>
+                        <strong>Download schrijfblad</strong>
+                        <small>Print en oefen mee</small>
+                      </span>
+                    </a>`
+                  : ""
+              }
+            </div>
             <h2 id="active-letter-title">${letter.name}: zo verandert de letter</h2>
             <p class="letter-meta">Van los naar begin, midden en eind. Kijk vooral naar de kleine handjes aan de zijkant.</p>
             ${nonJoiningNote}

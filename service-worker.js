@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v55";
+const CACHE_VERSION = "arabicokids-v62";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -13,6 +13,7 @@ const CORE_CACHE = [
   "js/app.js",
   "js/file-operations.js",
   "js/audio-player.js",
+  "js/book-payments.js",
   "js/motion.js",
   "js/pwa-update.js",
   "js/quiz-engine.js",
@@ -32,7 +33,8 @@ const CORE_CACHE = [
   "images/icons/apple-touch-icon.png",
   "images/icons/icon-192.png",
   "images/icons/icon-512.png",
-  "images/books/mijn-arabische-letters-boekje.png.png",
+  "images/books/mijn-arabische-letters-boekje-niveau-1.png.png",
+  "images/books/mijn-arabische-letters-boekje-niveau-2.png.png",
   "images/worksheets/worksheet-letters.svg",
   "images/worksheets/worksheet-sounds.svg",
   "images/worksheets/worksheet-words.svg",
@@ -68,6 +70,34 @@ const CORE_CACHE = [
   "docs/letter-worksheets/yaa.pdf",
   "pdf/pdf-letters/Zay.pdf.pdf",
   "pdf/pdf-letters/Zaa%20zwaar.pdf.pdf",
+  "pdf/lettervormen/ain.pdf",
+  "pdf/lettervormen/alif.pdf",
+  "pdf/lettervormen/baa.pdf",
+  "pdf/lettervormen/daad.pdf",
+  "pdf/lettervormen/daal.pdf",
+  "pdf/lettervormen/dhaal.pdf",
+  "pdf/lettervormen/faa.pdf",
+  "pdf/lettervormen/ghain.pdf",
+  "pdf/lettervormen/ha.pdf",
+  "pdf/lettervormen/haa.pdf",
+  "pdf/lettervormen/jeem.pdf",
+  "pdf/lettervormen/kaaf.pdf",
+  "pdf/lettervormen/khaa.pdf",
+  "pdf/lettervormen/laam.pdf",
+  "pdf/lettervormen/meem.pdf",
+  "pdf/lettervormen/noon.pdf",
+  "pdf/lettervormen/qaaf.pdf",
+  "pdf/lettervormen/raa.pdf",
+  "pdf/lettervormen/saad.pdf",
+  "pdf/lettervormen/seen.pdf",
+  "pdf/lettervormen/sheen.pdf",
+  "pdf/lettervormen/taa.pdf",
+  "pdf/lettervormen/thaa.pdf",
+  "pdf/lettervormen/taa%20zwaar.pdf",
+  "pdf/lettervormen/waaw.pdf",
+  "pdf/lettervormen/yaa.pdf",
+  "pdf/lettervormen/zay.pdf",
+  "pdf/lettervormen/zaa%20zwaar.pdf",
 ];
 
 const isAudioRequest = (request) => {
@@ -116,6 +146,11 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
 
   if (request.method !== "GET" || url.origin !== self.location.origin) {
+    return;
+  }
+
+  if (url.pathname.startsWith("/api/")) {
+    event.respondWith(fetch(request));
     return;
   }
 

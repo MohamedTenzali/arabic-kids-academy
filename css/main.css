@@ -1580,6 +1580,50 @@ h2 {
   gap: var(--space-4);
 }
 
+.book-test-panel {
+  display: grid;
+  max-width: 520px;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  border: 2px solid rgba(107, 59, 245, 0.14);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: 0 8px 0 rgba(107, 59, 245, 0.08);
+  padding: var(--space-4);
+}
+
+.book-test-panel label {
+  color: var(--color-brand-dark);
+  font-weight: 900;
+}
+
+.book-test-panel input {
+  min-height: 52px;
+  width: 100%;
+  border: 2px solid rgba(107, 59, 245, 0.16);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 800;
+  padding: 0 14px;
+}
+
+.book-test-panel p {
+  margin: 0;
+  color: var(--color-muted);
+  font-weight: 800;
+}
+
+.book-test-panel p.is-error {
+  color: #b42318;
+}
+
+.books-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
 .book-card {
   display: grid;
   gap: var(--space-6);
@@ -1614,6 +1658,35 @@ h2 {
   max-height: 520px;
   object-fit: contain;
   object-position: center;
+}
+
+.book-cover-pdf {
+  align-content: center;
+  gap: var(--space-3);
+  background:
+    linear-gradient(135deg, rgba(107, 59, 245, 0.12), rgba(77, 182, 255, 0.14)),
+    #ffffff;
+  color: var(--color-brand-dark);
+  text-align: center;
+}
+
+.book-cover-pdf span {
+  display: inline-grid;
+  width: 86px;
+  height: 86px;
+  place-items: center;
+  justify-self: center;
+  border-radius: 22px;
+  background: var(--gradient-brand);
+  box-shadow: 0 10px 0 rgba(107, 59, 245, 0.16);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.book-cover-pdf strong {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  line-height: 1.1;
 }
 
 .book-copy {
@@ -1662,6 +1735,20 @@ h2 {
 
 .book-download {
   width: min(100%, 280px);
+}
+
+.book-download-locked {
+  border: 2px solid rgba(107, 59, 245, 0.18);
+  background:
+    linear-gradient(135deg, rgba(107, 59, 245, 0.12), rgba(255, 200, 61, 0.16)),
+    #e7eaf0;
+  color: #4d2ac0;
+}
+
+.book-download-ready {
+  background: linear-gradient(135deg, #8bc34a, #4db6ff);
+  box-shadow: 0 8px 0 rgba(139, 195, 74, 0.2);
+  color: #ffffff;
 }
 
 .about-shell {
@@ -3552,6 +3639,29 @@ h2 {
   font-weight: 900;
 }
 
+.form-download-button {
+  border-color: rgba(139, 195, 74, 0.28);
+  background:
+    linear-gradient(135deg, rgba(139, 195, 74, 0.12), rgba(255, 200, 61, 0.16)),
+    #ffffff;
+  color: #3f6f0d;
+}
+
+.form-download-icon {
+  background: linear-gradient(135deg, #8bc34a, #ffc83d);
+  font-family: "Nunito", Arial, sans-serif;
+}
+
+.form-download-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4;
+}
+
 .letter-forms-page,
 .forms-workspace {
   display: grid;
@@ -3648,6 +3758,84 @@ h2 {
   background:
     radial-gradient(circle at 82% 12%, rgba(255, 200, 61, 0.24), transparent 34%),
     linear-gradient(135deg, #ffffff, #f7fbff);
+}
+
+.forms-hero-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.forms-hero-topline .eyebrow {
+  margin: 0;
+}
+
+.forms-download-button {
+  display: inline-flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid rgba(139, 195, 74, 0.3);
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(135deg, rgba(139, 195, 74, 0.14), rgba(255, 200, 61, 0.2)),
+    #ffffff;
+  box-shadow: 0 8px 0 rgba(139, 195, 74, 0.16), var(--shadow-card);
+  color: #3f6f0d;
+  font-weight: 900;
+  line-height: 1.05;
+  padding: 8px 16px 8px 10px;
+  text-decoration: none;
+  transition:
+    box-shadow var(--motion-pop),
+    filter var(--motion-pop),
+    transform var(--motion-pop);
+}
+
+.forms-download-button:hover,
+.forms-download-button:focus-visible {
+  filter: saturate(1.08);
+  box-shadow: 0 6px 0 rgba(139, 195, 74, 0.16), var(--shadow-raised);
+  transform: translateY(2px);
+}
+
+.forms-download-button:active {
+  box-shadow: 0 3px 0 rgba(139, 195, 74, 0.16);
+  transform: translateY(5px);
+}
+
+.forms-download-button-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #8bc34a, #ffc83d);
+  color: #ffffff;
+}
+
+.forms-download-button-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.forms-download-button span:last-child {
+  display: grid;
+  gap: 2px;
+}
+
+.forms-download-button small {
+  color: rgba(63, 111, 13, 0.78);
+  font-size: 0.78rem;
 }
 
 .forms-hero-symbol {
@@ -3966,6 +4154,11 @@ h2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .forms-download-button {
+    width: 100%;
+    justify-content: center;
+  }
+
   .forms-grid {
     grid-template-columns: 1fr;
   }
@@ -4108,8 +4301,12 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .books-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .book-card {
-    grid-template-columns: 340px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
   }
 
   .about-feature-grid {

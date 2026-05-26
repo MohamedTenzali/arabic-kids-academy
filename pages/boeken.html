@@ -6,12 +6,12 @@
     <title>Boeken | ArabicoKids</title>
     <meta
       name="description"
-      content="Download het ArabicoKids letterboekje als PDF en oefen thuis met Arabische letters."
+      content="Koop ArabicoKids letterboekjes als PDF en oefen thuis met Arabische letters."
     >
     <link rel="canonical" href="https://arabicokids.com/pages/boeken.html">
     <meta property="og:site_name" content="ArabicoKids">
     <meta property="og:title" content="Boeken | ArabicoKids">
-    <meta property="og:description" content="Download het ArabicoKids letterboekje als PDF en oefen thuis met Arabische letters.">
+    <meta property="og:description" content="Koop ArabicoKids letterboekjes als PDF en oefen thuis met Arabische letters.">
     <meta property="og:url" content="https://arabicokids.com/pages/boeken.html">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#6b3bf5">
@@ -26,11 +26,12 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=51">
+    <link rel="stylesheet" href="../css/main.css?v=52">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=20" defer></script>
     <script src="../js/app.js?v=45" defer></script>
+    <script src="../js/book-payments.js?v=1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -62,45 +63,85 @@
       <section class="books-hero" aria-labelledby="books-title">
         <div>
           <p class="eyebrow">PDF boek</p>
-          <h1 id="books-title">Mijn Arabische letters boekje</h1>
+          <h1 id="books-title">ArabicoKids boeken</h1>
           <p class="hero-text">
             Een printbaar oefenboekje waarmee kinderen stap voor stap Arabische letters kunnen herkennen,
-            luisteren en schrijven.
+            luisteren en schrijven. De boeken kosten 5 euro per stuk en zijn pas te downloaden na betaling.
           </p>
+          <div class="book-test-panel" data-book-test-panel>
+            <label for="book-buyer-email">Test e-mail</label>
+            <input id="book-buyer-email" type="email" autocomplete="email" placeholder="ouder@example.com" data-book-email>
+            <p data-book-global-status>Gebruik de lokale testserver om een testbetaling af te ronden.</p>
+          </div>
         </div>
       </section>
 
-      <section class="book-card" aria-labelledby="book-title">
-        <div class="book-cover">
-          <img
-            class="book-cover-image"
-            src="../images/books/mijn-arabische-letters-boekje.png.png"
-            alt="Cover van Mijn Arabische letters werkboekje niveau 1"
-          >
-        </div>
-
-        <div class="book-copy">
-          <div class="book-heading">
-            <h2 id="book-title">Mijn Arabische letters boekje</h2>
-            <span class="book-price">Premium later</span>
+      <section class="books-grid" aria-label="Downloadbare boeken">
+        <article class="book-card" aria-labelledby="book-title-niveau-1" data-book-card data-book-id="niveau-1">
+          <div class="book-cover">
+            <img
+              class="book-cover-image"
+              src="../images/books/mijn-arabische-letters-boekje-niveau-1.png.png"
+              alt="Cover van Mijn Arabische letters werkboekje niveau 1"
+            >
           </div>
 
-          <p>
-            Het volledige boekje is nog niet te downloaden. De gratis lessen, audio, quizzen en basiswerkbladen zijn wel direct beschikbaar.
-          </p>
+          <div class="book-copy">
+            <div class="book-heading">
+              <h2 id="book-title-niveau-1">Arabische letters boekje niveau 1</h2>
+              <span class="book-price">5 euro</span>
+            </div>
 
-          <ul class="book-points">
-            <li>Printbaar PDF-bestand</li>
-            <li>Oefenen met Arabische letters</li>
-            <li>Geschikt voor kinderen en beginners</li>
-          </ul>
+            <p>
+              Een printbaar werkboek om de Arabische letters stap voor stap te leren herkennen en schrijven.
+            </p>
 
-          <p class="book-price-note">Er is nu geen betaling of login actief. Premium boekmateriaal volgt later.</p>
+            <ul class="book-points">
+              <li>Printbaar PDF-bestand</li>
+              <li>Oefenen met Arabische letters</li>
+              <li>Geschikt voor kinderen en beginners</li>
+            </ul>
 
-          <a class="primary-button book-download" href="werkbladen.html">
-            Bekijk gratis werkbladen
-          </a>
-        </div>
+            <p class="book-price-note" data-book-status>Downloaden wordt beschikbaar nadat de betaling van 5 euro is afgerond.</p>
+
+            <button class="primary-button book-download book-download-locked" type="button" data-book-action>
+              Testbetaling - 5 euro
+            </button>
+          </div>
+        </article>
+
+        <article class="book-card" aria-labelledby="book-title-niveau-2" data-book-card data-book-id="niveau-2">
+          <div class="book-cover">
+            <img
+              class="book-cover-image"
+              src="../images/books/mijn-arabische-letters-boekje-niveau-2.png.png"
+              alt="Cover van Arabic Kids Academy niveau 2"
+            >
+          </div>
+
+          <div class="book-copy">
+            <div class="book-heading">
+              <h2 id="book-title-niveau-2">Arabische letters boekje niveau 2</h2>
+              <span class="book-price">5 euro</span>
+            </div>
+
+            <p>
+              Het vervolgboek voor kinderen die verder willen oefenen na niveau 1.
+            </p>
+
+            <ul class="book-points">
+              <li>Printbaar PDF-bestand</li>
+              <li>Vervolg op niveau 1</li>
+              <li>Extra oefening voor thuis</li>
+            </ul>
+
+            <p class="book-price-note" data-book-status>Downloaden wordt beschikbaar nadat de betaling van 5 euro is afgerond.</p>
+
+            <button class="primary-button book-download book-download-locked" type="button" data-book-action>
+              Testbetaling - 5 euro
+            </button>
+          </div>
+        </article>
       </section>
     </main>
 
