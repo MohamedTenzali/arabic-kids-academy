@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v62";
+const CACHE_VERSION = "arabicokids-v63";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -13,7 +13,6 @@ const CORE_CACHE = [
   "js/app.js",
   "js/file-operations.js",
   "js/audio-player.js",
-  "js/book-payments.js",
   "js/motion.js",
   "js/pwa-update.js",
   "js/quiz-engine.js",

@@ -31,7 +31,6 @@
     <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=20" defer></script>
     <script src="../js/app.js?v=45" defer></script>
-    <script src="../js/book-payments.js?v=1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -66,18 +65,14 @@
           <h1 id="books-title">ArabicoKids boeken</h1>
           <p class="hero-text">
             Een printbaar oefenboekje waarmee kinderen stap voor stap Arabische letters kunnen herkennen,
-            luisteren en schrijven. De boeken kosten 5 euro per stuk en zijn pas te downloaden na betaling.
+            luisteren en schrijven. De boeken kosten 5 euro per stuk. Na je aanvraag sturen wij handmatig
+            een betaalverzoek; na betaling ontvang je het PDF-boek per e-mail.
           </p>
-          <div class="book-test-panel" data-book-test-panel>
-            <label for="book-buyer-email">Test e-mail</label>
-            <input id="book-buyer-email" type="email" autocomplete="email" placeholder="ouder@example.com" data-book-email>
-            <p data-book-global-status>Gebruik de lokale testserver om een testbetaling af te ronden.</p>
-          </div>
         </div>
       </section>
 
       <section class="books-grid" aria-label="Downloadbare boeken">
-        <article class="book-card" aria-labelledby="book-title-niveau-1" data-book-card data-book-id="niveau-1">
+        <article class="book-card" aria-labelledby="book-title-niveau-1">
           <div class="book-cover">
             <img
               class="book-cover-image"
@@ -102,15 +97,18 @@
               <li>Geschikt voor kinderen en beginners</li>
             </ul>
 
-            <p class="book-price-note" data-book-status>Downloaden wordt beschikbaar nadat de betaling van 5 euro is afgerond.</p>
+            <p class="book-price-note">Stuur een aanvraag. Daarna ontvang je een betaalverzoek en sturen wij het PDF-boek handmatig na betaling.</p>
 
-            <button class="primary-button book-download book-download-locked" type="button" data-book-action>
-              Testbetaling - 5 euro
-            </button>
+            <a
+              class="primary-button book-download"
+              href="mailto:info@arabicokids.com?subject=Bestelling%20Arabische%20letters%20boekje%20niveau%201&body=Hallo%20ArabicoKids%2C%0A%0AIk%20wil%20graag%20Arabische%20letters%20boekje%20niveau%201%20bestellen%20voor%205%20euro.%0A%0ANaam%3A%0AE-mailadres%3A%0A%0AGroetjes%2C"
+            >
+              Bestel via e-mail
+            </a>
           </div>
         </article>
 
-        <article class="book-card" aria-labelledby="book-title-niveau-2" data-book-card data-book-id="niveau-2">
+        <article class="book-card" aria-labelledby="book-title-niveau-2">
           <div class="book-cover">
             <img
               class="book-cover-image"
@@ -135,11 +133,14 @@
               <li>Extra oefening voor thuis</li>
             </ul>
 
-            <p class="book-price-note" data-book-status>Downloaden wordt beschikbaar nadat de betaling van 5 euro is afgerond.</p>
+            <p class="book-price-note">Stuur een aanvraag. Daarna ontvang je een betaalverzoek en sturen wij het PDF-boek handmatig na betaling.</p>
 
-            <button class="primary-button book-download book-download-locked" type="button" data-book-action>
-              Testbetaling - 5 euro
-            </button>
+            <a
+              class="primary-button book-download"
+              href="mailto:info@arabicokids.com?subject=Bestelling%20Arabische%20letters%20boekje%20niveau%202&body=Hallo%20ArabicoKids%2C%0A%0AIk%20wil%20graag%20Arabische%20letters%20boekje%20niveau%202%20bestellen%20voor%205%20euro.%0A%0ANaam%3A%0AE-mailadres%3A%0A%0AGroetjes%2C"
+            >
+              Bestel via e-mail
+            </a>
           </div>
         </article>
       </section>
