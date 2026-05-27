@@ -4,7 +4,15 @@
   const contextMessages = {
     home: {
       title: "Welkom!",
-      hint: "Kies Beginner en start je Arabische avontuur.",
+      hint: "Kies Beginner en start je ontdektocht.",
+    },
+    adventure: {
+      title: "Klaar?",
+      hint: "Elke les brengt je een stap verder.",
+    },
+    reward: {
+      title: "Ster verdiend!",
+      hint: "Goed oefenen voelt als spelen.",
     },
     roadmap: {
       title: "Goed bezig!",
@@ -68,14 +76,20 @@
 
   const mascotSvg = `
     <svg class="mascot-svg" viewBox="0 0 120 120" role="img" aria-label="Vriendelijke leerhulp">
+      <g class="mascot-wave-arm">
+        <path d="M87 72c15 0 18-13 16-25" fill="none" stroke="#0b8c83" stroke-width="10" stroke-linecap="round"/>
+        <path d="M103 45l-9-7M105 45l4-10" fill="none" stroke="#0b8c83" stroke-width="5" stroke-linecap="round"/>
+      </g>
       <g class="mascot-head">
         <path d="M31 74c-10-14-6-38 12-49 17-10 42-5 52 13 10 17 3 42-13 52-17 11-40 4-51-16Z" fill="#12a594"/>
         <path d="M38 78c-8-11-5-30 9-38 13-8 33-4 41 10 8 13 2 33-10 41-14 8-32 3-40-13Z" fill="#65d685"/>
         <path class="mascot-turban" d="M45 32c7-14 26-18 40-8-8-1-15 3-19 10-6 10-16 12-21-2Z" fill="#ffd166"/>
         <circle cx="49" cy="56" r="9" fill="#fff"/>
         <circle cx="76" cy="56" r="9" fill="#fff"/>
-        <circle class="mascot-eye" cx="52" cy="58" r="4" fill="#243044"/>
-        <circle class="mascot-eye" cx="73" cy="58" r="4" fill="#243044"/>
+        <g class="mascot-eyes">
+          <circle class="mascot-eye" cx="52" cy="58" r="4" fill="#243044"/>
+          <circle class="mascot-eye" cx="73" cy="58" r="4" fill="#243044"/>
+        </g>
         <path d="M55 76c6 5 14 5 20 0" fill="none" stroke="#243044" stroke-width="5" stroke-linecap="round"/>
       </g>
       <g class="mascot-book">
@@ -223,6 +237,22 @@
     });
   };
 
+  const reactMascot = (context = "adventure") => {
+    const mascot = document.querySelector("#mascot-root .mascot");
+    const rect = mascot?.getBoundingClientRect();
+
+    setMascotMessage(context);
+    animateMascot();
+
+    if (rect && !reduceMotion) {
+      createBurst({
+        x: rect.left + rect.width * 0.72,
+        y: rect.top + rect.height * 0.28,
+        count: 10,
+      });
+    }
+  };
+
   const celebrateSuccess = (detail = {}) => {
     const target = detail.target instanceof Element ? detail.target : document.querySelector(".quiz-card, .roadmap-card, .primary-button");
     const rect = target?.getBoundingClientRect();
@@ -303,6 +333,20 @@
     playTapAnimation(target);
   }, { passive: true });
 
+  document.addEventListener("pointerenter", (event) => {
+    if (event.target.closest("#mascot-root .mascot")) {
+      reactMascot("adventure");
+    }
+  }, true);
+
+  document.addEventListener("click", (event) => {
+    const mascot = event.target.closest("#mascot-root .mascot");
+
+    if (mascot) {
+      reactMascot("reward");
+    }
+  });
+
   window.addEventListener("aka:success", (event) => celebrateSuccess(event.detail));
   window.addEventListener("aka:unlock", (event) => celebrateSuccess({ ...event.detail, type: "unlock" }));
   window.addEventListener("aka:letter-tap", (event) => celebrateLetterTap(event.detail));
@@ -319,6 +363,7 @@
     celebrateSuccess,
     createBurst,
     playTapAnimation,
+    reactMascot,
     setMascotMessage,
   };
 })();

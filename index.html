@@ -35,10 +35,10 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="css/main.css?v=51">
+    <link rel="stylesheet" href="css/main.css?v=52">
     <script src="data/progress.js?v=26" defer></script>
     <script src="js/pwa-update.js?v=2" defer></script>
-    <script src="js/motion.js?v=20" defer></script>
+    <script src="js/motion.js?v=21" defer></script>
     <script src="js/app.js?v=50" defer></script>
   </head>
   <body>
@@ -75,6 +75,12 @@
 
     <main class="home-main" id="main-content">
       <section class="hero hero-home" aria-labelledby="hero-title">
+        <div class="home-sparkle-field" aria-hidden="true">
+          <span style="--spark-x: 12%; --spark-y: 24%; --spark-delay: 0ms;"></span>
+          <span style="--spark-x: 82%; --spark-y: 28%; --spark-delay: 900ms;"></span>
+          <span style="--spark-x: 20%; --spark-y: 68%; --spark-delay: 1500ms;"></span>
+          <span style="--spark-x: 76%; --spark-y: 72%; --spark-delay: 2300ms;"></span>
+        </div>
         <div class="letter-arc" lang="ar" dir="rtl" aria-hidden="true">
           <span style="--left: 18%; --top: 76%; --rotate: -48deg; --delay: 900ms; --z: 1; --card-color: #ffb703;">ز</span>
           <span style="--left: 23%; --top: 59%; --rotate: -42deg; --delay: 810ms; --z: 2; --card-color: #fb8500;">ر</span>
@@ -108,6 +114,12 @@
             <a class="primary-button" href="pages/roadmap.html?level=beginner">Start met leren</a>
             <a class="secondary-button" href="pages/werkbladen.html">Bekijk werkbladen</a>
           </div>
+
+          <div class="home-reward-strip" aria-label="Wat kinderen onderweg verdienen">
+            <span><strong>1</strong> ontdek letters</span>
+            <span><strong>2</strong> verzamel sterren</span>
+            <span><strong>3</strong> speel levels vrij</span>
+          </div>
         </div>
 
         <section class="home-info-section home-how" aria-labelledby="how-title">
@@ -117,22 +129,22 @@
           </div>
 
           <div class="home-card-grid home-steps">
-            <article>
+            <article class="home-step-card home-step-listen">
               <span>1</span>
               <h3>Luister</h3>
               <p>Kinderen horen de juiste uitspraak van letters en klanken.</p>
             </article>
-            <article>
+            <article class="home-step-card home-step-practice">
               <span>2</span>
               <h3>Oefen</h3>
               <p>Ze herkennen letters, herhalen klanken en schrijven mee.</p>
             </article>
-            <article>
+            <article class="home-step-card home-step-quiz">
               <span>3</span>
               <h3>Speel quiz</h3>
               <p>Korte quizzen maken herhalen leuk en overzichtelijk.</p>
             </article>
-            <article>
+            <article class="home-step-card home-step-grow">
               <span>4</span>
               <h3>Groei stap voor stap</h3>
               <p>Levels helpen kinderen rustig verder leren op hun tempo.</p>
