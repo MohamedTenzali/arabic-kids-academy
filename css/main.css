@@ -3,6 +3,7 @@
 }
 
 html {
+  max-width: 100%;
   overflow-x: hidden;
   scroll-behavior: smooth;
   text-size-adjust: 100%;
@@ -35,21 +36,34 @@ html {
   --space-6: 24px;
   --space-7: 32px;
   --space-8: 40px;
+  --space-9: 56px;
+  --space-10: 72px;
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-pill: 999px;
+  --radius-card: var(--radius-lg);
+  --radius-section: var(--radius-lg);
   --shadow-soft: 0 16px 40px rgba(45, 45, 45, 0.1);
   --shadow-card: 0 16px 34px rgba(45, 45, 45, 0.1);
   --shadow-raised: 0 20px 46px rgba(107, 59, 245, 0.18);
+  --shadow-subtle: 0 10px 24px rgba(36, 48, 68, 0.07);
+  --shadow-panel: 0 18px 44px rgba(36, 48, 68, 0.1);
   --shadow-button: 0 8px 0 rgba(107, 59, 245, 0.24);
   --gradient-app: linear-gradient(180deg, #f8f7ff 0%, #fff9ed 100%);
   --gradient-card: linear-gradient(180deg, #ffffff 0%, #fbf9ff 100%);
+  --gradient-panel: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(251, 249, 255, 0.92));
   --gradient-brand: linear-gradient(135deg, #6b3bf5 0%, #4db6ff 100%);
   --gradient-sunny: linear-gradient(135deg, #ffc83d 0%, #ff6fae 100%);
   --touch-target: 52px;
   --page-max: 1040px;
+  --page-wide: 1180px;
+  --section-gap: clamp(28px, 6vw, 56px);
+  --font-size-hero: clamp(2.55rem, 7.2vw, 4.65rem);
+  --font-size-h1: clamp(2.35rem, 6vw, 4.25rem);
+  --font-size-h2: clamp(1.45rem, 3vw, 2.15rem);
+  --font-size-body: clamp(1rem, 1.5vw, 1.1rem);
   --motion-pop: 180ms cubic-bezier(0.2, 0.9, 0.25, 1.2);
   --motion-fast: 140ms;
   --motion-normal: 260ms;
@@ -60,6 +74,7 @@ html {
 
 body {
   margin: 0;
+  max-width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   background:
@@ -79,6 +94,7 @@ body * {
 
 [lang="ar"],
 [dir="rtl"],
+.arabic-text,
 .arabic-welcome,
 .letter-symbol,
 .level-badge,
@@ -93,7 +109,23 @@ body * {
 .letter-arc span {
   direction: rtl;
   unicode-bidi: isolate;
+  font-family: "Noto Naskh Arabic", system-ui, Arial, sans-serif;
   word-break: normal;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: rgba(107, 59, 245, 0.12);
 }
 
 body:has(.home-main) {
@@ -122,6 +154,7 @@ select:focus-visible {
 .button-base {
   display: inline-flex;
   min-height: var(--touch-target);
+  max-width: 100%;
   align-items: center;
   justify-content: center;
   border: 0;
@@ -133,6 +166,7 @@ select:focus-visible {
   padding: 0 var(--space-6);
   text-align: center;
   text-decoration: none;
+  white-space: normal;
   transition:
     box-shadow var(--motion-pop),
     filter var(--motion-pop),
@@ -185,13 +219,33 @@ select:focus-visible {
 
 .lesson-card,
 .quiz-card,
-.roadmap-card {
+.roadmap-card,
+.book-card,
+.about-panel,
+.contact-card,
+.worksheet-card,
+.letters-progress-card,
+.sound-letter-card,
+.letter-card,
+.forms-hero-card,
+.forms-magic-card,
+.forms-example-card,
+.forms-exercise-card,
+.seo-section,
+.seo-hero,
+.parent-info,
+.worksheet-promo {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(107, 59, 245, 0.16);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-card);
   background: var(--gradient-card);
   box-shadow: var(--shadow-card);
+}
+
+.lesson-card,
+.quiz-card,
+.roadmap-card {
   animation: cardEnter 420ms var(--ease-soft) both;
 }
 
@@ -590,7 +644,7 @@ select:focus-visible {
   justify-content: space-between;
   gap: var(--space-4);
   max-width: 100%;
-  padding: 18px 20px 8px;
+  padding: 18px clamp(14px, 3vw, 32px) 10px;
 }
 
 .brand {
@@ -747,7 +801,7 @@ select:focus-visible {
 main {
   width: min(100%, var(--page-max));
   margin: 0 auto;
-  padding: var(--space-7) var(--space-5) 48px;
+  padding: var(--section-gap) clamp(14px, 4vw, 32px) 48px;
 }
 
 .site-footer {
@@ -1414,10 +1468,20 @@ main {
   animation: rewardFloat 6.8s ease-in-out 420ms infinite;
 }
 
-.home-card-grid span {
+.home-step-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.home-step-number {
   display: grid;
   width: 46px;
   height: 46px;
+  flex: 0 0 auto;
   place-items: center;
   border-radius: 14px;
   background: var(--gradient-sunny);
@@ -1426,8 +1490,41 @@ main {
   font-weight: 900;
 }
 
+.home-step-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  padding: 7px;
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+  box-shadow: 0 6px 0 rgba(107, 59, 245, 0.08);
+}
+
+.home-step-listen .home-step-icon {
+  color: var(--color-sky);
+  background: #eaf7ff;
+}
+
+.home-step-practice .home-step-icon {
+  color: var(--color-coral);
+  background: #fff0f7;
+}
+
+.home-step-quiz .home-step-icon {
+  color: var(--color-accent-dark);
+  background: #fff4ce;
+}
+
+.home-step-grow .home-step-icon {
+  color: var(--color-leaf);
+  background: #eff9e8;
+}
+
 .home-card-grid h3,
 .home-card-grid p {
+  position: relative;
+  z-index: 1;
   margin-bottom: 0;
 }
 
@@ -1667,13 +1764,13 @@ p {
 h1 {
   max-width: 640px;
   margin-bottom: 14px;
-  font-size: 2.65rem;
-  line-height: 0.95;
+  font-size: var(--font-size-h1);
+  line-height: 1.02;
 }
 
 h2 {
   margin-bottom: 6px;
-  font-size: 1.45rem;
+  font-size: var(--font-size-h2);
   line-height: 1.15;
 }
 
@@ -1681,8 +1778,49 @@ h2 {
   max-width: 620px;
   margin-bottom: 24px;
   color: var(--color-muted);
-  font-size: 1.1rem;
+  font-size: var(--font-size-body);
   line-height: 1.6;
+}
+
+.page-shell,
+.letters-shell,
+.books-shell,
+.about-shell,
+.contact-shell,
+.worksheets-shell,
+.roadmap-shell {
+  width: min(100%, var(--page-wide));
+  margin-inline: auto;
+  padding-inline: clamp(14px, 4vw, 32px);
+}
+
+.about-hero,
+.books-hero,
+.contact-hero,
+.worksheets-hero,
+.roadmap-hero,
+.letter-detail-hero,
+.seo-hero {
+  border-radius: var(--radius-section);
+  background: var(--gradient-panel);
+  box-shadow: var(--shadow-panel);
+}
+
+.about-content,
+.contact-grid,
+.books-grid,
+.worksheet-grid,
+.parent-info-grid,
+.letters-grid,
+.vowels-grid,
+.sounds-grid,
+.letter-word-grid,
+.roadmap-list {
+  gap: var(--space-5);
+}
+
+.back-link {
+  margin-bottom: var(--space-5);
 }
 
 .arabic-example {
@@ -4287,6 +4425,13 @@ h2 {
 }
 
 @media (max-width: 719px) {
+  :root {
+    --touch-target: 48px;
+    --radius-card: 18px;
+    --radius-section: 20px;
+    --section-gap: 28px;
+  }
+
   body {
     padding-bottom: env(safe-area-inset-bottom);
   }
@@ -4394,6 +4539,34 @@ h2 {
     line-height: 1;
     padding: 9px 10px;
     white-space: nowrap;
+  }
+
+  .page-shell,
+  .letters-shell,
+  .books-shell,
+  .about-shell,
+  .contact-shell,
+  .worksheets-shell,
+  .roadmap-shell {
+    width: 100%;
+    padding-inline: 14px;
+  }
+
+  .about-hero,
+  .books-hero,
+  .contact-hero,
+  .worksheets-hero,
+  .roadmap-hero,
+  .letter-detail-hero,
+  .seo-hero,
+  .about-panel,
+  .contact-card,
+  .worksheet-card,
+  .book-card,
+  .quiz-card,
+  .letters-progress-card,
+  .forms-hero-card {
+    border-radius: var(--radius-section);
   }
 
   .download-section {
@@ -4533,9 +4706,30 @@ h2 {
   .primary-button,
   .secondary-button,
   .button-base {
+    width: fit-content;
     max-width: 100%;
     min-height: 48px;
     padding-inline: 16px;
+  }
+
+  .worksheet-actions,
+  .quiz-result-actions,
+  .sound-buttons,
+  .contact-actions,
+  .book-download,
+  .forms-download-button {
+    width: 100%;
+  }
+
+  .worksheet-actions .primary-button,
+  .worksheet-actions .secondary-button,
+  .quiz-result-actions .primary-button,
+  .quiz-result-actions .secondary-button,
+  .sound-buttons .primary-button,
+  .sound-buttons .secondary-button,
+  .book-download,
+  .forms-download-button {
+    width: 100%;
   }
 
   .roadmap-shell {
@@ -4867,8 +5061,11 @@ h2 {
   }
 
   .letter-arc {
+    left: 50%;
     width: min(100%, 860px);
     height: 340px;
+    transform: translateX(-50%);
+    animation: none;
   }
 
   .letter-arc span {
@@ -5452,10 +5649,9 @@ h2 {
   *,
   *::before,
   *::after {
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     scroll-behavior: auto !important;
-    transition-duration: 1ms !important;
+    transition: none !important;
   }
 
   .mascot-svg,
