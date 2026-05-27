@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v67";
+const CACHE_VERSION = "arabicokids-v68";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -42,6 +42,7 @@ const CORE_CACHE = [
   "robots.txt",
   "sitemap.xml",
   "images/icons/apple-touch-icon.png",
+  "images/icons/back-to-top.png",
   "images/icons/icon-192.png",
   "images/icons/icon-512.png",
   "images/books/mijn-arabische-letters-boekje-niveau-1.png.png",

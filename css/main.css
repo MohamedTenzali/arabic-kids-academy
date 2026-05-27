@@ -638,6 +638,42 @@ select:focus-visible {
   transform: translateY(0);
 }
 
+.back-to-top {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 45;
+  display: block;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: url("../images/icons/back-to-top.png") center / contain no-repeat;
+  box-shadow: 0 12px 28px rgba(77, 57, 197, 0.22);
+  text-decoration: none;
+  transition:
+    filter var(--motion-fast) var(--ease-soft),
+    transform var(--motion-fast) var(--ease-soft);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  filter: saturate(1.08);
+  transform: translateY(-3px) scale(1.04);
+}
+
+.back-to-top:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.back-to-top span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .site-header {
   display: flex;
   align-items: center;
@@ -4786,6 +4822,13 @@ h2 {
   .home-info-section,
   .home-premium-teaser {
     border-radius: 18px;
+  }
+
+  .back-to-top {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 50px;
+    height: 50px;
   }
 }
 
