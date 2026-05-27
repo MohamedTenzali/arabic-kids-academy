@@ -1,9 +1,15 @@
-const CACHE_VERSION = "arabicokids-v63";
+const CACHE_VERSION = "arabicokids-v64";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
   "./",
   "index.html",
+  "letters.html",
+  "klinkers.html",
+  "quiz.html",
+  "werkbladen.html",
+  "about.html",
+  "contact.html",
   "manifest.json",
   "css/main.css",
   "data/letters.js",
@@ -29,6 +35,12 @@ const CORE_CACHE = [
   "pages/vowel-letter.html",
   "pages/vowels.html",
   "pages/werkbladen.html",
+  "arabisch-leren-kinderen/index.html",
+  "arabische-letters-kinderen/index.html",
+  "arabisch-oefenen-pdf/index.html",
+  "arabische-klanken/index.html",
+  "robots.txt",
+  "sitemap.xml",
   "images/icons/apple-touch-icon.png",
   "images/icons/icon-192.png",
   "images/icons/icon-512.png",

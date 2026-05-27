@@ -4890,6 +4890,75 @@ h2 {
   color: #ffffff;
 }
 
+.seo-shell {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.seo-hero {
+  display: grid;
+  gap: var(--space-5);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top right, rgba(255, 200, 61, 0.26), transparent 44%),
+    linear-gradient(135deg, rgba(107, 59, 245, 0.1), rgba(77, 182, 255, 0.1)),
+    #ffffff;
+  box-shadow: var(--shadow-card);
+  padding: clamp(24px, 5vw, 44px);
+}
+
+.seo-hero h1 {
+  margin-bottom: var(--space-4);
+}
+
+.seo-section {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.seo-content-grid,
+.seo-link-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.seo-content-card,
+.seo-link-card {
+  border: 1px solid rgba(107, 59, 245, 0.16);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+}
+
+.seo-content-card h2,
+.seo-link-card h2,
+.seo-content-card h3,
+.seo-link-card h3 {
+  margin-top: 0;
+}
+
+.seo-link-card {
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    box-shadow var(--motion-fast) var(--ease-soft),
+    transform var(--motion-fast) var(--ease-soft);
+}
+
+.seo-link-card:hover,
+.seo-link-card:focus-visible {
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-3px);
+}
+
+.seo-check-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
 @media (max-width: 719px) {
   .file-action-buttons {
     width: 100%;
@@ -4909,5 +4978,17 @@ h2 {
 
   .file-action-icon {
     font-size: 1rem;
+  }
+}
+
+@media (min-width: 720px) {
+  .seo-hero {
+    grid-template-columns: minmax(0, 1fr) 260px;
+    align-items: center;
+  }
+
+  .seo-content-grid,
+  .seo-link-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
