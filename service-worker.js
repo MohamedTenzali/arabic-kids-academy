@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v64";
+const CACHE_VERSION = "arabicokids-v65";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -127,6 +127,45 @@ const isImageRequest = (request) => {
          request.url.match(/\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i);
 };
 
+const getUtf8ContentType = (request, response) => {
+  const url = new URL(request.url);
+  const path = url.pathname.toLowerCase();
+
+  if (request.mode === "navigate" || path.endsWith(".html") || path.endsWith("/")) {
+    return "text/html; charset=UTF-8";
+  }
+
+  if (path.endsWith(".css")) return "text/css; charset=UTF-8";
+  if (path.endsWith(".js")) return "text/javascript; charset=UTF-8";
+  if (path.endsWith(".json") || path.endsWith(".webmanifest")) return "application/json; charset=UTF-8";
+  if (path.endsWith(".svg")) return "image/svg+xml; charset=UTF-8";
+  if (path.endsWith(".txt") || path.endsWith(".xml")) return "text/plain; charset=UTF-8";
+
+  const contentType = response.headers.get("Content-Type") || "";
+  if (/^(text\/|application\/(javascript|json|xml))/.test(contentType) && !/charset=/i.test(contentType)) {
+    return `${contentType}; charset=UTF-8`;
+  }
+
+  return "";
+};
+
+const withUtf8Headers = (request, response) => {
+  const contentType = getUtf8ContentType(request, response);
+
+  if (!contentType || !response.ok) {
+    return response;
+  }
+
+  const headers = new Headers(response.headers);
+  headers.set("Content-Type", contentType);
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+};
+
 self.addEventListener("message", (event) => {
   if (event.data?.type === "SKIP_WAITING") {
     self.skipWaiting();
@@ -192,11 +231,17 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const copy = response.clone();
+          const utf8Response = withUtf8Headers(request, response);
+          const copy = utf8Response.clone();
           caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
-          return response;
+          return utf8Response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match(INDEX_URL))),
+        .catch(() =>
+          caches
+            .match(request)
+            .then((cached) => cached || caches.match(INDEX_URL))
+            .then((response) => (response ? withUtf8Headers(request, response) : response)),
+        ),
     );
     return;
   }
@@ -204,16 +249,18 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(request).then((cached) => {
       if (cached) {
-        return cached;
+        return withUtf8Headers(request, cached);
       }
 
       return fetch(request).then((response) => {
-        if (response.ok) {
-          const copy = response.clone();
+        const utf8Response = withUtf8Headers(request, response);
+
+        if (utf8Response.ok) {
+          const copy = utf8Response.clone();
           caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
         }
 
-        return response;
+        return utf8Response;
       });
     }),
   );

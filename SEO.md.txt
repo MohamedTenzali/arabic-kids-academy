@@ -1,0 +1,350 @@
+# SEO.md — Arabic Kids Academy
+
+## MISSIE
+
+Arabic Kids Academy moet niet alleen een mooie website zijn.
+
+Het doel is:
+
+* hoog ranken in Google
+* ouders vertrouwen geven
+* gratis waarde leveren
+* organisch verkeer opbouwen
+* later boeken/PDF’s verkopen
+
+SEO is PRIORITEIT vanaf nu.
+
+---
+
+# 1. SEO-STRUCTUUR
+
+Elke pagina moet:
+
+* één duidelijk onderwerp hebben
+* één hoofdzoekwoord targeten
+* nuttige tekst bevatten
+* mobiel snel laden
+* duidelijke headings hebben
+
+NIET:
+
+* alleen mooie kaarten/buttons
+* alleen animaties
+* weinig tekst
+
+Google rankt CONTENT.
+
+---
+
+# 2. PAGINA TITELS (ZEER BELANGRIJK)
+
+Elke pagina moet een unieke title hebben.
+
+Voorbeelden:
+
+Home:
+Arabische letters leren voor kinderen | Arabic Kids Academy
+
+Letters:
+Arabisch alfabet leren met audio voor kinderen
+
+Klinkers:
+Korte en lange Arabische klinkers oefenen
+
+Quiz:
+Gratis Arabische quiz voor kinderen
+
+Werkbladen:
+Gratis Arabische werkbladen PDF voor kinderen
+
+Boek:
+Arabische schrijfboekjes kopen voor kinderen
+
+Contact:
+Contact | Arabic Kids Academy
+
+---
+
+# 3. META DESCRIPTIONS
+
+Elke pagina moet meta descriptions hebben.
+
+Voorbeelden:
+
+Leer gratis Arabische letters met audio, quizzen en werkbladen voor kinderen.
+
+Oefen Arabische letters schrijven met gratis PDF werkbladen voor beginners.
+
+---
+
+# 4. TECHNISCHE SEO
+
+Controleer:
+
+* sitemap.xml
+* robots.txt
+* canonical tags
+* mobielvriendelijk
+* HTTPS actief
+* snelle laadtijd
+* lazy loading images
+* correcte heading structuur
+* alt text op afbeeldingen
+* correcte favicon
+* geen broken links
+
+---
+
+# 5. HEADINGS STRUCTUUR
+
+Elke pagina:
+
+1x H1
+meerdere H2
+optioneel H3
+
+Voorbeeld:
+
+H1:
+Arabische letters leren voor kinderen
+
+H2:
+Luister naar de uitspraak
+
+H2:
+Oefen met werkbladen
+
+H2:
+Quiz en spelletjes
+
+NIET:
+meerdere H1’s gebruiken.
+
+---
+
+# 6. CONTENT STRATEGIE
+
+GROOTSTE SEO PRIORITEIT.
+
+Elke pagina moet echte uitleg bevatten.
+
+Voorbeeld onder letterpagina:
+
+* uitspraak van letter
+* hoe schrijven
+* voorbeeldwoorden
+* tips voor ouders
+* verschil begin/midden/eind vorm
+
+Google moet begrijpen:
+deze website helpt kinderen Arabisch leren.
+
+---
+
+# 7. SEO LANDINGSPAGINA’S
+
+Maak aparte pagina’s:
+
+/arabische-letters-kinderen
+/arabisch-oefenen-pdf
+/arabisch-leren-kinderen
+/arabische-klanken
+/arabische-letters-schrijven
+/gratis-arabische-werkbladen
+/arabisch-alfabet-audio
+
+Elke pagina:
+
+* minimaal 500+ woorden
+* unieke content
+* afbeeldingen
+* interne links
+
+---
+
+# 8. BLOG / EDUCATIEVE ARTIKELEN
+
+Maak artikelen zoals:
+
+* Hoe leer je een kind Arabisch?
+* Beste leeftijd om Arabisch te leren
+* Arabische letters uitleg voor ouders
+* Arabisch oefenen thuis
+* Veelgemaakte fouten bij Arabisch leren
+
+Doel:
+topical authority opbouwen.
+
+---
+
+# 9. AFBEELDING SEO
+
+Elke afbeelding:
+
+* comprimeren
+* beschrijvende bestandsnaam
+* alt tekst toevoegen
+
+Slecht:
+image1.png
+
+Goed:
+arabische-letter-alif-kinderen.png
+
+Alt:
+Arabische letter Alif voor kinderen
+
+---
+
+# 10. INTERNE LINKS
+
+Elke pagina moet linken naar:
+
+* letters
+* quiz
+* werkbladen
+* boekpagina
+* andere relevante lessen
+
+Google houdt van sterke interne structuur.
+
+---
+
+# 11. GOOGLE SEARCH CONSOLE
+
+MOET gekoppeld worden.
+
+Toevoegen:
+
+* sitemap.xml
+* indexing controleren
+* zoekwoorden analyseren
+* mobiele fouten oplossen
+
+---
+
+# 12. PERFORMANCE
+
+Doelen:
+
+* mobiel eerst
+* snelle laadtijd
+* minimale JavaScript
+* afbeeldingen optimaliseren
+* caching correct gebruiken
+
+BELANGRIJK:
+mooie animaties mogen SEO/snelheid niet vernietigen.
+
+---
+
+# 13. BELANGRIJKE SEO KEYWORDS
+
+Target keywords:
+
+* Arabische letters leren
+* Arabisch voor kinderen
+* Arabisch alfabet oefenen
+* Arabische werkbladen PDF
+* Arabische letters schrijven
+* Arabische klinkers oefenen
+* Arabische quiz kinderen
+* Arabisch leren beginners
+* Arabisch leren met audio
+
+Gebruik natuurlijk in:
+
+* titles
+* headings
+* paragrafen
+* alt teksten
+
+NIET keyword spammen.
+
+---
+
+# 14. MOBILE FIRST
+
+Website moet perfect werken op:
+
+* iPhone
+* Android
+* tablet
+
+Google indexeert mobiel eerst.
+
+Controleer:
+
+* tekst leesbaar
+* buttons groot genoeg
+* audio werkt
+* geen layout bugs
+
+---
+
+# 15. SEO MINDSET
+
+Arabic Kids Academy is NIET alleen een app/project.
+
+Het moet een educatief content platform worden.
+
+Doel:
+
+* vertrouwen
+* gratis waarde
+* SEO verkeer
+* ouders helpen
+* later monetisatie via boeken/PDF’s
+
+NIET:
+alles direct achter betaalmuur zetten.
+
+---
+
+# 16. PRIORITEITEN VOLGORDE
+
+FASE 1:
+
+* technische SEO fixen
+* titles/meta’s
+* sitemap
+* headings
+
+FASE 2:
+
+* SEO pagina’s bouwen
+* educatieve content toevoegen
+
+FASE 3:
+
+* blog/artikelen publiceren
+* topical authority bouwen
+
+FASE 4:
+
+* premium boeken/PDF’s verkopen
+
+---
+
+# 17. BELANGRIJKSTE FOUTEN OM TE VERMIJDEN
+
+* te weinig tekst
+* alleen design focus
+* slechte titles
+* trage website
+* geen Search Console
+* geen SEO pagina’s
+* te snel monetiseren
+* geen consistente content updates
+
+---
+
+# 18. EINDDOEL
+
+Arabic Kids Academy moet uiteindelijk:
+
+* autoriteit worden voor Arabisch leren voor kinderen
+* hoog ranken in Nederland/België
+* organisch verkeer krijgen via Google
+* gratis waarde combineren met premium producten
+* schaalbaar zijn zonder afhankelijk te zijn van advertenties

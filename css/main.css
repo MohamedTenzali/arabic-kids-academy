@@ -3,7 +3,10 @@
 }
 
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 :root {
@@ -58,12 +61,39 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 16% 0%, rgba(255, 200, 61, 0.24), transparent 260px),
     radial-gradient(circle at 86% 10%, rgba(77, 182, 255, 0.2), transparent 280px),
     var(--gradient-app);
   color: var(--color-text);
   font-family: "Nunito", Arial, sans-serif;
+}
+
+body,
+body * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+[lang="ar"],
+[dir="rtl"],
+.arabic-welcome,
+.letter-symbol,
+.level-badge,
+.sound-letter-symbol,
+.forms-hero-symbol,
+.form-card-symbol,
+.forms-transform-symbol,
+.forms-example-equation,
+.forms-exercise-symbol,
+.worksheet-hero-icon,
+.roadmap-hero-copy::after,
+.letter-arc span {
+  direction: rtl;
+  unicode-bidi: isolate;
+  word-break: normal;
 }
 
 body:has(.home-main) {
@@ -325,7 +355,7 @@ select:focus-visible {
 
 .quiz-poppet {
   position: fixed;
-  left: var(--x);
+  left: clamp(64px, var(--x), calc(100vw - 64px));
   top: var(--y);
   z-index: 65;
   display: grid;
@@ -541,6 +571,7 @@ select:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
+  max-width: 100%;
   padding: 18px 20px 8px;
 }
 
@@ -548,6 +579,7 @@ select:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
   color: var(--color-text);
   text-decoration: none;
 }
@@ -576,6 +608,7 @@ select:focus-visible {
 .brand-name,
 .brand-subtitle {
   display: block;
+  overflow-wrap: anywhere;
 }
 
 .brand-name {
@@ -592,12 +625,14 @@ select:focus-visible {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
+  max-width: 100%;
   gap: var(--space-2);
 }
 
 .site-nav a {
   display: inline-flex;
   min-height: 44px;
+  flex: 0 0 auto;
   align-items: center;
   border-radius: var(--radius-pill);
   color: var(--color-text);
@@ -4003,6 +4038,16 @@ h2 {
 }
 
 @media (max-width: 980px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .site-nav {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .home-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4015,6 +4060,10 @@ h2 {
 @media (max-width: 719px) {
   body {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  main {
+    padding: 24px 14px 42px;
   }
 
   .footer-container {
@@ -4040,9 +4089,16 @@ h2 {
   }
 
   .mascot-root {
-    top: max(92px, env(safe-area-inset-top));
-    right: max(10px, env(safe-area-inset-right));
-    width: min(280px, calc(100vw - 20px));
+    top: auto;
+    right: max(8px, env(safe-area-inset-right));
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: min(238px, calc(100vw - 16px));
+    transform: scale(0.88);
+    transform-origin: right bottom;
+  }
+
+  .quiz-poppet {
+    transform: translate(-50%, -104%) scale(0.76);
   }
 
   .mascot {
@@ -4068,19 +4124,128 @@ h2 {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
-    padding-top: max(18px, env(safe-area-inset-top));
+    gap: 10px;
+    padding: max(12px, env(safe-area-inset-top)) 12px 10px;
+  }
+
+  .brand-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+  }
+
+  .brand-name {
+    font-size: 0.98rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.78rem;
+    line-height: 1.2;
   }
 
   .site-nav {
+    flex-wrap: nowrap;
     justify-content: flex-start;
+    gap: 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px max(12px, env(safe-area-inset-right)) 8px max(0px, env(safe-area-inset-left));
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .site-nav a {
-    padding-inline: 8px;
+    min-height: 40px;
+    border-radius: 16px;
+    font-size: 0.86rem;
+    line-height: 1;
+    padding: 9px 10px;
+    white-space: nowrap;
+  }
+
+  .download-section {
+    padding: 10px 12px;
+  }
+
+  .download-book-button {
+    min-height: 58px;
+    gap: 10px;
+    border-radius: 18px;
+    padding: 9px 12px;
+  }
+
+  .download-book-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+
+  .hero-home {
+    min-height: auto;
+    align-content: start;
+    padding: 178px 14px 36px;
+  }
+
+  .hero-home h1 {
+    max-width: 11ch;
+    font-size: clamp(2.35rem, 13vw, 3.2rem);
+    line-height: 1.04;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+    line-height: 1.58;
+  }
+
+  .hero-home .arabic-welcome {
+    max-width: 100%;
+    margin-block: 14px;
+    padding: 8px 18px 12px;
+    font-size: clamp(2rem, 12vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .letter-arc {
+    top: 18px;
+    left: 50%;
+    width: min(100%, 430px);
+    height: 210px;
+    transform: translateX(-50%);
+    animation: none;
+  }
+
+  .letter-arc::after {
+    width: 72%;
+    height: 30%;
+    filter: blur(18px);
+  }
+
+  .letter-arc span {
+    width: clamp(42px, 13vw, 62px);
+    height: clamp(54px, 17vw, 78px);
+    border-radius: 15px;
+    font-size: clamp(1.9rem, 8.8vw, 2.7rem);
+    box-shadow:
+      0 10px 20px rgba(36, 48, 68, 0.14),
+      inset 0 0 0 1px rgba(107, 59, 245, 0.08);
   }
 
   .home-card-grid,
-  .parent-trust {
+  .parent-trust,
+  .home-pill-grid,
+  .trust-list,
+  .level-grid,
+  .worksheet-grid,
+  .parent-info-grid,
+  .books-grid,
+  .vowels-grid,
+  .sounds-grid,
+  .letter-word-grid,
+  .letter-sounds-index {
     grid-template-columns: 1fr;
   }
 
@@ -4136,6 +4301,14 @@ h2 {
     width: min(100%, 320px);
   }
 
+  .primary-button,
+  .secondary-button,
+  .button-base {
+    max-width: 100%;
+    min-height: 48px;
+    padding-inline: 16px;
+  }
+
   .roadmap-shell {
     padding: 18px 14px 44px;
   }
@@ -4169,6 +4342,121 @@ h2 {
 @media (min-width: 480px) and (max-width: 719px) {
   .letters-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 430px) {
+  :root {
+    --space-7: 26px;
+    --space-8: 32px;
+  }
+
+  .hero-home {
+    padding-top: 166px;
+  }
+
+  .letter-arc {
+    width: min(100%, 430px);
+    height: 196px;
+  }
+
+  .home-info-section,
+  .home-premium-teaser {
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-header {
+    padding-inline: 10px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-home {
+    padding-top: 154px;
+  }
+
+  .letter-arc {
+    width: min(100%, 390px);
+    height: 184px;
+  }
+
+  .letter-arc span {
+    width: clamp(38px, 12.5vw, 54px);
+    height: clamp(50px, 16vw, 68px);
+    font-size: clamp(1.7rem, 8vw, 2.3rem);
+  }
+}
+
+@media (max-width: 375px) {
+  .download-book-copy strong {
+    font-size: 0.92rem;
+  }
+
+  .download-book-copy small {
+    font-size: 0.78rem;
+  }
+
+  .hero-home h1 {
+    font-size: clamp(2.12rem, 12.5vw, 2.75rem);
+  }
+
+  .hero-home .arabic-welcome {
+    font-size: clamp(1.85rem, 11vw, 2.45rem);
+  }
+}
+
+@media (max-width: 320px) {
+  main {
+    padding-inline: 10px;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .site-nav a {
+    min-height: 38px;
+    font-size: 0.8rem;
+    padding-inline: 8px;
+  }
+
+  .download-book-button {
+    align-items: flex-start;
+  }
+
+  .download-book-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hero-home {
+    padding: 138px 10px 30px;
+  }
+
+  .letter-arc {
+    width: min(100%, 320px);
+    height: 166px;
+  }
+
+  .letter-arc span {
+    width: 36px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 1.62rem;
+  }
+
+  .learning-stat {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -4331,6 +4619,33 @@ h2 {
   .letter-page-number {
     width: 48px;
     height: 48px;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 1024px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .site-nav {
+    justify-content: flex-start;
+  }
+
+  .hero-home {
+    min-height: auto;
+    padding-top: 250px;
+  }
+
+  .letter-arc {
+    width: min(100%, 860px);
+    height: 340px;
+  }
+
+  .letter-arc span {
+    width: clamp(68px, 10vw, 100px);
+    height: clamp(86px, 13vw, 124px);
+    font-size: clamp(3rem, 6vw, 4.2rem);
   }
 }
 
