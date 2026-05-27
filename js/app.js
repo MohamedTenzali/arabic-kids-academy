@@ -77,7 +77,7 @@ const roadmapNextStep = document.querySelector("#roadmap-next-step");
 
 const getSelectedRoadmapLevel = () => {
   const params = new URLSearchParams(window.location.search);
-  const selectedLevelId = params.get("level") || appProgress?.getSelectedLevel() || "beginner";
+  const selectedLevelId = params.get("level") || "beginner";
   const requestedLevel = appProgress?.getLevel(selectedLevelId);
 
   return requestedLevel && !requestedLevel.locked ? requestedLevel : appProgress?.getLevel("beginner");
@@ -1367,7 +1367,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         <p class="letter-meta">Mooi geoefend. Elke ronde maakt letters en klanken vertrouwder.</p>
         <div class="quiz-result-actions">
           <button class="primary-button" type="button" id="restart-quiz">Opnieuw spelen</button>
-          <a class="secondary-button" href="roadmap.html">Terug naar leerroute</a>
+          <a class="secondary-button" href="roadmap.html?level=beginner">Terug naar leerroute</a>
         </div>
       </div>
     `;
