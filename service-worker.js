@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v71";
+const CACHE_VERSION = "arabicokids-v73";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [

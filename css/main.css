@@ -2764,6 +2764,8 @@ h2 {
 
 .worksheet-promo {
   position: relative;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
   overflow: hidden;
   background:
     radial-gradient(circle at 92% 14%, rgba(255, 200, 61, 0.28), transparent 30%),
@@ -2772,14 +2774,23 @@ h2 {
 
 .worksheet-promo-mark {
   display: grid;
-  width: 72px;
-  height: 72px;
+  width: 68px;
+  height: 68px;
   place-items: center;
-  border-radius: 24px;
+  grid-row: span 2;
+  border-radius: 22px;
   background: linear-gradient(145deg, #65d685, #69c9ff);
   color: #ffffff;
   font-weight: 900;
   box-shadow: 0 14px 28px rgba(18, 165, 148, 0.18);
+}
+
+.worksheet-promo .primary-button {
+  grid-column: 2;
+  justify-self: start;
+  width: auto;
+  min-width: 180px;
+  margin-top: var(--space-2);
 }
 
 .parent-info {
@@ -5295,6 +5306,21 @@ h2 {
   }
 }
 
+@media (max-width: 719px) {
+  .worksheet-promo {
+    grid-template-columns: 1fr;
+  }
+
+  .worksheet-promo-mark {
+    grid-row: auto;
+  }
+
+  .worksheet-promo .primary-button {
+    grid-column: 1;
+    width: min(100%, 230px);
+  }
+}
+
 @media (min-width: 720px) {
   .site-header {
     padding: 28px 32px 12px;
@@ -5394,11 +5420,6 @@ h2 {
 
   .parent-info-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .worksheet-promo {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
   }
 
   .contact-grid,
@@ -6179,19 +6200,22 @@ h2 {
 
 .seo-shell {
   display: grid;
-  gap: var(--space-7);
+  gap: clamp(28px, 5vw, 56px);
+  padding-top: clamp(28px, 5vw, 56px);
+  padding-bottom: clamp(32px, 6vw, 72px);
 }
 
 .seo-hero {
   display: grid;
-  gap: var(--space-5);
-  border-radius: var(--radius-lg);
+  gap: clamp(22px, 4vw, 44px);
+  align-items: center;
+  border-radius: var(--radius-section);
   background:
     radial-gradient(circle at top right, rgba(255, 200, 61, 0.26), transparent 44%),
     linear-gradient(135deg, rgba(107, 59, 245, 0.1), rgba(77, 182, 255, 0.1)),
     #ffffff;
   box-shadow: var(--shadow-card);
-  padding: clamp(24px, 5vw, 44px);
+  padding: clamp(28px, 5vw, 56px);
 }
 
 .seo-hero h1 {
