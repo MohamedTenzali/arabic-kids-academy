@@ -566,27 +566,6 @@ if (lettersGrid && appLetters.length) {
   updateLettersProgress();
 }
 
-const lettersScrollButton = document.querySelector("[data-letters-scroll]");
-
-if (lettersScrollButton) {
-  const scrollTargetId = lettersScrollButton.dataset.scrollTarget || "letters-page-bottom";
-  const updateLettersScrollButton = () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const canScrollDown = scrollTop < 160;
-
-    lettersScrollButton.classList.toggle("is-up", !canScrollDown);
-    lettersScrollButton.href = canScrollDown ? `#${scrollTargetId}` : "#main-content";
-    lettersScrollButton.setAttribute(
-      "aria-label",
-      canScrollDown ? "Scroll naar beneden" : "Scroll naar boven",
-    );
-  };
-
-  updateLettersScrollButton();
-  window.addEventListener("scroll", updateLettersScrollButton, { passive: true });
-  window.addEventListener("resize", updateLettersScrollButton);
-}
-
 const letterSoundsIndex = document.querySelector("#letter-sounds-index");
 
 if (letterSoundsIndex && appLetters.length) {

@@ -328,6 +328,54 @@
     });
   };
 
+  const setupPageScrollButtons = () => {
+    const buttons = [...document.querySelectorAll(".back-to-top")];
+
+    if (!buttons.length) return;
+
+    let pageBottom = document.querySelector("#page-bottom");
+
+    if (!pageBottom) {
+      pageBottom = document.createElement("span");
+      pageBottom.id = "page-bottom";
+      pageBottom.setAttribute("aria-hidden", "true");
+      document.body.append(pageBottom);
+    }
+
+    const updateButtons = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const isUp = maxScroll <= 120 || scrollTop > 120;
+
+      buttons.forEach((button) => {
+        button.classList.toggle("is-up", isUp);
+        button.href = isUp ? "#main-content" : "#page-bottom";
+        button.setAttribute("aria-label", isUp ? "Terug naar boven" : "Scroll naar beneden");
+
+        const text = button.querySelector("span");
+        if (text) {
+          text.textContent = isUp ? "Terug naar boven" : "Scroll naar beneden";
+        }
+      });
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        const isUp = button.classList.contains("is-up");
+
+        window.scrollTo({
+          top: isUp ? 0 : document.documentElement.scrollHeight,
+          behavior: reduceMotion ? "auto" : "smooth",
+        });
+      });
+    });
+
+    updateButtons();
+    window.addEventListener("scroll", updateButtons, { passive: true });
+    window.addEventListener("resize", updateButtons);
+  };
+
   document.addEventListener("click", (event) => {
     const target = event.target.closest("button, .primary-button, .secondary-button, .level-card, .lesson-card, .roadmap-link, [data-audio-src]");
     playTapAnimation(target);
@@ -356,6 +404,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     renderMascot();
     markUnlockedLevels();
+    setupPageScrollButtons();
     document.body.classList.add("fade-in");
   });
 
