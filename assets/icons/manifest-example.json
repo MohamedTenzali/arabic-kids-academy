@@ -1,0 +1,26 @@
+{
+  "name": "arabicokids",
+  "short_name": "arabicokids",
+  "display": "standalone",
+  "background_color": "#6b3bf5",
+  "theme_color": "#6b3bf5",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/maskable-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
