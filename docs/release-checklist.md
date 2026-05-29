@@ -85,7 +85,7 @@ Vowel pages:
 When changing HTML, CSS, JS, data, manifest, PDFs, or service worker:
 
 - Bump relevant query strings in HTML, if used.
-- Bump `CACHE_VERSION` in `service-worker.js`.
+- Bump `CACHE_NAME` in `service-worker.js`.
 - Keep audio out of service-worker cache unless offline audio is intentionally added.
 - Keep all `CORE_CACHE` files present on disk; `node scripts/verify-static-assets.mjs` verifies this.
 - Verify PDF requests still bypass cache first, with cached fallback only for offline use.

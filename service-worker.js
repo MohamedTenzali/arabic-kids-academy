@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v-new-icons-001";
+const CACHE_NAME = "arabicokids-v2026-iconfix-01";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -45,13 +45,6 @@ const CORE_CACHE = [
   "icons/apple-touch-icon.png",
   "icons/icon-192.png",
   "icons/icon-512.png",
-  "assets/icons/apple-touch-icon.png",
-  "assets/icons/favicon-16.png",
-  "assets/icons/favicon-32.png",
-  "assets/icons/favicon.ico",
-  "assets/icons/icon-192.png",
-  "assets/icons/icon-512.png",
-  "assets/icons/maskable-icon-512.png",
   "images/icons/back-to-top.png",
   "images/books/mijn-arabische-letters-boekje-niveau-1.png.png",
   "images/books/mijn-arabische-letters-boekje-niveau-2.png.png",
@@ -184,7 +177,7 @@ self.addEventListener("message", (event) => {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
-      .open(CACHE_VERSION)
+      .open(CACHE_NAME)
       .then((cache) => cache.addAll(CORE_CACHE)),
   );
 });
@@ -194,7 +187,7 @@ self.addEventListener("activate", (event) => {
     caches
       .keys()
       .then((keys) =>
-        Promise.all(keys.filter((key) => key !== CACHE_VERSION).map((key) => caches.delete(key))),
+        Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))),
       )
       .then(() => self.clients.claim()),
   );
@@ -242,7 +235,7 @@ self.addEventListener("fetch", (event) => {
         .then((response) => {
           const utf8Response = withUtf8Headers(request, response);
           const copy = utf8Response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
           return utf8Response;
         })
         .catch(() =>
@@ -266,7 +259,7 @@ self.addEventListener("fetch", (event) => {
 
         if (utf8Response.ok) {
           const copy = utf8Response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
         }
 
         return utf8Response;
