@@ -1,4 +1,4 @@
-const CACHE_VERSION = "arabicokids-v73";
+const CACHE_VERSION = "arabicokids-v-new-icons-001";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -41,6 +41,10 @@ const CORE_CACHE = [
   "arabische-klanken/index.html",
   "robots.txt",
   "sitemap.xml",
+  "favicon.ico",
+  "icons/apple-touch-icon.png",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
   "assets/icons/apple-touch-icon.png",
   "assets/icons/favicon-16.png",
   "assets/icons/favicon-32.png",

@@ -4840,7 +4840,7 @@ h2 {
   }
 }
 
-@media (max-width: 719px) {
+@media (max-width: 768px) {
   :root {
     --touch-target: 48px;
     --radius-card: 18px;
@@ -4880,11 +4880,13 @@ h2 {
 
   .mascot-root {
     top: auto;
-    right: max(8px, env(safe-area-inset-right));
-    bottom: max(10px, env(safe-area-inset-bottom));
-    width: min(238px, calc(100vw - 16px));
-    transform: scale(0.88);
+    right: calc(12px + env(safe-area-inset-right));
+    bottom: calc(90px + env(safe-area-inset-bottom));
+    z-index: 20;
+    width: min(238px, calc(100vw - 24px));
+    transform: none;
     transform-origin: right bottom;
+    pointer-events: none;
   }
 
   .quiz-poppet {
@@ -4893,18 +4895,27 @@ h2 {
 
   .mascot {
     gap: var(--space-2);
+    pointer-events: none;
   }
 
   .mascot-svg {
-    width: 68px;
-    height: 68px;
+    width: 72px;
+    height: 72px;
+    max-width: 72px;
+    pointer-events: none;
   }
 
   .mascot-bubble {
-    max-width: 168px;
+    max-width: 230px;
     border-radius: var(--radius-md);
     font-size: 0.82rem;
     padding: 10px 12px;
+    pointer-events: none;
+  }
+
+  .back-to-top,
+  .pwa-update-notice {
+    bottom: calc(90px + env(safe-area-inset-bottom));
   }
 
   .mascot-bubble small {
@@ -5206,7 +5217,7 @@ h2 {
 
   .back-to-top {
     right: max(12px, env(safe-area-inset-right));
-    bottom: max(12px, env(safe-area-inset-bottom));
+    bottom: calc(90px + env(safe-area-inset-bottom));
     width: 50px;
     height: 50px;
   }
