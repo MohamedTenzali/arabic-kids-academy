@@ -101,6 +101,8 @@
   `;
 
   const renderMascot = (context = getContext()) => {
+    if (document.body?.dataset.noMascot === "true") return;
+
     let root = document.querySelector("#mascot-root");
 
     if (!root) {

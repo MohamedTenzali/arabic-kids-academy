@@ -34,13 +34,13 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="css/main.css?v=58">
+    <link rel="stylesheet" href="css/main.css?v=61">
     <script src="data/progress.js?v=26" defer></script>
     <script src="js/pwa-update.js?v=2" defer></script>
-    <script src="js/motion.js?v=24" defer></script>
+    <script src="js/motion.js?v=25" defer></script>
     <script src="js/app.js?v=45" defer></script>
   </head>
-  <body>
+  <body data-no-mascot="true">
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
     <header class="site-header">
       <a class="brand" href="/" aria-label="ArabicoKids homepagina">
@@ -52,225 +52,157 @@
       </a>
       <nav class="site-nav" aria-label="Hoofdnavigatie">
         <a href="/">Home</a>
-        <a href="pages/niveaus.html">Niveaus</a>
-        <a href="pages/roadmap.html?level=beginner">Lessen</a>
-        <a href="werkbladen.html" aria-current="page">Werkbladen</a>
-        <a href="pages/boeken.html">Boeken</a>
-        <a href="about.html">Over ons</a>
-        <a href="contact.html">Contact</a>
+        <a href="/pages/niveaus.html">Niveaus</a>
+        <a href="/pages/roadmap.html?level=beginner">Lessen</a>
+        <a href="/werkbladen.html" aria-current="page">Werkbladen</a>
+        <a href="/pages/boeken.html">Boeken</a>
+        <a href="/about.html">Over ons</a>
+        <a href="/contact.html">Contact</a>
       </nav>
     </header>
 
     <div class="motion-layer" id="motion-layer" aria-hidden="true"></div>
-    <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
-
     <main class="page-shell worksheets-shell" id="main-content">
-      <a class="secondary-button back-link" href="/">Terug naar home</a>
-
       <section class="worksheets-hero" aria-labelledby="worksheets-title">
-        <div>
-          <p class="eyebrow">Print en oefen</p>
-          <h1 id="worksheets-title">Werkbladen voor Arabisch leren</h1>
-          <p class="hero-text">
-            Download en print de gratis basisbladen voor letters en klanken. Premium werkbladen staan duidelijk gemarkeerd
-            als later beschikbaar; er is nu geen betaling of login nodig. Gebruik de PDF's naast de online lessen om Arabisch
-            oefenen thuis eenvoudig en herhaalbaar te maken.
-          </p>
+        <span class="worksheet-sparkle worksheet-sparkle-one" aria-hidden="true"></span>
+        <span class="worksheet-sparkle worksheet-sparkle-two" aria-hidden="true"></span>
+        <span class="worksheet-blob worksheet-blob-one" aria-hidden="true"></span>
+        <span class="worksheet-blob worksheet-blob-two" aria-hidden="true"></span>
+
+        <div class="worksheets-hero-copy">
+          <p class="eyebrow">Printbaar en speels</p>
+          <h1 id="worksheets-title">Arabische Werkbladen voor Kinderen</h1>
+          <p class="hero-text">Oefen letters, klanken en schrijven op een speelse manier.</p>
+          <div class="worksheet-hero-actions" aria-label="Werkbladen acties">
+            <a class="primary-button" href="#werkbladen-grid">Bekijk werkbladen</a>
+            <a class="secondary-button" href="/pages/boeken.html">Bekijk boekje</a>
+          </div>
         </div>
 
-        <div class="worksheet-hero-card" aria-hidden="true">
-          <span class="worksheet-hero-icon">PDF</span>
-          <strong>Letters</strong>
-          <span>Luister, herken en schrijf</span>
-        </div>
-      </section>
-
-      <section class="worksheet-section" aria-labelledby="free-worksheets-title">
-        <div class="section-heading">
-          <p class="eyebrow">Gratis</p>
-          <h2 id="free-worksheets-title">Gratis werkbladen</h2>
-          <p class="letter-meta">Begin direct met eenvoudige PDF-oefeningen.</p>
-        </div>
-
-        <div class="worksheet-grid">
-          <article class="worksheet-card">
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-letters.svg" alt="Voorbeeld van gratis letters werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge">Gratis</span>
-              <h3>Letters herkennen</h3>
-              <p>Een rustig startblad voor alif, baa en taa.</p>
-              <div class="worksheet-actions">
-                <a class="primary-button" href="pdf/worksheets/gratis-letters-placeholder.pdf" download>Download PDF</a>
-                <button class="secondary-button" type="button" onclick="window.print()">Print</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="worksheet-card">
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-sounds.svg" alt="Voorbeeld van gratis klanken werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge">Gratis</span>
-              <h3>Korte klanken</h3>
-              <p>Oefen fatha, kasra en damma met voorbeeldvakjes.</p>
-              <div class="worksheet-actions">
-                <a class="primary-button" href="pdf/worksheets/gratis-letters-placeholder.pdf" download>Download PDF</a>
-                <button class="secondary-button" type="button" onclick="window.print()">Print</button>
-              </div>
-            </div>
-          </article>
+        <div class="worksheet-hero-illustration" aria-hidden="true">
+          <span class="worksheet-hero-book">ب</span>
+          <span class="worksheet-hero-pencil"></span>
+          <span class="worksheet-hero-star">★</span>
+          <span class="worksheet-hero-letter" lang="ar" dir="rtl">ا</span>
+          <span class="worksheet-hero-letter worksheet-hero-letter-alt" lang="ar" dir="rtl">م</span>
         </div>
       </section>
 
-      <section class="worksheet-section" aria-labelledby="level-1-title">
+      <section class="worksheet-section worksheet-grid-section" aria-labelledby="worksheets-grid-title" id="werkbladen-grid">
         <div class="section-heading">
-          <p class="eyebrow">Niveau 1</p>
-          <h2 id="level-1-title">Level 1 werkbladen</h2>
-          <p class="letter-meta">Voor kinderen die net beginnen met letters herkennen en overtrekken.</p>
+          <p class="eyebrow">Direct downloaden</p>
+          <h2 id="worksheets-grid-title">Kies een werkblad</h2>
+          <p class="letter-meta">Rustige oefeningen voor thuis, de klas of extra herhaling naast de online lessen.</p>
         </div>
 
         <div class="worksheet-grid">
-          <article class="worksheet-card">
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-letters.svg" alt="Voorbeeld van niveau 1 lettervormen werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge">Niveau 1</span>
-              <h3>Lettervormen overtrekken</h3>
-              <p>Grote lijnen, duidelijke vakjes en veel schrijfruimte.</p>
-              <div class="worksheet-actions">
-                <a class="primary-button" href="pdf/worksheets/niveau-1-placeholder.pdf" download>Download PDF</a>
-                <button class="secondary-button" type="button" onclick="window.print()">Print</button>
-              </div>
-            </div>
+          <article class="worksheet-card worksheet-card-lavender">
+            <div class="worksheet-icon" aria-hidden="true">✎</div>
+            <span class="worksheet-badge">Beginner</span>
+            <h3>Arabische letters schrijven</h3>
+            <p>Oefen losse, begin-, midden- en eindvormen.</p>
+            <a class="primary-button" href="/pdf/worksheets/niveau-1-placeholder.pdf" download>Open PDF</a>
           </article>
 
-          <article class="worksheet-card">
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-words.svg" alt="Voorbeeld van niveau 1 woorden werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge">Niveau 1</span>
-              <h3>Eerste woorden</h3>
-              <p>Korte voorbeeldwoorden om letters in woorden te herkennen.</p>
-              <div class="worksheet-actions">
-                <a class="primary-button" href="pdf/worksheets/niveau-1-placeholder.pdf" download>Download PDF</a>
-                <button class="secondary-button" type="button" onclick="window.print()">Print</button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="worksheet-section" aria-labelledby="level-2-title">
-        <div class="section-heading">
-          <p class="eyebrow">Niveau 2</p>
-          <h2 id="level-2-title">Level 2 werkbladen</h2>
-          <p class="letter-meta">Klaar voor meer klanken en combinatie-oefeningen.</p>
-        </div>
-
-        <div class="worksheet-grid">
-          <article class="worksheet-card is-premium">
-            <span class="worksheet-lock" aria-label="Premium werkblad vergrendeld"></span>
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-sounds.svg" alt="Voorbeeld van niveau 2 klanken werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge worksheet-badge-premium">Premium</span>
-              <h3>Korte en lange klanken</h3>
-              <p>Meer herhaling met korte en lange klanken per letter.</p>
-              <div class="worksheet-actions">
-                <button class="primary-button is-disabled" type="button" disabled>Premium volgt later</button>
-                <button class="secondary-button is-disabled" type="button" disabled>Niet gratis beschikbaar</button>
-              </div>
-            </div>
+          <article class="worksheet-card worksheet-card-mint">
+            <div class="worksheet-icon" aria-hidden="true" lang="ar" dir="rtl">َ</div>
+            <span class="worksheet-badge">Niveau 1</span>
+            <h3>Korte klanken</h3>
+            <p>Leer fatha, damma en kasra herkennen.</p>
+            <a class="primary-button" href="/pdf/worksheets/gratis-letters-placeholder.pdf" download>Open PDF</a>
           </article>
 
-          <article class="worksheet-card is-premium">
-            <span class="worksheet-lock" aria-label="Premium werkblad vergrendeld"></span>
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-words.svg" alt="Voorbeeld van niveau 2 woordgroepen werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge worksheet-badge-premium">Premium</span>
-              <h3>Woordgroepen oefenen</h3>
-              <p>Combineer luisteren, herkennen en schrijven in een oefenblad.</p>
-              <div class="worksheet-actions">
-                <button class="primary-button is-disabled" type="button" disabled>Premium volgt later</button>
-                <button class="secondary-button is-disabled" type="button" disabled>Niet gratis beschikbaar</button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="worksheet-section" aria-labelledby="level-3-title">
-        <div class="section-heading">
-          <p class="eyebrow">Niveau 3</p>
-          <h2 id="level-3-title">Level 3 werkbladen</h2>
-          <p class="letter-meta">Voor kinderen die richting lezen en zinnen oefenen.</p>
-        </div>
-
-        <div class="worksheet-grid">
-          <article class="worksheet-card is-premium">
-            <span class="worksheet-lock" aria-label="Premium werkblad vergrendeld"></span>
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-words.svg" alt="Voorbeeld van niveau 3 lezen werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge worksheet-badge-premium">Premium</span>
-              <h3>Lezen met mini-zinnen</h3>
-              <p>Oefen eenvoudige zinnen met bekende letters en klanken.</p>
-              <div class="worksheet-actions">
-                <button class="primary-button is-disabled" type="button" disabled>Premium volgt later</button>
-                <button class="secondary-button is-disabled" type="button" disabled>Niet gratis beschikbaar</button>
-              </div>
-            </div>
+          <article class="worksheet-card worksheet-card-sky">
+            <div class="worksheet-icon" aria-hidden="true" lang="ar" dir="rtl">او ي</div>
+            <span class="worksheet-badge">Niveau 2</span>
+            <h3>Lange klanken</h3>
+            <p>Oefen alif, waw en yaa.</p>
+            <a class="primary-button" href="/pdf/worksheets/niveau-2-placeholder.pdf" download>Open PDF</a>
           </article>
 
-          <article class="worksheet-card is-premium">
-            <span class="worksheet-lock" aria-label="Premium werkblad vergrendeld"></span>
-            <img loading="lazy" decoding="async" src="images/worksheets/worksheet-sounds.svg" alt="Voorbeeld van niveau 3 mixquiz werkblad" class="worksheet-preview">
-            <div class="worksheet-card-copy">
-              <span class="worksheet-badge worksheet-badge-premium">Premium</span>
-              <h3>Mix quiz op papier</h3>
-              <p>Een printbare quiz met letters, klanken en woorden door elkaar.</p>
-              <div class="worksheet-actions">
-                <button class="primary-button is-disabled" type="button" disabled>Premium volgt later</button>
-                <button class="secondary-button is-disabled" type="button" disabled>Niet gratis beschikbaar</button>
-              </div>
-            </div>
+          <article class="worksheet-card worksheet-card-yellow">
+            <div class="worksheet-icon" aria-hidden="true">◇</div>
+            <span class="worksheet-badge">Gratis</span>
+            <h3>Letters herkennen</h3>
+            <p>Koppel letters aan klanken.</p>
+            <a class="primary-button" href="/pdf/worksheets/gratis-letters-placeholder.pdf" download>Open PDF</a>
+          </article>
+
+          <article class="worksheet-card worksheet-card-pink">
+            <div class="worksheet-icon" aria-hidden="true">?</div>
+            <span class="worksheet-badge">Quiz</span>
+            <h3>Mini quiz werkblad</h3>
+            <p>Printbare quiz voor thuis.</p>
+            <a class="primary-button" href="/pdf/worksheets/niveau-3-placeholder.pdf" download>Open PDF</a>
+          </article>
+
+          <article class="worksheet-card worksheet-card-green">
+            <div class="worksheet-icon" aria-hidden="true" lang="ar" dir="rtl">باب</div>
+            <span class="worksheet-badge">Woorden</span>
+            <h3>Woordjes oefenen</h3>
+            <p>Leer eenvoudige Arabische woorden.</p>
+            <a class="primary-button" href="/pdf/worksheets/niveau-1-placeholder.pdf" download>Open PDF</a>
           </article>
         </div>
       </section>
 
       <section class="worksheet-promo" aria-labelledby="workbook-promo-title">
-        <div>
-          <p class="eyebrow">Werkboek</p>
-          <h2 id="workbook-promo-title">Wil je alles in één boekje?</h2>
-          <p>
-            Het werkboek bundelt luisteren, herkennen en schrijven in een printbare PDF. Betalen of bestellen komt later,
-            maar je kunt het boekje nu alvast bekijken.
-          </p>
+        <div class="worksheet-book-mockup" aria-hidden="true">
+          <span class="premium-ribbon">Premium</span>
+          <strong>ArabicoKids</strong>
+          <span>Werkboek</span>
+          <span lang="ar" dir="rtl">ا ب ت</span>
         </div>
-        <a class="primary-button" href="pages/boeken.html">Bekijk boekje</a>
+        <div class="worksheet-promo-copy">
+          <p class="eyebrow">Alles gebundeld</p>
+          <h2 id="workbook-promo-title">Wil je alles in één boekje?</h2>
+          <p>Een rustig printboek met duidelijke opbouw voor kinderen die stap voor stap Arabisch leren.</p>
+          <ul class="worksheet-benefits" aria-label="Voordelen van het boekje">
+            <li>Printbaar</li>
+            <li>Stap voor stap</li>
+            <li>Geschikt voor beginners</li>
+            <li>Inclusief schrijfoefeningen</li>
+          </ul>
+          <a class="primary-button" href="/pages/boeken.html">Bekijk boekje</a>
+        </div>
       </section>
 
       <section class="parent-info" aria-labelledby="parent-info-title">
-        <p class="eyebrow">Voor ouders</p>
-        <h2 id="parent-info-title">Zo gebruik je de werkbladen</h2>
+        <div class="section-heading">
+          <p class="eyebrow">Voor ouders</p>
+          <h2 id="parent-info-title">Zo oefen je zonder stress</h2>
+        </div>
         <div class="parent-info-grid">
           <article>
-            <strong>1. Luister eerst</strong>
-            <p>Laat je kind de letter of klank eerst horen in de les.</p>
+            <span class="parent-step-icon" aria-hidden="true">1</span>
+            <strong>Luister</strong>
+            <p>Start met de letter of klank hardop horen.</p>
           </article>
           <article>
-            <strong>2. Herken samen</strong>
-            <p>Wijs de letters aan en spreek ze rustig samen uit.</p>
+            <span class="parent-step-icon" aria-hidden="true">2</span>
+            <strong>Herken</strong>
+            <p>Laat je kind dezelfde vorm aanwijzen.</p>
           </article>
           <article>
-            <strong>3. Schrijf kort</strong>
-            <p>Oefen liever kort en vrolijk dan te lang achter elkaar.</p>
+            <span class="parent-step-icon" aria-hidden="true">3</span>
+            <strong>Schrijf</strong>
+            <p>Oefen kort met duidelijke schrijfvakjes.</p>
+          </article>
+          <article>
+            <span class="parent-step-icon" aria-hidden="true">4</span>
+            <strong>Herhaal</strong>
+            <p>Herhaal op een ander moment in kleine stapjes.</p>
           </article>
         </div>
       </section>
 
-      <section class="parent-info" aria-labelledby="pdf-seo-title">
-        <p class="eyebrow">SEO route</p>
+      <section class="parent-info worksheet-route-block" aria-labelledby="pdf-seo-title">
+        <p class="eyebrow">Verder oefenen</p>
         <h2 id="pdf-seo-title">Arabisch oefenen PDF voor thuis</h2>
         <p>
           Zoek je printbare oefeningen? Bekijk ook de overzichtspagina
-          <a href="arabisch-oefenen-pdf/">Arabisch oefenen PDF</a>, of start eerst met
-          <a href="arabische-letters-kinderen/">Arabische letters voor kinderen</a>.
+          <a href="/arabisch-oefenen-pdf/">Arabisch oefenen PDF</a>, of start eerst met
+          <a href="/arabische-letters-kinderen/">Arabische letters voor kinderen</a>.
         </p>
       </section>
     </main>
@@ -287,11 +219,11 @@
           <h3>Navigatie</h3>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="pages/roadmap.html?level=beginner">Lessen</a></li>
-            <li><a href="werkbladen.html">Werkbladen</a></li>
-            <li><a href="about.html">Over ons</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="pages/privacy.html">Privacy</a></li>
+            <li><a href="/pages/roadmap.html?level=beginner">Lessen</a></li>
+            <li><a href="/werkbladen.html">Werkbladen</a></li>
+            <li><a href="/about.html">Over ons</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/pages/privacy.html">Privacy</a></li>
           </ul>
         </div>
 
@@ -300,6 +232,11 @@
           <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
           <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
           <p class="footer-premium-note">Gratis basis beschikbaar. Premium materiaal volgt later.</p>
+          <div class="footer-socials" aria-label="Social media">
+            <a href="https://instagram.com/arabicokids" aria-label="ArabicoKids op Instagram">IG</a>
+            <a href="https://youtube.com/@arabicokids" aria-label="ArabicoKids op YouTube">YT</a>
+            <a href="https://www.tiktok.com/@arabicokids" aria-label="ArabicoKids op TikTok">TT</a>
+          </div>
         </div>
       </div>
 
