@@ -1553,7 +1553,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
                 <path d="M18.5 7c1.4 1.3 2.2 3 2.2 5s-.8 3.7-2.2 5" />
               </svg>
             </span>
-            <span class="sound-name">Luister naar de vraag</span>
+            <span class="sound-name">Luister</span>
           </span>
         `,
       })}
@@ -1578,7 +1578,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
           .join("")}
       </div>
 
-      <p class="quiz-feedback" id="quiz-feedback" role="status">Luister eerst naar de vraag.</p>
+      <p class="quiz-feedback" id="quiz-feedback" role="status">Druk eerst op de luisterknop.</p>
       <button class="primary-button is-disabled" type="button" id="next-quiz-question" aria-disabled="true" disabled>Volgende vraag</button>
     `;
   };
@@ -1588,7 +1588,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
     if (answerButton) {
       if (!quizAudioReady) {
-        setText("#quiz-feedback", "Luister eerst naar de vraag.");
+        setText("#quiz-feedback", "Druk eerst op de luisterknop.");
         return;
       }
 
