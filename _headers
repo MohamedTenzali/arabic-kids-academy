@@ -1,6 +1,12 @@
 /*.html
   Content-Type: text/html; charset=UTF-8
 
+/manifest.json
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/service-worker.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
 /*/index.html
   Content-Type: text/html; charset=UTF-8
 

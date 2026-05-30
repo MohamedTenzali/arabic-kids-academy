@@ -1,7 +1,8 @@
 {
   "name": "ArabicoKids",
   "short_name": "ArabicoKids",
-  "start_url": "/",
+  "id": "/",
+  "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",

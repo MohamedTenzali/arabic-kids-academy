@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-iconfix-01";
+const CACHE_NAME = "arabicokids-v2";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -10,7 +10,6 @@ const CORE_CACHE = [
   "werkbladen.html",
   "about.html",
   "contact.html",
-  "manifest.json",
   "css/main.css",
   "data/letters.js",
   "data/progress.js",
@@ -206,6 +205,11 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  if (url.pathname.endsWith("/manifest.json") || url.pathname.endsWith("/service-worker.js")) {
+    event.respondWith(fetch(request, { cache: "no-store" }));
+    return;
+  }
+
   // Don't cache audio files - stream them directly
   if (isAudioRequest(request)) {
     return;
@@ -234,8 +238,12 @@ self.addEventListener("fetch", (event) => {
       fetch(request)
         .then((response) => {
           const utf8Response = withUtf8Headers(request, response);
-          const copy = utf8Response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+
+          if (utf8Response.ok) {
+            const copy = utf8Response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+
           return utf8Response;
         })
         .catch(() =>
