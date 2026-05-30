@@ -14,6 +14,22 @@ const levelStartPages = {
 const getLevelStartHref = (levelId) =>
   getPageHref(levelStartPages[levelId] || `roadmap.html?level=${encodeURIComponent(levelId)}`);
 
+document.querySelectorAll(".aka-footer .footer-contact").forEach((footerContact) => {
+  if (footerContact.querySelector(".footer-support-inline")) {
+    return;
+  }
+
+  const support = document.createElement("div");
+  support.className = "footer-support-inline";
+  support.innerHTML = `
+    <p class="footer-support-copy">Help ons gratis lessen en werkbladen maken voor kinderen.</p>
+    <a class="support-btn footer-support-btn" href="https://ko-fi.com/arabicokids" target="_blank" rel="noopener noreferrer">
+      ☕ Steun ArabicoKids
+    </a>
+  `;
+  footerContact.appendChild(support);
+});
+
 if (levelButtons.length && appProgress) {
   const selectedLevelId = appProgress.getSelectedLevel();
 

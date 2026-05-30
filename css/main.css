@@ -938,7 +938,8 @@ main {
 
 .footer-brand p,
 .footer-newsletter p,
-.footer-contact p {
+.footer-contact p,
+.footer-support-copy {
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.8;
   margin-bottom: 15px;
@@ -946,8 +947,7 @@ main {
 
 .footer-links h3,
 .footer-newsletter h3,
-.footer-contact h3,
-.footer-support h3 {
+.footer-contact h3 {
   margin: 0 0 18px;
   color: #ffffff;
   font-size: 1.25rem;
@@ -1007,17 +1007,12 @@ main {
   font-weight: 900;
 }
 
-.footer-support {
+.footer-support-inline {
   display: grid;
-  align-content: start;
   gap: 10px;
-}
-
-.footer-support p {
-  max-width: 28ch;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.7;
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .footer-socials {
