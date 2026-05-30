@@ -25,33 +25,33 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="ArabicoKids">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=58">
+    <link rel="stylesheet" href="../css/main.css?v=63">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=24" defer></script>
-    <script src="../js/app.js?v=45" defer></script>
+    <script src="../js/app.js?v=50" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="ArabicoKids homepagina">
-        <img class="brand-logo" src="/icons/icon-192.png" alt="ArabicoKids logo">
+      <a class="brand" href="../index.html" aria-label="ArabicoKids homepagina">
+        <img class="brand-logo" src="../icons/icon-192.png" alt="ArabicoKids logo">
         <span>
           <span class="brand-name">ArabicoKids</span>
           <span class="brand-subtitle">Arabisch leren voor kinderen</span>
         </span>
       </a>
       <nav class="site-nav" aria-label="Hoofdnavigatie">
-        <a href="/">Home</a>
+        <a href="../index.html">Home</a>
         <a href="niveaus.html">Niveaus</a>
         <a href="roadmap.html?level=beginner">Lessen</a>
         <a href="werkbladen.html">Werkbladen</a>
@@ -65,44 +65,72 @@
     <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
 
     <main class="page-shell contact-shell" id="main-content">
-      <a class="secondary-button back-link" href="/">Terug naar home</a>
+      <a class="secondary-button back-link" href="../index.html">Terug naar home</a>
 
       <section class="contact-hero contact-simple" aria-labelledby="contact-title">
         <p class="eyebrow">Voor ouders</p>
         <h1 id="contact-title">Contact</h1>
         <p class="hero-text">
-          Ouders kunnen ons bereiken via <a href="mailto:info@arabicokids.com">info@arabicokids.com</a>
-          voor vragen over lessen, werkbladen, audio of technische hulp.
+          Heb je een vraag over lessen, werkbladen, audio of technische hulp? Stuur ons gerust een bericht.
         </p>
-        <a class="primary-button" href="mailto:info@arabicokids.com">info@arabicokids.com</a>
+        <a class="primary-button" href="mailto:info@arabicokids.com">Mail ons</a>
+      </section>
+
+      <section class="contact-panel contact-form-panel" aria-labelledby="contact-form-title">
+        <div>
+          <p class="eyebrow">Bericht sturen</p>
+          <h2 id="contact-form-title">Stel je vraag</h2>
+          <p>Vul het formulier in. Je mail-app wordt geopend met je bericht klaar om te versturen.</p>
+        </div>
+        <!-- TODO: Vervang deze mailto-fallback later door echte formulierverwerking via een backend of Formspree endpoint. -->
+        <form class="contact-form" id="contact-form" action="mailto:info@arabicokids.com" method="post" enctype="text/plain">
+          <label class="form-row">
+            Naam ouder
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label class="form-row">
+            E-mailadres
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label class="form-row form-row-full">
+            Onderwerp
+            <input type="text" name="subject" required>
+          </label>
+          <label class="form-row form-row-full">
+            Bericht
+            <textarea name="message" rows="6" required></textarea>
+          </label>
+          <button class="primary-button contact-submit" type="submit">Bericht versturen</button>
+        </form>
       </section>
 
       <section class="contact-grid" aria-label="Contact informatie">
         <article class="contact-panel">
           <h2>Waarvoor kun je mailen?</h2>
           <ul class="contact-topic-list">
-            <li>vragen over lessen of levels</li>
-            <li>vragen over werkbladen of downloads</li>
-            <li>audio die niet goed afspeelt</li>
-            <li>technische problemen op mobiel, tablet of computer</li>
+            <li><span aria-hidden="true">ABC</span> vragen over lessen</li>
+            <li><span aria-hidden="true">PDF</span> hulp met downloads</li>
+            <li><span aria-hidden="true">AUD</span> audio werkt niet</li>
+            <li><span aria-hidden="true">FIX</span> technisch probleem</li>
+            <li><span aria-hidden="true">TIP</span> samenwerking of feedback</li>
           </ul>
         </article>
 
         <article class="contact-panel faq-panel" aria-labelledby="faq-title">
           <p class="eyebrow">FAQ</p>
-          <h2 id="faq-title">Korte uitleg</h2>
+          <h2 id="faq-title">Veelgestelde vragen</h2>
           <div class="faq-list">
             <details>
               <summary>Zijn de lessen gratis te gebruiken?</summary>
-              <p>Je kunt direct starten met de beschikbare lessen, audio, quizzen en werkbladen.</p>
+              <p>Ja, de basislessen zijn gratis beschikbaar. Later kunnen er extra premium werkboeken of materialen bijkomen.</p>
             </details>
             <details>
               <summary>Komen er extra werkbladen?</summary>
-              <p>Ja. De basis is gratis te gebruiken. Extra premium werkbladen en boekmateriaal volgen later; er is nu geen betaling of login actief.</p>
+              <p>Ja, we blijven nieuwe werkbladen en oefeningen toevoegen per niveau.</p>
             </details>
             <details>
               <summary>Wat doe ik bij een technisch probleem?</summary>
-              <p>Mail naar <a href="mailto:info@arabicokids.com">info@arabicokids.com</a> wat er misgaat, welke pagina je gebruikt en op welk apparaat je kijkt.</p>
+              <p>Mail ons met het apparaat, de browser en wat er precies fout gaat. Dan kunnen we gerichter helpen.</p>
             </details>
           </div>
         </article>
@@ -112,7 +140,7 @@
     <footer class="aka-footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <img loading="lazy" decoding="async" src="/icons/icon-192.png" alt="ArabicoKids logo" class="footer-logo">
+          <img loading="lazy" decoding="async" src="../icons/icon-192.png" alt="ArabicoKids logo" class="footer-logo">
           <h2>ArabicoKids</h2>
           <p>Kindvriendelijk Arabisch leren met letters, audio, quizzen, werkbladen en levels voor thuis.</p>
         </div>
@@ -120,7 +148,7 @@
         <div class="footer-links">
           <h3>Navigatie</h3>
           <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="../index.html">Home</a></li>
             <li><a href="roadmap.html?level=beginner">Lessen</a></li>
             <li><a href="werkbladen.html">Werkbladen</a></li>
             <li><a href="about.html">Over ons</a></li>

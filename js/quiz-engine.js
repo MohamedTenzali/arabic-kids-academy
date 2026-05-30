@@ -41,12 +41,13 @@ const createLetterQuiz = (letters, options = {}) => {
   const settings = {
     mode: quizModeConfig[options.mode] ? options.mode : "letters",
     difficulty: quizDifficultyChoices[options.difficulty] ? options.difficulty : "medium",
-    finishScore: options.finishScore || 20,
+    totalQuestions: options.totalQuestions || options.finishScore || 20,
   };
   let question = null;
   let questionCount = 0;
   let score = 0;
   let answered = false;
+  let lastAnswerId = "";
 
   const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
   const getLetterName = (letter) => letter.nameDutch || letter.nameNl || letter.id;
@@ -110,17 +111,19 @@ const createLetterQuiz = (letters, options = {}) => {
   const createQuestion = () => {
     pool = buildQuestionPool();
 
-    if (!pool.length || score >= settings.finishScore) {
+    if (!pool.length || questionCount >= settings.totalQuestions) {
       question = null;
       return null;
     }
 
-    const answer = pool[Math.floor(Math.random() * pool.length)];
+    const answerPool = pool.length > 1 ? pool.filter((item) => item.id !== lastAnswerId) : pool;
+    const answer = answerPool[Math.floor(Math.random() * answerPool.length)];
     const choiceCount = Math.min(quizDifficultyChoices[settings.difficulty], pool.length);
     const distractors = shuffle(pool.filter((item) => item.id !== answer.id)).slice(0, choiceCount - 1);
 
     questionCount += 1;
     answered = false;
+    lastAnswerId = answer.id;
     question = {
       answer,
       choices: shuffle([answer, ...distractors]),
@@ -139,16 +142,17 @@ const createLetterQuiz = (letters, options = {}) => {
 
     const isCorrect = question.answer.id === choiceId;
 
+    answered = true;
+
     if (isCorrect) {
-      answered = true;
-      score += 1;
+      score = Math.min(settings.totalQuestions, score + 1);
     }
 
     return {
       isCorrect,
       answer: question.answer,
       score,
-      isFinished: score >= settings.finishScore,
+      isFinished: questionCount >= settings.totalQuestions,
     };
   };
 
@@ -158,6 +162,7 @@ const createLetterQuiz = (letters, options = {}) => {
     questionCount = 0;
     score = 0;
     answered = false;
+    lastAnswerId = "";
   }
 
   return {
@@ -173,12 +178,13 @@ const createLetterQuiz = (letters, options = {}) => {
       return {
         answered,
         difficulty: settings.difficulty,
-        finishScore: settings.finishScore,
-        isFinished: score >= settings.finishScore,
+        finishScore: settings.totalQuestions,
+        isFinished: questionCount >= settings.totalQuestions,
         mode: settings.mode,
         modeLabel: quizModeConfig[settings.mode].label,
         questionCount,
-        score,
+        score: Math.max(0, score),
+        totalQuestions: settings.totalQuestions,
         choiceCount: Math.min(quizDifficultyChoices[settings.difficulty], pool.length),
       };
     },

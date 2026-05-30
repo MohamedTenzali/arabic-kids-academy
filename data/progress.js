@@ -19,7 +19,7 @@ const learningLevels = [
       },
       {
         id: "short-vowels",
-        title: "Korte klanken",
+        title: "Korte Klanken",
         description: "Oefen fatha, kasra en damma per letter.",
         href: "vowels.html?type=short",
       },
@@ -32,13 +32,13 @@ const learningLevels = [
       },
       {
         id: "long-vowels",
-        title: "Lange klanken",
+        title: "Lange Klanken",
         description: "Oefen aa, ie en oe per letter.",
         href: "vowels.html?type=long",
       },
       {
         id: "long-vowels-quiz",
-        title: "Lange klanken Quiz",
+        title: "Lange Klanken Quiz",
         description: "Test aa, ie en oe tot je genoeg punten hebt.",
         href: "quiz.html?mode=long",
         requires: "long-vowels",

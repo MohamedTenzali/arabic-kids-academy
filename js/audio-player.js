@@ -7,11 +7,11 @@ const createAudioPlayer = () => {
   let playRequestId = 0;
 
   const defaultMessages = {
-    idle: "Luister",
+    idle: "",
     loading: "Laden...",
     playing: "Speelt",
-    missing: "Audio mist",
-    blocked: "Tik nog een keer",
+    missing: "Geluid kon niet starten. Tik opnieuw.",
+    blocked: "Geluid kon niet starten. Tik opnieuw.",
   };
 
   const setStatus = (button, message) => {

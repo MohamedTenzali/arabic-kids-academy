@@ -25,35 +25,35 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="ArabicoKids">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=58">
+    <link rel="stylesheet" href="../css/main.css?v=59">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../data/letters.js?v=12" defer></script>
-    <script src="../js/audio-player.js?v=23" defer></script>
+    <script src="../js/audio-player.js?v=24" defer></script>
     <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=24" defer></script>
-    <script src="../js/app.js?v=46" defer></script>
+    <script src="../js/app.js?v=47" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="ArabicoKids homepagina">
-        <img class="brand-logo" src="/icons/icon-192.png" alt="ArabicoKids logo">
+      <a class="brand" href="../index.html" aria-label="ArabicoKids homepagina">
+        <img class="brand-logo" src="../icons/icon-192.png" alt="ArabicoKids logo">
         <span>
           <span class="brand-name">ArabicoKids</span>
           <span class="brand-subtitle">Arabisch leren voor kinderen</span>
         </span>
       </a>
       <nav class="site-nav" aria-label="Hoofdnavigatie">
-        <a href="/">Home</a>
+        <a href="../index.html">Home</a>
         <a href="niveaus.html">Niveaus</a>
         <a href="roadmap.html?level=beginner">Lessen</a>
         <a href="werkbladen.html">Werkbladen</a>
@@ -81,20 +81,31 @@
         <p class="eyebrow">Beginner</p>
         <h1 id="letters-title">Arabische letters</h1>
         <p class="hero-text">
-          Bekijk elke letter en druk op luisteren om de uitspraak te horen. Deze pagina helpt kinderen het Arabische alfabet
-          stap voor stap herkennen voordat ze verdergaan met klanken en schrijven.
+          Begin bij Alif en ga rustig letter voor letter verder. Kijk naar de vorm, luister naar de uitspraak en open daarna
+          het schrijfblad om de letter met je hand te oefenen.
         </p>
 
         <section class="letters-progress-card" aria-labelledby="letters-progress-title">
           <div>
             <p class="eyebrow">Jouw voortgang</p>
             <h2 id="letters-progress-title">Luister naar alle letters</h2>
-            <p>Luister naar alle letters en ontdek stap voor stap het Arabische alfabet.</p>
+            <p>Druk op elke luisterknop. Als alle letters beluisterd zijn, kun je door naar de quiz.</p>
             <p id="letters-progress-text">Je hebt nog 0 van de 28 letters beluisterd.</p>
           </div>
-          <div class="letters-progress-meter" aria-hidden="true">
+          <div
+            class="letters-progress-meter"
+            id="letters-progress-meter"
+            role="progressbar"
+            aria-label="Voortgang letters beluisteren"
+            aria-valuemin="0"
+            aria-valuemax="28"
+            aria-valuenow="0"
+          >
             <span id="letters-progress-fill"></span>
           </div>
+          <a class="primary-button letters-progress-cta" id="letters-progress-cta" href="quiz.html" hidden>
+            Naar de quiz
+          </a>
           <div class="letters-writing-copy">
             <h2>Oefen schrijven</h2>
             <p>Oefening baart kunst! Download de PDF-werkbladen van de letters en leer stap voor stap Arabisch schrijven.</p>
@@ -120,7 +131,7 @@
     <footer class="aka-footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <img loading="lazy" decoding="async" src="/icons/icon-192.png" alt="ArabicoKids logo" class="footer-logo">
+          <img loading="lazy" decoding="async" src="../icons/icon-192.png" alt="ArabicoKids logo" class="footer-logo">
           <h2>ArabicoKids</h2>
           <p>Kindvriendelijk Arabisch leren met letters, audio, quizzen, werkbladen en levels voor thuis.</p>
         </div>
@@ -128,7 +139,7 @@
         <div class="footer-links">
           <h3>Navigatie</h3>
           <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="../index.html">Home</a></li>
             <li><a href="roadmap.html?level=beginner">Lessen</a></li>
             <li><a href="werkbladen.html">Werkbladen</a></li>
             <li><a href="about.html">Over ons</a></li>

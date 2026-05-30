@@ -1,10 +1,18 @@
 const levelButtons = document.querySelectorAll("[data-level]");
 const selectedLevelText = document.querySelector("#selected-level");
 const startLink = document.querySelector(".start-link");
+const contactForm = document.querySelector("#contact-form");
 const appProgress = window.progressStore;
 const appLevels = window.learningLevels || [];
 const isPagesPath = window.location.pathname.includes("/pages/");
 const getPageHref = (page) => `${isPagesPath ? "" : "pages/"}${page}`;
+const levelStartPages = {
+  beginner: "letters.html",
+  advanced: "vowels.html?type=short&level=advanced",
+  expert: "quiz.html?mode=mixed&level=expert",
+};
+const getLevelStartHref = (levelId) =>
+  getPageHref(levelStartPages[levelId] || `roadmap.html?level=${encodeURIComponent(levelId)}`);
 
 if (levelButtons.length && appProgress) {
   const selectedLevelId = appProgress.getSelectedLevel();
@@ -35,7 +43,7 @@ if (levelButtons.length && appProgress) {
     }
     startLink.classList.remove("is-disabled");
     startLink.removeAttribute("aria-disabled");
-    startLink.href = getPageHref(`roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`);
+    startLink.href = getLevelStartHref(selectedLevel.id);
   }
 }
 
@@ -63,12 +71,30 @@ levelButtons.forEach((button) => {
     if (startLink) {
       startLink.classList.remove("is-disabled");
       startLink.removeAttribute("aria-disabled");
-      startLink.href = getPageHref(`roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`);
+      startLink.href = getLevelStartHref(selectedLevel.id);
     }
-
-    window.location.href = getPageHref(`roadmap.html?level=${encodeURIComponent(selectedLevel.id)}`);
   });
 });
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const subject = String(formData.get("subject") || "Vraag via ArabicoKids").trim();
+    const message = String(formData.get("message") || "").trim();
+    const body = [
+      `Naam ouder: ${name}`,
+      `E-mailadres: ${email}`,
+      "",
+      message,
+    ].join("\n");
+
+    window.location.href = `mailto:info@arabicokids.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
 
 const roadmapLevelText = document.querySelector("#roadmap-level");
 const roadmapList = document.querySelector("#roadmap-list");
@@ -89,24 +115,33 @@ if (roadmapList && appProgress) {
   const nextStep = appProgress.getNextStep(selectedLevel.id);
 
   if (roadmapLevelText) {
-    roadmapLevelText.textContent = `Je leerroute: ${selectedLevel.name}. Speel alle levels vrij in de juiste volgorde.`;
+    roadmapLevelText.textContent = "Volg de stappen rustig op volgorde: letters, klanken en quizzen.";
   }
 
   if (roadmapProgress) {
     roadmapProgress.innerHTML = `
       <span class="roadmap-progress-label">Voortgang</span>
       <strong>${levelProgress.percent}%</strong>
-      <div class="progress-bar roadmap-progress-track" aria-label="${levelProgress.completed} van ${levelProgress.total} stappen klaar">
+      <p>${levelProgress.completed} van ${levelProgress.total} stappen klaar</p>
+      <div
+        class="progress-bar roadmap-progress-track"
+        role="progressbar"
+        aria-label="Voortgang leerroute"
+        aria-valuemin="0"
+        aria-valuemax="${levelProgress.total}"
+        aria-valuenow="${levelProgress.completed}"
+        aria-valuetext="${levelProgress.completed} van ${levelProgress.total} stappen klaar"
+      >
         <span style="width: ${levelProgress.percent}%"></span>
       </div>
-      <p>${levelProgress.completed} / ${levelProgress.total} levels klaar</p>
+      <p class="roadmap-next-inline">Volgende stap: ${nextStep?.title || "Alles klaar"}</p>
     `;
   }
 
   if (roadmapNextStep) {
     roadmapNextStep.textContent = nextStep
-      ? `Volgende level: ${nextStep.title}`
-      : `Alle ${selectedLevel.name.toLowerCase()} levels zijn klaar.`;
+      ? `Volgende stap: ${nextStep.title}`
+      : `Alle stappen van ${selectedLevel.name.toLowerCase()} zijn klaar.`;
   }
 
   const beginnerItems = selectedLevel.steps
@@ -115,18 +150,24 @@ if (roadmapList && appProgress) {
       const isUnlocked = appProgress.isStepUnlocked(selectedLevel, index);
       const stars = appProgress.getStepStars(selectedLevel.id, step.id);
       const stateText = isComplete ? "Klaar" : isUnlocked ? "Open" : "Op slot";
+      const statusIcon = isComplete ? "OK" : isUnlocked ? "Start" : "Slot";
+      const actionText = isComplete ? "Opnieuw oefenen" : isUnlocked ? "Start stap" : "Op slot";
       const stepNumber = step.levelNumber || index + 1;
       const cardContent = `
-        <span class="roadmap-node" aria-hidden="true">${isComplete ? "OK" : isUnlocked ? stepNumber : "Slot"}</span>
+        <span class="roadmap-node" aria-hidden="true">${stepNumber}</span>
         <span class="roadmap-card-copy">
           <strong>Level ${stepNumber}: ${step.title}</strong>
           <span>${step.description}</span>
         </span>
         <span class="roadmap-card-meta">
+          <span class="roadmap-status-chip" aria-label="Status: ${stateText}">
+            <span aria-hidden="true">${statusIcon}</span>
+            ${stateText}
+          </span>
           <span class="star-badge roadmap-stars" aria-label="${stars} van 3 sterren">
             <span aria-hidden="true">${Array.from({ length: 3 }, (_, starIndex) => (starIndex < stars ? "&#9733;" : "&#9734;")).join("")}</span>
           </span>
-          <em>${stateText}</em>
+          <em>${actionText}</em>
         </span>
       `;
 
@@ -337,6 +378,8 @@ const saveListenedLetters = (listenedLetters) => {
 const updateLettersProgress = () => {
   const progressText = document.querySelector("#letters-progress-text");
   const progressFill = document.querySelector("#letters-progress-fill");
+  const progressMeter = document.querySelector("#letters-progress-meter");
+  const progressCta = document.querySelector("#letters-progress-cta");
 
   if (!progressText || !progressFill || !appLetters.length) {
     return;
@@ -346,8 +389,18 @@ const updateLettersProgress = () => {
   const completedCount = appLetters.filter((letter) => listenedLetters.has(letter.id)).length;
   const percent = Math.round((completedCount / appLetters.length) * 100);
 
-  progressText.textContent = `Je hebt nog ${completedCount} van de ${appLetters.length} letters beluisterd.`;
+  progressText.textContent =
+    completedCount === appLetters.length
+      ? `Knap gedaan: je hebt alle ${appLetters.length} letters beluisterd.`
+      : `Je hebt ${completedCount} van de ${appLetters.length} letters beluisterd.`;
   progressFill.style.width = `${percent}%`;
+  progressMeter?.setAttribute("aria-valuemax", String(appLetters.length));
+  progressMeter?.setAttribute("aria-valuenow", String(completedCount));
+  progressMeter?.setAttribute("aria-valuetext", `${completedCount} van ${appLetters.length} letters beluisterd`);
+
+  if (progressCta) {
+    progressCta.hidden = completedCount !== appLetters.length;
+  }
 
   document.querySelectorAll("[data-letter-id]").forEach((card) => {
     card.classList.toggle("is-complete", listenedLetters.has(card.dataset.letterId));
@@ -433,7 +486,15 @@ const markVowelPracticed = (vowelKey) => {
   updateVowelsProgress();
 };
 
-const renderAudioButton = ({ src, label = "Luister", ariaLabel, className = "sound-button", content, attributes = "" }) => `
+const renderAudioButton = ({
+  src,
+  label = "Luister",
+  ariaLabel,
+  className = "sound-button",
+  content,
+  attributes = "",
+  statusLabel = "",
+}) => `
   <button
     class="${className}"
     type="button"
@@ -442,7 +503,7 @@ const renderAudioButton = ({ src, label = "Luister", ariaLabel, className = "sou
     ${attributes}
   >
     ${content}
-    <span class="sound-status" data-audio-status>${label}</span>
+    <span class="sound-status" data-audio-status aria-live="polite">${statusLabel}</span>
   </button>
 `;
 
@@ -453,7 +514,15 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  playAudio(button.dataset.audioSrc, { button });
+  const playResult = playAudio(button.dataset.audioSrc, { button });
+
+  if (button.closest("#quiz-card")) {
+    playResult.then((didPlay) => {
+      if (didPlay) {
+        button.dispatchEvent(new CustomEvent("aka:quiz-audio-ready", { bubbles: true }));
+      }
+    });
+  }
 
   if (button.closest(".letter-card, .sound-letter-card")) {
     dispatchAppEvent("aka:letter-tap", {
@@ -467,7 +536,11 @@ document.addEventListener("click", (event) => {
     letterCard.classList.remove("is-tapped");
     void letterCard.offsetWidth;
     letterCard.classList.add("is-tapped");
-    markLetterListened(letterCard.dataset.letterId);
+    playResult.then((didPlay) => {
+      if (didPlay) {
+        markLetterListened(letterCard.dataset.letterId);
+      }
+    });
   }
 
   const vowelKey = button.dataset.vowelKey;
@@ -478,7 +551,11 @@ document.addEventListener("click", (event) => {
     void soundCard?.offsetWidth;
     soundCard?.classList.add("is-tapped", "is-active-sound");
     window.setTimeout(() => soundCard?.classList.remove("is-active-sound"), 900);
-    markVowelPracticed(vowelKey);
+    playResult.then((didPlay) => {
+      if (didPlay) {
+        markVowelPracticed(vowelKey);
+      }
+    });
   }
 });
 
@@ -512,8 +589,13 @@ if (lettersGrid && appLetters.length) {
   appProgress?.completeStep("beginner", "letters");
 
   const letterCards = appLetters
+    .slice()
+    .sort((firstLetter, secondLetter) => firstLetter.order - secondLetter.order)
     .map((letter) => {
+      // TODO: When a new letter is added, add its own worksheet PDF before relying on the fallback link.
       const worksheetPath = getLetterWorksheetPath(letter);
+      const letterName = getLetterName(letter);
+      const pronunciation = letter.transliteration || letterName.toLowerCase();
 
       return `
         <article class="lesson-card letter-card" data-letter-id="${escapeAttribute(letter.id)}">
@@ -524,13 +606,13 @@ if (lettersGrid && appLetters.length) {
           </span>
           <p class="letter-symbol" lang="ar" dir="rtl">${letter.arabic}</p>
           <div>
-            <h2>${getLetterName(letter)}</h2>
-            <p class="letter-meta">${letter.transliteration}</p>
+            <h2>${letterName}</h2>
+            <p class="letter-meta">Klinkt als: <strong>${pronunciation}</strong></p>
           </div>
           <div class="letter-card-actions">
             ${renderAudioButton({
               src: letter.baseAudio,
-              ariaLabel: `Luister naar de letter ${getLetterName(letter)}`,
+              ariaLabel: `Luister naar de letter ${letterName}`,
               className: "sound-button letter-audio-button",
               content: `
                 <span class="letter-button-icon" aria-hidden="true">
@@ -545,7 +627,7 @@ if (lettersGrid && appLetters.length) {
             })}
             ${
               worksheetPath
-                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" download aria-label="Download oefenblad voor ${getLetterName(letter)}">
+                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" download aria-label="Oefen schrijven met de letter ${letterName}">
                     <span class="letter-button-icon" aria-hidden="true">
                       <svg viewBox="0 0 24 24" focusable="false">
                         <path d="M4 20h5l10-10a2.8 2.8 0 0 0-4-4L5 16l-1 4Z" />
@@ -554,7 +636,15 @@ if (lettersGrid && appLetters.length) {
                     </span>
                     <span class="sound-name">Oefen schrijven</span>
                   </a>`
-                : ""
+                : `<a class="sound-button letter-write-button" href="werkbladen.html" aria-label="Bekijk schrijfwerkbladen voor de letter ${letterName}">
+                    <span class="letter-button-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M4 20h5l10-10a2.8 2.8 0 0 0-4-4L5 16l-1 4Z" />
+                        <path d="M13.5 7.5l3 3" />
+                      </svg>
+                    </span>
+                    <span class="sound-name">Oefen schrijven</span>
+                  </a>`
             }
           </div>
         </article>
@@ -1239,8 +1329,8 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
   const initialQuizMode = pageParams.get("mode") || "letters";
   const quiz = window.createLetterQuiz(appLetters, {
     difficulty: "medium",
-    finishScore: 20,
     mode: initialQuizMode,
+    totalQuestions: 20,
   });
   const modeOptions = [
     ["letters", "Letters"],
@@ -1256,7 +1346,38 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
   let quizStreak = 0;
   let correctAnswers = 0;
   let wrongAnswers = 0;
+  let quizAudioReady = false;
+  let quizAnswered = false;
   const quizMistakeCounts = new Map();
+
+  const playQuizTone = () => {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) {
+      return;
+    }
+
+    try {
+      const context = new AudioContextClass();
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      const now = context.currentTime;
+
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(660, now);
+      oscillator.frequency.exponentialRampToValueAtTime(880, now + 0.14);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.08, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      oscillator.start(now);
+      oscillator.stop(now + 0.24);
+      window.setTimeout(() => context.close?.(), 320);
+    } catch {
+      // Quiz feedback should keep working even when the browser blocks WebAudio.
+    }
+  };
 
   const resetQuizSessionStats = () => {
     quizStreak = 0;
@@ -1267,16 +1388,18 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
   const renderQuizProgress = () => {
     const state = quiz.state;
-    const percent = Math.min(100, Math.round((state.score / state.finishScore) * 100));
+    const totalQuestions = state.totalQuestions || state.finishScore || 20;
+    const currentQuestion = Math.min(Math.max(state.questionCount, 1), totalQuestions);
+    const percent = Math.min(100, Math.round((currentQuestion / totalQuestions) * 100));
 
     return `
       <div class="quiz-progress" aria-label="Quiz voortgang">
         <div class="quiz-progress-copy">
-          <span>Vraag ${state.questionCount}</span>
-          <strong>${state.score} / ${state.finishScore} punten</strong>
+          <span>Vraag ${currentQuestion} van ${totalQuestions}</span>
+          <strong>${state.score} / ${totalQuestions} punten</strong>
           <em class="quiz-streak" aria-live="polite">${quizStreak ? `${quizStreak} goed op rij` : "Start je reeks"}</em>
         </div>
-        <div class="progress-bar quiz-progress-track" aria-hidden="true">
+        <div class="progress-bar quiz-progress-track" role="progressbar" aria-label="Quiz voortgang" aria-valuemin="0" aria-valuemax="${totalQuestions}" aria-valuenow="${currentQuestion}">
           <span style="width: ${percent}%"></span>
         </div>
       </div>
@@ -1310,6 +1433,15 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
   const renderQuizResult = () => {
     const state = quiz.state;
+    const totalQuestions = state.totalQuestions || state.finishScore || 20;
+    const scorePercent = Math.min(100, Math.round((state.score / totalQuestions) * 100));
+    const resultMessage = state.score >= 18
+      ? "Geweldig gedaan!"
+      : state.score >= 12
+        ? "Goed bezig!"
+        : "Blijf oefenen!";
+    const starCount = state.score >= 18 ? 3 : state.score >= 12 ? 2 : state.score > 0 ? 1 : 0;
+    const stars = Array.from({ length: 3 }, (_, index) => `<span aria-hidden="true">${index < starCount ? "&#9733;" : "&#9734;"}</span>`).join("");
     const completedQuizSteps = {
       letters: "letter-quiz",
       short: "short-vowels-quiz",
@@ -1335,15 +1467,17 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       ${renderQuizControls()}
       <div class="quiz-result">
         <p class="eyebrow">Klaar</p>
-        <h2>Je hebt ${state.score} punten gehaald</h2>
-        <div class="progress-bar quiz-progress-track" aria-label="Eindscore 100%">
-          <span style="width: 100%"></span>
+        <h2>${resultMessage}</h2>
+        <p class="letter-meta">Je eindscore is ${state.score} van ${totalQuestions} punten.</p>
+        <div class="quiz-stars" aria-label="${starCount} van 3 sterren">${stars}</div>
+        <div class="progress-bar quiz-progress-track" role="progressbar" aria-label="Eindscore" aria-valuemin="0" aria-valuemax="${totalQuestions}" aria-valuenow="${state.score}">
+          <span style="width: ${scorePercent}%"></span>
         </div>
         <div class="quiz-result-stats" aria-label="Quiz resultaat">
           <span><strong>${correctAnswers}</strong> goed</span>
           <span><strong>${wrongAnswers}</strong> nog oefenen</span>
         </div>
-        <p class="letter-meta">Mooi geoefend. Elke ronde maakt letters en klanken vertrouwder.</p>
+        <p class="letter-meta">Luister nog eens naar moeilijke letters en speel daarna opnieuw.</p>
         <div class="quiz-result-actions">
           <button class="primary-button" type="button" id="restart-quiz">Opnieuw spelen</button>
           <a class="secondary-button" href="roadmap.html?level=beginner">Terug naar leerroute</a>
@@ -1360,6 +1494,9 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       renderQuizResult();
       return;
     }
+
+    quizAudioReady = false;
+    quizAnswered = false;
 
     quizCard.innerHTML = `
       ${renderQuizControls()}
@@ -1395,7 +1532,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         ${question.choices
           .map(
             (choice) => `
-              <button class="sound-button quiz-choice" type="button" data-quiz-answer="${choice.id}" aria-label="${escapeAttribute(`Kies ${choice.title}: ${choice.subtitle}`)}">
+              <button class="sound-button quiz-choice is-locked" type="button" data-quiz-answer="${choice.id}" aria-label="${escapeAttribute(`Kies ${choice.title}: ${choice.subtitle}`)}" aria-disabled="true" disabled>
                 <span class="sound-example" lang="ar" dir="rtl">${choice.arabic}</span>
                 <span class="sound-name">${choice.title}</span>
                 <span class="sound-copy">${choice.subtitle}</span>
@@ -1406,8 +1543,8 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
           .join("")}
       </div>
 
-      <p class="quiz-feedback" id="quiz-feedback" role="status"></p>
-      <button class="primary-button is-disabled" type="button" id="next-quiz-question" disabled>Volgende vraag</button>
+      <p class="quiz-feedback" id="quiz-feedback" role="status">Luister eerst naar de vraag.</p>
+      <button class="primary-button is-disabled" type="button" id="next-quiz-question" aria-disabled="true" disabled>Volgende vraag</button>
     `;
   };
 
@@ -1415,6 +1552,15 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
     const answerButton = event.target.closest("[data-quiz-answer]");
 
     if (answerButton) {
+      if (!quizAudioReady) {
+        setText("#quiz-feedback", "Luister eerst naar de vraag.");
+        return;
+      }
+
+      if (quizAnswered) {
+        return;
+      }
+
       const result = quiz.answerQuestion(answerButton.dataset.quizAnswer);
 
       if (!result) {
@@ -1423,19 +1569,25 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
       const nextButton = document.querySelector("#next-quiz-question");
       const choices = quizCard.querySelectorAll("[data-quiz-answer]");
+      const feedback = quizCard.querySelector("#quiz-feedback");
+      quizAnswered = true;
 
       if (result.isCorrect) {
         quizStreak += 1;
         correctAnswers += 1;
+        playQuizTone();
 
         choices.forEach((choice) => {
           choice.disabled = true;
+          choice.setAttribute("aria-disabled", "true");
           choice.classList.toggle("is-playing", choice.dataset.quizAnswer === result.answer.id);
           choice.classList.toggle("is-correct", choice.dataset.quizAnswer === result.answer.id);
-          choice.classList.remove("is-missing", "is-wrong");
+          choice.classList.remove("is-locked", "is-missing", "is-wrong");
         });
 
-        setText("#quiz-feedback", `Goed gedaan! ${quizStreak} goed op rij.`);
+        setText("#quiz-feedback", "Goed gedaan!");
+        feedback?.classList.remove("is-wrong");
+        feedback?.classList.add("is-correct");
       } else {
         quizStreak = 0;
         wrongAnswers += 1;
@@ -1444,12 +1596,15 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
         choices.forEach((choice) => {
           choice.disabled = true;
+          choice.setAttribute("aria-disabled", "true");
           choice.classList.toggle("is-correct", choice.dataset.quizAnswer === result.answer.id);
           choice.classList.toggle("is-wrong", choice === answerButton);
-          choice.classList.remove("is-playing");
+          choice.classList.remove("is-locked", "is-playing");
         });
         answerButton.classList.add("is-wrong", "is-missing");
-        setText("#quiz-feedback", "Bijna. Het juiste antwoord is gemarkeerd, probeer de volgende.");
+        setText("#quiz-feedback", "Probeer de volgende!");
+        feedback?.classList.remove("is-correct");
+        feedback?.classList.add("is-wrong");
       }
 
       dispatchAppEvent("aka:quiz-answer", {
@@ -1460,6 +1615,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
       if (nextButton) {
         nextButton.disabled = false;
+        nextButton.removeAttribute("aria-disabled");
         nextButton.classList.remove("is-disabled");
         nextButton.classList.add("is-ready");
         nextButton.textContent = result.isFinished ? "Bekijk resultaat" : "Volgende vraag";
@@ -1467,6 +1623,12 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
     }
 
     if (event.target.closest("#next-quiz-question")) {
+      const nextButton = event.target.closest("#next-quiz-question");
+
+      if (nextButton.disabled) {
+        return;
+      }
+
       renderQuestion();
     }
 
@@ -1475,6 +1637,20 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       resetQuizSessionStats();
       renderQuestion();
     }
+  });
+
+  quizCard.addEventListener("aka:quiz-audio-ready", () => {
+    if (quizAnswered) {
+      return;
+    }
+
+    quizAudioReady = true;
+    quizCard.querySelectorAll("[data-quiz-answer]").forEach((choice) => {
+      choice.disabled = false;
+      choice.removeAttribute("aria-disabled");
+      choice.classList.remove("is-locked");
+    });
+    setText("#quiz-feedback", "Kies nu het juiste antwoord.");
   });
 
   quizCard.addEventListener("change", (event) => {
