@@ -219,7 +219,7 @@ const audioPlayer = window.audioPlayer;
 const playAudio = window.playAudio || ((src, options = {}) => audioPlayer?.play(src, options.button));
 const preloadAudio = window.preloadAudio || (() => false);
 const pageParams = new URLSearchParams(window.location.search);
-const activeVowelGroup = pageParams.get("type");
+const activeVowelGroup = pageParams.get("type") || document.body.dataset.vowelGroup || null;
 const activeLearningLevelId = pageParams.get("level") || appProgress?.getSelectedLevel() || "beginner";
 const activeProgressLevelId = appProgress?.getLevel(activeLearningLevelId)?.id || "beginner";
 
@@ -461,8 +461,10 @@ const updateVowelsProgress = () => {
   const items = getVowelPracticeItems();
   const completedCount = items.filter((item) => practicedVowels.has(item.key)).length;
   const percent = items.length ? Math.round((completedCount / items.length) * 100) : 0;
+  const isShortVowels = activeVowelGroup === "short";
+  const progressLabel = isShortVowels ? "korte klanken" : "klanken";
 
-  progressText.textContent = `Je hebt ${completedCount} van ${items.length} klanken geoefend.`;
+  progressText.textContent = `Je hebt ${completedCount} van ${items.length} ${progressLabel} geoefend.`;
   progressFill.style.width = `${percent}%`;
 
   document.querySelectorAll("[data-vowel-key]").forEach((button) => {
@@ -484,6 +486,12 @@ const markVowelPracticed = (vowelKey) => {
   practicedVowels.add(vowelKey);
   savePracticedVowels(practicedVowels);
   updateVowelsProgress();
+
+  const feedback = document.querySelector("#vowels-feedback");
+
+  if (feedback) {
+    feedback.textContent = "Goed geluisterd!";
+  }
 };
 
 const renderAudioButton = ({
@@ -711,6 +719,7 @@ if (letterSoundsIndex && appLetters.length) {
       }&level=${encodeURIComponent(activeProgressLevelId)}&page=${encodeURIComponent(activeVowelPage)}`;
       const formsHref = `letter-forms.html?letter=${encodeURIComponent(letter.id)}`;
       const formWorksheetPath = getLetterFormWorksheetPath(letter);
+      const isShortVowelCard = activeVowelGroup === "short";
 
       return `
         <article class="lesson-card sound-letter-card" data-vowel-letter-card="${escapeAttribute(letter.id)}">
@@ -720,9 +729,12 @@ if (letterSoundsIndex && appLetters.length) {
             </a>
             <div class="sound-letter-copy">
               <h2>${getLetterName(letter)}</h2>
-              <p class="letter-meta">${sounds.length} klanken</p>
+              <p class="letter-meta">${isShortVowelCard ? "Fatha, Kasra en Damma" : `${sounds.length} klanken`}</p>
             </div>
           </div>
+          <p class="sound-letter-help">
+            ${isShortVowelCard ? "Luister naar de korte a, korte i en korte oe bij deze letter." : "Luister naar elke klank rustig na elkaar."}
+          </p>
 
           <div class="sound-buttons" dir="rtl">
             ${sounds
@@ -740,14 +752,15 @@ if (letterSoundsIndex && appLetters.length) {
                     <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
                     <span class="sound-name">${vowelType.nameNl}</span>
                     <span class="sound-copy">${sound.soundNl}</span>
+                    <span class="sound-action-label">Luister</span>
                   `,
                 });
               })
               .join("")}
           </div>
-          <a class="sound-button forms-link-button" href="${formsHref}" aria-label="Bekijk vormen van ${getLetterName(letter)}">
+          <a class="sound-button forms-link-button" href="${formsHref}" aria-label="Bekijk lettervormen van ${getLetterName(letter)}">
             <span class="forms-link-icon" aria-hidden="true">Aa</span>
-            <span class="sound-name">Bekijk vormen</span>
+            <span class="sound-name">Bekijk lettervormen</span>
             <span class="sound-copy">Los, begin, midden en eind</span>
           </a>
           ${
@@ -1014,11 +1027,12 @@ if (soundsGrid && appLetters.length) {
                     content: `
                       <span class="sound-complete-badge" aria-hidden="true">
                         <svg viewBox="0 0 24 24" focusable="false"><path d="M5 12.5l4.2 4L19 7" /></svg>
-                      </span>
-                      <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
-                      <span class="sound-name">${vowelType.nameNl}</span>
-                      <span class="sound-copy">${sound.soundNl}</span>
-                    `,
+                    </span>
+                    <span class="sound-example" lang="ar" dir="rtl">${sound.example}</span>
+                    <span class="sound-name">${vowelType.nameNl}</span>
+                    <span class="sound-copy">${sound.soundNl}</span>
+                    <span class="sound-action-label">Luister</span>
+                  `,
                   });
                 },
               )
