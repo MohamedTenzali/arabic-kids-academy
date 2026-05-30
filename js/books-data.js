@@ -1,0 +1,24 @@
+window.arabicoKidsBooks = [
+  {
+    id: "level-1",
+    title: "Arabische Letters Niveau 1",
+    level: "Niveau 1",
+    description: "Leer de Arabische letters stap voor stap met schrijf- en klankoefeningen. Ideaal voor kinderen die net beginnen.",
+    cover: "/assets/book-covers/arabicokids-level-1-cover.webp",
+    pdf: "/assets/books/arabicokids-level-1.pdf",
+    priceLabel: "Gratis",
+    status: "free",
+    buttonText: "Download boek",
+  },
+  {
+    id: "level-2",
+    title: "Arabische Letters Niveau 2",
+    level: "Niveau 2",
+    description: "Oefen verder met Arabische letters, schrijven en herkenning na niveau 1. Fijn voor thuis of in de les.",
+    cover: "/assets/book-covers/arabicokids-level-2-cover.webp",
+    pdf: "/assets/books/arabicokids-level-2.pdf",
+    priceLabel: "Gratis",
+    status: "free",
+    buttonText: "Download boek",
+  },
+];

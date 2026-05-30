@@ -34,11 +34,13 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="css/main.css?v=67">
+    <link rel="stylesheet" href="css/main.css?v=68">
     <script src="data/progress.js?v=26" defer></script>
     <script src="js/pwa-update.js?v=2" defer></script>
     <script src="js/motion.js?v=24" defer></script>
     <script src="js/app.js?v=54" defer></script>
+    <script src="js/books-data.js?v=1" defer></script>
+    <script src="js/books-page.js?v=2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -203,6 +205,18 @@
           </div>
         </section>
 
+        <section class="home-info-section home-books-preview" aria-labelledby="home-books-title">
+          <div class="home-books-copy">
+            <p class="eyebrow">Nieuwe werkboeken beschikbaar</p>
+            <h2 id="home-books-title">Printbare boeken voor thuis</h2>
+            <p>
+              Download de nieuwste ArabicOKids werkboeken en oefen letters schrijven stap voor stap met duidelijke covers en PDF’s.
+            </p>
+            <a class="primary-button" href="pages/boeken.html">Bekijk boeken</a>
+          </div>
+          <div class="home-books-covers" data-featured-books aria-label="Nieuwe werkboeken"></div>
+        </section>
+
         <section class="home-info-section parent-trust" aria-labelledby="trust-title">
           <div>
             <p class="eyebrow">Voor ouders</p>
@@ -274,6 +288,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="pages/roadmap.html?level=beginner">Lessen</a></li>
             <li><a href="pages/werkbladen.html">Werkbladen</a></li>
+            <li><a href="pages/boeken.html">Boeken</a></li>
             <li><a href="pages/about.html">Over ons</a></li>
             <li><a href="pages/contact.html">Contact</a></li>
             <li><a href="pages/privacy.html">Privacy</a></li>

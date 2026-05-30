@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-footer-mobile-01";
+const CACHE_NAME = "arabicokids-v2026-books-01";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -19,6 +19,8 @@ const CORE_CACHE = [
   "js/file-operations.js",
   "js/audio-player.js",
   "js/motion.js",
+  "js/books-data.js",
+  "js/books-page.js",
   "js/pwa-update.js",
   "js/quiz-engine.js",
   "pages/about.html",
@@ -45,8 +47,8 @@ const CORE_CACHE = [
   "assets/icons/icon-192.png",
   "assets/icons/icon-512.png",
   "images/icons/back-to-top.png",
-  "images/books/mijn-arabische-letters-boekje-niveau-1.png",
-  "images/books/mijn-arabische-letters-boekje-niveau-2.png",
+  "assets/book-covers/arabicokids-level-1-cover.webp",
+  "assets/book-covers/arabicokids-level-2-cover.webp",
   "images/worksheets/worksheet-letters.svg",
   "images/worksheets/worksheet-sounds.svg",
   "images/worksheets/worksheet-words.svg",
@@ -54,12 +56,12 @@ const CORE_CACHE = [
   "pdf/worksheets/niveau-1-placeholder.pdf",
   "pdf/worksheets/niveau-2-placeholder.pdf",
   "pdf/worksheets/niveau-3-placeholder.pdf",
-  "pdf/pdf-letters/Ain.pdf",
-  "pdf/pdf-letters/alif.pdf",
-  "pdf/pdf-letters/baa.pdf",
-  "pdf/pdf-letters/Daad.pdf",
-  "pdf/pdf-letters/Dal.pdf",
-  "pdf/pdf-letters/Dhal.pdf",
+  "pdf/pdf-letters/Ain.pdf.pdf",
+  "pdf/pdf-letters/alif.pdf.pdf",
+  "pdf/pdf-letters/baa.pdf.pdf",
+  "pdf/pdf-letters/Daad.pdf.pdf",
+  "pdf/pdf-letters/Dal.pdf.pdf",
+  "pdf/pdf-letters/Dhal.pdf.pdf",
   "pdf/pdf-letters/Faa.pdf.pdf",
   "pdf/pdf-letters/Ghain.pdf.pdf",
   "pdf/pdf-letters/Ha.pdf.pdf",
