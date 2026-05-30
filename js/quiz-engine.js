@@ -51,6 +51,15 @@ const createLetterQuiz = (letters, options = {}) => {
 
   const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
   const getLetterName = (letter) => letter.nameDutch || letter.nameNl || letter.id;
+  const getVowelName = (vowelType) =>
+    ({
+      fatha: "Fatha",
+      kasra: "Kasra",
+      damma: "Damma",
+      aa: "Lange aa",
+      ii: "Lange ie",
+      uu: "Lange oe",
+    })[vowelType] || vowelType;
 
   const createLetterItem = (letter) => ({
     id: `letter:${letter.id}`,
@@ -72,6 +81,7 @@ const createLetterQuiz = (letters, options = {}) => {
       arabic: `${letter.arabic}${meta.mark}`,
       title: getLetterName(letter),
       subtitle: meta.label,
+      vowelName: getVowelName(vowelType),
       type: vowelType,
     };
   };

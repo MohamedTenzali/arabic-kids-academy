@@ -1493,7 +1493,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         </div>
         <p class="letter-meta">Luister nog eens naar moeilijke letters en speel daarna opnieuw.</p>
         <div class="quiz-result-actions">
-          <button class="primary-button" type="button" id="restart-quiz">Opnieuw spelen</button>
+          <button class="primary-button" type="button" id="restart-quiz">Opnieuw oefenen</button>
           <a class="secondary-button" href="roadmap.html?level=beginner">Terug naar leerroute</a>
         </div>
       </div>
@@ -1544,16 +1544,21 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 
       <div class="sound-buttons quiz-choices" dir="rtl">
         ${question.choices
-          .map(
-            (choice) => `
-              <button class="sound-button quiz-choice is-locked" type="button" data-quiz-answer="${choice.id}" aria-label="${escapeAttribute(`Kies ${choice.title}: ${choice.subtitle}`)}" aria-disabled="true" disabled>
+          .map((choice) => {
+            const choiceLabel = choice.vowelName
+              ? `${choice.title} - ${choice.vowelName} - ${choice.subtitle}`
+              : `${choice.title}: ${choice.subtitle}`;
+
+            return `
+              <button class="sound-button quiz-choice is-locked" type="button" data-quiz-answer="${choice.id}" aria-label="${escapeAttribute(`Kies ${choiceLabel}`)}" aria-disabled="true" disabled>
                 <span class="sound-example" lang="ar" dir="rtl">${choice.arabic}</span>
                 <span class="sound-name">${choice.title}</span>
+                ${choice.vowelName ? `<span class="quiz-vowel-name">${choice.vowelName}</span>` : ""}
                 <span class="sound-copy">${choice.subtitle}</span>
                 <span class="quiz-choice-mark" aria-hidden="true"></span>
               </button>
-            `,
-          )
+            `;
+          })
           .join("")}
       </div>
 
@@ -1616,7 +1621,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
           choice.classList.remove("is-locked", "is-playing");
         });
         answerButton.classList.add("is-wrong", "is-missing");
-        setText("#quiz-feedback", "Probeer de volgende!");
+        setText("#quiz-feedback", "Bijna! Kijk naar het juiste antwoord.");
         feedback?.classList.remove("is-correct");
         feedback?.classList.add("is-wrong");
       }
