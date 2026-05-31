@@ -437,6 +437,12 @@ const letters = [
     "arabic": "ي",
     "nameDutch": "Yaa",
     "transliteration": "yaa",
+    "forms": {
+      "isolated": "ي",
+      "start": "يـ",
+      "middle": "ـيـ",
+      "end": "ـي"
+    },
     "baseAudio": "../audio/letters/yaa.mp3",
     "vowelAudio": {
       "fatha": "../audio/vowels/yaa_fatha.mp3",

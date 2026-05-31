@@ -181,9 +181,9 @@ const checkLetterWorksheets = (letters) => {
   const worksheetPaths = parseLetterWorksheetPaths();
 
   for (const letter of letters) {
-    const fallback = `../docs/letter-worksheets/${encodeURIComponent(letter.id)}.pdf`;
+    const fallback = `docs/letter-worksheets/${encodeURIComponent(letter.id)}.pdf`;
     const worksheetPath = letter.worksheetSrc || worksheetPaths[letter.id] || fallback;
-    checkReference("missing letter worksheet PDF", file, worksheetPath);
+    checkReference("missing letter worksheet PDF", "index.html", worksheetPath);
   }
 };
 

@@ -34,11 +34,20 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=68">
+    <link rel="stylesheet" href="../css/main.css?v=70">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=25" defer></script>
-    <script src="../js/app.js?v=54" defer></script>
+    <script src="../js/app.js?v=55" defer></script>
+    <!-- MailerLite Universal -->
+    <script>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '2393476');
+    </script>
+    <!-- End MailerLite Universal -->
   </head>
   <body data-no-mascot="true">
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -88,6 +97,17 @@
         </div>
       </section>
 
+      <section class="worksheet-signup" aria-labelledby="worksheet-signup-title">
+        <div class="worksheet-signup-copy">
+          <p class="eyebrow">Gratis werkbladen</p>
+          <h2 id="worksheet-signup-title">Ontvang nieuwe Arabische werkbladen</h2>
+          <p class="letter-meta">Schrijf je in en krijg printbare oefeningen voor thuis rustig in je inbox.</p>
+        </div>
+        <div class="worksheet-signup-form">
+          <div class="ml-embedded" data-form="ihAGYG"></div>
+        </div>
+      </section>
+
       <section class="worksheet-section worksheet-grid-section" aria-labelledby="worksheets-grid-title" id="werkbladen-grid">
         <div class="section-heading">
           <p class="eyebrow">Direct downloaden</p>
@@ -101,7 +121,7 @@
             <span class="worksheet-badge">Beginner</span>
             <h3>Arabische letters schrijven</h3>
             <p>Oefen losse, begin-, midden- en eindvormen.</p>
-            <a class="primary-button" href="/pdf/worksheets/niveau-1-placeholder.pdf" download>Open PDF</a>
+            <a class="primary-button" href="/pdf/worksheets/niveau-1-placeholder.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </article>
 
           <article class="worksheet-card worksheet-card-mint">
@@ -109,7 +129,7 @@
             <span class="worksheet-badge">Niveau 1</span>
             <h3>Korte klanken</h3>
             <p>Leer fatha, damma en kasra herkennen.</p>
-            <a class="primary-button" href="/pdf/worksheets/gratis-letters-placeholder.pdf" download>Open PDF</a>
+            <a class="primary-button" href="/pdf/worksheets/gratis-letters-placeholder.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </article>
 
           <article class="worksheet-card worksheet-card-sky">
@@ -117,7 +137,7 @@
             <span class="worksheet-badge">Niveau 2</span>
             <h3>Lange klanken</h3>
             <p>Oefen alif, waw en yaa.</p>
-            <a class="primary-button" href="/pdf/worksheets/niveau-2-placeholder.pdf" download>Open PDF</a>
+            <a class="primary-button" href="/pdf/worksheets/niveau-2-placeholder.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </article>
 
           <article class="worksheet-card worksheet-card-yellow">
@@ -125,7 +145,7 @@
             <span class="worksheet-badge">Gratis</span>
             <h3>Letters herkennen</h3>
             <p>Koppel letters aan klanken.</p>
-            <a class="primary-button" href="/pdf/worksheets/gratis-letters-placeholder.pdf" download>Open PDF</a>
+            <a class="primary-button" href="/pdf/worksheets/gratis-letters-placeholder.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </article>
 
           <article class="worksheet-card worksheet-card-pink">
@@ -133,7 +153,7 @@
             <span class="worksheet-badge">Quiz</span>
             <h3>Mini quiz werkblad</h3>
             <p>Printbare quiz voor thuis.</p>
-            <a class="primary-button" href="/pdf/worksheets/niveau-3-placeholder.pdf" download>Open PDF</a>
+            <a class="primary-button" href="/pdf/worksheets/niveau-3-placeholder.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </article>
 
           <article class="worksheet-card worksheet-card-green">
@@ -141,7 +161,7 @@
             <span class="worksheet-badge">Woorden</span>
             <h3>Woordjes oefenen</h3>
             <p>Leer eenvoudige Arabische woorden.</p>
-            <a class="primary-button" href="/pdf/worksheets/niveau-1-placeholder.pdf" download>Open PDF</a>
+            <a class="primary-button" href="/pdf/worksheets/niveau-1-placeholder.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
           </article>
         </div>
       </section>
@@ -221,7 +241,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/pages/roadmap.html?level=beginner">Lessen</a></li>
             <li><a href="/werkbladen.html">Werkbladen</a></li>
-            <li><a href="pages/boeken.html">Boeken</a></li>
+            <li><a href="boeken.html">Boeken</a></li>
             <li><a href="/about.html">Over ons</a></li>
             <li><a href="/contact.html">Contact</a></li>
             <li><a href="/pages/privacy.html">Privacy</a></li>
@@ -233,11 +253,6 @@
           <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
           <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
           <p class="footer-premium-note">Gratis basis beschikbaar. Premium materiaal volgt later.</p>
-          <div class="footer-socials" aria-label="Social media">
-            <a href="https://instagram.com/arabicokids" aria-label="ArabicoKids op Instagram">IG</a>
-            <a href="https://youtube.com/@arabicokids" aria-label="ArabicoKids op YouTube">YT</a>
-            <a href="https://www.tiktok.com/@arabicokids" aria-label="ArabicoKids op TikTok">TT</a>
-          </div>
         </div>
       </div>
 

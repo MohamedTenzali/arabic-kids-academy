@@ -62,7 +62,7 @@ Check these downloads:
 
 - `pages/werkbladen.html`: free worksheet PDF downloads.
 - `pages/letters.html`: download a worksheet for Alif, Ha and Yaa.
-- `pages/vowel-letter.html?letter=ha&type=short`: detail-page worksheet download opens `pdf/pdf-letters/Ha.pdf.pdf`.
+- `pages/vowel-letter.html?letter=ha&type=short`: detail-page worksheet download opens `docs/letter-worksheets/ha.pdf`.
 - `pages/vowel-letter.html?letter=yaa&type=short`: detail-page worksheet download opens `docs/letter-worksheets/yaa.pdf`.
 - Disabled premium/book buttons stay disabled until real files and payment/login flows exist.
 

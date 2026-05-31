@@ -1057,34 +1057,12 @@ main {
   border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.footer-socials {
+.pdf-action-buttons {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
-  margin-top: 20px;
-}
-
-.footer-socials a {
-  display: inline-grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  font-size: 0.78rem;
-  font-weight: 900;
-  text-decoration: none;
-  transition:
-    background-color var(--motion-fast) var(--ease-soft),
-    transform var(--motion-fast) var(--ease-soft);
-}
-
-.footer-socials a:hover,
-.footer-socials a:focus-visible {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.08);
+  margin-top: 22px;
 }
 
 .footer-newsletter form {
@@ -2793,6 +2771,45 @@ h2 {
   min-height: var(--touch-target);
 }
 
+.worksheet-signup {
+  display: grid;
+  gap: var(--space-4);
+  width: min(100%, 820px);
+  margin-inline: auto;
+  padding: clamp(22px, 5vw, 36px);
+  border: 1px solid rgba(107, 59, 245, 0.14);
+  border-radius: var(--radius-section);
+  background:
+    radial-gradient(circle at 90% 8%, rgba(255, 200, 61, 0.18), transparent 28%),
+    linear-gradient(135deg, #ffffff 0%, #f7fbff 54%, #fff8df 100%);
+  box-shadow: 0 20px 44px rgba(77, 42, 192, 0.1);
+  text-align: center;
+}
+
+.worksheet-signup-copy {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.worksheet-signup-copy h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  line-height: 1.1;
+}
+
+.worksheet-signup-form {
+  width: min(100%, 620px);
+  margin-inline: auto;
+}
+
+.worksheet-signup-form .ml-embedded {
+  width: 100%;
+  min-height: 120px;
+}
+
 .worksheet-float-shape {
   position: absolute;
   z-index: 0;
@@ -3578,26 +3595,6 @@ h2 {
   background: linear-gradient(145deg, #6b3bf5, #69c9ff);
   color: #ffffff;
   font-weight: 900;
-}
-
-.footer-socials a {
-  font-size: 0;
-}
-
-.footer-socials a::before {
-  font-size: 0.78rem;
-}
-
-.footer-socials a[aria-label*="Instagram"]::before {
-  content: "IG";
-}
-
-.footer-socials a[aria-label*="YouTube"]::before {
-  content: "YT";
-}
-
-.footer-socials a[aria-label*="TikTok"]::before {
-  content: "TT";
 }
 
 .contact-shell {
@@ -5871,10 +5868,6 @@ h2 {
     text-align: center;
   }
 
-  .footer-socials {
-    justify-content: center;
-  }
-
   .footer-links ul,
   .footer-newsletter form {
     justify-items: center;
@@ -7972,17 +7965,6 @@ h2 {
     padding: 10px 16px;
     font-size: 0.94rem;
     letter-spacing: 0;
-  }
-
-  .footer-socials {
-    justify-content: flex-start;
-    gap: 8px;
-    margin-top: 8px;
-  }
-
-  .footer-socials a {
-    width: 44px;
-    height: 44px;
   }
 
   .footer-bottom {

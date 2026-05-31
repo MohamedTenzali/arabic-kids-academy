@@ -6,6 +6,7 @@ const appProgress = window.progressStore;
 const appLevels = window.learningLevels || [];
 const isPagesPath = window.location.pathname.includes("/pages/");
 const getPageHref = (page) => `${isPagesPath ? "" : "pages/"}${page}`;
+const getAssetHref = (path) => `${isPagesPath ? "../" : ""}${path}`;
 const levelStartPages = {
   beginner: "letters.html",
   advanced: "vowels.html?type=short&level=advanced",
@@ -22,7 +23,6 @@ document.querySelectorAll(".aka-footer .footer-contact").forEach((footerContact)
   const support = document.createElement("div");
   support.className = "footer-support-inline";
   support.innerHTML = `
-    <p class="footer-support-copy">Help ons gratis lessen en werkbladen maken voor kinderen.</p>
     <a class="support-btn footer-support-btn" href="https://ko-fi.com/arabicokids" target="_blank" rel="noopener noreferrer">
       ☕ Steun ArabicoKids
     </a>
@@ -314,67 +314,73 @@ const getVowelSounds = (letter, group = "") =>
       src: letter.vowelAudio[vowel.id],
     }));
 const letterWorksheetPaths = {
-  ain: "../pdf/pdf-letters/Ain.pdf.pdf",
-  alif: "../pdf/pdf-letters/alif.pdf.pdf",
-  baa: "../pdf/pdf-letters/baa.pdf.pdf",
-  daad: "../pdf/pdf-letters/Daad.pdf.pdf",
-  dal: "../pdf/pdf-letters/Dal.pdf.pdf",
-  dhal: "../pdf/pdf-letters/Dhal.pdf.pdf",
-  faa: "../pdf/pdf-letters/Faa.pdf.pdf",
-  ghain: "../pdf/pdf-letters/Ghain.pdf.pdf",
-  ha: "../pdf/pdf-letters/Ha.pdf.pdf",
-  haa: "../pdf/pdf-letters/Haa.pdf.pdf",
-  jeem: "../pdf/pdf-letters/Jeem.pdf.pdf",
-  kaaf: "../pdf/pdf-letters/Kaaf.pdf.pdf",
-  khaa: "../pdf/pdf-letters/Khaa.pdf.pdf",
-  laam: "../pdf/pdf-letters/Laam.pdf.pdf",
-  meem: "../pdf/pdf-letters/Meem.pdf.pdf",
-  noon: "../pdf/pdf-letters/Noon.pdf.pdf",
-  qaaf: "../pdf/pdf-letters/Qaaf.pdf.pdf",
-  raa: "../pdf/pdf-letters/Raa.pdf.pdf",
-  saad: "../pdf/pdf-letters/Saad.pdf.pdf",
-  seen: "../pdf/pdf-letters/Seen.pdf.pdf",
-  sheen: "../pdf/pdf-letters/Sheen.pdf.pdf",
-  taa: "../pdf/pdf-letters/taa.pdf.pdf",
-  thaa: "../pdf/pdf-letters/Thaa.pdf.pdf",
-  "taa-heavy": "../pdf/pdf-letters/Taa%20zwaar.pdf.pdf",
-  waw: "../pdf/pdf-letters/Waw.pdf.pdf",
-  yaa: "../docs/letter-worksheets/yaa.pdf",
-  zay: "../pdf/pdf-letters/Zay.pdf.pdf",
-  "zaa-heavy": "../pdf/pdf-letters/Zaa%20zwaar.pdf.pdf",
+  ain: "docs/letter-worksheets/ain.pdf",
+  alif: "docs/letter-worksheets/alif.pdf",
+  baa: "docs/letter-worksheets/baa.pdf",
+  daad: "docs/letter-worksheets/daad.pdf",
+  dal: "docs/letter-worksheets/dal.pdf",
+  dhal: "docs/letter-worksheets/dhal.pdf",
+  faa: "docs/letter-worksheets/faa.pdf",
+  ghain: "docs/letter-worksheets/ghain.pdf",
+  ha: "docs/letter-worksheets/ha.pdf",
+  haa: "docs/letter-worksheets/haa.pdf",
+  jeem: "docs/letter-worksheets/jeem.pdf",
+  kaaf: "docs/letter-worksheets/kaaf.pdf",
+  khaa: "docs/letter-worksheets/khaa.pdf",
+  laam: "docs/letter-worksheets/laam.pdf",
+  meem: "docs/letter-worksheets/meem.pdf",
+  noon: "docs/letter-worksheets/noon.pdf",
+  qaaf: "docs/letter-worksheets/qaaf.pdf",
+  raa: "docs/letter-worksheets/raa.pdf",
+  saad: "docs/letter-worksheets/saad.pdf",
+  seen: "docs/letter-worksheets/seen.pdf",
+  sheen: "docs/letter-worksheets/sheen.pdf",
+  taa: "docs/letter-worksheets/taa.pdf",
+  thaa: "docs/letter-worksheets/thaa.pdf",
+  "taa-heavy": "docs/letter-worksheets/taa-heavy.pdf",
+  waw: "docs/letter-worksheets/waw.pdf",
+  yaa: "docs/letter-worksheets/yaa.pdf",
+  zay: "docs/letter-worksheets/zay.pdf",
+  "zaa-heavy": "docs/letter-worksheets/zaa-heavy.pdf",
 };
-const getLetterWorksheetPath = (letter) => letter.worksheetSrc || letterWorksheetPaths[letter.id] || "";
+const getLetterWorksheetPath = (letter) => {
+  const path = letter.worksheetSrc || letterWorksheetPaths[letter.id] || "";
+  return path ? getAssetHref(path) : "";
+};
 const letterFormWorksheetPaths = {
-  ain: "../pdf/lettervormen/ain.pdf",
-  alif: "../pdf/lettervormen/alif.pdf",
-  baa: "../pdf/lettervormen/baa.pdf",
-  daad: "../pdf/lettervormen/daad.pdf",
-  dal: "../pdf/lettervormen/daal.pdf",
-  dhal: "../pdf/lettervormen/dhaal.pdf",
-  faa: "../pdf/lettervormen/faa.pdf",
-  ghain: "../pdf/lettervormen/ghain.pdf",
-  ha: "../pdf/lettervormen/ha.pdf",
-  haa: "../pdf/lettervormen/haa.pdf",
-  jeem: "../pdf/lettervormen/jeem.pdf",
-  kaaf: "../pdf/lettervormen/kaaf.pdf",
-  khaa: "../pdf/lettervormen/khaa.pdf",
-  laam: "../pdf/lettervormen/laam.pdf",
-  meem: "../pdf/lettervormen/meem.pdf",
-  noon: "../pdf/lettervormen/noon.pdf",
-  qaaf: "../pdf/lettervormen/qaaf.pdf",
-  raa: "../pdf/lettervormen/raa.pdf",
-  saad: "../pdf/lettervormen/saad.pdf",
-  seen: "../pdf/lettervormen/seen.pdf",
-  sheen: "../pdf/lettervormen/sheen.pdf",
-  taa: "../pdf/lettervormen/taa.pdf",
-  thaa: "../pdf/lettervormen/thaa.pdf",
-  "taa-heavy": "../pdf/lettervormen/taa%20zwaar.pdf",
-  waw: "../pdf/lettervormen/waaw.pdf",
-  yaa: "../pdf/lettervormen/yaa.pdf",
-  zay: "../pdf/lettervormen/zay.pdf",
-  "zaa-heavy": "../pdf/lettervormen/zaa%20zwaar.pdf",
+  ain: "pdf/lettervormen/ain.pdf",
+  alif: "pdf/lettervormen/alif.pdf",
+  baa: "pdf/lettervormen/baa.pdf",
+  daad: "pdf/lettervormen/daad.pdf",
+  dal: "pdf/lettervormen/daal.pdf",
+  dhal: "pdf/lettervormen/dhaal.pdf",
+  faa: "pdf/lettervormen/faa.pdf",
+  ghain: "pdf/lettervormen/ghain.pdf",
+  ha: "pdf/lettervormen/ha.pdf",
+  haa: "pdf/lettervormen/haa.pdf",
+  jeem: "pdf/lettervormen/jeem.pdf",
+  kaaf: "pdf/lettervormen/kaaf.pdf",
+  khaa: "pdf/lettervormen/khaa.pdf",
+  laam: "pdf/lettervormen/laam.pdf",
+  meem: "pdf/lettervormen/meem.pdf",
+  noon: "pdf/lettervormen/noon.pdf",
+  qaaf: "pdf/lettervormen/qaaf.pdf",
+  raa: "pdf/lettervormen/raa.pdf",
+  saad: "pdf/lettervormen/saad.pdf",
+  seen: "pdf/lettervormen/seen.pdf",
+  sheen: "pdf/lettervormen/sheen.pdf",
+  taa: "pdf/lettervormen/taa.pdf",
+  thaa: "pdf/lettervormen/thaa.pdf",
+  "taa-heavy": "pdf/lettervormen/taa%20zwaar.pdf",
+  waw: "pdf/lettervormen/waaw.pdf",
+  yaa: "pdf/lettervormen/yaa.pdf",
+  zay: "pdf/lettervormen/zay.pdf",
+  "zaa-heavy": "pdf/lettervormen/zaa%20zwaar.pdf",
 };
-const getLetterFormWorksheetPath = (letter) => letter.formWorksheetSrc || letterFormWorksheetPaths[letter.id] || "";
+const getLetterFormWorksheetPath = (letter) => {
+  const path = letter.formWorksheetSrc || letterFormWorksheetPaths[letter.id] || "";
+  return path ? getAssetHref(path) : "";
+};
 const listenedLettersStorageKey = "arabicKidsListenedLetters";
 const getListenedLetters = () => {
   try {
@@ -651,14 +657,14 @@ if (lettersGrid && appLetters.length) {
             })}
             ${
               worksheetPath
-                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" download aria-label="Oefen schrijven met de letter ${letterName}">
+                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" target="_blank" rel="noopener noreferrer" aria-label="Open schrijf-PDF voor de letter ${letterName}">
                     <span class="letter-button-icon" aria-hidden="true">
                       <svg viewBox="0 0 24 24" focusable="false">
                         <path d="M4 20h5l10-10a2.8 2.8 0 0 0-4-4L5 16l-1 4Z" />
                         <path d="M13.5 7.5l3 3" />
                       </svg>
                     </span>
-                    <span class="sound-name">Oefen schrijven</span>
+                    <span class="sound-name">Open PDF</span>
                   </a>`
                 : `<a class="sound-button letter-write-button" href="werkbladen.html" aria-label="Bekijk schrijfwerkbladen voor de letter ${letterName}">
                     <span class="letter-button-icon" aria-hidden="true">
@@ -781,7 +787,7 @@ if (letterSoundsIndex && appLetters.length) {
           </a>
           ${
             formWorksheetPath
-              ? `<a class="sound-button forms-link-button form-download-button" href="${formWorksheetPath}" download aria-label="Download schrijf-PDF voor ${getLetterName(letter)}">
+              ? `<a class="sound-button forms-link-button form-download-button" href="${formWorksheetPath}" target="_blank" rel="noopener noreferrer" download aria-label="Download schrijf-PDF voor ${getLetterName(letter)}">
                   <span class="forms-link-icon form-download-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" focusable="false">
                       <path d="M12 5v11" />
@@ -789,7 +795,7 @@ if (letterSoundsIndex && appLetters.length) {
                       <path d="M5 20h14" />
                     </svg>
                   </span>
-                  <span class="sound-name">Download schrijfblad</span>
+                  <span class="sound-name">Download PDF</span>
                   <span class="sound-copy">Los, begin en eind oefenen</span>
                 </a>`
               : ""
@@ -926,56 +932,23 @@ if (soundsGrid && appLetters.length) {
     if (letterDownload) {
       const worksheetUrl = getLetterWorksheetPath(selectedLetter);
       const fileName = `${getLetterName(selectedLetter)}-oefenblad.pdf`;
-      
-      letterDownload.innerHTML = "";
-      
-      // Create action buttons container
-      const actionContainer = document.createElement("div");
-      actionContainer.style.display = "flex";
-      actionContainer.style.justifyContent = "center";
-      actionContainer.style.marginTop = "22px";
-      
-      // Create download button
-      const downloadBtn = document.createElement("button");
-      downloadBtn.className = "worksheet-download-button";
-      downloadBtn.setAttribute("aria-label", `Download oefenblad voor ${getLetterName(selectedLetter)}`);
-      downloadBtn.innerHTML = `
-        <span class="worksheet-spinner-dot" aria-hidden="true"></span>
-        <span class="worksheet-download-icon" aria-hidden="true">
-          <span class="worksheet-progress-fill"></span>
-          <svg class="worksheet-download-svg" viewBox="0 0 24 24" focusable="false">
-            <path d="M12 5v14m0 0-4-4m4 4 4-4" />
-          </svg>
-          <span class="worksheet-loading-block"></span>
-        </span>
-        <span class="worksheet-download-label">
-          <strong>Download</strong>
-          <small>Oefening baart kunst</small>
-        </span>
+
+      letterDownload.innerHTML = `
+        <div class="pdf-action-buttons" aria-label="PDF acties voor ${escapeAttribute(getLetterName(selectedLetter))}">
+          <a class="primary-button" href="${worksheetUrl}" target="_blank" rel="noopener noreferrer">Open PDF</a>
+          <a class="secondary-button" href="${worksheetUrl}" target="_blank" rel="noopener noreferrer" download="${escapeAttribute(fileName)}">Download PDF</a>
+          <button class="secondary-button" type="button" data-print-pdf="${escapeAttribute(worksheetUrl)}">Print PDF</button>
+        </div>
       `;
-      
-      downloadBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (downloadBtn.classList.contains("is-downloading")) return;
-        
-        downloadBtn.classList.add("is-downloading");
-        downloadBtn.setAttribute("aria-busy", "true");
-        
-        FileOperations.downloadFile(worksheetUrl, fileName, {
-          onComplete: () => {
-            downloadBtn.classList.remove("is-downloading");
-            downloadBtn.removeAttribute("aria-busy");
-          },
-          onError: (err) => {
-            downloadBtn.classList.remove("is-downloading");
-            downloadBtn.removeAttribute("aria-busy");
-            console.error("Download failed:", err);
-          }
-        });
+
+      letterDownload.querySelector("[data-print-pdf]")?.addEventListener("click", (event) => {
+        const printUrl = event.currentTarget.dataset.printPdf;
+        const printWindow = window.open(printUrl, "_blank", "noopener,noreferrer");
+
+        if (printWindow) {
+          printWindow.opener = null;
+        }
       });
-      
-      actionContainer.appendChild(downloadBtn);
-      letterDownload.appendChild(actionContainer);
     }
   }
 
@@ -1192,7 +1165,7 @@ if (letterFormsPage && appLetterForms.length) {
               <p class="eyebrow">Letter ${letter.order} van ${appLetterForms.length}</p>
               ${
                 formWorksheetPath
-                  ? `<a class="forms-download-button" href="${formWorksheetPath}" download aria-label="Download schrijfblad voor ${letter.name}">
+                  ? `<a class="forms-download-button" href="${formWorksheetPath}" target="_blank" rel="noopener noreferrer" download aria-label="Download schrijf-PDF voor ${letter.name}">
                       <span class="forms-download-button-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" focusable="false">
                           <path d="M12 5v11" />
@@ -1201,7 +1174,7 @@ if (letterFormsPage && appLetterForms.length) {
                         </svg>
                       </span>
                       <span>
-                        <strong>Download schrijfblad</strong>
+                        <strong>Download PDF</strong>
                         <small>Print en oefen mee</small>
                       </span>
                     </a>`

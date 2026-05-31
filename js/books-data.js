@@ -8,7 +8,7 @@ window.arabicoKidsBooks = [
     pdf: "/assets/books/arabicokids-level-1.pdf",
     priceLabel: "Gratis",
     status: "free",
-    buttonText: "Download boek",
+    buttonText: "Download PDF",
   },
   {
     id: "level-2",
@@ -19,6 +19,6 @@ window.arabicoKidsBooks = [
     pdf: "/assets/books/arabicokids-level-2.pdf",
     priceLabel: "Gratis",
     status: "free",
-    buttonText: "Download boek",
+    buttonText: "Download PDF",
   },
 ];

@@ -23,7 +23,7 @@ const renderBookCard = (book, options = {}) => {
   const cardClass = options.compact ? "book-card book-card-compact" : "book-card";
   const imageLoading = options.compact ? "eager" : "lazy";
   const button = isAvailable
-    ? `<a class="primary-button book-download" href="${escapeHtml(book.pdf)}" download target="_blank" rel="noopener">${escapeHtml(book.buttonText || "Download boek")}</a>`
+    ? `<a class="primary-button book-download" href="${escapeHtml(book.pdf)}" download target="_blank" rel="noopener noreferrer">${escapeHtml(book.buttonText || "Download PDF")}</a>`
     : `<button class="primary-button book-download is-disabled" type="button" disabled>${escapeHtml(book.buttonText || "Binnenkort")}</button>`;
 
   return `
