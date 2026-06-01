@@ -379,22 +379,39 @@
   };
 
   document.addEventListener("click", (event) => {
-    const target = event.target.closest("button, .primary-button, .secondary-button, .level-card, .lesson-card, .roadmap-link, [data-audio-src]");
-    playTapAnimation(target);
+    const target = event.target;
+
+    if (!(target instanceof Element)) return;
+
+    const element = target.closest("button, .primary-button, .secondary-button, .level-card, .lesson-card, .roadmap-link, [data-audio-src]");
+
+    if (!element) return;
+
+    playTapAnimation(element);
   }, { passive: true });
 
   document.addEventListener("pointerenter", (event) => {
-    if (event.target.closest("#mascot-root .mascot")) {
-      reactMascot("adventure");
-    }
+    const target = event.target;
+
+    if (!(target instanceof Element)) return;
+
+    const element = target.closest("#mascot-root .mascot");
+
+    if (!element) return;
+
+    reactMascot("adventure");
   }, true);
 
   document.addEventListener("click", (event) => {
-    const mascot = event.target.closest("#mascot-root .mascot");
+    const target = event.target;
 
-    if (mascot) {
-      reactMascot("reward");
-    }
+    if (!(target instanceof Element)) return;
+
+    const mascot = target.closest("#mascot-root .mascot");
+
+    if (!mascot) return;
+
+    reactMascot("reward");
   });
 
   window.addEventListener("aka:success", (event) => celebrateSuccess(event.detail));

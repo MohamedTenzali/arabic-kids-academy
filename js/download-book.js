@@ -17,6 +17,7 @@ const button = document.querySelector("[data-book-download-button]");
 const params = new URLSearchParams(window.location.search);
 const bookId = params.get("id");
 const selectedBook = bookDownloads[bookId];
+let isDownloadInProgress = false;
 
 const setStatus = (message, type = "") => {
   if (!statusElement) return;
@@ -46,6 +47,9 @@ if (!selectedBook) {
 
   if (button) {
     button.addEventListener("click", () => {
+      if (isDownloadInProgress) return;
+
+      isDownloadInProgress = true;
       button.disabled = true;
       button.setAttribute("aria-busy", "true");
       setStatus("Uw boek wordt geopend in een nieuw venster.", "loading");
@@ -61,6 +65,7 @@ if (!selectedBook) {
       link.remove();
 
       window.setTimeout(() => {
+        isDownloadInProgress = false;
         button.disabled = false;
         button.removeAttribute("aria-busy");
         setStatus("Bedankt voor het bevestigen van uw e-mailadres.", "success");

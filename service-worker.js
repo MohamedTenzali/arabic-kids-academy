@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-verified-book-flow-07";
+const CACHE_NAME = "arabicokids-v2026-mailerlite-debug-19";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [

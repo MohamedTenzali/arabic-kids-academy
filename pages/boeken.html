@@ -34,13 +34,13 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=73">
+    <link rel="stylesheet" href="../css/main.css?v=74">
     <script src="../data/progress.js?v=26" defer></script>
-    <script src="../js/pwa-update.js?v=2" defer></script>
-    <script src="../js/motion.js?v=24" defer></script>
+    <script src="../js/pwa-update.js?v=3" defer></script>
+    <script src="../js/motion.js?v=25" defer></script>
     <script src="../js/app.js?v=55" defer></script>
-    <script src="../js/books-data.js?v=3" defer></script>
-    <script src="../js/books-page.js?v=7" defer></script>
+    <script src="../js/books-data.js?v=4" defer></script>
+    <script src="../js/books-page.js?v=17" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -81,6 +81,16 @@
       </section>
 
       <section class="books-grid" data-books-grid aria-label="Downloadbare boeken"></section>
+
+      <section class="books-debug-mailerlite" aria-label="MailerLite testknoppen">
+        <button type="button" onclick="ml('show', '9YWMsO', true)">
+          TEST Niveau 1 formulier
+        </button>
+
+        <button type="button" onclick="ml('show', 'EGyyxm', true)">
+          TEST Niveau 2 formulier
+        </button>
+      </section>
     </main>
 
     <footer class="aka-footer">
@@ -117,5 +127,14 @@
       </div>
     </footer>
     <a class="back-to-top" href="#main-content" aria-label="Terug naar boven"><span>Terug naar boven</span></a>
+    <!-- MailerLite Universal -->
+    <script>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '2393476');
+    </script>
+    <!-- End MailerLite Universal -->
   </body>
 </html>
