@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-mailerlite-submit-23";
+const CACHE_NAME = "arabicokids-v2026-download-book-page-24";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -27,6 +27,7 @@ const CORE_CACHE = [
   "js/quiz-engine.js",
   "pages/about.html",
   "pages/bedankt.html",
+  "pages/download-book.html",
   "pages/letters.html",
   "pages/letter-forms.html",
   "pages/boeken.html",
@@ -59,6 +60,8 @@ const CORE_CACHE = [
   "pdf/worksheets/niveau-1-placeholder.pdf",
   "pdf/worksheets/niveau-2-placeholder.pdf",
   "pdf/worksheets/niveau-3-placeholder.pdf",
+  "pdf/mijn-arabische-letters-boekje.pdf.pdf",
+  "pdf/mijn-arabische-letters-boekje-niveau 2.pdf.pdf",
   "docs/letter-worksheets/ain.pdf",
   "docs/letter-worksheets/alif.pdf",
   "docs/letter-worksheets/baa.pdf",
