@@ -79,6 +79,25 @@ const setBookStatus = (button, message, state = "") => {
   status.removeAttribute("aria-hidden");
 };
 
+const revealEmailForm = (button) => {
+  const formSection = document.getElementById("book-email-section");
+  const formCopy = document.getElementById("book-email-copy");
+  const bookTitle = button.dataset.bookTitle || "het boek";
+
+  if (!formSection) {
+    setBookStatus(button, "E-mailformulier ontbreekt op deze pagina. Controleer pages/boeken.html.", "error");
+    return;
+  }
+
+  if (formCopy) {
+    formCopy.textContent = `Vul uw e-mailadres in voor ${bookTitle}. Na bevestiging via e-mail ontvangt u de downloadlink.`;
+  }
+
+  formSection.hidden = false;
+  formSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  setBookStatus(button, "Formulier staat hieronder. Vul uw e-mailadres in en bevestig via e-mail.", "success");
+};
+
 document.addEventListener("click", (event) => {
   const target = event.target;
 
@@ -95,16 +114,5 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  if (typeof window.ml !== "function") {
-    setBookStatus(button, "MailerLite is nog niet geladen. Herlaad de pagina en probeer opnieuw.", "error");
-    return;
-  }
-
-  try {
-    window.ml("show", formId, true);
-    setBookStatus(button, "Formulier geopend. Vul uw e-mailadres in en bevestig via e-mail.", "success");
-  } catch (error) {
-    console.error("MailerLite formulier kon niet openen:", error);
-    setBookStatus(button, "MailerLite formulier kon niet openen. Controleer form-id en script.", "error");
-  }
+  revealEmailForm(button);
 });
