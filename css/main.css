@@ -8392,7 +8392,8 @@ h2 {
   }
 }
 
-.book-email-section[hidden] {
+.book-email-section[hidden],
+.book-email-panel[hidden] {
   display: none !important;
 }
 
@@ -8402,4 +8403,8 @@ h2 {
   border-radius: 1.5rem;
   background: #ffffff;
   border: 1px solid rgba(107, 59, 245, 0.18);
+}
+
+.book-email-panel.active {
+  display: block;
 }
