@@ -333,7 +333,11 @@ const FileOperations = (() => {
    */
   const initializeDownloadLinks = (selector = ".worksheet-download-button") => {
     document.addEventListener("click", (event) => {
-      const link = event.target.closest(selector);
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest(selector);
       if (!link || link.dataset.fileOpsInitialized) return;
 
       const url = link.getAttribute("href");

@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-mailerlite-debug-19";
+const CACHE_NAME = "arabicokids-v2026-mailerlite-debug-20";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -181,7 +181,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(CORE_CACHE)),
+      .then((cache) => Promise.allSettled(CORE_CACHE.map((url) => cache.add(url)))),
   );
 });
 
@@ -218,6 +218,24 @@ self.addEventListener("fetch", (event) => {
   if (isAudioRequest(request)) {
     return;
   }
+  const isCodeOrStyleRequest = ["script", "style"].includes(request.destination) || /\.(js|css)(\?.*)?$/i.test(url.pathname);
+
+  if (isCodeOrStyleRequest) {
+    event.respondWith(
+      fetch(request, { cache: "no-store" })
+        .then((response) => {
+          const utf8Response = withUtf8Headers(request, response);
+          if (utf8Response.ok) {
+            const copy = utf8Response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return utf8Response;
+        })
+        .catch(() => caches.match(request).then((cached) => (cached ? withUtf8Headers(request, cached) : cached))),
+    );
+    return;
+  }
+
 
   // For PDFs: bypass cache to ensure fresh downloads on iPhone PWA
   if (isPdfRequest(request)) {

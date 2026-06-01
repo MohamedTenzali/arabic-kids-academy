@@ -538,7 +538,13 @@ const renderAudioButton = ({
 `;
 
 document.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-audio-src]");
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const button = target.closest("[data-audio-src]");
 
   if (!button || !audioPlayer) {
     return;
@@ -590,7 +596,13 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("pointerenter", (event) => {
-  const button = event.target.closest?.("[data-audio-src]");
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const button = target.closest("[data-audio-src]");
 
   if (button) {
     if (button.closest(".letter-card")) {
@@ -602,7 +614,13 @@ document.addEventListener("pointerenter", (event) => {
 }, true);
 
 document.addEventListener("focusin", (event) => {
-  const button = event.target.closest?.("[data-audio-src]");
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const button = target.closest("[data-audio-src]");
 
   if (button) {
     if (button.closest(".letter-card")) {
@@ -1273,7 +1291,13 @@ if (letterFormsPage && appLetterForms.length) {
   updateFormsProgress();
 
   letterFormsPage.addEventListener("click", (event) => {
-    const magicButton = event.target.closest("[data-forms-magic]");
+    const target = event.target;
+
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const magicButton = target.closest("[data-forms-magic]");
 
     if (magicButton) {
       const workspace = magicButton.closest(".forms-workspace");
@@ -1296,7 +1320,7 @@ if (letterFormsPage && appLetterForms.length) {
       });
     }
 
-    const answerButton = event.target.closest("[data-form-answer]");
+    const answerButton = target.closest("[data-form-answer]");
 
     if (answerButton) {
       const exercise = answerButton.closest("[data-forms-exercise]");
@@ -1557,7 +1581,13 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
   };
 
   quizCard.addEventListener("click", (event) => {
-    const answerButton = event.target.closest("[data-quiz-answer]");
+    const target = event.target;
+
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const answerButton = target.closest("[data-quiz-answer]");
 
     if (answerButton) {
       if (!quizAudioReady) {
@@ -1630,8 +1660,8 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       }
     }
 
-    if (event.target.closest("#next-quiz-question")) {
-      const nextButton = event.target.closest("#next-quiz-question");
+    if (target.closest("#next-quiz-question")) {
+      const nextButton = target.closest("#next-quiz-question");
 
       if (nextButton.disabled) {
         return;
@@ -1640,7 +1670,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
       renderQuestion();
     }
 
-    if (event.target.closest("#restart-quiz")) {
+    if (target.closest("#restart-quiz")) {
       quiz.reset();
       resetQuizSessionStats();
       renderQuestion();
@@ -1662,14 +1692,20 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
   });
 
   quizCard.addEventListener("change", (event) => {
-    if (event.target.matches("#quiz-mode")) {
-      quiz.setMode(event.target.value);
+    const target = event.target;
+
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    if (target.matches("#quiz-mode")) {
+      quiz.setMode(target.value);
       resetQuizSessionStats();
       renderQuestion();
     }
 
-    if (event.target.matches("#quiz-difficulty")) {
-      quiz.setDifficulty(event.target.value);
+    if (target.matches("#quiz-difficulty")) {
+      quiz.setDifficulty(target.value);
       resetQuizSessionStats();
       renderQuestion();
     }
@@ -1679,7 +1715,13 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
 }
 
 document.addEventListener("click", (event) => {
-  const downloadButton = event.target.closest(".worksheet-download-button");
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const downloadButton = target.closest(".worksheet-download-button");
 
   if (!downloadButton) {
     return;
