@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-mailerlite-separated-22";
+const CACHE_NAME = "arabicokids-v2026-mailerlite-submit-23";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -26,6 +26,7 @@ const CORE_CACHE = [
   "js/pwa-update.js",
   "js/quiz-engine.js",
   "pages/about.html",
+  "pages/bedankt.html",
   "pages/letters.html",
   "pages/letter-forms.html",
   "pages/boeken.html",

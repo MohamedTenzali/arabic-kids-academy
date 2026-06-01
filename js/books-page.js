@@ -68,6 +68,13 @@ if (featuredBooks) {
 }
 
 const formPanels = ["worksheet-form", "book-level1-form", "book-level2-form"];
+const thanksPageUrl = new URL("bedankt.html", window.location.href).href;
+const blankDocumentUrl = ["about", "blank"].join(":");
+
+const isBlankUrl = (value) => {
+  const normalized = String(value || "").trim().toLowerCase();
+  return !normalized || normalized === blankDocumentUrl;
+};
 
 const hideAllMailerLiteForms = () => {
   formPanels.forEach((id) => {
@@ -76,6 +83,34 @@ const hideAllMailerLiteForms = () => {
 
     panel.hidden = true;
     panel.classList.remove("active");
+  });
+};
+
+const normalizeMailerLiteForm = (form) => {
+  const target = form.getAttribute("target");
+
+  if (target && ["_blank", blankDocumentUrl].includes(target.trim().toLowerCase())) {
+    form.removeAttribute("target");
+  }
+
+  if (isBlankUrl(form.getAttribute("action"))) {
+    form.setAttribute("action", window.location.href);
+  }
+
+  form
+    .querySelectorAll('input[name*="redirect" i], input[name*="success" i], input[name*="thank" i], input[name*="return" i]')
+    .forEach((input) => {
+      if (input instanceof HTMLInputElement && isBlankUrl(input.value)) {
+        input.value = thanksPageUrl;
+      }
+    });
+};
+
+const normalizeMailerLiteForms = (root = document) => {
+  root.querySelectorAll(".book-email-panel form, #worksheet-form form").forEach((form) => {
+    if (form instanceof HTMLFormElement) {
+      normalizeMailerLiteForm(form);
+    }
   });
 };
 
@@ -90,6 +125,7 @@ const revealEmailForm = (button) => {
   if (formSection) formSection.hidden = false;
   targetPanel.hidden = false;
   targetPanel.classList.add("active");
+  normalizeMailerLiteForms(targetPanel);
   targetPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
@@ -107,3 +143,37 @@ document.addEventListener("click", (event) => {
 
   revealEmailForm(button);
 });
+
+document.addEventListener("submit", (event) => {
+  const form = event.target;
+
+  if (!(form instanceof HTMLFormElement) || !form.closest(".book-email-panel, #worksheet-form")) return;
+
+  const hadBlankAction = isBlankUrl(form.getAttribute("action"));
+
+  normalizeMailerLiteForm(form);
+
+  if (hadBlankAction) {
+    event.preventDefault();
+    window.location.assign(thanksPageUrl);
+  }
+}, true);
+
+const mailerLiteObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    mutation.addedNodes.forEach((node) => {
+      if (node instanceof Element) {
+        normalizeMailerLiteForms(node);
+      }
+    });
+  });
+});
+
+formPanels.forEach((id) => {
+  const panel = document.getElementById(id);
+  if (panel) {
+    mailerLiteObserver.observe(panel, { childList: true, subtree: true });
+  }
+});
+
+normalizeMailerLiteForms();
