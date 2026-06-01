@@ -1,9 +1,10 @@
-const CACHE_NAME = "arabicokids-v2026-mailerlite-03";
+const CACHE_NAME = "arabicokids-v2026-verified-book-flow-07";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
   "./",
   "index.html",
+  "download-book.html",
   "letters.html",
   "klinkers.html",
   "quiz.html",
@@ -21,6 +22,7 @@ const CORE_CACHE = [
   "js/motion.js",
   "js/books-data.js",
   "js/books-page.js",
+  "js/download-book.js",
   "js/pwa-update.js",
   "js/quiz-engine.js",
   "pages/about.html",
@@ -49,8 +51,6 @@ const CORE_CACHE = [
   "images/icons/back-to-top.png",
   "assets/book-covers/arabicokids-level-1-cover.webp",
   "assets/book-covers/arabicokids-level-2-cover.webp",
-  "assets/books/arabicokids-level-1.pdf",
-  "assets/books/arabicokids-level-2.pdf",
   "images/worksheets/worksheet-letters.svg",
   "images/worksheets/worksheet-sounds.svg",
   "images/worksheets/worksheet-words.svg",
