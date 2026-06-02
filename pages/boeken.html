@@ -34,13 +34,20 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=74">
+    <link rel="stylesheet" href="../css/main.css?v=75">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js?v=3" defer></script>
     <script src="../js/motion.js?v=26" defer></script>
     <script src="../js/app.js?v=56" defer></script>
-    <script src="../js/books-data.js?v=6" defer></script>
-    <script src="../js/books-page.js?v=22" defer></script>
+    <!-- MailerLite Universal -->
+    <script>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '2393476');
+    </script>
+    <!-- End MailerLite Universal -->
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -80,23 +87,56 @@
         </div>
       </section>
 
-      <section class="books-grid" data-books-grid aria-label="Downloadbare boeken"></section>
+      <section class="books-grid" aria-label="Downloadbare boeken">
+        <article class="book-card" aria-labelledby="book-title-level-1">
+          <div class="book-cover">
+            <img
+              class="book-cover-image"
+              src="/assets/book-covers/arabicokids-level-1-cover.webp"
+              alt="Cover van Arabische Letters Niveau 1"
+              width="720"
+              height="1018"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <div class="book-copy">
+            <div class="book-heading">
+              <span class="book-level">Niveau 1</span>
+              <span class="book-price book-status-free">Gratis</span>
+            </div>
+            <h2 id="book-title-level-1">Arabische Letters Niveau 1</h2>
+            <p>Leer de Arabische letters stap voor stap met schrijf- en klankoefeningen. Ideaal voor kinderen die net beginnen.</p>
+            <div class="ml-embedded" data-form="9YWMsO"></div>
+          </div>
+        </article>
 
-      <section class="book-email-section" id="book-email-section" hidden aria-live="polite">
-        <h2>Vul uw e-mailadres in</h2>
-        <p>Na bevestiging via e-mail ontvangt u de downloadlink.</p>
-
-        <div id="worksheet-form" class="book-email-panel" hidden>
-          <div class="ml-embedded" data-form="ihAGYG"></div>
-        </div>
-
-        <div id="book-level1-form" class="book-email-panel" hidden>
-          <div class="ml-embedded" data-form="9YWMsO"></div>
-        </div>
-
-        <div id="book-level2-form" class="book-email-panel" hidden>
-          <div class="ml-embedded" data-form="EGyyxm"></div>
-        </div>
+        <article class="book-card" aria-labelledby="book-title-level-2">
+          <div class="book-cover">
+            <img
+              class="book-cover-image"
+              src="/assets/book-covers/arabicokids-level-2-cover.webp"
+              alt="Cover van Arabische Letters Niveau 2"
+              width="720"
+              height="1018"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <div class="book-copy">
+            <div class="book-heading">
+              <span class="book-level">Niveau 2</span>
+              <span class="book-price book-status-free">Gratis</span>
+            </div>
+            <h2 id="book-title-level-2">Arabische Letters Niveau 2</h2>
+            <p>Oefen verder met Arabische letters, schrijven en herkenning na niveau 1. Fijn voor thuis of in de les.</p>
+            <a class="primary-button book-download" href="../assets/books/arabicokids-level-2.pdf" download>
+              <span class="book-download-lock" aria-hidden="true">PDF</span>
+              <span>Download Boek Niveau 2</span>
+              <small>Directe PDF-download</small>
+            </a>
+          </div>
+        </article>
       </section>
     </main>
 
@@ -134,14 +174,5 @@
       </div>
     </footer>
     <a class="back-to-top" href="#main-content" aria-label="Terug naar boven"><span>Terug naar boven</span></a>
-    <!-- MailerLite Universal -->
-    <script>
-      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-      ml('account', '2393476');
-    </script>
-    <!-- End MailerLite Universal -->
   </body>
 </html>
