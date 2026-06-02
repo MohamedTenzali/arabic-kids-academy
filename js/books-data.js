@@ -5,6 +5,7 @@ window.arabicoKidsBooks = [
     level: "Niveau 1",
     description: "Leer de Arabische letters stap voor stap met schrijf- en klankoefeningen. Ideaal voor kinderen die net beginnen.",
     cover: "/assets/book-covers/arabicokids-level-1-cover.webp",
+    downloadFile: "arabicokids-level-1.pdf",
     priceLabel: "Gratis",
     status: "free",
     buttonText: "Download Boek Niveau 1",

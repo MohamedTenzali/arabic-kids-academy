@@ -2292,11 +2292,6 @@ h2 {
   padding: 0 6px;
 }
 
-.book-copy .ml-embedded {
-  width: 100%;
-  min-height: 120px;
-}
-
 .book-download-page {
   display: grid;
   min-height: 58vh;
