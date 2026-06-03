@@ -1507,6 +1507,17 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         </div>
       </div>
     `;
+
+    // Save star count and trigger rewards system
+    if (completedStepId) {
+      appProgress?.saveStepStars?.(activeProgressLevelId, completedStepId, starCount);
+    }
+    dispatchAppEvent("aka:quiz-complete", {
+      levelId: activeProgressLevelId,
+      stepId: completedStepId,
+      stars: starCount,
+      target: quizCard,
+    });
   };
 
   const renderQuestion = () => {

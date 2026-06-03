@@ -41,6 +41,7 @@
     <script src="../js/pwa-update.js?v=2" defer></script>
     <script src="../js/motion.js?v=24" defer></script>
     <script src="../js/app.js?v=55" defer></script>
+    <script src="../js/rewards.js?v=1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -62,15 +63,6 @@
         <a href="contact.html">Contact</a>
       </nav>
     </header>
-    <section class="download-section" aria-label="Bekijk ons leerboekje">
-      <a class="download-book-button" href="../assets/books/arabicokids-level-1.pdf" download>
-        <span class="download-book-icon" aria-hidden="true">ABC</span>
-        <span class="download-book-copy">
-          <strong>Download ons boekje om te leren schrijven</strong>
-          <small>Want oefenen baart kunst.</small>
-        </span>
-      </a>
-    </section>
     <div class="motion-layer" id="motion-layer" aria-hidden="true"></div>
     <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
 
@@ -114,14 +106,41 @@
 
         <div class="letters-grid" id="letters-grid" dir="rtl" aria-live="polite"></div>
 
-        <section class="parent-info" aria-labelledby="letters-seo-title">
-          <p class="eyebrow">Verder oefenen</p>
-          <h2 id="letters-seo-title">Arabische letters oefenen met kinderen</h2>
-          <p>
-            Begin met korte oefenmomenten: kijk naar de letter, luister naar de uitspraak en laat je kind de vorm aanwijzen.
-            Daarna kun je verder met <a href="vowels.html">Arabische klanken</a> of met
-            <a href="../arabisch-oefenen-pdf/">printbare PDF werkbladen</a>.
-          </p>
+        <section class="letters-next-section" aria-labelledby="letters-seo-title">
+          <div class="letters-next-header">
+            <p class="eyebrow">Goed gedaan!</p>
+            <h2 id="letters-seo-title">Wat wil je nu doen? 🌟</h2>
+            <p class="letters-next-subtitle">Kies je volgende stap en blijf oefenen!</p>
+          </div>
+
+          <div class="letters-next-grid">
+            <article class="letters-next-card letters-next-purple">
+              <span class="letters-next-emoji" aria-hidden="true">👂</span>
+              <h3>Luister & herhaal</h3>
+              <p>Druk op elke letter en spreek de klank hardop na.</p>
+            </article>
+
+            <article class="letters-next-card letters-next-pink">
+              <span class="letters-next-emoji" aria-hidden="true">🎯</span>
+              <h3>Speel de quiz!</h3>
+              <p>Test hoeveel letters je al kent.</p>
+              <a class="letters-next-cta" href="quiz.html?mode=letters">Start quiz →</a>
+            </article>
+
+            <article class="letters-next-card letters-next-blue">
+              <span class="letters-next-emoji" aria-hidden="true">✏️</span>
+              <h3>Leer schrijven</h3>
+              <p>Download werkbladen en oefen met pen en papier.</p>
+              <a class="letters-next-cta" href="../arabisch-oefenen-pdf/">Bekijk werkbladen →</a>
+            </article>
+
+            <article class="letters-next-card letters-next-green">
+              <span class="letters-next-emoji" aria-hidden="true">🔊</span>
+              <h3>Oefen klanken</h3>
+              <p>Leer fatha, kasra en damma bij elke letter.</p>
+              <a class="letters-next-cta" href="vowels.html?type=short">Naar klanken →</a>
+            </article>
+          </div>
         </section>
       </section>
 

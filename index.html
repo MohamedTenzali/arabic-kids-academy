@@ -34,13 +34,14 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="css/main.css?v=74">
+    <link rel="stylesheet" href="css/main.css?v=76">
     <script src="data/progress.js?v=26" defer></script>
     <script src="js/pwa-update.js?v=3" defer></script>
     <script src="js/motion.js?v=25" defer></script>
     <script src="js/app.js?v=55" defer></script>
     <script src="js/books-data.js?v=11" defer></script>
     <script src="js/books-page.js?v=27" defer></script>
+    <script src="js/reviews-wall.js?v=1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -88,7 +89,6 @@
         </div>
 
         <div class="hero-content">
-          <p class="eyebrow">Welkom bij ArabicoKids</p>
           <h1 id="hero-title">Leer Arabisch spelenderwijs</h1>
           <p class="arabic-welcome" lang="ar" dir="rtl">مرحبا بكم</p>
           <p class="hero-text">
@@ -113,6 +113,69 @@
             <span><strong>3</strong> speel levels vrij</span>
           </div>
         </div>
+
+        <!-- ── STEUN ARABICOKIDS ──────────────────────────────────────── -->
+        <section class="home-support-section" aria-labelledby="support-title">
+          <figure class="home-support-illus" aria-hidden="true">
+            <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+              <!-- Grote decoratieve hart achtergrond -->
+              <path d="M160 185 L60 100 Q30 70 60 45 Q90 20 120 45 L160 80 L200 45 Q230 20 260 45 Q290 70 260 100 Z"
+                    fill="rgba(255,200,61,0.18)"/>
+
+              <!-- Koffie-kop lichaam -->
+              <rect x="100" y="108" width="96" height="72" rx="16" fill="#ffffff"/>
+              <rect x="100" y="108" width="96" height="20" rx="12" fill="#ffd166"/>
+              <!-- Koffie -->
+              <ellipse cx="148" cy="118" rx="38" ry="10" fill="#c87941"/>
+              <!-- Oor -->
+              <path d="M196 122 Q226 122 226 144 Q226 166 196 166" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
+              <path d="M196 122 Q220 122 220 144 Q220 163 196 163" fill="none" stroke="#ffd166" stroke-width="7" stroke-linecap="round"/>
+              <!-- Stoom -->
+              <path d="M126 98 Q122 86 126 74" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+              <path d="M148 94 Q144 82 148 70" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+              <path d="M170 98 Q166 86 170 74" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+              <!-- Koffietekst op kop -->
+              <text x="148" y="154" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-size="11" font-weight="900" fill="#6b3bf5">ArabicoKids</text>
+
+              <!-- Hartjes links -->
+              <path d="M52 80 Q52 68 62 68 Q72 68 72 80 Q72 92 52 104 Q32 92 32 80 Q32 68 42 68 Q52 68 52 80Z" fill="#ff6fae"/>
+              <path d="M76 50 Q76 42 82 42 Q88 42 88 50 Q88 58 76 66 Q64 58 64 50 Q64 42 70 42 Q76 42 76 50Z" fill="#ff6fae" opacity="0.7"/>
+
+              <!-- Hartjes rechts -->
+              <path d="M248 80 Q248 68 258 68 Q268 68 268 80 Q268 92 248 104 Q228 92 228 80 Q228 68 238 68 Q248 68 248 80Z" fill="#6b3bf5" opacity="0.8"/>
+              <path d="M236 46 Q236 38 242 38 Q248 38 248 46 Q248 54 236 62 Q224 54 224 46 Q224 38 230 38 Q236 38 236 46Z" fill="#4db6ff" opacity="0.8"/>
+
+              <!-- Sterren -->
+              <path d="M36 145 L38 139 L40 145 L46 145 L41 149 L43 155 L38 151 L33 155 L35 149 L30 145Z" fill="#ffd166"/>
+              <path d="M274 140 L276 134 L278 140 L284 140 L279 144 L281 150 L276 146 L271 150 L273 144 L268 140Z" fill="#ff6fae"/>
+
+              <!-- Arabische letters decoratie -->
+              <text x="22" y="75" font-family="Noto Naskh Arabic,serif" font-size="28" fill="#6b3bf5" opacity="0.15" direction="rtl">ب</text>
+
+              <!-- Kleine sterretjes -->
+              <circle cx="88" cy="168" r="4" fill="#ffd166" opacity="0.7"/>
+              <circle cx="208" cy="62" r="3" fill="#ff6fae" opacity="0.6"/>
+              <circle cx="58" cy="120" r="2.5" fill="#4db6ff" opacity="0.7"/>
+              <circle cx="264" cy="112" r="3" fill="#ffd166" opacity="0.7"/>
+            </svg>
+          </figure>
+
+          <div class="home-support-copy">
+            <h2 id="support-title" class="home-support-title">Help ons ArabicoKids gratis te houden</h2>
+            <p class="home-support-text">
+              ArabicoKids is een gratis platform voor kinderen die Arabisch leren.
+              Met jouw steun kunnen we nieuwe lessen, letters en quizzen blijven maken.
+            </p>
+            <a class="home-support-btn"
+               href="https://ko-fi.com/arabicokids"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Steun ArabicoKids via Ko-fi (opent in nieuw tabblad)">
+              ☕ Steun ArabicoKids
+            </a>
+            <p class="home-support-note">Elke bijdrage helpt, hoe klein ook. ❤️</p>
+          </div>
+        </section>
 
         <section class="home-info-section home-how" aria-labelledby="how-title">
           <div class="section-heading">
@@ -251,10 +314,235 @@
           </a>
         </section>
 
-        <section class="home-premium-teaser" aria-label="Gratis en premium uitleg">
-          <strong>Gratis starten:</strong> letters, audio, quizzen en basiswerkbladen zijn direct beschikbaar. Premium materiaal volgt later.
-        </section>
       </section>
+
+    <!-- ── ILLUSTRATIE 1: Samen leren ─────────────────────────────────── -->
+    <section class="home-illus-section home-illus-together" aria-labelledby="illus-together-title">
+      <div class="home-illus-inner">
+        <figure class="home-illus-figure" aria-label="Twee kinderen leren samen Arabische letters">
+          <svg viewBox="0 0 440 282" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <!-- Shadow ground -->
+            <ellipse cx="220" cy="274" rx="185" ry="8" fill="rgba(107,59,245,0.1)"/>
+
+            <!-- BORD (midden) -->
+            <line x1="213" y1="168" x2="192" y2="270" stroke="#4d2ac0" stroke-width="6" stroke-linecap="round"/>
+            <line x1="227" y1="168" x2="248" y2="270" stroke="#4d2ac0" stroke-width="6" stroke-linecap="round"/>
+            <rect x="156" y="66" width="128" height="106" rx="12" fill="#ffffff" stroke="#6b3bf5" stroke-width="4"/>
+            <rect x="156" y="66" width="128" height="22" rx="10" fill="#6b3bf5"/>
+            <circle cx="175" cy="77" r="5" fill="#ffd166"/>
+            <circle cx="265" cy="77" r="5" fill="#ffd166"/>
+            <text x="220" y="156" text-anchor="middle" font-family="'Noto Naskh Arabic',serif" font-size="54" font-weight="700" fill="#6b3bf5" direction="rtl">ب</text>
+
+            <!-- MEISJE MET HOOFDDOEK (links) -->
+            <!-- jurk/body -->
+            <rect x="56" y="174" width="52" height="56" rx="26" fill="#ff6fae"/>
+            <!-- benen -->
+            <rect x="65" y="222" width="14" height="46" rx="7" fill="#e04d97"/>
+            <rect x="83" y="222" width="14" height="46" rx="7" fill="#e04d97"/>
+            <!-- schoenen -->
+            <ellipse cx="72" cy="270" rx="13" ry="6" fill="#2d2d2d"/>
+            <ellipse cx="90" cy="270" rx="13" ry="6" fill="#2d2d2d"/>
+            <!-- hoofd huid -->
+            <circle cx="82" cy="148" r="29" fill="#fdbcb4"/>
+            <!-- hoofddoek koepel -->
+            <ellipse cx="82" cy="132" rx="33" ry="23" fill="#6b3bf5"/>
+            <!-- hoofddoek zijkanten -->
+            <path d="M49 150 Q47 178 66 188 L98 188 Q117 178 115 150 Q99 170 82 170 Q65 170 49 150Z" fill="#6b3bf5"/>
+            <!-- ogen -->
+            <circle cx="74" cy="152" r="4" fill="#2d2d2d"/>
+            <circle cx="90" cy="152" r="4" fill="#2d2d2d"/>
+            <circle cx="75.5" cy="150.5" r="1.8" fill="white"/>
+            <circle cx="91.5" cy="150.5" r="1.8" fill="white"/>
+            <!-- lach -->
+            <path d="M74 163 Q82 172 90 163" stroke="#2d2d2d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- wijzende arm -->
+            <path d="M108 188 Q136 174 153 138" stroke="#fdbcb4" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="156" cy="133" r="10" fill="#fdbcb4"/>
+            <line x1="160" y1="124" x2="164" y2="110" stroke="#fdbcb4" stroke-width="7" stroke-linecap="round"/>
+            <!-- andere arm -->
+            <path d="M56 188 Q38 205 34 224" stroke="#fdbcb4" stroke-width="12" stroke-linecap="round"/>
+
+            <!-- JONGETJE MET KOPTELEFOON (rechts) -->
+            <!-- body -->
+            <rect x="332" y="174" width="52" height="56" rx="26" fill="#4db6ff"/>
+            <!-- benen -->
+            <rect x="341" y="222" width="14" height="46" rx="7" fill="#3a9fd4"/>
+            <rect x="359" y="222" width="14" height="46" rx="7" fill="#3a9fd4"/>
+            <!-- schoenen -->
+            <ellipse cx="348" cy="270" rx="13" ry="6" fill="#2d2d2d"/>
+            <ellipse cx="366" cy="270" rx="13" ry="6" fill="#2d2d2d"/>
+            <!-- hoofd huid -->
+            <circle cx="358" cy="148" r="29" fill="#fdbcb4"/>
+            <!-- haar -->
+            <ellipse cx="358" cy="130" rx="29" ry="17" fill="#2d2d2d"/>
+            <!-- koptelefoon band -->
+            <path d="M327 154 Q327 120 358 120 Q389 120 389 154" stroke="#ffc83d" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <!-- koptelefoon cups -->
+            <rect x="320" y="151" width="17" height="24" rx="8" fill="#ffc83d"/>
+            <rect x="379" y="151" width="17" height="24" rx="8" fill="#ffc83d"/>
+            <!-- gesloten blije ogen -->
+            <path d="M348 151 Q353 146 358 151" stroke="#2d2d2d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M358 151 Q363 146 368 151" stroke="#2d2d2d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- lach -->
+            <path d="M347 163 Q358 174 369 163" stroke="#2d2d2d" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- wangen -->
+            <ellipse cx="342" cy="161" rx="7" ry="4" fill="#ffb3c1" opacity="0.55"/>
+            <ellipse cx="374" cy="161" rx="7" ry="4" fill="#ffb3c1" opacity="0.55"/>
+            <!-- arm omhoog -->
+            <path d="M332 188 Q314 176 306 160" stroke="#fdbcb4" stroke-width="12" stroke-linecap="round"/>
+            <!-- andere arm -->
+            <path d="M384 188 Q402 202 406 220" stroke="#fdbcb4" stroke-width="12" stroke-linecap="round"/>
+            <!-- muzieknoten -->
+            <text x="288" y="158" font-size="20" fill="#ffc83d" font-family="sans-serif">♪</text>
+            <text x="272" y="140" font-size="14" fill="#ffc83d" font-family="sans-serif">♫</text>
+
+            <!-- Sterren decoratie -->
+            <path d="M138 54 L141 46 L144 54 L152 54 L146 59 L148 67 L141 63 L134 67 L136 59 L130 54Z" fill="#ffd166"/>
+            <path d="M404 88 L406 83 L408 88 L413 88 L409 91 L411 96 L406 93 L401 96 L403 91 L398 88Z" fill="#ff6fae"/>
+            <circle cx="28" cy="128" r="6" fill="#8bc34a"/>
+            <circle cx="414" cy="56" r="4" fill="#4db6ff"/>
+          </svg>
+        </figure>
+        <div class="home-illus-copy">
+          <p class="eyebrow">Samen oefenen</p>
+          <h2 id="illus-together-title">Samen leren is leuker</h2>
+          <p>Elke dag 5 minuten oefenen maakt een groot verschil! ⭐</p>
+          <a class="primary-button" href="pages/roadmap.html?level=beginner">Start nu gratis</a>
+        </div>
+      </div>
+      <div class="home-illus-wave-bottom" aria-hidden="true">
+        <svg viewBox="0 0 1440 52" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,18 C400,52 1040,0 1440,38 L1440,52 L0,52 Z" fill="#fff9ed"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ── ILLUSTRATIE 2: Schrijven leren ─────────────────────────────── -->
+    <section class="home-illus-section home-illus-write" aria-labelledby="illus-write-title">
+      <div class="home-illus-inner home-illus-inner-reverse">
+        <div class="home-illus-copy">
+          <p class="eyebrow">Letters schrijven</p>
+          <h2 id="illus-write-title">Schrijven leren stap voor stap</h2>
+          <p>Van krabbelen naar schrijven — jij kan het! ✏️</p>
+          <a class="secondary-button" href="pages/werkbladen.html">Bekijk werkbladen</a>
+        </div>
+        <figure class="home-illus-figure" aria-label="Kind oefent Arabisch schrijven">
+          <svg viewBox="0 0 380 265" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <!-- Shadow ground -->
+            <ellipse cx="155" cy="258" rx="130" ry="7" fill="rgba(139,195,74,0.15)"/>
+
+            <!-- Grote decoratieve letter rechts -->
+            <text x="305" y="200" text-anchor="middle" font-family="'Noto Naskh Arabic',serif" font-size="140" font-weight="700" fill="#6b3bf5" opacity="0.07" direction="rtl">ب</text>
+            <text x="300" y="194" text-anchor="middle" font-family="'Noto Naskh Arabic',serif" font-size="90" font-weight="700" fill="#6b3bf5" opacity="0.88" direction="rtl">ب</text>
+
+            <!-- Bureau -->
+            <rect x="35" y="195" width="155" height="14" rx="7" fill="#8bc34a"/>
+            <rect x="50" y="207" width="12" height="48" rx="6" fill="#5a8a2e"/>
+            <rect x="163" y="207" width="12" height="48" rx="6" fill="#5a8a2e"/>
+
+            <!-- Papier op bureau -->
+            <rect x="66" y="164" width="102" height="36" rx="6" fill="#ffffff" stroke="#dde0e4" stroke-width="2"/>
+            <line x1="74" y1="177" x2="160" y2="177" stroke="#e8eaed" stroke-width="1.5"/>
+            <line x1="74" y1="188" x2="160" y2="188" stroke="#e8eaed" stroke-width="1.5"/>
+            <!-- Letter op papier (geschreven) -->
+            <text x="117" y="189" text-anchor="middle" font-family="'Noto Naskh Arabic',serif" font-size="20" font-weight="700" fill="#6b3bf5" direction="rtl">ب</text>
+
+            <!-- Potlood -->
+            <g transform="rotate(-30, 152, 176)">
+              <rect x="148" y="148" width="8" height="40" rx="3" fill="#ffc83d"/>
+              <polygon points="148,188 156,188 152,202" fill="#e67e00"/>
+              <rect x="148" y="148" width="8" height="9" rx="2" fill="#ffb3b3"/>
+            </g>
+
+            <!-- Kind zittend -->
+            <!-- Lichaam/torso -->
+            <rect x="55" y="148" width="48" height="52" rx="24" fill="#6b3bf5"/>
+            <!-- Hoofd huid -->
+            <circle cx="79" cy="122" r="28" fill="#fdbcb4"/>
+            <!-- Haar -->
+            <ellipse cx="79" cy="105" rx="28" ry="16" fill="#2d2d2d"/>
+            <!-- Oren -->
+            <circle cx="51" cy="124" r="7" fill="#fdbcb4"/>
+            <circle cx="107" cy="124" r="7" fill="#fdbcb4"/>
+            <!-- Ogen (geconcentreerd) -->
+            <circle cx="71" cy="124" r="4" fill="#2d2d2d"/>
+            <circle cx="87" cy="124" r="4" fill="#2d2d2d"/>
+            <circle cx="72.5" cy="122.5" r="1.8" fill="white"/>
+            <circle cx="88.5" cy="122.5" r="1.8" fill="white"/>
+            <!-- Wenkbrauwen (gefronst, concentratie) -->
+            <path d="M66 115 Q71 111 76 114" stroke="#2d2d2d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M82 114 Q87 111 92 115" stroke="#2d2d2d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Tong (concentratie) -->
+            <circle cx="79" cy="136" r="6" fill="#ff8fa3"/>
+            <!-- Arm schrijvend -->
+            <path d="M103 175 Q130 174 145 174" stroke="#fdbcb4" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="150" cy="175" r="10" fill="#fdbcb4"/>
+            <!-- Andere arm -->
+            <path d="M55 175 Q36 186 30 198" stroke="#fdbcb4" stroke-width="12" stroke-linecap="round"/>
+
+            <!-- Kleine decoratieve sterren -->
+            <path d="M32 88 L34 82 L36 88 L42 88 L37 92 L39 98 L34 94 L29 98 L31 92 L26 88Z" fill="#ffd166"/>
+            <circle cx="348" cy="46" r="6" fill="#ff6fae"/>
+            <circle cx="22" cy="190" r="4" fill="#4db6ff"/>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ── ERVARINGEN WALL ────────────────────────────────────────────── -->
+    <section class="home-reviews-section" aria-labelledby="reviews-title">
+      <div class="section-heading">
+        <p class="eyebrow">Ervaringen</p>
+        <h2 id="reviews-title">Wat ouders zeggen</h2>
+        <p class="letter-meta">Lees ervaringen van andere ouders of deel jouw eigen verhaal!</p>
+      </div>
+
+      <!-- Live reacties (gevuld door reviews-wall.js) -->
+      <div id="reviews-wall" class="home-reviews-grid" aria-live="polite" aria-label="Ervaringen van ouders"></div>
+
+      <!-- Reactie plaatsen -->
+      <div class="home-review-form-wrapper">
+        <h3 class="home-review-form-title">
+          <span class="home-review-form-icon" aria-hidden="true">✏️</span>
+          Schrijf jouw reactie
+        </h3>
+
+        <form id="review-form" class="home-review-form" novalidate>
+
+          <!-- Avatar kiezer -->
+          <div class="review-field">
+            <p class="review-label" id="avatar-picker-label">Kies je avatar</p>
+            <div class="review-avatar-options" role="group" aria-labelledby="avatar-picker-label"></div>
+          </div>
+
+          <!-- Naam -->
+          <div class="review-field">
+            <label class="review-label" for="review-name">Naam <span class="review-required" aria-hidden="true">*</span></label>
+            <input class="review-input" type="text" id="review-name" name="name" required maxlength="40" placeholder="Bijv. Sarah M." autocomplete="off">
+          </div>
+
+          <!-- Sterren -->
+          <div class="review-field">
+            <p class="review-label" id="stars-label">Beoordeling <span class="review-required" aria-hidden="true">*</span></p>
+            <div class="review-stars-picker" role="group" aria-labelledby="stars-label"></div>
+          </div>
+
+          <!-- Tekst -->
+          <div class="review-field">
+            <label class="review-label" for="review-text">Jouw ervaring <span class="review-required" aria-hidden="true">*</span></label>
+            <textarea class="review-textarea" id="review-text" name="text" required maxlength="200" rows="3" placeholder="Vertel hoe ArabicoKids jullie helpt thuis te oefenen…"></textarea>
+            <small class="review-char-count"><span id="review-char-left">200</span> tekens over</small>
+          </div>
+
+          <div class="review-form-footer">
+            <button class="primary-button review-submit-btn" type="submit">Reactie plaatsen 🎉</button>
+            <button class="secondary-button review-cancel-btn" type="button" id="review-cancel-btn" hidden>Annuleren</button>
+            <p class="review-privacy-note">Reacties worden opgeslagen in je browser.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
     </main>
     <footer class="aka-footer">
       <div class="footer-container">

@@ -34,7 +34,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=75">
+    <link rel="stylesheet" href="../css/main.css?v=76">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../js/pwa-update.js?v=3" defer></script>
     <script src="../js/motion.js?v=26" defer></script>
@@ -76,19 +76,61 @@
     <main class="page-shell books-shell" id="main-content">
       <a class="secondary-button back-link" href="/">Terug naar home</a>
 
+      <!-- Hero -->
       <section class="books-hero" aria-labelledby="books-title">
-        <div>
-          <p class="eyebrow">Printbaar oefenen</p>
+        <div class="books-hero-text">
+          <span class="books-hero-badge">📚 Gratis printbaar oefenmateriaal</span>
           <h1 id="books-title">Boeken &amp; Werkboeken</h1>
           <p class="hero-text">
             Download duidelijke werkboeken waarmee kinderen stap voor stap Arabische letters herkennen,
             schrijven en herhalen. Handig voor thuis, op school of als extra oefening naast de online lessen.
           </p>
         </div>
+        <figure class="books-hero-deco" aria-hidden="true">
+          <svg viewBox="0 0 220 190" width="220" height="190" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shadow -->
+            <ellipse cx="110" cy="168" rx="70" ry="9" fill="rgba(0,0,0,0.13)"/>
+            <!-- Left page (white) -->
+            <rect x="30" y="48" width="80" height="108" rx="10" fill="#ffffff" opacity="0.97"/>
+            <!-- Right page (light purple) -->
+            <rect x="110" y="48" width="80" height="108" rx="10" fill="#ede8ff" opacity="0.97"/>
+            <!-- Spine -->
+            <rect x="106" y="48" width="8" height="108" rx="4" fill="rgba(107,59,245,0.25)"/>
+            <!-- Lines on left page -->
+            <line x1="42" y1="70" x2="100" y2="70" stroke="rgba(107,59,245,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="42" y1="83" x2="100" y2="83" stroke="rgba(107,59,245,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="42" y1="96" x2="100" y2="96" stroke="rgba(107,59,245,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="42" y1="109" x2="100" y2="109" stroke="rgba(107,59,245,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="42" y1="122" x2="78" y2="122" stroke="rgba(107,59,245,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Pencil on left page -->
+            <rect x="56" y="130" width="32" height="8" rx="4" fill="#ffd166" transform="rotate(-30 56 130)"/>
+            <polygon points="56,130 60,137 50,134" fill="#ff9f43" transform="rotate(-30 56 130)"/>
+            <!-- Arabic letter on right page -->
+            <text x="150" y="115" font-size="42" text-anchor="middle" fill="#6b3bf5" font-family="Noto Naskh Arabic,serif" opacity="0.85">ب</text>
+            <!-- Small star below letter -->
+            <text x="150" y="138" font-size="13" text-anchor="middle" opacity="0.7">⭐</text>
+            <!-- Floating stars around book -->
+            <text x="10" y="38" font-size="20">⭐</text>
+            <text x="185" y="28" font-size="15">✨</text>
+            <text x="180" y="160" font-size="17">⭐</text>
+            <text x="15" y="155" font-size="13">✨</text>
+            <text x="5"  y="95"  font-size="11">⭐</text>
+            <text x="205" y="90" font-size="11">✨</text>
+          </svg>
+        </figure>
       </section>
 
+      <!-- Trust bar -->
+      <div class="books-trust-bar" role="list" aria-label="Voordelen">
+        <div class="books-trust-chip" role="listitem">✅ 100% Gratis</div>
+        <div class="books-trust-chip" role="listitem">📧 Direct in je inbox</div>
+        <div class="books-trust-chip" role="listitem">🖨️ Thuis printen</div>
+        <div class="books-trust-chip" role="listitem">⭐ Leeftijd 4–8 jaar</div>
+      </div>
+
+      <!-- Book cards -->
       <section class="books-grid" aria-label="Downloadbare boeken">
-        <article class="book-card" aria-labelledby="book-title-level-1">
+        <article class="book-card book-card--purple" aria-labelledby="book-title-level-1">
           <div class="book-cover">
             <img
               class="book-cover-image"
@@ -107,14 +149,19 @@
             </div>
             <h2 id="book-title-level-1">Arabische Letters Niveau 1</h2>
             <p>Leer de Arabische letters stap voor stap met schrijf- en klankoefeningen. Ideaal voor kinderen die net beginnen.</p>
+            <ul class="book-features">
+              <li>28 Arabische letters</li>
+              <li>Schrijf- en herkening oefeningen</li>
+              <li>Kleurrijke afbeeldingen</li>
+            </ul>
             <div class="ml-form-wrapper">
-              <p style="font-size:.9rem;color:var(--color-muted);margin:0 0 8px;">✉️ Vul je naam en e-mail in en ontvang de downloadlink gratis:</p>
+              <p class="ml-form-label">✉️ Ontvang de downloadlink gratis in je inbox:</p>
               <div class="ml-embedded" data-form="lJFmkm"></div>
             </div>
           </div>
         </article>
 
-        <article class="book-card" aria-labelledby="book-title-level-2">
+        <article class="book-card book-card--pink" aria-labelledby="book-title-level-2">
           <div class="book-cover">
             <img
               class="book-cover-image"
@@ -133,12 +180,40 @@
             </div>
             <h2 id="book-title-level-2">Arabische Letters Niveau 2</h2>
             <p>Oefen verder met Arabische letters, schrijven en herkenning na niveau 1. Fijn voor thuis of in de les.</p>
+            <ul class="book-features">
+              <li>Herhaling &amp; verdieping</li>
+              <li>Lettercombinaties oefenen</li>
+              <li>Geschikt na niveau 1</li>
+            </ul>
             <div class="ml-form-wrapper">
-              <p style="font-size:.9rem;color:var(--color-muted);margin:0 0 8px;">✉️ Vul je naam en e-mail in en ontvang de downloadlink gratis:</p>
+              <p class="ml-form-label">✉️ Ontvang de downloadlink gratis in je inbox:</p>
               <div class="ml-embedded" data-form="aGQZ8o"></div>
             </div>
           </div>
         </article>
+      </section>
+
+      <!-- Coming soon -->
+      <section class="books-coming-section" aria-label="Binnenkort beschikbaar">
+        <div class="books-coming-header">
+          <span class="books-coming-badge">🚀 Binnenkort</span>
+          <h2>Meer boeken komen eraan!</h2>
+          <p>We werken hard aan nieuwe werkboeken voor klanken, woorden en zinnen.</p>
+        </div>
+        <div class="books-coming-grid">
+          <div class="books-coming-card">
+            <span class="books-coming-emoji">🔊</span>
+            <h3>Klanken Werkboek</h3>
+            <p>Fatha, kasra &amp; damma oefenen</p>
+            <span class="books-coming-tag">Binnenkort</span>
+          </div>
+          <div class="books-coming-card">
+            <span class="books-coming-emoji">✍️</span>
+            <h3>Schrijfschrift Niveau 3</h3>
+            <p>Woorden en korte zinnen schrijven</p>
+            <span class="books-coming-tag">Binnenkort</span>
+          </div>
+        </div>
       </section>
     </main>
 

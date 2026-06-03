@@ -249,5 +249,75 @@ const progressStore = {
   },
 };
 
+// === Star & Badge storage ===
+
+const starsStorageKey = "arabicKidsAcademyStars";
+const badgesStorageKey = "arabicKidsAcademyBadges";
+
+const readStars = () => {
+  try {
+    return JSON.parse(localStorage.getItem(starsStorageKey) || "{}");
+  } catch {
+    return {};
+  }
+};
+
+const writeStars = (stars) => {
+  try {
+    localStorage.setItem(starsStorageKey, JSON.stringify(stars));
+  } catch {}
+};
+
+const readBadges = () => {
+  try {
+    const value = JSON.parse(localStorage.getItem(badgesStorageKey) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+};
+
+const writeBadges = (badges) => {
+  try {
+    localStorage.setItem(badgesStorageKey, JSON.stringify(badges));
+  } catch {}
+};
+
+progressStore.saveStepStars = function (levelId, stepId, starCount) {
+  const stars = readStars();
+  const key = `${levelId}:${stepId}`;
+  if ((starCount || 0) > (stars[key] || 0)) {
+    stars[key] = starCount;
+    writeStars(stars);
+  }
+};
+
+progressStore.getStepStars = function (levelId, stepId) {
+  if (!this.isStepComplete(levelId, stepId)) return 0;
+  const stars = readStars();
+  const stored = stars[`${levelId}:${stepId}`];
+  return stored != null ? stored : 1;
+};
+
+progressStore.earnBadge = function (badgeId) {
+  const badges = readBadges();
+  if (badges.includes(badgeId)) return false;
+  badges.push(badgeId);
+  writeBadges(badges);
+  return true;
+};
+
+progressStore.getEarnedBadges = function () {
+  return readBadges();
+};
+
+progressStore.getTotalCompletedSteps = function () {
+  const progress = readProgress();
+  return Object.values(progress.completedSteps || {}).reduce(
+    (total, steps) => total + (Array.isArray(steps) ? steps.length : 0),
+    0,
+  );
+};
+
 window.learningLevels = learningLevels;
 window.progressStore = progressStore;
