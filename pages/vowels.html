@@ -34,7 +34,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=76">
+    <link rel="stylesheet" href="../css/main.css?v=77">
     <script src="../data/progress.js?v=26" defer></script>
     <script src="../data/letters.js?v=13" defer></script>
     <script src="../data/vowels.js" defer></script>
@@ -42,7 +42,7 @@
     <script src="../js/audio-player.js?v=25" defer></script>
     <script src="../js/pwa-update.js?v=3" defer></script>
     <script src="../js/motion.js?v=24" defer></script>
-    <script src="../js/app.js?v=55" defer></script>
+    <script src="../js/app.js?v=57" defer></script>
   </head>
   <body data-vowel-group="short">
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -71,12 +71,39 @@
       <a class="secondary-button back-link" href="roadmap.html?level=beginner">Terug naar leerroute</a>
 
       <section aria-labelledby="vowels-title">
-        <p class="eyebrow">Beginner</p>
-        <h1 id="vowels-title">Korte klanken</h1>
-        <p class="hero-text">
-          Oefen fatha, kasra en damma per letter met duidelijke audio.
-        </p>
 
+        <!-- Hero -->
+        <div class="vowels-hero">
+          <div class="vowels-hero-text">
+            <p class="eyebrow vowels-eyebrow">Beginner</p>
+            <h1 id="vowels-title">🎵 Korte klanken</h1>
+            <p class="hero-text">
+              Oefen fatha, kasra en damma per letter met duidelijke audio.
+            </p>
+            <div class="vowels-hero-pills" aria-hidden="true">
+              <span class="vowels-pill vowels-pill-fatha">َ Fatha <em>korte a</em></span>
+              <span class="vowels-pill vowels-pill-kasra">ِ Kasra <em>korte i</em></span>
+              <span class="vowels-pill vowels-pill-damma">ُ Damma <em>korte oe</em></span>
+            </div>
+          </div>
+          <figure class="vowels-hero-deco" aria-hidden="true">
+            <svg viewBox="0 0 200 180" width="200" height="180" xmlns="http://www.w3.org/2000/svg">
+              <!-- Note / speaker -->
+              <circle cx="100" cy="90" r="72" fill="rgba(255,255,255,0.15)"/>
+              <!-- Arabic letter with vowel marks -->
+              <text x="100" y="115" font-size="72" text-anchor="middle" fill="#fff" font-family="Noto Naskh Arabic,serif" opacity="0.9">بَ</text>
+              <!-- Floating notes -->
+              <text x="18" y="46" font-size="22">🎵</text>
+              <text x="158" y="34" font-size="16">🎶</text>
+              <text x="164" y="164" font-size="18">🎵</text>
+              <text x="10" y="160" font-size="13">🎶</text>
+              <text x="6" y="100" font-size="11">⭐</text>
+              <text x="184" y="100" font-size="11">⭐</text>
+            </svg>
+          </figure>
+        </div>
+
+        <!-- Progress -->
         <section class="letters-progress-card vowels-progress-card" aria-labelledby="vowels-progress-title">
           <div>
             <p class="eyebrow">Jouw voortgang</p>
@@ -89,6 +116,7 @@
           </div>
         </section>
 
+        <!-- Letter picker -->
         <section class="practice-section" aria-labelledby="sound-practice-title">
           <p class="eyebrow">Letters</p>
           <h2 id="sound-practice-title">Kies een letter</h2>
@@ -100,14 +128,45 @@
           <nav class="letter-page-nav" id="vowel-page-nav" aria-label="Klinker pagina's"></nav>
         </section>
 
-        <section class="parent-info" aria-labelledby="vowels-seo-title">
-          <p class="eyebrow">Uitspraak</p>
-          <h2 id="vowels-seo-title">Arabische klanken oefenen</h2>
-          <p>
-            Klaar met korte klanken? Speel daarna een korte quiz om te kijken welke klanken je al goed herkent.
-          </p>
-          <a class="primary-button" href="quiz.html?mode=short&level=beginner">Ga naar klanken quiz</a>
+        <!-- Fun CTA bottom -->
+        <section class="vowels-next-section" aria-labelledby="vowels-seo-title">
+          <div class="vowels-next-header">
+            <p class="eyebrow">Goed gedaan!</p>
+            <h2 id="vowels-seo-title">Wat wil je nu doen? 🌟</h2>
+            <p class="vowels-next-subtitle">Kies je volgende stap en blijf oefenen!</p>
+          </div>
+
+          <div class="vowels-next-grid">
+            <article class="vowels-next-card vowels-next-purple">
+              <span class="vowels-next-emoji" aria-hidden="true">🎯</span>
+              <h3>Speel de quiz!</h3>
+              <p>Test hoeveel klanken je al kent.</p>
+              <a class="vowels-next-cta" href="quiz.html?mode=short&amp;level=beginner">Start quiz →</a>
+            </article>
+
+            <article class="vowels-next-card vowels-next-blue">
+              <span class="vowels-next-emoji" aria-hidden="true">🔤</span>
+              <h3>Leer de letters</h3>
+              <p>Herken alle 28 Arabische letters.</p>
+              <a class="vowels-next-cta" href="letters.html">Naar letters →</a>
+            </article>
+
+            <article class="vowels-next-card vowels-next-pink">
+              <span class="vowels-next-emoji" aria-hidden="true">🎵</span>
+              <h3>Lange klanken</h3>
+              <p>Oefen aa, ii en uu per letter.</p>
+              <a class="vowels-next-cta" href="vowels.html?type=long">Start oefening →</a>
+            </article>
+
+            <article class="vowels-next-card vowels-next-green">
+              <span class="vowels-next-emoji" aria-hidden="true">✏️</span>
+              <h3>Leer schrijven</h3>
+              <p>Download werkbladen en oefen schrijven.</p>
+              <a class="vowels-next-cta" href="werkbladen.html">Bekijk werkbladen →</a>
+            </article>
+          </div>
         </section>
+
       </section>
     </main>
     <footer class="aka-footer">
