@@ -25,17 +25,22 @@ const renderBookCard = (book, options = {}) => {
   const status = statusLabels[book.status] || book.priceLabel || "Binnenkort";
   const cardClass = options.compact ? "book-card book-card-compact" : "book-card";
   const imageLoading = options.compact ? "eager" : "lazy";
-  const buttonText = book.buttonText || "Download PDF";
-  const pdfHref = book.pdfPath ? escapeHtml(getAssetHref(book.pdfPath)) : "";
-  const button = pdfHref
-    ? `<a class="primary-button book-download" href="${pdfHref}" download>
+
+  // Gebruik MailerLite formulier als mailerliteFormId aanwezig is
+  const button = book.mailerliteFormId
+    ? `<div class="ml-form-wrapper">
+        <p style="font-size:.9rem;color:var(--color-muted);margin:0 0 8px;">✉️ Vul je naam en e-mail in en ontvang de downloadlink gratis:</p>
+        <div class="ml-embedded" data-form="${escapeHtml(book.mailerliteFormId)}"></div>
+      </div>`
+    : book.pdfPath
+    ? `<a class="primary-button book-download" href="${escapeHtml(getAssetHref(book.pdfPath))}" download>
         <span class="book-download-lock" aria-hidden="true">PDF</span>
-        <span>${escapeHtml(buttonText)}</span>
+        <span>${escapeHtml(book.buttonText || "Download PDF")}</span>
         <small>Direct downloaden</small>
       </a>`
     : `<a class="primary-button book-download" href="${escapeHtml(getPageHref("pages/boeken.html"))}">
         <span class="book-download-lock" aria-hidden="true">PDF</span>
-        <span>${escapeHtml(buttonText)}</span>
+        <span>${escapeHtml(book.buttonText || "Bekijk boeken")}</span>
         <small>Bekijk boeken</small>
       </a>`;
 
@@ -67,8 +72,15 @@ const renderBookCard = (book, options = {}) => {
 
 if (booksGrid) {
   booksGrid.innerHTML = books.map((book) => renderBookCard(book)).join("");
+  // MailerLite formulieren herladen na dynamisch renderen
+  if (window.ml) {
+    window.ml("reload");
+  }
 }
 
 if (featuredBooks) {
   featuredBooks.innerHTML = books.slice(0, 2).map((book) => renderBookCard(book, { compact: true })).join("");
+  if (window.ml) {
+    window.ml("reload");
+  }
 }

@@ -9,6 +9,7 @@ window.arabicoKidsBooks = [
     priceLabel: "Gratis",
     status: "free",
     buttonText: "Download gratis Boek Niveau 1",
+    mailerliteFormId: "lJFmkm",
   },
   {
     id: "level-2",
@@ -20,5 +21,6 @@ window.arabicoKidsBooks = [
     priceLabel: "Gratis",
     status: "free",
     buttonText: "Download Boek Niveau 2",
+    mailerliteFormId: "aGQZ8o",
   },
 ];
