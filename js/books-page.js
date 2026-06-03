@@ -17,30 +17,26 @@ const escapeHtml = (value) =>
     "'": "&#39;",
   })[char]);
 
-const getBookDownloadHref = (book) => {
-  if (!book.downloadFile) return "";
-
-  const basePath = window.location.pathname.includes("/pages/") ? "../assets/books/" : "assets/books/";
-  return `${basePath}${book.downloadFile}`;
-};
+const isPagesPath = window.location.pathname.includes("/pages/");
+const getAssetHref = (path) => `${isPagesPath ? "../" : ""}${path}`;
+const getPageHref = (path) => (isPagesPath && path.startsWith("pages/") ? path.slice("pages/".length) : path);
 
 const renderBookCard = (book, options = {}) => {
-  const isAvailable = book.status === "free" && book.downloadFile;
   const status = statusLabels[book.status] || book.priceLabel || "Binnenkort";
   const cardClass = options.compact ? "book-card book-card-compact" : "book-card";
   const imageLoading = options.compact ? "eager" : "lazy";
   const buttonText = book.buttonText || "Download PDF";
-  const downloadHref = escapeHtml(getBookDownloadHref(book));
-  const button = isAvailable
-    ? `<a class="primary-button book-download" href="${downloadHref}" download>
+  const pdfHref = book.pdfPath ? escapeHtml(getAssetHref(book.pdfPath)) : "";
+  const button = pdfHref
+    ? `<a class="primary-button book-download" href="${pdfHref}" download>
         <span class="book-download-lock" aria-hidden="true">PDF</span>
         <span>${escapeHtml(buttonText)}</span>
-        <small>Directe PDF-download</small>
+        <small>Direct downloaden</small>
       </a>`
-    : `<a class="primary-button book-download" href="pages/boeken.html">
+    : `<a class="primary-button book-download" href="${escapeHtml(getPageHref("pages/boeken.html"))}">
         <span class="book-download-lock" aria-hidden="true">PDF</span>
         <span>${escapeHtml(buttonText)}</span>
-        <small>Na e-mailbevestiging</small>
+        <small>Bekijk boeken</small>
       </a>`;
 
   return `

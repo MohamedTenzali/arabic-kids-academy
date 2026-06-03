@@ -3,94 +3,303 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Bedankt - ArabicoKids</title>
-    <meta name="description" content="Bedankt voor uw aanvraag bij ArabicoKids. Controleer uw e-mail om uw download te bevestigen.">
+    <title>Je boek staat klaar - ArabicoKids</title>
     <meta name="robots" content="noindex, follow">
     <meta name="theme-color" content="#6b3bf5">
-    <meta name="application-name" content="ArabicoKids">
     <link rel="icon" href="/assets/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
-      rel="stylesheet"
-    >
-    <link rel="stylesheet" href="../css/main.css?v=74">
-    <script src="../data/progress.js?v=26" defer></script>
-    <script src="../js/pwa-update.js?v=3" defer></script>
-    <script src="../js/motion.js?v=26" defer></script>
-    <script src="../js/app.js?v=56" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css?v=75">
+    <style>
+      .bedankt-shell {
+        min-height: 100vh;
+        background: var(--gradient-app);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-8) var(--space-6);
+      }
+      .bedankt-card {
+        background: var(--color-surface);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-raised);
+        max-width: 520px;
+        width: 100%;
+        padding: clamp(32px,6vw,56px) clamp(24px,5vw,48px);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .bedankt-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 6px;
+        background: var(--gradient-brand);
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      }
+      .level-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--color-brand-soft);
+        color: var(--color-brand);
+        font-size: .82rem; font-weight: 800;
+        padding: 7px 16px;
+        border-radius: var(--radius-pill);
+        margin-bottom: var(--space-4);
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        animation: fadeUp .4s .1s both;
+      }
+      .confetti-row {
+        font-size: 2rem;
+        margin-bottom: var(--space-5);
+        display: flex;
+        justify-content: center;
+        gap: var(--space-3);
+      }
+      .confetti-row span {
+        display: inline-block;
+        animation: starSpin .8s cubic-bezier(.2,.9,.2,1.18) both;
+      }
+      .confetti-row span:nth-child(2){animation-delay:.1s}
+      .confetti-row span:nth-child(3){animation-delay:.2s}
+      .confetti-row span:nth-child(4){animation-delay:.3s}
+      .confetti-row span:nth-child(5){animation-delay:.4s}
+      @keyframes starSpin {
+        from{opacity:0;transform:scale(0) rotate(-30deg)}
+        to{opacity:1;transform:scale(1) rotate(0)}
+      }
+      @keyframes fadeUp {
+        from{opacity:0;transform:translateY(10px)}
+        to{opacity:1;transform:translateY(0)}
+      }
+      .bedankt-title {
+        font-family:'Nunito',sans-serif;
+        font-size:clamp(1.9rem,5vw,2.6rem);
+        font-weight:800;
+        color:var(--color-text);
+        margin:0 0 var(--space-3);
+        line-height:1.2;
+        animation:fadeUp .5s .2s both;
+      }
+      .bedankt-subtitle {
+        font-size:1.05rem;
+        color:var(--color-muted);
+        margin:0 0 var(--space-7);
+        line-height:1.6;
+        animation:fadeUp .5s .3s both;
+      }
+      .book-preview {
+        background:var(--color-surface-soft);
+        border:2px solid var(--color-border);
+        border-radius:var(--radius-lg);
+        padding:var(--space-5) var(--space-6);
+        margin-bottom:var(--space-6);
+        display:flex;
+        align-items:center;
+        gap:var(--space-5);
+        text-align:left;
+        animation:fadeUp .5s .4s both;
+      }
+      .book-icon {
+        width:60px;height:72px;
+        background:var(--gradient-brand);
+        border-radius:var(--radius-md);
+        display:flex;align-items:center;justify-content:center;
+        flex-shrink:0;font-size:1.6rem;
+        box-shadow:0 6px 16px rgba(107,59,245,.3);
+      }
+      .book-level{font-size:.72rem;font-weight:800;color:var(--color-brand);margin:0 0 2px;text-transform:uppercase;letter-spacing:.07em}
+      .book-title{font-size:1rem;font-weight:800;color:var(--color-text);margin:0 0 2px;font-family:'Nunito',sans-serif}
+      .book-meta{font-size:.82rem;color:var(--color-muted);margin:0}
+      .download-btn {
+        display:flex;align-items:center;justify-content:center;gap:var(--space-3);
+        width:100%;padding:18px var(--space-6);
+        background:var(--gradient-brand);
+        color:white;font-family:'Nunito',sans-serif;
+        font-size:1.1rem;font-weight:800;
+        border-radius:var(--radius-pill);
+        text-decoration:none;
+        box-shadow:var(--shadow-button);
+        transition:transform .15s cubic-bezier(.2,.9,.2,1.18),box-shadow .15s;
+        animation:fadeUp .5s .5s both;
+      }
+      .download-btn:hover{transform:translateY(-3px);box-shadow:0 14px 0 rgba(107,59,245,.24)}
+      .download-btn:active{transform:translateY(2px);box-shadow:0 4px 0 rgba(107,59,245,.24)}
+      .dl-icon{width:26px;height:26px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+      .email-tip {
+        margin-top:var(--space-5);
+        padding:var(--space-4) var(--space-5);
+        background:#fff9ed;border:1.5px solid #fde68a;
+        border-radius:var(--radius-md);
+        font-size:.88rem;color:#92400e;line-height:1.5;
+        animation:fadeUp .5s .6s both;
+      }
+      .email-tip strong{display:block;margin-bottom:2px;font-weight:800}
+      .other-book {
+        margin-top:var(--space-5);
+        padding:var(--space-4) var(--space-5);
+        background:linear-gradient(135deg,#fff0fa 0%,#f0f4ff 100%);
+        border:1.5px solid var(--color-border);
+        border-radius:var(--radius-md);
+        font-size:.9rem;color:var(--color-text);line-height:1.5;
+        animation:fadeUp .5s .7s both;
+      }
+      .other-book strong{display:block;font-weight:800;margin-bottom:4px}
+      .other-book a{color:var(--color-brand);font-weight:800;text-decoration:underline}
+      /* Compatibele kaart voor oude links */
+      .wacht-card {
+        background:var(--color-surface);
+        border-radius:var(--radius-xl);
+        box-shadow:var(--shadow-raised);
+        max-width:520px;width:100%;
+        padding:clamp(32px,6vw,56px) clamp(24px,5vw,48px);
+        text-align:center;
+        position:relative;overflow:hidden;
+        display:none; /* standaard verborgen */
+      }
+      .wacht-card::before {
+        content:'';position:absolute;
+        top:0;left:0;right:0;height:6px;
+        background:var(--gradient-sunny);
+        border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+      }
+      .wacht-icon{font-size:3.5rem;margin-bottom:var(--space-4);animation:fadeUp .5s .1s both}
+      .wacht-title{font-family:'Nunito',sans-serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;color:var(--color-text);margin:0 0 var(--space-3);animation:fadeUp .5s .2s both}
+      .wacht-text{font-size:1rem;color:var(--color-muted);margin:0 0 var(--space-6);line-height:1.6;animation:fadeUp .5s .3s both}
+      .stappen{list-style:none;padding:0;margin:0 0 var(--space-6);text-align:left}
+      .stappen li{display:flex;align-items:flex-start;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--color-border);font-size:.95rem;color:var(--color-text);animation:fadeUp .5s both}
+      .stappen li:last-child{border-bottom:none}
+      .stappen li:nth-child(1){animation-delay:.3s}
+      .stappen li:nth-child(2){animation-delay:.4s}
+      .stappen li:nth-child(3){animation-delay:.5s}
+      .stap-nr{width:32px;height:32px;background:var(--color-brand);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0}
+      .spam-tip{font-size:.82rem;color:var(--color-muted);margin-top:var(--space-4);animation:fadeUp .5s .6s both}
+      .back-link{display:inline-block;margin-top:var(--space-6);font-size:.9rem;color:var(--color-brand);text-decoration:none;font-weight:700;animation:fadeUp .5s .8s both}
+      .back-link:hover{text-decoration:underline}
+    </style>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Naar de inhoud</a>
-    <header class="site-header">
-      <a class="brand" href="/" aria-label="ArabicoKids homepagina">
-        <img class="brand-logo" src="/assets/icons/icon-192.png" alt="ArabicoKids logo">
-        <span>
-          <span class="brand-name">ArabicoKids</span>
-          <span class="brand-subtitle">Arabisch leren voor kinderen</span>
-        </span>
-      </a>
-      <nav class="site-nav" aria-label="Hoofdnavigatie">
-        <a href="/">Home</a>
-        <a href="niveaus.html">Niveaus</a>
-        <a href="roadmap.html?level=beginner">Lessen</a>
-        <a href="werkbladen.html">Werkbladen</a>
-        <a href="boeken.html">Boeken</a>
-        <a href="about.html">Over ons</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </header>
+    <main class="bedankt-shell" id="main-content">
 
-    <div class="motion-layer" id="motion-layer" aria-hidden="true"></div>
-    <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
+      <!-- Oude formulierlinks komen hier uit; downloads zijn nu direct beschikbaar. -->
+      <div class="wacht-card" id="wacht-kaart">
+        <div class="wacht-icon">PDF</div>
+        <h1 class="wacht-title">Je boek staat klaar</h1>
+        <p class="wacht-text">
+          Je hebt geen formulier of e-mailbevestiging nodig. Kies je boek en download de PDF direct.
+        </p>
+        <ol class="stappen">
+          <li>
+            <span class="stap-nr">1</span>
+            <span>Download Boek Niveau 1 direct als PDF.</span>
+          </li>
+          <li>
+            <span class="stap-nr">2</span>
+            <span>Download Boek Niveau 2 direct als PDF.</span>
+          </li>
+          <li>
+            <span class="stap-nr">3</span>
+            <span>Oefen thuis of in de les met de printbare boeken.</span>
+          </li>
+        </ol>
+        <p class="spam-tip">Geen popup, geen formulier en geen redirect.</p>
+        <a class="back-link" href="/pages/boeken.html">← Terug naar alle boeken</a>
+      </div>
 
-    <main class="page-shell books-shell" id="main-content">
-      <section class="books-hero" aria-labelledby="thanks-title">
-        <div>
-          <p class="eyebrow">Aanvraag ontvangen</p>
-          <h1 id="thanks-title">Bedankt</h1>
-          <p class="hero-text">Controleer uw e-mail om uw download te bevestigen.</p>
-          <a class="primary-button" href="boeken.html">Terug naar boeken</a>
+      <!-- KAART B: directe download -->
+      <div class="bedankt-card" id="download-kaart">
+        <div class="level-badge" id="level-badge">⭐ Niveau 1</div>
+
+        <div class="confetti-row" aria-hidden="true">
+          <span>🌟</span><span>✨</span><span>🎉</span><span>✨</span><span>🌟</span>
         </div>
-      </section>
+
+        <h1 class="bedankt-title">Jouw boek staat klaar!</h1>
+        <p class="bedankt-subtitle">Klik hieronder om direct te downloaden.</p>
+
+        <div class="book-preview">
+          <div class="book-icon">📖</div>
+          <div>
+            <p class="book-level" id="book-level-text">Niveau 1 — Beginners</p>
+            <p class="book-title" id="book-title-text">Arabisch Alfabet Boek</p>
+            <p class="book-meta">Gratis · PDF · Direct downloaden</p>
+          </div>
+        </div>
+
+        <a class="download-btn" id="download-btn" href="#" download>
+          <span class="dl-icon">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M7 1v8M7 9l-3-3M7 9l3-3M1 12h12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span id="btn-label">Download Niveau 1 — Gratis</span>
+        </a>
+
+        <div class="email-tip">
+          <strong>Direct beschikbaar</strong>
+          Je kunt de boeken ook terugvinden op de boekenpagina.
+        </div>
+
+        <div class="other-book" id="other-book-promo"></div>
+
+        <a class="back-link" href="/pages/boeken.html">← Terug naar alle boeken</a>
+      </div>
+
     </main>
 
-    <footer class="aka-footer">
-      <div class="footer-container">
-        <div class="footer-brand">
-          <img loading="lazy" decoding="async" src="/assets/icons/icon-192.png" alt="ArabicoKids logo" class="footer-logo">
-          <h2>ArabicoKids</h2>
-          <p>Kindvriendelijk Arabisch leren met letters, audio, quizzen, werkbladen en levels voor thuis.</p>
-        </div>
+    <script>
+      // ── Boekenconfiguratie — voeg hier nieuwe boeken toe ──
+      const BOEKEN = {
+        'niveau1': {
+          badge:      '⭐ Niveau 1',
+          levelText:  'Niveau 1 — Beginners',
+          title:      'Arabisch Alfabet Boek',
+          pdf:        '/assets/books/arabicokids-level-1.pdf',
+          bestand:    'ArabicoKids-Niveau-1.pdf',
+          btnLabel:   'Download Niveau 1 — Gratis',
+          ander:      { label: 'Niveau 2', url: '/pages/boeken.html', tekst: '🚀 Klaar voor meer? Download ook het gratis <a href="/pages/boeken.html">Niveau 2 boek</a>!' }
+        },
+        'niveau2': {
+          badge:      '🚀 Niveau 2',
+          levelText:  'Niveau 2 — Gevorderd',
+          title:      'Arabisch Alfabet Boek',
+          pdf:        '/assets/books/arabicokids-level-2.pdf',
+          bestand:    'ArabicoKids-Niveau-2.pdf',
+          btnLabel:   'Download Niveau 2 — Gratis',
+          ander:      { label: 'Niveau 1', url: '/pages/boeken.html', tekst: '👶 Wil je beginnen bij het begin? Bekijk ook het gratis <a href="/pages/boeken.html">Niveau 1 boek</a>.' }
+        }
+        // niveau3: { ... } ← voeg hier eenvoudig nieuwe boeken toe
+      };
 
-        <div class="footer-links">
-          <h3>Navigatie</h3>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="roadmap.html?level=beginner">Lessen</a></li>
-            <li><a href="werkbladen.html">Werkbladen</a></li>
-            <li><a href="boeken.html">Boeken</a></li>
-            <li><a href="about.html">Over ons</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="privacy.html">Privacy</a></li>
-          </ul>
-        </div>
+      // Oude links met ?boek=niveau1 of ?boek=niveau2 blijven werken, maar zonder formulierstap.
+      const params  = new URLSearchParams(window.location.search);
+      const boekKey = (params.get('boek') || 'niveau1').toLowerCase();
+      const boek    = BOEKEN[boekKey] || BOEKEN['niveau1'];
 
-        <div class="footer-contact">
-          <h3>Contact</h3>
-          <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
-          <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
-          <p class="footer-premium-note">Gratis basis beschikbaar. Premium materiaal volgt later.</p>
-        </div>
-      </div>
+      // ── Juiste kaart tonen ──
+      const wachtKaart    = document.getElementById('wacht-kaart');
+      const downloadKaart = document.getElementById('download-kaart');
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 ArabicoKids. Alle rechten voorbehouden.</p>
-      </div>
-    </footer>
-    <a class="back-to-top" href="#main-content" aria-label="Terug naar boven"><span>Terug naar boven</span></a>
+      downloadKaart.style.display = 'block';
+      wachtKaart.style.display = 'none';
+
+      document.getElementById('level-badge').textContent     = boek.badge;
+      document.getElementById('book-level-text').textContent = boek.levelText;
+      document.getElementById('book-title-text').textContent = boek.title;
+      document.getElementById('btn-label').textContent       = boek.btnLabel;
+
+      const btn = document.getElementById('download-btn');
+      btn.href = boek.pdf;
+      btn.setAttribute('download', boek.bestand);
+
+      const promo = document.getElementById('other-book-promo');
+      if (boek.ander) {
+        promo.innerHTML = `<strong>Ook handig</strong>${boek.ander.tekst}`;
+      }
+    </script>
   </body>
 </html>

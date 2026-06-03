@@ -2292,6 +2292,104 @@ h2 {
   padding: 0 6px;
 }
 
+.book-lead-form {
+  display: grid;
+  gap: var(--space-3);
+  width: 100%;
+  margin-top: var(--space-3);
+  border: 1px solid rgba(107, 59, 245, 0.18);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  padding: var(--space-4);
+}
+
+.book-lead-form h3,
+.book-lead-form p {
+  margin: 0;
+}
+
+.book-lead-form h3 {
+  color: var(--color-brand-dark);
+  font-size: 1.25rem;
+}
+
+.btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  border: 0;
+  padding: 0 var(--space-5);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: #ffffff;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--color-brand-dark);
+  color: #ffffff;
+}
+
+.pdf-fallback-link {
+  color: var(--color-brand-dark);
+  font-weight: 900;
+}
+
+.book-request-shell {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.book-request-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 340px);
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.book-request-copy {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.book-request-copy h1 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.08;
+}
+
+.book-request-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.book-request-preview {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #fff8df;
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+}
+
+.book-request-form {
+  display: grid;
+  visibility: visible;
+  gap: var(--space-4);
+  max-width: 760px;
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+}
+
 .book-download-page {
   display: grid;
   min-height: 58vh;
@@ -6186,11 +6284,16 @@ h2 {
   .worksheet-grid,
   .parent-info-grid,
   .books-grid,
+  .book-request-hero,
   .vowels-grid,
   .sounds-grid,
   .letter-word-grid,
   .letter-sounds-index {
     grid-template-columns: 1fr;
+  }
+
+  .book-request-preview {
+    max-width: 340px;
   }
 
   .letters-grid {
