@@ -3,14 +3,29 @@
 
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .getRegistrations()
-      .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
-      .then(() => {
-        if (!window.caches) return Promise.resolve();
-        return caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key))));
+      .register("/service-worker.js")
+      .then((registration) => {
+        registration.addEventListener("updatefound", () => {
+          const newWorker = registration.installing;
+          if (!newWorker) return;
+          newWorker.addEventListener("statechange", () => {
+            if (
+              newWorker.state === "installed" &&
+              navigator.serviceWorker.controller
+            ) {
+              newWorker.postMessage({ type: "SKIP_WAITING" });
+            }
+          });
+        });
       })
-      .catch(() => {
-        // Debug mode: cache cleanup should never block the page.
-      });
+      .catch(() => {});
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
+    });
   });
 })();

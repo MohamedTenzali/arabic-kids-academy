@@ -6,12 +6,12 @@
     <title>Contact | ArabicoKids</title>
     <meta name="description" content="Neem contact op met ArabicoKids voor vragen over Arabisch leren, werkbladen, boekjes of oefenen met kinderen.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://arabicokids.com/contact.html">
+    <link rel="canonical" href="https://arabicokids.com/pages/contact.html">
     <meta property="og:locale" content="nl_NL">
     <meta property="og:site_name" content="ArabicoKids">
     <meta property="og:title" content="Contact | ArabicoKids">
     <meta property="og:description" content="Neem contact op met ArabicoKids voor vragen over Arabisch leren, werkbladen, boekjes of oefenen met kinderen.">
-    <meta property="og:url" content="https://arabicokids.com/contact.html">
+    <meta property="og:url" content="https://arabicokids.com/pages/contact.html">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://arabicokids.com/assets/icons/icon-512.png">
     <meta property="og:image:alt" content="ArabicoKids logo voor Arabisch leren voor kinderen">
@@ -34,11 +34,11 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=70">
+    <link rel="stylesheet" href="../css/main.css?v=76">
     <script src="../data/progress.js?v=26" defer></script>
-    <script src="../js/pwa-update.js?v=2" defer></script>
-    <script src="../js/motion.js?v=24" defer></script>
-    <script src="../js/app.js?v=55" defer></script>
+    <script src="../js/pwa-update.js?v=3" defer></script>
+    <script src="../js/motion.js?v=26" defer></script>
+    <script src="../js/app.js?v=56" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -67,74 +67,131 @@
     <main class="page-shell contact-shell" id="main-content">
       <a class="secondary-button back-link" href="../index.html">Terug naar home</a>
 
-      <section class="contact-hero contact-simple" aria-labelledby="contact-title">
-        <p class="eyebrow">Voor ouders</p>
-        <h1 id="contact-title">Contact</h1>
-        <p class="hero-text">
-          Heb je een vraag over lessen, werkbladen, audio of technische hulp? Stuur ons gerust een bericht.
-        </p>
-        <a class="primary-button" href="mailto:info@arabicokids.com">Mail ons</a>
-      </section>
-
-      <section class="contact-panel contact-form-panel" aria-labelledby="contact-form-title">
-        <div>
-          <p class="eyebrow">Bericht sturen</p>
-          <h2 id="contact-form-title">Stel je vraag</h2>
-          <p>Vul het formulier in. Je mail-app wordt geopend met je bericht klaar om te versturen.</p>
+      <!-- Hero -->
+      <section class="contact-hero contact-hero-new" aria-labelledby="contact-title">
+        <div class="contact-hero-text">
+          <span class="contact-hero-badge">✉️ Wij helpen je graag</span>
+          <h1 id="contact-title">Neem contact op</h1>
+          <p class="hero-text">
+            Heb je een vraag over lessen, werkbladen, audio of technische hulp? Stuur ons gerust een bericht.
+          </p>
+          <a class="contact-mail-btn" href="mailto:info@arabicokids.com">
+            <span aria-hidden="true">📧</span> info@arabicokids.com
+          </a>
         </div>
-        <!-- TODO: Vervang deze mailto-fallback later door echte formulierverwerking via een backend of Formspree endpoint. -->
-        <form class="contact-form" id="contact-form" action="mailto:info@arabicokids.com" method="post" enctype="text/plain">
-          <label class="form-row">
-            Naam ouder
-            <input type="text" name="name" autocomplete="name" required>
-          </label>
-          <label class="form-row">
-            E-mailadres
-            <input type="email" name="email" autocomplete="email" required>
-          </label>
-          <label class="form-row form-row-full">
-            Onderwerp
-            <input type="text" name="subject" required>
-          </label>
-          <label class="form-row form-row-full">
-            Bericht
-            <textarea name="message" rows="6" required></textarea>
-          </label>
-          <button class="primary-button contact-submit" type="submit">Bericht versturen</button>
-        </form>
+        <figure class="contact-hero-deco" aria-hidden="true">
+          <svg viewBox="0 0 200 180" width="200" height="180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Envelope body -->
+            <rect x="20" y="50" width="160" height="110" rx="14" fill="#ffffff" opacity="0.95"/>
+            <!-- Envelope flap -->
+            <path d="M20 64 L100 118 L180 64 L180 50 Q180 50 100 106 Q20 50 20 50Z" fill="#e8e0ff" opacity="0.95"/>
+            <!-- Envelope lines (paper) -->
+            <line x1="44" y1="98" x2="96" y2="98" stroke="rgba(107,59,245,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="44" y1="110" x2="80" y2="110" stroke="rgba(107,59,245,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Stars -->
+            <text x="10"  y="40"  font-size="18">⭐</text>
+            <text x="172" y="36"  font-size="14">✨</text>
+            <text x="168" y="170" font-size="16">⭐</text>
+            <text x="8"   y="168" font-size="12">✨</text>
+          </svg>
+        </figure>
       </section>
 
-      <section class="contact-grid" aria-label="Contact informatie">
-        <article class="contact-panel">
-          <h2>Waarvoor kun je mailen?</h2>
-          <ul class="contact-topic-list">
-            <li><span aria-hidden="true">ABC</span> vragen over lessen</li>
-            <li><span aria-hidden="true">PDF</span> hulp met downloads</li>
-            <li><span aria-hidden="true">AUD</span> audio werkt niet</li>
-            <li><span aria-hidden="true">FIX</span> technisch probleem</li>
-            <li><span aria-hidden="true">TIP</span> samenwerking of feedback</li>
-          </ul>
-        </article>
+      <!-- Contact topics -->
+      <section class="contact-topics-section" aria-labelledby="topics-title">
+        <h2 id="topics-title" class="visually-hidden">Waarvoor kun je contact opnemen?</h2>
+        <div class="contact-topics-grid" role="list">
+          <div class="contact-topic-card contact-topic-purple" role="listitem">
+            <span class="contact-topic-emoji" aria-hidden="true">📚</span>
+            <h3>Vragen over lessen</h3>
+            <p>Hulp bij letters, audio of de leerroute</p>
+          </div>
+          <div class="contact-topic-card contact-topic-blue" role="listitem">
+            <span class="contact-topic-emoji" aria-hidden="true">📄</span>
+            <h3>Downloads &amp; werkbladen</h3>
+            <p>Hulp met PDF's en werkboeken</p>
+          </div>
+          <div class="contact-topic-card contact-topic-pink" role="listitem">
+            <span class="contact-topic-emoji" aria-hidden="true">🔊</span>
+            <h3>Audio werkt niet</h3>
+            <p>Technische problemen met geluid</p>
+          </div>
+          <div class="contact-topic-card contact-topic-green" role="listitem">
+            <span class="contact-topic-emoji" aria-hidden="true">💡</span>
+            <h3>Feedback &amp; ideeën</h3>
+            <p>Samenwerking of verbetervoorstellen</p>
+          </div>
+        </div>
+      </section>
 
-        <article class="contact-panel faq-panel" aria-labelledby="faq-title">
-          <p class="eyebrow">FAQ</p>
-          <h2 id="faq-title">Veelgestelde vragen</h2>
-          <div class="faq-list">
-            <details>
+      <!-- Form + FAQ side by side -->
+      <div class="contact-bottom-grid">
+
+        <section class="contact-panel contact-form-panel" aria-labelledby="contact-form-title">
+          <div class="contact-form-header">
+            <span class="contact-form-icon" aria-hidden="true">✍️</span>
+            <div>
+              <p class="eyebrow">Bericht sturen</p>
+              <h2 id="contact-form-title">Stel je vraag</h2>
+              <p>Vul het formulier in. Je mail-app wordt geopend met je bericht klaar om te versturen.</p>
+            </div>
+          </div>
+          <form class="contact-form contact-form-new" id="contact-form" action="mailto:info@arabicokids.com" method="post" enctype="text/plain">
+            <div class="contact-form-row-pair">
+              <label class="form-row">
+                <span class="form-label">Naam ouder</span>
+                <input type="text" name="name" autocomplete="name" required placeholder="Je naam">
+              </label>
+              <label class="form-row">
+                <span class="form-label">E-mailadres</span>
+                <input type="email" name="email" autocomplete="email" required placeholder="je@email.nl">
+              </label>
+            </div>
+            <label class="form-row">
+              <span class="form-label">Onderwerp</span>
+              <input type="text" name="subject" required placeholder="Waar gaat het over?">
+            </label>
+            <label class="form-row">
+              <span class="form-label">Bericht</span>
+              <textarea name="message" rows="5" required placeholder="Typ je bericht hier..."></textarea>
+            </label>
+            <button class="primary-button contact-submit" type="submit">Bericht versturen →</button>
+          </form>
+        </section>
+
+        <section class="contact-panel faq-panel faq-panel-new" aria-labelledby="faq-title">
+          <div class="faq-header">
+            <span class="faq-icon" aria-hidden="true">❓</span>
+            <div>
+              <p class="eyebrow">Veelgesteld</p>
+              <h2 id="faq-title">Veelgestelde vragen</h2>
+            </div>
+          </div>
+          <div class="faq-list faq-list-new">
+            <details class="faq-item">
               <summary>Zijn de lessen gratis te gebruiken?</summary>
               <p>Ja, de basislessen zijn gratis beschikbaar. Later kunnen er extra premium werkboeken of materialen bijkomen.</p>
             </details>
-            <details>
+            <details class="faq-item">
               <summary>Komen er extra werkbladen?</summary>
               <p>Ja, we blijven nieuwe werkbladen en oefeningen toevoegen per niveau.</p>
             </details>
-            <details>
+            <details class="faq-item">
               <summary>Wat doe ik bij een technisch probleem?</summary>
               <p>Mail ons met het apparaat, de browser en wat er precies fout gaat. Dan kunnen we gerichter helpen.</p>
             </details>
+            <details class="faq-item">
+              <summary>Werkt ArabicoKids ook op mobiel?</summary>
+              <p>Ja! ArabicoKids is volledig mobiel- en tabletvriendeijk en werkt ook als app op je telefoon.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Voor welke leeftijd is het geschikt?</summary>
+              <p>ArabicoKids is ontworpen voor kinderen van 4 tot 8 jaar, maar ook oudere beginners kunnen er goed mee starten.</p>
+            </details>
           </div>
-        </article>
-      </section>
+        </section>
+
+      </div>
     </main>
 
     <footer class="aka-footer">
@@ -162,7 +219,6 @@
           <h3>Contact</h3>
           <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
           <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
-          <p class="footer-premium-note">Gratis basis beschikbaar. Premium materiaal volgt later.</p>
         </div>
       </div>
 
@@ -173,4 +229,3 @@
     <a class="back-to-top" href="#main-content" aria-label="Terug naar boven"><span>Terug naar boven</span></a>
   </body>
 </html>
-

@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-book-downloads-40";
+const CACHE_NAME = "arabicokids-v2026-41";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -24,6 +24,8 @@ const CORE_CACHE = [
   "js/books-page.js",
   "js/pwa-update.js",
   "js/quiz-engine.js",
+  "js/rewards.js",
+  "js/reviews-wall.js",
   "pages/about.html",
   "pages/bedankt.html",
   "pages/boek-niveau-1.html",

@@ -6,12 +6,12 @@
     <title>Over ArabicoKids | Arabisch leren voor kinderen</title>
     <meta name="description" content="Lees hoe ArabicoKids kinderen helpt om Arabisch rustig, veilig en spelenderwijs te leren met duidelijke oefeningen.">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://arabicokids.com/about.html">
+    <link rel="canonical" href="https://arabicokids.com/pages/about.html">
     <meta property="og:locale" content="nl_NL">
     <meta property="og:site_name" content="ArabicoKids">
     <meta property="og:title" content="Over ArabicoKids | Arabisch leren voor kinderen">
     <meta property="og:description" content="Lees hoe ArabicoKids kinderen helpt om Arabisch rustig, veilig en spelenderwijs te leren met duidelijke oefeningen.">
-    <meta property="og:url" content="https://arabicokids.com/about.html">
+    <meta property="og:url" content="https://arabicokids.com/pages/about.html">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://arabicokids.com/assets/icons/icon-512.png">
     <meta property="og:image:alt" content="ArabicoKids logo voor Arabisch leren voor kinderen">
@@ -34,11 +34,27 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="../css/main.css?v=70">
+    <link rel="stylesheet" href="../css/main.css?v=76">
     <script src="../data/progress.js?v=26" defer></script>
-    <script src="../js/pwa-update.js?v=2" defer></script>
-    <script src="../js/motion.js?v=24" defer></script>
-    <script src="../js/app.js?v=55" defer></script>
+    <script src="../js/pwa-update.js?v=3" defer></script>
+    <script src="../js/motion.js?v=26" defer></script>
+    <script src="../js/app.js?v=56" defer></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ArabicoKids",
+      "url": "https://arabicokids.com",
+      "logo": "https://arabicokids.com/assets/icons/icon-512.png",
+      "description": "ArabicoKids helpt kinderen van 4 tot 8 jaar Arabisch te leren via letters, audio, quizzen en werkbladen.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@arabicokids.com",
+        "contactType": "customer support",
+        "availableLanguage": "Dutch"
+      }
+    }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -68,92 +84,143 @@
       <a class="secondary-button back-link" href="../index.html">Terug naar home</a>
 
       <article class="about-content">
-        <section class="about-hero" aria-labelledby="about-title">
+
+        <!-- Hero -->
+        <section class="about-hero about-hero-new" aria-labelledby="about-title">
           <div class="about-hero-copy">
-            <p class="eyebrow">Over ons</p>
+            <span class="about-hero-badge">🌟 Ons verhaal</span>
             <h1 id="about-title">Over ArabicoKids</h1>
             <p class="hero-text">Arabisch leren voor kinderen op een leuke, rustige en duidelijke manier.</p>
             <p>ArabicoKids helpt kinderen stap voor stap kennismaken met Arabische letters, klanken en eenvoudige oefeningen.</p>
           </div>
-          <div class="about-hero-mascot" aria-hidden="true">
-            <span class="about-mascot-letter" lang="ar" dir="rtl">ا</span>
-            <span class="about-mascot-card">Luister</span>
+          <figure class="about-hero-deco" aria-hidden="true">
+            <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+              <!-- Grote cirkel achtergrond -->
+              <circle cx="100" cy="100" r="90" fill="rgba(255,255,255,0.15)"/>
+              <!-- Arabische letter groot -->
+              <text x="100" y="130" font-size="96" text-anchor="middle" fill="#fff" font-family="Noto Naskh Arabic,serif" opacity="0.9">ا</text>
+              <!-- Kleine sterren -->
+              <text x="28" y="55" font-size="20">⭐</text>
+              <text x="158" y="42" font-size="15">✨</text>
+              <text x="162" y="170" font-size="18">⭐</text>
+              <text x="22" y="168" font-size="13">✨</text>
+              <text x="10" y="110" font-size="11">⭐</text>
+              <text x="185" y="110" font-size="11">✨</text>
+            </svg>
+          </figure>
+        </section>
+
+        <!-- Stats bar -->
+        <div class="about-stats-bar" role="list">
+          <div class="about-stat" role="listitem">
+            <span class="about-stat-num">28</span>
+            <span class="about-stat-label">Arabische letters</span>
+          </div>
+          <div class="about-stat" role="listitem">
+            <span class="about-stat-num">3</span>
+            <span class="about-stat-label">Niveaus</span>
+          </div>
+          <div class="about-stat" role="listitem">
+            <span class="about-stat-num">100%</span>
+            <span class="about-stat-label">Gratis basis</span>
+          </div>
+          <div class="about-stat" role="listitem">
+            <span class="about-stat-num">4–8</span>
+            <span class="about-stat-label">Jaar</span>
+          </div>
+        </div>
+
+        <!-- Missie -->
+        <section class="about-panel about-mission about-mission-new" aria-labelledby="mission-title">
+          <div class="about-mission-icon" aria-hidden="true">🎯</div>
+          <div>
+            <h2 id="mission-title">Onze missie</h2>
+            <p>Wij willen dat Arabisch leren veilig en haalbaar voelt. Geen haast, geen stress, maar kleine stappen die kinderen kunnen herhalen.</p>
+            <p>Daarom combineren we plezier, duidelijke audio en zelfstandig oefenen. Zo kan een kind thuis rustig groeien, terwijl ouders makkelijk mee kunnen kijken.</p>
           </div>
         </section>
 
-        <section class="about-panel about-mission">
-          <h2>Onze missie</h2>
-          <p>Wij willen dat Arabisch leren veilig en haalbaar voelt. Geen haast, geen stress, maar kleine stappen die kinderen kunnen herhalen.</p>
-          <p>Daarom combineren we plezier, duidelijke audio en zelfstandig oefenen. Zo kan een kind thuis rustig groeien, terwijl ouders makkelijk mee kunnen kijken.</p>
-        </section>
+        <!-- Features -->
+        <section class="about-panel" aria-labelledby="features-title">
+          <h2 id="features-title">Wat bieden wij?</h2>
+          <div class="about-feature-grid about-feature-grid-new">
 
-        <section class="about-panel">
-          <h2>Wat bieden wij?</h2>
-          <div class="about-feature-grid">
-            <section>
-              <span class="about-feature-icon" aria-hidden="true">ا</span>
+            <article class="about-feature-card about-feat-purple">
+              <span class="about-feat-emoji" aria-hidden="true">🔤</span>
               <h3>Arabische letters leren</h3>
-              <p>Kinderen leren stap voor stap alle Arabische letters herkennen en uitspreken.</p>
-            </section>
+              <p>Kinderen leren stap voor stap alle 28 Arabische letters herkennen en uitspreken.</p>
+            </article>
 
-            <section>
-              <span class="about-feature-icon" aria-hidden="true">♫</span>
+            <article class="about-feature-card about-feat-blue">
+              <span class="about-feat-emoji" aria-hidden="true">🎵</span>
               <h3>Korte en lange klanken</h3>
               <p>Interactieve lessen met audio om uitspraak en klanken goed te oefenen.</p>
-            </section>
+            </article>
 
-            <section>
-              <span class="about-feature-icon" aria-hidden="true">?</span>
+            <article class="about-feature-card about-feat-pink">
+              <span class="about-feat-emoji" aria-hidden="true">🎯</span>
               <h3>Quizzen en oefeningen</h3>
               <p>Leuke quizzen helpen kinderen om hun kennis te testen en te herhalen.</p>
-            </section>
+            </article>
 
-            <section>
-              <span class="about-feature-icon" aria-hidden="true">PDF</span>
+            <article class="about-feature-card about-feat-green">
+              <span class="about-feat-emoji" aria-hidden="true">📄</span>
               <h3>Werkbladen &amp; werkboeken</h3>
               <p>Printbare oefeningen en werkboeken per niveau voor extra oefenen thuis.</p>
-            </section>
+            </article>
 
-            <section>
-              <span class="about-feature-icon" aria-hidden="true">1-3</span>
+            <article class="about-feature-card about-feat-amber">
+              <span class="about-feat-emoji" aria-hidden="true">📈</span>
               <h3>Niveausysteem</h3>
-              <p>De lessen zijn verdeeld in verschillende niveaus zodat kinderen rustig kunnen doorgroeien.</p>
-            </section>
+              <p>De lessen zijn verdeeld in niveaus zodat kinderen rustig kunnen doorgroeien.</p>
+            </article>
+
           </div>
         </section>
 
-        <section class="about-panel">
-          <h2>Voor ouders</h2>
+        <!-- Voor ouders -->
+        <section class="about-panel about-parents-panel" aria-labelledby="parents-title">
+          <div class="about-parents-header">
+            <span class="about-parents-emoji" aria-hidden="true">👨‍👩‍👧</span>
+            <h2 id="parents-title">Voor ouders</h2>
+          </div>
           <p>ArabicoKids helpt ouders om thuis eenvoudig te begeleiden, ook met korte oefenmomenten.</p>
-          <ul class="about-check-list">
-            <li>voortgang volgen</li>
-            <li>thuis oefenen</li>
-            <li>werkbladen downloaden</li>
-            <li>duidelijke leerroute gebruiken</li>
+          <ul class="about-check-list about-check-list-new">
+            <li>Voortgang bijhouden per level</li>
+            <li>Thuis oefenen op eigen tempo</li>
+            <li>Werkbladen downloaden en printen</li>
+            <li>Duidelijke leerroute volgen</li>
           </ul>
         </section>
 
-        <section class="about-panel">
-          <h2>Waarom ArabicoKids?</h2>
-          <ul class="about-check-list">
-            <li>kindvriendelijk ontwerp</li>
-            <li>mobiel en tablet vriendelijk</li>
-            <li>interactieve audio</li>
-            <li>rustig leren op eigen tempo</li>
-            <li>geschikt voor beginners</li>
-          </ul>
+        <!-- Waarom -->
+        <section class="about-panel about-why-panel" aria-labelledby="why-title">
+          <h2 id="why-title">Waarom ArabicoKids?</h2>
+          <div class="about-why-grid">
+            <div class="about-why-chip">🎨 Kindvriendelijk ontwerp</div>
+            <div class="about-why-chip">📱 Mobiel &amp; tablet vriendelijk</div>
+            <div class="about-why-chip">🔊 Interactieve audio</div>
+            <div class="about-why-chip">🐢 Rustig op eigen tempo</div>
+            <div class="about-why-chip">✅ Geschikt voor beginners</div>
+            <div class="about-why-chip">🆓 Gratis basis</div>
+          </div>
         </section>
 
-        <section class="about-panel">
-          <h2>Samen groeien</h2>
+        <!-- Samen groeien -->
+        <section class="about-panel about-grow-panel" aria-labelledby="grow-title">
+          <span class="about-grow-emoji" aria-hidden="true">🌱</span>
+          <h2 id="grow-title">Samen groeien</h2>
           <p>Wij blijven ArabicoKids verder ontwikkelen met nieuwe lessen, werkboeken, quizzen en interactieve functies zodat kinderen op een moderne en motiverende manier Arabisch kunnen leren.</p>
         </section>
 
-        <section class="about-panel about-start">
-          <h2>Start vandaag nog</h2>
+        <!-- CTA -->
+        <section class="about-panel about-start about-cta-new" aria-labelledby="cta-title">
+          <span class="about-cta-emoji" aria-hidden="true">🚀</span>
+          <h2 id="cta-title">Start vandaag nog!</h2>
           <p>Ontdek de lessen en help je kind rustig groeien in het Arabisch.</p>
-          <a class="primary-button" href="niveaus.html">Kies een niveau</a>
+          <a class="primary-button about-cta-btn" href="niveaus.html">Kies een niveau →</a>
         </section>
+
       </article>
     </main>
 
@@ -182,7 +249,6 @@
           <h3>Contact</h3>
           <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
           <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
-          <p class="footer-premium-note">Gratis basis beschikbaar. Premium materiaal volgt later.</p>
         </div>
       </div>
 
@@ -193,4 +259,3 @@
     <a class="back-to-top" href="#main-content" aria-label="Terug naar boven"><span>Terug naar boven</span></a>
   </body>
 </html>
-
