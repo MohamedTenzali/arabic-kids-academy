@@ -3,8 +3,8 @@
   const pagePath = window.location.pathname;
   const contextMessages = {
     home: {
-      title: "Welkom!",
-      hint: "Kies Beginner en start je ontdektocht.",
+      title: "Hoi! Kom je Arabisch leren? 🌟",
+      hint: "Kies Beginner en verzamel sterren!",
     },
     adventure: {
       title: "Klaar?",

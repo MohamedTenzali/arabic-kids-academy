@@ -84,11 +84,7 @@ levelButtons.forEach((button) => {
       selectedLevelText.textContent = `Gekozen niveau: ${selectedLevel.name}`;
     }
 
-    if (startLink) {
-      startLink.classList.remove("is-disabled");
-      startLink.removeAttribute("aria-disabled");
-      startLink.href = getLevelStartHref(selectedLevel.id);
-    }
+    window.location.href = getLevelStartHref(selectedLevel.id);
   });
 });
 

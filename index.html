@@ -62,15 +62,6 @@
         <a href="pages/contact.html">Contact</a>
       </nav>
     </header>
-    <section class="download-section" aria-label="Bekijk ons leerboekje">
-      <a class="download-book-button" href="assets/books/arabicokids-level-1.pdf" download>
-        <span class="download-book-icon" aria-hidden="true">ABC</span>
-        <span class="download-book-copy">
-          <strong>Download ons boekje om te leren schrijven</strong>
-          <small>Want oefenen baart kunst.</small>
-        </span>
-      </a>
-    </section>
     <div class="motion-layer" id="motion-layer" aria-hidden="true"></div>
     <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
 
@@ -101,19 +92,19 @@
           <h1 id="hero-title">Leer Arabisch spelenderwijs</h1>
           <p class="arabic-welcome" lang="ar" dir="rtl">مرحبا بكم</p>
           <p class="hero-text">
-            Een kindvriendelijk online leerplatform waarmee kinderen stap voor stap Arabische letters,
-            klanken en woorden oefenen met audio, quizzen en printbare werkbladen.
+            Leer Arabische letters met spelletjes, audio en sterren! ⭐
           </p>
+
+          <div class="home-cta-row" aria-label="Snel starten">
+            <a class="primary-button home-cta-main" href="pages/roadmap.html?level=beginner">Start met leren</a>
+            <a class="secondary-button" href="pages/werkbladen.html">Bekijk werkbladen</a>
+          </div>
+          <p class="hero-stars" aria-hidden="true">⭐⭐⭐</p>
 
           <div class="learning-stats" aria-label="Wat je kunt oefenen">
             <span class="learning-stat"><strong>28</strong> letters</span>
             <span class="learning-stat"><strong>6</strong> levels</span>
             <span class="learning-stat"><strong>Audio</strong> oefenen</span>
-          </div>
-
-          <div class="home-cta-row" aria-label="Snel starten">
-            <a class="primary-button" href="pages/roadmap.html?level=beginner">Start met leren</a>
-            <a class="secondary-button" href="pages/werkbladen.html">Bekijk werkbladen</a>
           </div>
 
           <div class="home-reward-strip" aria-label="Wat kinderen onderweg verdienen">
@@ -142,7 +133,7 @@
                 </svg>
               </div>
               <h3>Luister</h3>
-              <p>Kinderen horen de juiste uitspraak van letters en klanken.</p>
+              <p>Hoor de letters en klanken duidelijk.</p>
             </article>
             <article class="home-step-card home-step-practice">
               <div class="home-step-top">
@@ -182,7 +173,7 @@
                 </svg>
               </div>
               <h3>Groei stap voor stap</h3>
-              <p>Levels helpen kinderen rustig verder leren op hun tempo.</p>
+              <p>Ga door naar het volgende level.</p>
             </article>
           </div>
         </section>
@@ -205,25 +196,13 @@
           </div>
         </section>
 
-        <section class="home-info-section home-books-preview" aria-labelledby="home-books-title">
-          <div class="home-books-copy">
-            <p class="eyebrow">Nieuwe werkboeken beschikbaar</p>
-            <h2 id="home-books-title">Printbare boeken voor thuis</h2>
-            <p>
-              Download de nieuwste ArabicOKids werkboeken en oefen letters schrijven stap voor stap met duidelijke covers en PDF’s.
-            </p>
-            <a class="primary-button" href="pages/boeken.html">Bekijk boeken</a>
-          </div>
-          <div class="home-books-covers" data-featured-books aria-label="Nieuwe werkboeken"></div>
-        </section>
 
         <section class="home-info-section parent-trust" aria-labelledby="trust-title">
           <div>
             <p class="eyebrow">Voor ouders</p>
             <h2 id="trust-title">Eenvoudig, veilig en duidelijk</h2>
             <p>
-              ArabicoKids is gemaakt voor gezinnen die Arabisch leren laagdrempelig willen houden:
-              korte lessen, duidelijke audio en oefeningen die ook op mobiel prettig werken.
+              Korte lessen, duidelijke audio en oefeningen voor thuis.
             </p>
           </div>
 
@@ -243,6 +222,7 @@
 
           <div class="level-grid">
             <button class="level-card" type="button" data-level="beginner" aria-label="Kies niveau Beginner" aria-pressed="false">
+              <span class="level-emoji" aria-hidden="true">🌱</span>
               <span class="level-badge" lang="ar" dir="rtl">ا</span>
               <span class="level-name">Beginner</span>
               <span class="level-copy">Ik begin net met Arabisch.</span>
@@ -250,6 +230,7 @@
             </button>
 
             <button class="level-card" type="button" data-level="advanced" aria-label="Niveau Gevorderd is nog op slot" aria-pressed="false">
+              <span class="level-emoji" aria-hidden="true">⭐</span>
               <span class="level-badge" lang="ar" dir="rtl">بَ</span>
               <span class="level-name">Gevorderd</span>
               <span class="level-copy">Ik ken al een paar letters.</span>
@@ -257,6 +238,7 @@
             </button>
 
             <button class="level-card" type="button" data-level="expert" aria-label="Kies niveau Expert" aria-pressed="false">
+              <span class="level-emoji" aria-hidden="true">🔥</span>
               <span class="level-badge" lang="ar" dir="rtl">تُ</span>
               <span class="level-name">Expert</span>
               <span class="level-copy">Ik wil extra uitdaging.</span>
