@@ -310,34 +310,34 @@ const getVowelSounds = (letter, group = "") =>
       src: letter.vowelAudio[vowel.id],
     }));
 const letterWorksheetPaths = {
-  ain: "docs/letter-worksheets/ain.pdf",
-  alif: "docs/letter-worksheets/alif.pdf",
-  baa: "docs/letter-worksheets/baa.pdf",
-  daad: "docs/letter-worksheets/daad.pdf",
-  dal: "docs/letter-worksheets/dal.pdf",
-  dhal: "docs/letter-worksheets/dhal.pdf",
-  faa: "docs/letter-worksheets/faa.pdf",
-  ghain: "docs/letter-worksheets/ghain.pdf",
-  ha: "docs/letter-worksheets/ha.pdf",
-  haa: "docs/letter-worksheets/haa.pdf",
-  jeem: "docs/letter-worksheets/jeem.pdf",
-  kaaf: "docs/letter-worksheets/kaaf.pdf",
-  khaa: "docs/letter-worksheets/khaa.pdf",
-  laam: "docs/letter-worksheets/laam.pdf",
-  meem: "docs/letter-worksheets/meem.pdf",
-  noon: "docs/letter-worksheets/noon.pdf",
-  qaaf: "docs/letter-worksheets/qaaf.pdf",
-  raa: "docs/letter-worksheets/raa.pdf",
-  saad: "docs/letter-worksheets/saad.pdf",
-  seen: "docs/letter-worksheets/seen.pdf",
-  sheen: "docs/letter-worksheets/sheen.pdf",
-  taa: "docs/letter-worksheets/taa.pdf",
-  thaa: "docs/letter-worksheets/thaa.pdf",
-  "taa-heavy": "docs/letter-worksheets/taa-heavy.pdf",
-  waw: "docs/letter-worksheets/waw.pdf",
-  yaa: "docs/letter-worksheets/yaa.pdf",
-  zay: "docs/letter-worksheets/zay.pdf",
-  "zaa-heavy": "docs/letter-worksheets/zaa-heavy.pdf",
+  alif:       "pdf/pdf-letters/alif.pdf.pdf",
+  baa:        "pdf/pdf-letters/baa.pdf.pdf",
+  taa:        "pdf/pdf-letters/taa.pdf.pdf",
+  thaa:       "pdf/pdf-letters/Thaa.pdf.pdf",
+  jeem:       "pdf/pdf-letters/Jeem.pdf.pdf",
+  haa:        "pdf/pdf-letters/Haa.pdf.pdf",
+  khaa:       "pdf/pdf-letters/Khaa.pdf.pdf",
+  dal:        "pdf/pdf-letters/Dal.pdf.pdf",
+  dhal:       "pdf/pdf-letters/Dhal.pdf.pdf",
+  raa:        "pdf/pdf-letters/Raa.pdf.pdf",
+  zay:        "pdf/pdf-letters/Zay.pdf.pdf",
+  seen:       "pdf/pdf-letters/Seen.pdf.pdf",
+  sheen:      "pdf/pdf-letters/Sheen.pdf.pdf",
+  saad:       "pdf/pdf-letters/Saad.pdf.pdf",
+  daad:       "pdf/pdf-letters/Daad.pdf.pdf",
+  "taa-heavy":"pdf/pdf-letters/Taa%20zwaar.pdf.pdf",
+  "zaa-heavy":"pdf/pdf-letters/Zaa%20zwaar.pdf.pdf",
+  ain:        "pdf/pdf-letters/Ain.pdf.pdf",
+  ghain:      "pdf/pdf-letters/Ghain.pdf.pdf",
+  faa:        "pdf/pdf-letters/Faa.pdf.pdf",
+  qaaf:       "pdf/pdf-letters/Qaaf.pdf.pdf",
+  kaaf:       "pdf/pdf-letters/Kaaf.pdf.pdf",
+  laam:       "pdf/pdf-letters/Laam.pdf.pdf",
+  meem:       "pdf/pdf-letters/Meem.pdf.pdf",
+  noon:       "pdf/pdf-letters/Noon.pdf.pdf",
+  ha:         "pdf/pdf-letters/Ha.pdf.pdf",
+  waw:        "pdf/pdf-letters/Waw.pdf.pdf",
+  yaa:        "docs/letter-worksheets/yaa.pdf",
 };
 const getLetterWorksheetPath = (letter) => {
   const path = letter.worksheetSrc || letterWorksheetPaths[letter.id] || "";
@@ -671,14 +671,14 @@ if (lettersGrid && appLetters.length) {
             })}
             ${
               worksheetPath
-                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" target="_blank" rel="noopener noreferrer" aria-label="Open schrijf-PDF voor de letter ${letterName}">
+                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" download="Schrijfblad-${letterName}.pdf" aria-label="Download schrijf-PDF voor de letter ${letterName}">
                     <span class="letter-button-icon" aria-hidden="true">
                       <svg viewBox="0 0 24 24" focusable="false">
-                        <path d="M4 20h5l10-10a2.8 2.8 0 0 0-4-4L5 16l-1 4Z" />
-                        <path d="M13.5 7.5l3 3" />
+                        <path d="M12 3v13M8 12l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 20h16" stroke-linecap="round"/>
                       </svg>
                     </span>
-                    <span class="sound-name">Open PDF</span>
+                    <span class="sound-name">Download</span>
                   </a>`
                 : `<a class="sound-button letter-write-button" href="werkbladen.html" aria-label="Bekijk schrijfwerkbladen voor de letter ${letterName}">
                     <span class="letter-button-icon" aria-hidden="true">
@@ -687,7 +687,7 @@ if (lettersGrid && appLetters.length) {
                         <path d="M13.5 7.5l3 3" />
                       </svg>
                     </span>
-                    <span class="sound-name">Oefen schrijven</span>
+                    <span class="sound-name">Werkbladen</span>
                   </a>`
             }
           </div>
