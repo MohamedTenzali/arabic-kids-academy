@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Check je inbox – ArabicoKids</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#6b3bf5">
+    <link rel="icon" href="/assets/icons/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css?v=76">
+    <style>
+      .shell {
+        min-height: 100vh;
+        background: var(--gradient-app);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-8) var(--space-6);
+      }
+      .card {
+        background: var(--color-surface);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-raised);
+        max-width: 480px;
+        width: 100%;
+        padding: clamp(32px,6vw,56px) clamp(24px,5vw,48px);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 6px;
+        background: linear-gradient(135deg, #6b3bf5 0%, #a78bfa 100%);
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      }
+      .mail-icon {
+        width: 72px; height: 72px;
+        background: #ede9fe;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--space-5);
+        font-size: 2rem;
+        animation: popIn .6s cubic-bezier(.2,.9,.2,1.18) both;
+      }
+      @keyframes popIn {
+        from { opacity: 0; transform: scale(0); }
+        to   { opacity: 1; transform: scale(1); }
+      }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      h1 {
+        font-family: 'Nunito', sans-serif;
+        font-size: clamp(1.7rem, 4vw, 2.2rem);
+        font-weight: 800;
+        color: var(--color-text);
+        margin: 0 0 var(--space-3);
+        animation: fadeUp .5s .2s both;
+      }
+      .subtitle {
+        font-size: 1rem;
+        color: var(--color-muted);
+        line-height: 1.6;
+        margin: 0 0 var(--space-6);
+        animation: fadeUp .5s .3s both;
+      }
+      .info-box {
+        background: #f5f3ff;
+        border: 1.5px solid #c4b5fd;
+        border-radius: var(--radius-md);
+        padding: var(--space-4) var(--space-5);
+        font-size: .9rem;
+        color: #4c1d95;
+        line-height: 1.6;
+        margin-bottom: var(--space-5);
+        animation: fadeUp .5s .4s both;
+      }
+      .info-box strong { display: block; font-weight: 800; margin-bottom: 4px; }
+      .spam-tip {
+        background: #fff9ed;
+        border: 1.5px solid #fde68a;
+        border-radius: var(--radius-md);
+        padding: var(--space-4) var(--space-5);
+        font-size: .85rem;
+        color: #92400e;
+        line-height: 1.5;
+        animation: fadeUp .5s .5s both;
+      }
+      .spam-tip strong { font-weight: 800; }
+      .back-link {
+        display: inline-block;
+        margin-top: var(--space-6);
+        font-size: .9rem;
+        color: var(--color-brand);
+        text-decoration: none;
+        font-weight: 700;
+        animation: fadeUp .5s .6s both;
+      }
+      .back-link:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <div class="card">
+
+        <div class="mail-icon">📬</div>
+
+        <h1>Check je inbox!</h1>
+        <p class="subtitle">
+          Bijna klaar! We hebben je een bevestigingsmail gestuurd.<br>
+          Klik op de link in die e-mail om je boeken te ontvangen.
+        </p>
+
+        <div class="info-box">
+          <strong>📧 Stap: bevestig je e-mailadres</strong>
+          Je ontvangt binnen 1 minuut een e-mail van <strong>ArabicOKids</strong>.<br>
+          Klik op de knop in die e-mail om je aanmelding te bevestigen.
+        </div>
+
+        <div class="spam-tip">
+          <strong>📁 Geen e-mail ontvangen?</strong>
+          Check ook je <strong>spam</strong> of <strong>promoties</strong> map. Soms belandt onze e-mail daar per ongeluk.
+        </div>
+
+        <a class="back-link" href="/pages/boeken.html">← Terug naar alle boeken</a>
+
+      </div>
+    </main>
+  </body>
+</html>
