@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Boeken downloaden - ArabicoKids</title>
-    <meta name="description" content="Download de gratis ArabicoKids boeken direct als PDF.">
+    <title>Gratis boek ontvangen - ArabicoKids</title>
+    <meta name="description" content="Ontvang gratis de ArabicoKids boeken direct in je inbox.">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#6b3bf5">
     <meta name="application-name" content="ArabicoKids">
@@ -13,13 +13,97 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap"
-      rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css?v=76">
     <script src="../js/pwa-update.js?v=3" defer></script>
     <script src="../js/motion.js?v=26" defer></script>
+    <style>
+      .download-shell {
+        min-height: 100vh;
+        background: var(--gradient-app);
+        padding: 40px 20px 60px;
+      }
+      .download-hero {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+      .download-hero .eyebrow {
+        display: inline-block;
+        background: rgba(107,59,245,0.1);
+        color: var(--color-brand);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding: 6px 16px;
+        border-radius: 99px;
+        margin-bottom: 16px;
+      }
+      .download-hero h1 {
+        font-family: 'Nunito', sans-serif;
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
+        font-weight: 800;
+        color: var(--color-text);
+        margin: 0 0 12px;
+      }
+      .download-hero p {
+        font-size: 1rem;
+        color: var(--color-muted);
+        max-width: 480px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 32px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .book-form-card {
+        background: var(--color-surface);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-raised);
+        overflow: hidden;
+      }
+      .book-form-header {
+        padding: 24px 28px 16px;
+        border-bottom: 1px solid var(--color-border, #eee);
+      }
+      .book-form-header .level-badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 4px 12px;
+        border-radius: 99px;
+        margin-bottom: 10px;
+      }
+      .level-1 .level-badge { background: #ede9fe; color: #6b3bf5; }
+      .level-2 .level-badge { background: #fce7f3; color: #be185d; }
+      .book-form-header h2 {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--color-text);
+        margin: 0 0 6px;
+      }
+      .book-form-header p {
+        font-size: 0.9rem;
+        color: var(--color-muted);
+        margin: 0;
+        line-height: 1.5;
+      }
+      .book-form-body {
+        padding: 8px 0;
+      }
+      .book-form-body iframe {
+        border: none;
+        width: 100%;
+        min-height: 320px;
+      }
+    </style>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Naar de inhoud</a>
@@ -45,24 +129,41 @@
     <div class="motion-layer" id="motion-layer" aria-hidden="true"></div>
     <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
 
-    <main class="book-download-page book-confirmation-page" id="main-content">
-      <section class="book-confirmation" aria-labelledby="download-title">
-        <div class="book-confirmation-copy">
-          <p class="eyebrow">Direct downloaden</p>
-          <h1 id="download-title">Gratis boeken</h1>
-          <p class="hero-text">Kies een boek en download de PDF direct.</p>
+    <main class="download-shell" id="main-content">
 
-          <div class="book-confirmation-actions">
-            <a class="btn btn-primary" href="../assets/books/arabicokids-level-1.pdf" download>
-              Download Boek Niveau 1
-            </a>
+      <div class="download-hero">
+        <span class="eyebrow">📚 Gratis boeken</span>
+        <h1>Kies jouw boek</h1>
+        <p>Vul je naam en e-mailadres in en ontvang het boek direct in je inbox. Gratis en altijd beschikbaar.</p>
+      </div>
 
-            <a class="btn btn-primary" href="../assets/books/arabicokids-level-2.pdf" download>
-              Download Boek Niveau 2
-            </a>
+      <div class="books-grid">
+
+        <!-- Niveau 1 -->
+        <div class="book-form-card level-1">
+          <div class="book-form-header">
+            <span class="level-badge">Niveau 1</span>
+            <h2>Arabische Letters Niveau 1</h2>
+            <p>Voor beginners. Leer alle 28 letters stap voor stap met schrijf- en klankoefeningen.</p>
+          </div>
+          <div class="book-form-body">
+            <iframe src="https://8561d9ee.sibforms.com/v2/serve/MUIFAMlDlkBfzNRsTYDcP20WLYckBUNE0DV8iru0VS04Njp005t7EQAsXYZ-6Qi7C0tTMJrPayL1q3xXXb5b0quN6eQGCKI6rwIBYnZTJApfYcMPLQEYTdlV-094UBLoU-181Ufv5HtIgN2_3eGz5r1KrajG75TmJryndyNcU5F8qdRBV_PRXC4ZFGvV4VO_BkfUlP040VYusazOEw==" frameborder="0" scrolling="auto" allowfullscreen></iframe>
           </div>
         </div>
-      </section>
+
+        <!-- Niveau 2 -->
+        <div class="book-form-card level-2">
+          <div class="book-form-header">
+            <span class="level-badge">Niveau 2</span>
+            <h2>Arabische Letters Niveau 2</h2>
+            <p>Na niveau 1. Oefen verder met lettercombinaties, schrijven en herkenning.</p>
+          </div>
+          <div class="book-form-body">
+            <iframe src="https://8561d9ee.sibforms.com/v2/serve/MUIFAJQZHbM05AAEv5C3iSij-3rbvLftWYFowy7C2wZ4mlo6tPAJLIk2sJITOMqTA1a0r_-C3j5jW_UnkY4EtkL2CgRtSqPL5c5f3asXolU_YQfihhk8tTAKQdm81dnCce0699ula6rUK2iqzMD1ll1ywwjG0Eb5DMnPcmWHBMzlBid0p8VTfnUp4ixtrQqH1pCrNe6eKKvx_9XIig==" frameborder="0" scrolling="auto" allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
     </main>
 
     <footer class="aka-footer">
@@ -72,7 +173,6 @@
           <h2>ArabicoKids</h2>
           <p>Kindvriendelijk Arabisch leren met letters, audio, quizzen, werkbladen en levels voor thuis.</p>
         </div>
-
         <div class="footer-links">
           <h3>Navigatie</h3>
           <ul>
@@ -85,15 +185,12 @@
             <li><a href="privacy.html">Privacy</a></li>
           </ul>
         </div>
-
         <div class="footer-contact">
           <h3>Contact</h3>
           <p><strong>Website:</strong> <a href="https://arabicokids.com">arabicokids.com</a></p>
           <p><strong>Contact:</strong> <a href="mailto:info@arabicokids.com">info@arabicokids.com</a></p>
-          <p class="footer-premium-note">Gratis basis beschikbaar. Premium materiaal volgt later.</p>
         </div>
       </div>
-
       <div class="footer-bottom">
         <p>&copy; 2026 ArabicoKids. Alle rechten voorbehouden.</p>
       </div>
