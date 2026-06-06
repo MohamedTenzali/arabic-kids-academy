@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css?v=76">
+    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
     <script src="../js/pwa-update.js?v=3" defer></script>
     <script src="../js/motion.js?v=26" defer></script>
     <style>
@@ -98,11 +99,45 @@
       .book-form-body {
         padding: 8px 0;
       }
-      .book-form-body iframe {
-        border: none;
-        width: 100%;
-        min-height: 320px;
+      /* Brevo form override — blend into card */
+      .book-form-body .sib-form { padding: 0; background: transparent; }
+      .book-form-body #sib-container-1,
+      .book-form-body #sib-container-2 {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 20px 28px 24px;
+        max-width: 100%;
       }
+      .book-form-body .entry__label { font-family: 'Nunito', sans-serif; font-weight: 700; color: var(--color-text); }
+      .book-form-body .input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 2px solid var(--color-border, #e5e7eb);
+        border-radius: 10px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .book-form-body .input:focus { border-color: var(--color-brand, #6b3bf5); }
+      .book-form-body .sib-form-block__button {
+        width: 100%;
+        margin-top: 8px;
+        padding: 13px 24px;
+        border: none;
+        border-radius: 99px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .level-1 .sib-form-block__button { background: #6b3bf5; color: #fff; }
+      .level-2 .sib-form-block__button { background: #be185d; color: #fff; }
+      .book-form-body .sib-form-block__button:hover { opacity: 0.88; }
+      .book-form-body .entry_errored .input { border-color: #ef4444; }
+      .book-form-body .sib-form-message-panel { border-radius: 10px; margin: 8px 0 0; }
     </style>
   </head>
   <body>
@@ -147,7 +182,56 @@
             <p>Voor beginners. Leer alle 28 letters stap voor stap met schrijf- en klankoefeningen.</p>
           </div>
           <div class="book-form-body">
-            <iframe src="https://8561d9ee.sibforms.com/v2/serve/MUIFAMlDlkBfzNRsTYDcP20WLYckBUNE0DV8iru0VS04Njp005t7EQAsXYZ-6Qi7C0tTMJrPayL1q3xXXb5b0quN6eQGCKI6rwIBYnZTJApfYcMPLQEYTdlV-094UBLoU-181Ufv5HtIgN2_3eGz5r1KrajG75TmJryndyNcU5F8qdRBV_PRXC4ZFGvV4VO_BkfUlP040VYusazOEw==" frameborder="0" scrolling="auto" allowfullscreen></iframe>
+            <div class="sib-form">
+              <div id="sib-container-1" class="sib-container--large sib-container--vertical">
+                <form id="sib-form-1" method="POST"
+                  action="https://8561d9ee.sibforms.com/serve/MUIFAMlDlkBfzNRsTYDcP20WLYckBUNE0DV8iru0VS04Njp005t7EQAsXYZ-6Qi7C0tTMJrPayL1q3xXXb5b0quN6eQGCKI6rwIBYnZTJApfYcMPLQEYTdlV-094UBLoU-181Ufv5HtIgN2_3eGz5r1KrajG75TmJryndyNcU5F8qdRBV_PRXC4ZFGvV4VO_BkfUlP040VYusazOEw=="
+                  data-type="subscription" novalidate>
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="FIRSTNAME-1">Voornaam</label>
+                      <div class="entry__field">
+                        <input class="input" type="text" id="FIRSTNAME-1" name="FIRSTNAME" placeholder="Voornaam" autocomplete="given-name">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="EMAIL-1">E-mailadres <span style="color:#ef4444">*</span></label>
+                      <div class="entry__field">
+                        <input class="input" type="email" id="EMAIL-1" name="EMAIL" placeholder="jouw@email.nl" autocomplete="email" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form__entry entry_block">
+                    <div class="sib-form-block">
+                      <button class="sib-form-block__button sib-form-block__button-with-loader" type="submit">
+                        <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                          <path d="M460.116 373.846l-20.823-12.023c-5.683-3.284-7.935-10.406-5.074-16.327
+                            l6.151-12.948c2.86-5.92.485-13.078-5.43-16.144l-27.878-14.786c-5.847-3.101-13.126-.705-15.918
+                            5.334L384 320l-1.024-.001c-6.634 0-12.01-5.376-12.01-12.01V288c0-6.627-5.373-12-12-12h-33.976
+                            C316.62 258.418 293.4 248 268 248s-48.62 10.418-56.014 28H178c-6.627 0-12 5.373-12 12v19.989
+                            c0 6.634-5.376 12.01-12.01 12.01L153 320l-6.942-13.002c-2.792-6.039-10.071-8.435-15.918-5.334
+                            l-27.878 14.786c-5.915 3.066-8.29 10.224-5.43 16.144l6.151 12.948c2.861 5.921.609 13.043
+                            -5.074 16.327l-20.823 12.023c-5.683 3.284-7.279 10.643-3.56 15.96L100 368l-.002 1.039
+                            C99.998 375.671 105.374 381.047 112.008 381.047L128 381v1.975c0 6.617 5.353 11.984 11.97
+                            12.01l33.806.141c7.348.031 13.441-5.543 13.98-12.861L189 376l1.041-.002c6.627 0
+                            12-5.373 12-12v-18c0-3.31 2.686-5.994 5.994-5.994C220.627 340.004 244 352.627 268
+                            352.627s47.373-12.623 60.006-18.621c3.308 0 5.994 2.684 5.994 5.994V358c0 6.627 5.373
+                            12 12 12l1.041.002.246 6.433c.539 7.318 6.632 12.892 13.98 12.861l33.806-.141
+                            c6.617-.026 11.97-5.393 11.97-12.01V375h15.992c6.634 0 12.01-5.376 12.008-12.011L435
+                            368l25.676-22.194c3.719-5.317 2.123-12.676-3.56-15.96z"/>
+                        </svg>
+                        📥 Ontvang Niveau 1
+                      </button>
+                    </div>
+                  </div>
+                  <input type="text" name="email_address_check" value="" class="input--hidden">
+                  <input type="hidden" name="locale" value="nl">
+                  <input type="hidden" name="html_type" value="simple">
+                </form>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -159,7 +243,56 @@
             <p>Na niveau 1. Oefen verder met lettercombinaties, schrijven en herkenning.</p>
           </div>
           <div class="book-form-body">
-            <iframe src="https://8561d9ee.sibforms.com/v2/serve/MUIFAJQZHbM05AAEv5C3iSij-3rbvLftWYFowy7C2wZ4mlo6tPAJLIk2sJITOMqTA1a0r_-C3j5jW_UnkY4EtkL2CgRtSqPL5c5f3asXolU_YQfihhk8tTAKQdm81dnCce0699ula6rUK2iqzMD1ll1ywwjG0Eb5DMnPcmWHBMzlBid0p8VTfnUp4ixtrQqH1pCrNe6eKKvx_9XIig==" frameborder="0" scrolling="auto" allowfullscreen></iframe>
+            <div class="sib-form">
+              <div id="sib-container-2" class="sib-container--large sib-container--vertical">
+                <form id="sib-form-2" method="POST"
+                  action="https://8561d9ee.sibforms.com/serve/MUIFAJQZHbM05AAEv5C3iSij-3rbvLftWYFowy7C2wZ4mlo6tPAJLIk2sJITOMqTA1a0r_-C3j5jW_UnkY4EtkL2CgRtSqPL5c5f3asXolU_YQfihhk8tTAKQdm81dnCce0699ula6rUK2iqzMD1ll1ywwjG0Eb5DMnPcmWHBMzlBid0p8VTfnUp4ixtrQqH1pCrNe6eKKvx_9XIig=="
+                  data-type="subscription" novalidate>
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="FIRSTNAME-2">Voornaam</label>
+                      <div class="entry__field">
+                        <input class="input" type="text" id="FIRSTNAME-2" name="FIRSTNAME" placeholder="Voornaam" autocomplete="given-name">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <label class="entry__label" for="EMAIL-2">E-mailadres <span style="color:#ef4444">*</span></label>
+                      <div class="entry__field">
+                        <input class="input" type="email" id="EMAIL-2" name="EMAIL" placeholder="jouw@email.nl" autocomplete="email" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form__entry entry_block">
+                    <div class="sib-form-block">
+                      <button class="sib-form-block__button sib-form-block__button-with-loader" type="submit">
+                        <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                          <path d="M460.116 373.846l-20.823-12.023c-5.683-3.284-7.935-10.406-5.074-16.327
+                            l6.151-12.948c2.86-5.92.485-13.078-5.43-16.144l-27.878-14.786c-5.847-3.101-13.126-.705-15.918
+                            5.334L384 320l-1.024-.001c-6.634 0-12.01-5.376-12.01-12.01V288c0-6.627-5.373-12-12-12h-33.976
+                            C316.62 258.418 293.4 248 268 248s-48.62 10.418-56.014 28H178c-6.627 0-12 5.373-12 12v19.989
+                            c0 6.634-5.376 12.01-12.01 12.01L153 320l-6.942-13.002c-2.792-6.039-10.071-8.435-15.918-5.334
+                            l-27.878 14.786c-5.915 3.066-8.29 10.224-5.43 16.144l6.151 12.948c2.861 5.921.609 13.043
+                            -5.074 16.327l-20.823 12.023c-5.683 3.284-7.279 10.643-3.56 15.96L100 368l-.002 1.039
+                            C99.998 375.671 105.374 381.047 112.008 381.047L128 381v1.975c0 6.617 5.353 11.984 11.97
+                            12.01l33.806.141c7.348.031 13.441-5.543 13.98-12.861L189 376l1.041-.002c6.627 0
+                            12-5.373 12-12v-18c0-3.31 2.686-5.994 5.994-5.994C220.627 340.004 244 352.627 268
+                            352.627s47.373-12.623 60.006-18.621c3.308 0 5.994 2.684 5.994 5.994V358c0 6.627 5.373
+                            12 12 12l1.041.002.246 6.433c.539 7.318 6.632 12.892 13.98 12.861l33.806-.141
+                            c6.617-.026 11.97-5.393 11.97-12.01V375h15.992c6.634 0 12.01-5.376 12.008-12.011L435
+                            368l25.676-22.194c3.719-5.317 2.123-12.676-3.56-15.96z"/>
+                        </svg>
+                        📥 Ontvang Niveau 2
+                      </button>
+                    </div>
+                  </div>
+                  <input type="text" name="email_address_check" value="" class="input--hidden">
+                  <input type="hidden" name="locale" value="nl">
+                  <input type="hidden" name="html_type" value="simple">
+                </form>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -196,5 +329,6 @@
       </div>
     </footer>
     <a class="back-to-top" href="#main-content" aria-label="Terug naar boven"><span>Terug naar boven</span></a>
+    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
   </body>
 </html>
