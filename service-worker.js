@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-43";
+const CACHE_NAME = "arabicokids-v2026-44";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -12,6 +12,7 @@ const CORE_CACHE = [
   "about.html",
   "contact.html",
   "css/main.css",
+  "css/fonts.css",
   "data/letters.js",
   "data/progress.js",
   "data/vowels.js",
@@ -249,6 +250,23 @@ self.addEventListener("fetch", (event) => {
   if (isAudioRequest(request)) {
     return;
   }
+
+  // Cache First for fonts — they are immutable once deployed
+  if (request.destination === "font" || url.pathname.startsWith("/fonts/")) {
+    event.respondWith(
+      caches.open("fonts-v2").then((fontCache) =>
+        fontCache.match(request).then((cached) => {
+          if (cached) return cached;
+          return fetch(request).then((response) => {
+            if (response.ok) fontCache.put(request, response.clone());
+            return response;
+          });
+        })
+      )
+    );
+    return;
+  }
+
   const isCodeOrStyleRequest = ["script", "style"].includes(request.destination) || /\.(js|css)(\?.*)?$/i.test(url.pathname);
 
   if (isCodeOrStyleRequest) {

@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Amiri';
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/amiri-regular.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/cairo-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: url('/fonts/inter-regular.woff2') format('woff2');
+}
+
+html[dir="ltr"] {
+  font-family: 'Inter', system-ui, sans-serif,
+               'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+}
+
+[lang="ar"], .letter-block, .arabic-text {
+  font-family: 'Amiri', 'Cairo', 'Traditional Arabic', serif,
+               'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+}
+
+button, .btn, .card-button {
+  font-family: 'Cairo', 'Inter', system-ui, sans-serif,
+               'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+}
