@@ -1,4 +1,4 @@
-const booksGrid = document.querySelector("[data-books-grid]");
+﻿const booksGrid = document.querySelector("[data-books-grid]");
 const featuredBooks = document.querySelector("[data-featured-books]");
 const books = window.arabicoKidsBooks || [];
 
@@ -17,9 +17,7 @@ const escapeHtml = (value) =>
     "'": "&#39;",
   })[char]);
 
-const isPagesPath = window.location.pathname.includes("/pages/");
-const getAssetHref = (path) => `${isPagesPath ? "../" : ""}${path}`;
-const getPageHref = (path) => (isPagesPath && path.startsWith("pages/") ? path.slice("pages/".length) : path);
+const booksGetPageHref = (path) => (isPagesPath && path.startsWith("pages/") ? path.slice("pages/".length) : path);
 
 const renderBookCard = (book, options = {}) => {
   const status = statusLabels[book.status] || book.priceLabel || "Binnenkort";
@@ -38,7 +36,7 @@ const renderBookCard = (book, options = {}) => {
         <span>${escapeHtml(book.buttonText || "Download PDF")}</span>
         <small>Direct downloaden</small>
       </a>`
-    : `<a class="primary-button book-download" href="${escapeHtml(getPageHref("pages/boeken.html"))}">
+    : `<a class="primary-button book-download" href="${escapeHtml(booksGetPageHref("pages/boeken.html"))}">
         <span class="book-download-lock" aria-hidden="true">PDF</span>
         <span>${escapeHtml(book.buttonText || "Bekijk boeken")}</span>
         <small>Bekijk boeken</small>
