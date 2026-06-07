@@ -45,10 +45,8 @@ if (levelButtons.length && appProgress) {
 
     if (isLocked) {
       button.querySelector(".level-route").textContent = "Nog op slot";
-      button.setAttribute("aria-label", `Niveau ${level?.name || button.dataset.level} is nog op slot`);
-    } else {
-      button.setAttribute("aria-label", `Kies niveau ${level.name}`);
     }
+    button.removeAttribute("aria-label");
   });
 
   if (selectedLevelId && startLink) {
