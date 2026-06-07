@@ -63,3 +63,23 @@ button, .btn, .card-button {
   font-family: 'Nunito', 'Cairo', 'Inter', system-ui, sans-serif,
                'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
 }
+
+/* ==============================================
+   EMOJI FIX — Voorkomt ??? op alle apparaten
+   ============================================== */
+.emoji,
+[data-emoji] {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji',
+               'Noto Color Emoji', sans-serif !important;
+}
+
+button .emoji,
+.btn .emoji,
+.card .emoji,
+.level-card .emoji,
+.hero-section .emoji,
+.reward-emoji,
+.star-emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji',
+               'Noto Color Emoji', sans-serif !important;
+}
