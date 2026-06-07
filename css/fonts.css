@@ -21,7 +21,7 @@
   font-display: swap;
   font-weight: 400;
   src: url('/fonts/amiri-regular.woff2') format('woff2');
-  unicode-range: U+0600-06FF, U+0750-077F;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF;
 }
 
 @font-face {
@@ -49,13 +49,23 @@
 }
 
 /* Font stacks with emoji fallbacks */
+body {
+  font-family: 'Nunito', 'Inter', system-ui, sans-serif,
+               'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+}
+
 html[dir="ltr"] {
   font-family: 'Nunito', 'Inter', system-ui, sans-serif,
                'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
 }
 
-[lang="ar"], .letter-block, .arabic-text {
-  font-family: 'Noto Naskh Arabic', 'Amiri', 'Cairo', 'Traditional Arabic', serif,
+[lang="ar"],
+.letter-block,
+.arabic-text,
+.letter-display,
+.arabic-letter {
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Cairo',
+               'Traditional Arabic', 'Arabic Typesetting', 'Geeza Pro', serif,
                'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
 }
 
