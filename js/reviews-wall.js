@@ -124,7 +124,7 @@
         <article class="home-review-card${editingId === r.id ? " is-editing" : ""}" data-review-id="${esc(r.id)}">
           <div class="home-review-avatar" style="background:${r.avatarBg}" aria-hidden="true">${r.avatar}</div>
           <div class="home-review-body">
-            <p class="home-review-stars" aria-label="${r.stars} van 5 sterren">${starsHtml(r.stars)}</p>
+            <p class="home-review-stars" role="img" aria-label="${r.stars} van 5 sterren">${starsHtml(r.stars)}</p>
             <blockquote class="home-review-text">"${esc(r.text)}"</blockquote>
             <footer class="home-review-meta">
               <p class="home-review-name">${esc(r.name)}</p>
