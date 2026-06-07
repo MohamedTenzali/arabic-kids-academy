@@ -1,1 +1,4 @@
 .superpowers/
+.venv/
+lighthouse-report.json
+lighthouse-report*.html

@@ -2,12 +2,7 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.arabicokids.com"
-        }
-      ],
+      "has": [{ "type": "host", "value": "www.arabicokids.com" }],
       "destination": "https://arabicokids.com/:path*",
       "permanent": true
     },
@@ -21,64 +16,62 @@
     {
       "source": "/manifest.json",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Content-Type", "value": "application/manifest+json; charset=UTF-8" }
       ]
     },
     {
       "source": "/service-worker.js",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        }
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Content-Type", "value": "text/javascript; charset=UTF-8" }
       ]
     },
     {
       "source": "/(.*)\\.html",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=UTF-8"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
+        { "key": "Content-Type", "value": "text/html; charset=UTF-8" }
       ]
     },
     {
       "source": "/css/(.*)\\.css",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/css; charset=UTF-8"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "Content-Type", "value": "text/css; charset=UTF-8" }
       ]
     },
     {
       "source": "/js/(.*)\\.js",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/javascript; charset=UTF-8"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "Content-Type", "value": "text/javascript; charset=UTF-8" }
       ]
     },
     {
       "source": "/data/(.*)\\.js",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/javascript; charset=UTF-8"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "Content-Type", "value": "text/javascript; charset=UTF-8" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/audio/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
       "source": "/(.*)\\.json",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json; charset=UTF-8"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "Content-Type", "value": "application/json; charset=UTF-8" }
       ]
     }
   ]
