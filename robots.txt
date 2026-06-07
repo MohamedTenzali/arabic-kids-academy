@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
 
+Disallow: /APP/
+Disallow: /.superpowers/
+Disallow: /.venv/
+Disallow: /docs/
+Disallow: /BRAND/
+Disallow: /data/
+Disallow: /pages/bedankt.html
+Disallow: /pages/bevestigd.html
+Disallow: /pages/bevestiging-verzonden.html
+Disallow: /download-book.html
+Disallow: /pages/download-book.html
+
 Sitemap: https://arabicokids.com/sitemap.xml
