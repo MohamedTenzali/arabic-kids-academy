@@ -133,253 +133,146 @@
     <aside class="mascot-root" id="mascot-root" aria-label="Leerhulp"></aside>
 
     <main class="home-main" id="main-content">
-      <section class="hero hero-home" aria-labelledby="hero-title">
-        <div class="home-sparkle-field" aria-hidden="true">
-          <span style="--spark-x: 12%; --spark-y: 24%; --spark-delay: 0ms;"></span>
-          <span style="--spark-x: 82%; --spark-y: 28%; --spark-delay: 900ms;"></span>
-          <span style="--spark-x: 20%; --spark-y: 68%; --spark-delay: 1500ms;"></span>
-          <span style="--spark-x: 76%; --spark-y: 72%; --spark-delay: 2300ms;"></span>
-        </div>
-        <div class="letter-arc" lang="ar" dir="rtl" aria-hidden="true">
-          <span style="--left: 18%; --top: 76%; --rotate: -48deg; --delay: 900ms; --z: 1; --card-color: #ffb703;">ز</span>
-          <span style="--left: 23%; --top: 59%; --rotate: -42deg; --delay: 810ms; --z: 2; --card-color: #fb8500;">ر</span>
-          <span style="--left: 29%; --top: 43%; --rotate: -34deg; --delay: 720ms; --z: 3; --card-color: #8ecae6;">ذ</span>
-          <span style="--left: 36%; --top: 29%; --rotate: -24deg; --delay: 630ms; --z: 4; --card-color: #90be6d;">د</span>
-          <span style="--left: 44%; --top: 19%; --rotate: -13deg; --delay: 540ms; --z: 5; --card-color: #f28482;">خ</span>
-          <span style="--left: 52%; --top: 15%; --rotate: 0deg; --delay: 450ms; --z: 6; --card-color: #7bdff2;">ح</span>
-          <span style="--left: 60%; --top: 19%; --rotate: 13deg; --delay: 360ms; --z: 5; --card-color: #b2f7ef;">ج</span>
-          <span style="--left: 68%; --top: 29%; --rotate: 24deg; --delay: 270ms; --z: 4; --card-color: #f7aef8;">ث</span>
-          <span style="--left: 75%; --top: 43%; --rotate: 34deg; --delay: 180ms; --z: 3; --card-color: #ffd166;">ت</span>
-          <span style="--left: 81%; --top: 59%; --rotate: 42deg; --delay: 90ms; --z: 2; --card-color: #06d6a0;">ب</span>
-          <span style="--left: 86%; --top: 76%; --rotate: 48deg; --delay: 0ms; --z: 1; --card-color: #ef476f;">ا</span>
+
+      <h1 class="home-h1">Kies je niveau en leer Arabische letters</h1>
+
+      <section class="level-section home-levels" aria-labelledby="level-title">
+        <div class="section-heading">
+          <h2 id="level-title">Kies je niveau</h2>
+          <p id="selected-level">Nog geen niveau gekozen.</p>
         </div>
 
-        <div class="hero-content">
-          <h1 id="hero-title">Leer Arabisch spelenderwijs</h1>
-          <p class="arabic-welcome" lang="ar" dir="rtl">مرحبا بكم</p>
-          <p class="hero-text">
-            Leer Arabische letters met spelletjes, audio en sterren! ⭐
+        <div class="level-grid">
+          <button class="level-card" type="button" data-level="beginner" aria-pressed="false">
+            <span class="level-emoji" aria-hidden="true">🌱</span>
+            <span class="level-badge" lang="ar" dir="rtl">ا</span>
+            <span class="level-name">Beginner</span>
+            <span class="level-copy">Ik begin net met Arabisch.</span>
+            <span class="level-route">Letters leren</span>
+          </button>
+
+          <button class="level-card" type="button" data-level="advanced" aria-pressed="false">
+            <span class="level-emoji" aria-hidden="true">⭐</span>
+            <span class="level-badge" lang="ar" dir="rtl">بَ</span>
+            <span class="level-name">Gevorderd</span>
+            <span class="level-copy">Ik ken al een paar letters.</span>
+            <span class="level-route">Klanken oefenen</span>
+          </button>
+
+          <button class="level-card" type="button" data-level="expert" aria-pressed="false">
+            <span class="level-emoji" aria-hidden="true">🔥</span>
+            <span class="level-badge" lang="ar" dir="rtl">تُ</span>
+            <span class="level-name">Expert</span>
+            <span class="level-copy">Ik wil extra uitdaging.</span>
+            <span class="level-route">Mix Quiz</span>
+          </button>
+        </div>
+
+        <a class="primary-button start-link is-disabled" href="pages/roadmap.html?level=beginner" aria-disabled="true">
+          Start leerroute
+        </a>
+      </section>
+
+      <a class="secondary-button home-werkbladen-btn" href="/pages/werkbladen.html">Bekijk werkbladen</a>
+
+      <section class="home-info-section home-how" aria-labelledby="how-title">
+        <div class="section-heading">
+          <p class="eyebrow">Hoe werkt het?</p>
+          <h2 id="how-title">Rustig oefenen in kleine stappen</h2>
+        </div>
+
+        <div class="home-card-grid home-steps">
+          <article class="home-step-card home-step-listen">
+            <div class="home-step-top">
+              <span class="home-step-number">1</span>
+              <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <path d="M16 36v-6a16 16 0 0 1 32 0v6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
+                <rect x="9" y="34" width="13" height="20" rx="6" fill="currentColor" />
+                <rect x="42" y="34" width="13" height="20" rx="6" fill="currentColor" />
+                <path d="M40 50c-2 3-5 5-8 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4" />
+                <circle cx="31" cy="55" r="3" fill="currentColor" />
+              </svg>
+            </div>
+            <h3>Luister</h3>
+            <p>Hoor de letters en klanken duidelijk.</p>
+          </article>
+          <article class="home-step-card home-step-practice">
+            <div class="home-step-top">
+              <span class="home-step-number">2</span>
+              <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <path d="M14 46h24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
+                <path d="M18 38l24-24 8 8-24 24-11 3 3-11Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="5" />
+                <path d="M39 17l8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4" />
+                <path d="M17 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
+              </svg>
+            </div>
+            <h3>Oefen</h3>
+            <p>Ze herkennen letters, herhalen klanken en schrijven mee.</p>
+          </article>
+          <article class="home-step-card home-step-quiz">
+            <div class="home-step-top">
+              <span class="home-step-number">3</span>
+              <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <path d="M31 10l5 11 12 2-9 8 3 12-11-6-11 6 3-12-9-8 12-2 5-11Z" fill="currentColor" />
+                <path d="M18 49h28" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
+                <path d="M22 55h20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
+              </svg>
+            </div>
+            <h3>Speel quiz</h3>
+            <p>Korte quizzen maken herhalen leuk en overzichtelijk.</p>
+          </article>
+          <article class="home-step-card home-step-grow">
+            <div class="home-step-top">
+              <span class="home-step-number">4</span>
+              <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <path d="M12 50h40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
+                <rect x="15" y="36" width="9" height="14" rx="3" fill="currentColor" />
+                <rect x="28" y="27" width="9" height="23" rx="3" fill="currentColor" />
+                <rect x="41" y="17" width="9" height="33" rx="3" fill="currentColor" />
+                <path d="M16 25c7 1 15-2 21-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
+                <path d="M37 15h-9m9 0v9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4" />
+              </svg>
+            </div>
+            <h3>Groei stap voor stap</h3>
+            <p>Ga door naar het volgende level.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="home-info-section home-learning-parts" aria-labelledby="parts-title">
+        <div class="section-heading">
+          <p class="eyebrow">Leeronderdelen</p>
+          <h2 id="parts-title">Alles om thuis mee te oefenen</h2>
+        </div>
+
+        <div class="home-pill-grid">
+          <a href="pages/letters.html">Arabische letters</a>
+          <a href="pages/vowels.html?type=short">Korte klanken</a>
+          <a href="pages/vowels.html?type=long">Lange klanken</a>
+          <a href="pages/quiz.html">Quizzen</a>
+          <a href="pages/werkbladen.html">Werkbladen</a>
+          <a href="arabisch-leren-kinderen/">Arabisch leren</a>
+          <a href="arabische-letters-kinderen/">Letters voor kinderen</a>
+          <a href="arabisch-oefenen-pdf/">PDF oefenen</a>
+        </div>
+      </section>
+
+
+      <section class="home-info-section parent-trust" aria-labelledby="trust-title">
+        <div>
+          <p class="eyebrow">Voor ouders</p>
+          <h2 id="trust-title">Eenvoudig, veilig en duidelijk</h2>
+          <p>
+            Korte lessen, duidelijke audio en oefeningen voor thuis.
           </p>
-
-          <div class="home-cta-row" aria-label="Snel starten">
-            <a class="primary-button home-cta-main" href="pages/roadmap.html?level=beginner">Start met leren</a>
-            <a class="secondary-button" href="pages/werkbladen.html">Bekijk werkbladen</a>
-          </div>
-          <p class="hero-stars" aria-hidden="true">⭐⭐⭐</p>
-
-          <div class="learning-stats" aria-label="Wat je kunt oefenen">
-            <span class="learning-stat"><strong>28</strong> letters</span>
-            <span class="learning-stat"><strong>6</strong> levels</span>
-            <span class="learning-stat"><strong>Audio</strong> oefenen</span>
-          </div>
-
-          <div class="home-reward-strip" aria-label="Wat kinderen onderweg verdienen">
-            <span><strong>1</strong> ontdek letters</span>
-            <span><strong>2</strong> verzamel sterren</span>
-            <span><strong>3</strong> speel levels vrij</span>
-          </div>
         </div>
 
-        <!-- -- STEUN ARABICOKIDS ---------------------------------------- -->
-        <section class="home-support-section" aria-labelledby="support-title">
-          <figure class="home-support-illus" aria-hidden="true">
-            <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-              <!-- Grote decoratieve hart achtergrond -->
-              <path d="M160 185 L60 100 Q30 70 60 45 Q90 20 120 45 L160 80 L200 45 Q230 20 260 45 Q290 70 260 100 Z"
-                    fill="rgba(255,200,61,0.18)"/>
-
-              <!-- Koffie-kop lichaam -->
-              <rect x="100" y="108" width="96" height="72" rx="16" fill="#ffffff"/>
-              <rect x="100" y="108" width="96" height="20" rx="12" fill="#ffd166"/>
-              <!-- Koffie -->
-              <ellipse cx="148" cy="118" rx="38" ry="10" fill="#c87941"/>
-              <!-- Oor -->
-              <path d="M196 122 Q226 122 226 144 Q226 166 196 166" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
-              <path d="M196 122 Q220 122 220 144 Q220 163 196 163" fill="none" stroke="#ffd166" stroke-width="7" stroke-linecap="round"/>
-              <!-- Stoom -->
-              <path d="M126 98 Q122 86 126 74" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
-              <path d="M148 94 Q144 82 148 70" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
-              <path d="M170 98 Q166 86 170 74" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
-              <!-- Koffietekst op kop -->
-              <text x="148" y="154" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-size="11" font-weight="900" fill="#6b3bf5">ArabicoKids</text>
-
-              <!-- Hartjes links -->
-              <path d="M52 80 Q52 68 62 68 Q72 68 72 80 Q72 92 52 104 Q32 92 32 80 Q32 68 42 68 Q52 68 52 80Z" fill="#ff6fae"/>
-              <path d="M76 50 Q76 42 82 42 Q88 42 88 50 Q88 58 76 66 Q64 58 64 50 Q64 42 70 42 Q76 42 76 50Z" fill="#ff6fae" opacity="0.7"/>
-
-              <!-- Hartjes rechts -->
-              <path d="M248 80 Q248 68 258 68 Q268 68 268 80 Q268 92 248 104 Q228 92 228 80 Q228 68 238 68 Q248 68 248 80Z" fill="#6b3bf5" opacity="0.8"/>
-              <path d="M236 46 Q236 38 242 38 Q248 38 248 46 Q248 54 236 62 Q224 54 224 46 Q224 38 230 38 Q236 38 236 46Z" fill="#4db6ff" opacity="0.8"/>
-
-              <!-- Sterren -->
-              <path d="M36 145 L38 139 L40 145 L46 145 L41 149 L43 155 L38 151 L33 155 L35 149 L30 145Z" fill="#ffd166"/>
-              <path d="M274 140 L276 134 L278 140 L284 140 L279 144 L281 150 L276 146 L271 150 L273 144 L268 140Z" fill="#ff6fae"/>
-
-              <!-- Arabische letters decoratie -->
-              <text x="22" y="75" font-family="Noto Naskh Arabic,serif" font-size="28" fill="#6b3bf5" opacity="0.15" direction="rtl">ب</text>
-
-              <!-- Kleine sterretjes -->
-              <circle cx="88" cy="168" r="4" fill="#ffd166" opacity="0.7"/>
-              <circle cx="208" cy="62" r="3" fill="#ff6fae" opacity="0.6"/>
-              <circle cx="58" cy="120" r="2.5" fill="#4db6ff" opacity="0.7"/>
-              <circle cx="264" cy="112" r="3" fill="#ffd166" opacity="0.7"/>
-            </svg>
-          </figure>
-
-          <div class="home-support-copy">
-            <h2 id="support-title" class="home-support-title">Help ons ArabicoKids gratis te houden</h2>
-            <p class="home-support-text">
-              ArabicoKids is een gratis platform voor kinderen die Arabisch leren.
-              Met jouw steun kunnen we nieuwe lessen, letters en quizzen blijven maken.
-            </p>
-            <a class="home-support-btn"
-               href="https://ko-fi.com/arabicokids"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Steun ArabicoKids via Ko-fi (opent in nieuw tabblad)">
-              ☕ Steun ArabicoKids
-            </a>
-            <p class="home-support-note">Elke bijdrage helpt, hoe klein ook. ❤️</p>
-          </div>
-        </section>
-
-        <section class="home-info-section home-how" aria-labelledby="how-title">
-          <div class="section-heading">
-            <p class="eyebrow">Hoe werkt het?</p>
-            <h2 id="how-title">Rustig oefenen in kleine stappen</h2>
-          </div>
-
-          <div class="home-card-grid home-steps">
-            <article class="home-step-card home-step-listen">
-              <div class="home-step-top">
-                <span class="home-step-number">1</span>
-                <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-                  <path d="M16 36v-6a16 16 0 0 1 32 0v6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
-                  <rect x="9" y="34" width="13" height="20" rx="6" fill="currentColor" />
-                  <rect x="42" y="34" width="13" height="20" rx="6" fill="currentColor" />
-                  <path d="M40 50c-2 3-5 5-8 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4" />
-                  <circle cx="31" cy="55" r="3" fill="currentColor" />
-                </svg>
-              </div>
-              <h3>Luister</h3>
-              <p>Hoor de letters en klanken duidelijk.</p>
-            </article>
-            <article class="home-step-card home-step-practice">
-              <div class="home-step-top">
-                <span class="home-step-number">2</span>
-                <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-                  <path d="M14 46h24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
-                  <path d="M18 38l24-24 8 8-24 24-11 3 3-11Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="5" />
-                  <path d="M39 17l8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4" />
-                  <path d="M17 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
-                </svg>
-              </div>
-              <h3>Oefen</h3>
-              <p>Ze herkennen letters, herhalen klanken en schrijven mee.</p>
-            </article>
-            <article class="home-step-card home-step-quiz">
-              <div class="home-step-top">
-                <span class="home-step-number">3</span>
-                <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-                  <path d="M31 10l5 11 12 2-9 8 3 12-11-6-11 6 3-12-9-8 12-2 5-11Z" fill="currentColor" />
-                  <path d="M18 49h28" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
-                  <path d="M22 55h20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
-                </svg>
-              </div>
-              <h3>Speel quiz</h3>
-              <p>Korte quizzen maken herhalen leuk en overzichtelijk.</p>
-            </article>
-            <article class="home-step-card home-step-grow">
-              <div class="home-step-top">
-                <span class="home-step-number">4</span>
-                <svg class="home-step-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-                  <path d="M12 50h40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
-                  <rect x="15" y="36" width="9" height="14" rx="3" fill="currentColor" />
-                  <rect x="28" y="27" width="9" height="23" rx="3" fill="currentColor" />
-                  <rect x="41" y="17" width="9" height="33" rx="3" fill="currentColor" />
-                  <path d="M16 25c7 1 15-2 21-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="5" />
-                  <path d="M37 15h-9m9 0v9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4" />
-                </svg>
-              </div>
-              <h3>Groei stap voor stap</h3>
-              <p>Ga door naar het volgende level.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="home-info-section home-learning-parts" aria-labelledby="parts-title">
-          <div class="section-heading">
-            <p class="eyebrow">Leeronderdelen</p>
-            <h2 id="parts-title">Alles om thuis mee te oefenen</h2>
-          </div>
-
-          <div class="home-pill-grid">
-            <a href="pages/letters.html">Arabische letters</a>
-            <a href="pages/vowels.html?type=short">Korte klanken</a>
-            <a href="pages/vowels.html?type=long">Lange klanken</a>
-            <a href="pages/quiz.html">Quizzen</a>
-            <a href="pages/werkbladen.html">Werkbladen</a>
-            <a href="arabisch-leren-kinderen/">Arabisch leren</a>
-            <a href="arabische-letters-kinderen/">Letters voor kinderen</a>
-            <a href="arabisch-oefenen-pdf/">PDF oefenen</a>
-          </div>
-        </section>
-
-
-        <section class="home-info-section parent-trust" aria-labelledby="trust-title">
-          <div>
-            <p class="eyebrow">Voor ouders</p>
-            <h2 id="trust-title">Eenvoudig, veilig en duidelijk</h2>
-            <p>
-              Korte lessen, duidelijke audio en oefeningen voor thuis.
-            </p>
-          </div>
-
-          <ul class="trust-list">
-            <li>kindvriendelijk</li>
-            <li>mobielvriendelijk</li>
-            <li>geen advertenties</li>
-            <li>leren met audio</li>
-          </ul>
-        </section>
-
-        <section class="level-section home-levels" aria-labelledby="level-title">
-          <div class="section-heading">
-            <h2 id="level-title">Kies je niveau</h2>
-            <p id="selected-level">Nog geen niveau gekozen.</p>
-          </div>
-
-          <div class="level-grid">
-            <button class="level-card" type="button" data-level="beginner" aria-pressed="false">
-              <span class="level-emoji" aria-hidden="true">🌱</span>
-              <span class="level-badge" lang="ar" dir="rtl">ا</span>
-              <span class="level-name">Beginner</span>
-              <span class="level-copy">Ik begin net met Arabisch.</span>
-              <span class="level-route">Letters leren</span>
-            </button>
-
-            <button class="level-card" type="button" data-level="advanced" aria-pressed="false">
-              <span class="level-emoji" aria-hidden="true">⭐</span>
-              <span class="level-badge" lang="ar" dir="rtl">بَ</span>
-              <span class="level-name">Gevorderd</span>
-              <span class="level-copy">Ik ken al een paar letters.</span>
-              <span class="level-route">Klanken oefenen</span>
-            </button>
-
-            <button class="level-card" type="button" data-level="expert" aria-pressed="false">
-              <span class="level-emoji" aria-hidden="true">🔥</span>
-              <span class="level-badge" lang="ar" dir="rtl">تُ</span>
-              <span class="level-name">Expert</span>
-              <span class="level-copy">Ik wil extra uitdaging.</span>
-              <span class="level-route">Mix Quiz</span>
-            </button>
-          </div>
-
-          <a class="primary-button start-link is-disabled" href="pages/roadmap.html?level=beginner" aria-disabled="true">
-            Start leerroute
-          </a>
-        </section>
-
+        <ul class="trust-list">
+          <li>kindvriendelijk</li>
+          <li>mobielvriendelijk</li>
+          <li>geen advertenties</li>
+          <li>leren met audio</li>
+        </ul>
       </section>
 
     <!-- -- ILLUSTRATIE 1: Samen leren ----------------------------------- -->
@@ -596,7 +489,7 @@
           <!-- Tekst -->
           <div class="review-field">
             <label class="review-label" for="review-text">Jouw ervaring <span class="review-required" aria-hidden="true">*</span></label>
-            <textarea class="review-textarea" id="review-text" name="text" required maxlength="200" rows="3" placeholder="Vertel hoe ArabicoKids jullie helpt thuis te oefenen�"></textarea>
+            <textarea class="review-textarea" id="review-text" name="text" required maxlength="200" rows="3" placeholder="Vertel hoe ArabicoKids jullie helpt thuis te oefenen 😊"></textarea>
             <small class="review-char-count"><span id="review-char-left">200</span> tekens over</small>
           </div>
 
@@ -606,6 +499,69 @@
             <p class="review-privacy-note">Reacties worden opgeslagen in je browser.</p>
           </div>
         </form>
+      </div>
+    </section>
+
+    <!-- -- STEUN ARABICOKIDS ---------------------------------------- -->
+    <section class="home-support-section" aria-labelledby="support-title">
+      <figure class="home-support-illus" aria-hidden="true">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grote decoratieve hart achtergrond -->
+          <path d="M160 185 L60 100 Q30 70 60 45 Q90 20 120 45 L160 80 L200 45 Q230 20 260 45 Q290 70 260 100 Z"
+                fill="rgba(255,200,61,0.18)"/>
+
+          <!-- Koffie-kop lichaam -->
+          <rect x="100" y="108" width="96" height="72" rx="16" fill="#ffffff"/>
+          <rect x="100" y="108" width="96" height="20" rx="12" fill="#ffd166"/>
+          <!-- Koffie -->
+          <ellipse cx="148" cy="118" rx="38" ry="10" fill="#c87941"/>
+          <!-- Oor -->
+          <path d="M196 122 Q226 122 226 144 Q226 166 196 166" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
+          <path d="M196 122 Q220 122 220 144 Q220 163 196 163" fill="none" stroke="#ffd166" stroke-width="7" stroke-linecap="round"/>
+          <!-- Stoom -->
+          <path d="M126 98 Q122 86 126 74" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+          <path d="M148 94 Q144 82 148 70" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+          <path d="M170 98 Q166 86 170 74" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+          <!-- Koffietekst op kop -->
+          <text x="148" y="154" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-size="11" font-weight="900" fill="#6b3bf5">ArabicoKids</text>
+
+          <!-- Hartjes links -->
+          <path d="M52 80 Q52 68 62 68 Q72 68 72 80 Q72 92 52 104 Q32 92 32 80 Q32 68 42 68 Q52 68 52 80Z" fill="#ff6fae"/>
+          <path d="M76 50 Q76 42 82 42 Q88 42 88 50 Q88 58 76 66 Q64 58 64 50 Q64 42 70 42 Q76 42 76 50Z" fill="#ff6fae" opacity="0.7"/>
+
+          <!-- Hartjes rechts -->
+          <path d="M248 80 Q248 68 258 68 Q268 68 268 80 Q268 92 248 104 Q228 92 228 80 Q228 68 238 68 Q248 68 248 80Z" fill="#6b3bf5" opacity="0.8"/>
+          <path d="M236 46 Q236 38 242 38 Q248 38 248 46 Q248 54 236 62 Q224 54 224 46 Q224 38 230 38 Q236 38 236 46Z" fill="#4db6ff" opacity="0.8"/>
+
+          <!-- Sterren -->
+          <path d="M36 145 L38 139 L40 145 L46 145 L41 149 L43 155 L38 151 L33 155 L35 149 L30 145Z" fill="#ffd166"/>
+          <path d="M274 140 L276 134 L278 140 L284 140 L279 144 L281 150 L276 146 L271 150 L273 144 L268 140Z" fill="#ff6fae"/>
+
+          <!-- Arabische letters decoratie -->
+          <text x="22" y="75" font-family="Noto Naskh Arabic,serif" font-size="28" fill="#6b3bf5" opacity="0.15" direction="rtl">ب</text>
+
+          <!-- Kleine sterretjes -->
+          <circle cx="88" cy="168" r="4" fill="#ffd166" opacity="0.7"/>
+          <circle cx="208" cy="62" r="3" fill="#ff6fae" opacity="0.6"/>
+          <circle cx="58" cy="120" r="2.5" fill="#4db6ff" opacity="0.7"/>
+          <circle cx="264" cy="112" r="3" fill="#ffd166" opacity="0.7"/>
+        </svg>
+      </figure>
+
+      <div class="home-support-copy">
+        <h2 id="support-title" class="home-support-title">Help ons ArabicoKids gratis te houden</h2>
+        <p class="home-support-text">
+          ArabicoKids is een gratis platform voor kinderen die Arabisch leren.
+          Met jouw steun kunnen we nieuwe lessen, letters en quizzen blijven maken.
+        </p>
+        <a class="home-support-btn"
+           href="https://ko-fi.com/arabicokids"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Steun ArabicoKids via Ko-fi (opent in nieuw tabblad)">
+          ☕ Steun ArabicoKids
+        </a>
+        <p class="home-support-note">Elke bijdrage helpt, hoe klein ook. ❤️</p>
       </div>
     </section>
 
