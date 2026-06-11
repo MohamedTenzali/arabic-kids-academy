@@ -9960,6 +9960,8 @@ h2 {
 /* === Steun ArabicoKids sectie === */
 
 .home-support-section {
+  width: min(100% - 2rem, var(--page-max));
+  margin-inline: auto;
   display: flex;
   align-items: center;
   gap: clamp(20px, 4vw, 48px);
@@ -9986,7 +9988,7 @@ h2 {
 
 .home-support-illus {
   flex: 0 0 auto;
-  width: min(42%, 240px);
+  width: min(45%, 300px);
   margin: 0;
 }
 
