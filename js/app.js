@@ -24,7 +24,7 @@ document.querySelectorAll(".aka-footer .footer-contact").forEach((footerContact)
   support.className = "footer-support-inline";
   support.innerHTML = `
     <a class="support-btn footer-support-btn" href="https://ko-fi.com/arabicokids" target="_blank" rel="noopener noreferrer">
-      ☕ Steun ArabicoKids
+      ☕ Steun ArabicOKids
     </a>
   `;
   footerContact.appendChild(support);
@@ -93,7 +93,7 @@ if (contactForm) {
     const formData = new FormData(contactForm);
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
-    const subject = String(formData.get("subject") || "Vraag via ArabicoKids").trim();
+    const subject = String(formData.get("subject") || "Vraag via ArabicOKids").trim();
     const message = String(formData.get("message") || "").trim();
     const body = [
       `Naam ouder: ${name}`,
