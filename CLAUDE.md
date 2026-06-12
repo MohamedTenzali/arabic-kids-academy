@@ -34,7 +34,7 @@ npx lighthouse https://arabicokids.com --chrome-flags="--headless --no-sandbox" 
 ## ⛔ NOOIT aanraken zonder expliciete toestemming
 
 ### Bestanden die je NOOIT mag wijzigen tenzij de gebruiker dit uitdrukkelijk vraagt:
-- `sw.js` — Service Worker (cachinglogica)
+- `service-worker.js` — Service Worker (cachinglogica)
 - `manifest.json` — PWA manifest
 - `sitemap.xml` — SEO sitemap
 - `robots.txt` — SEO crawling
@@ -84,10 +84,10 @@ NOOIT relatieve paden gebruiken voor CSS, JS of fonts:
 Dit geldt voor ALLE bestanden in /pages/ en subdirectories.
 
 ### 3. Service Worker — versie ophogen bij elke content-wijziging
-Als je HTML, CSS, JS of audio bestanden wijzigt, MOET je ook sw.js aanpassen:
+Als je HTML, CSS, JS of audio bestanden wijzigt, MOET je ook service-worker.js aanpassen:
 ```javascript
-// In sw.js — verhoog dit versienummer bij elke deployment
-const CACHE_VERSION = 'v3'; // Was v2 → maak v3, etc.
+// In service-worker.js — verhoog het getal bij elke deployment
+const CACHE_NAME = "arabicokids-v2026-51"; // Was v2026-50 → maak v2026-51, etc.
 ```
 
 ### 4. Brand naam — altijd consistent
@@ -132,7 +132,7 @@ arabic-kids-academy/
 ├── sitemap.xml             # SEO — NIET aanraken
 ├── robots.txt              # SEO — NIET aanraken
 ├── manifest.json           # PWA — NIET aanraken
-├── sw.js                   # Service Worker — versie ophogen bij wijziging
+├── service-worker.js       # Service Worker — versie ophogen bij wijziging
 ├── og-image.png            # Social sharing — NIET aanraken
 ├── css/
 │   └── main.css            # Hoofdstijl
@@ -225,7 +225,7 @@ Controleer ALTIJD deze punten voor je pusht naar GitHub:
 | Geen horizontale scroll | Op 375px breedte (iPhone SE) |
 | Knoppen groot genoeg | Minimaal 64×64px |
 | Fonts geladen | `/fonts/` pad correct in Network tab |
-| SW cache vers | CACHE_VERSION opgehoogd na wijziging |
+| SW cache vers | CACHE_NAME opgehoogd na wijziging (arabicokids-v2026-XX) |
 
 ### Lighthouse mobiele test (verplicht na grote wijzigingen)
 ```bash
@@ -281,7 +281,7 @@ git revert [commit-hash]
 ```
 
 ### Service Worker cached oude versie:
-1. Verhoog CACHE_VERSION in sw.js
+1. Verhoog CACHE_NAME in service-worker.js (arabicokids-v2026-XX → XX+1)
 2. Commit en push
 3. Wacht 2 minuten
 4. Hard refresh op mobiel: Settings → Safari → Clear History
@@ -299,6 +299,6 @@ git push origin main
 
 Gebruik duidelijke commit messages:
 - ✅ Fix encoding Arabic characters letters.html
-- ✅ Bump SW cache version to v3
+- ✅ Bump SW cache version to v2026-52
 - ✅ Fix absolute CSS paths in /pages/
 - ⛔ NOOIT: "fix", "update", "changes"
