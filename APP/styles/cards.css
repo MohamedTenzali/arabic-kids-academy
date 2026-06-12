@@ -1,7 +1,0 @@
-.aka-card {
-  border: 1px solid rgba(107, 59, 245, 0.12);
-  border-radius: var(--aka-radius-card);
-  background: var(--aka-white);
-  box-shadow: var(--aka-shadow-soft);
-  padding: var(--aka-space-5);
-}
