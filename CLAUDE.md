@@ -29,6 +29,8 @@ Na ELKE sessie Lighthouse draaien en controleren dat deze scores intact zijn:
 npx lighthouse https://arabicokids.com --chrome-flags="--headless --no-sandbox" --output=json
 ```
 
+Als de headless Lighthouse run faalt met NO_FCP (bekend Windows-probleem): gebruik https://pagespeed.web.dev als alternatief en rapporteer die scores. Sla de verificatie NOOIT over.
+
 ---
 
 ## ⛔ NOOIT aanraken zonder expliciete toestemming
