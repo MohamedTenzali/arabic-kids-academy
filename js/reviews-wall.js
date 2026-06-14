@@ -1,6 +1,4 @@
 (function () {
-  const STORAGE_KEY = "arabicKidsUserReviews";
-
   const DEFAULT_REVIEWS = [
     {
       id: "d1",
@@ -51,7 +49,6 @@
 
   let selectedAvatarIndex = 0;
   let selectedStars = 5;
-  let editingId = null; // null = add mode, string = edit mode
 
   // ── helpers ────────────────────────────────────────────────────────────
 
@@ -62,31 +59,6 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#x27;");
-  }
-
-  function readReviews() {
-    try {
-      const v = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      return Array.isArray(v) ? v : [];
-    } catch {
-      return [];
-    }
-  }
-
-  function writeReviews(reviews) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
-    } catch {}
-  }
-
-  function getAllReviews() {
-    return [...DEFAULT_REVIEWS, ...readReviews()].sort(
-      (a, b) => b.date.localeCompare(a.date),
-    );
-  }
-
-  function isUserReview(id) {
-    return String(id).startsWith("u");
   }
 
   function starsHtml(count, total = 5) {
@@ -111,17 +83,15 @@
     const wall = document.getElementById("reviews-wall");
     if (!wall) return;
 
-    const all = getAllReviews();
-
-    if (all.length === 0) {
+    if (DEFAULT_REVIEWS.length === 0) {
       wall.innerHTML = `<p class="reviews-empty">Nog geen ervaringen. Wees de eerste!</p>`;
       return;
     }
 
-    wall.innerHTML = all
+    wall.innerHTML = DEFAULT_REVIEWS
       .map(
         (r) => `
-        <article class="home-review-card${editingId === r.id ? " is-editing" : ""}" data-review-id="${esc(r.id)}">
+        <article class="home-review-card" data-review-id="${esc(r.id)}">
           <div class="home-review-avatar" style="background:${r.avatarBg}" aria-hidden="true">${r.avatar}</div>
           <div class="home-review-body">
             <p class="home-review-stars" role="img" aria-label="${r.stars} van 5 sterren">${starsHtml(r.stars)}</p>
@@ -129,93 +99,12 @@
             <footer class="home-review-meta">
               <p class="home-review-name">${esc(r.name)}</p>
               <time class="home-review-date" datetime="${esc(r.date)}">${timeAgo(r.date)}</time>
-              ${
-                isUserReview(r.id)
-                  ? `<button class="review-edit-btn" type="button" data-edit-id="${esc(r.id)}" aria-label="Reactie bewerken van ${esc(r.name)}">
-                       ✏️ Bewerken
-                     </button>`
-                  : ""
-              }
             </footer>
           </div>
         </article>
       `,
       )
       .join("");
-
-    // Edit button listeners
-    wall.querySelectorAll(".review-edit-btn").forEach((btn) => {
-      btn.addEventListener("click", () => startEdit(btn.dataset.editId));
-    });
-  }
-
-  // ── edit mode ──────────────────────────────────────────────────────────
-
-  function startEdit(id) {
-    const review = readReviews().find((r) => r.id === id);
-    if (!review) return;
-
-    editingId = id;
-
-    // Pre-fill form
-    const nameInput = document.getElementById("review-name");
-    const textarea = document.getElementById("review-text");
-    const charLeft = document.getElementById("review-char-left");
-    const submitBtn = document.querySelector(".review-submit-btn");
-    const cancelBtn = document.getElementById("review-cancel-btn");
-    const formTitle = document.querySelector(".home-review-form-title");
-
-    if (nameInput) nameInput.value = review.name;
-    if (textarea) {
-      textarea.value = review.text;
-      if (charLeft) charLeft.textContent = 200 - review.text.length;
-    }
-
-    // Avatar: find matching index
-    const avatarIdx = AVATAR_OPTIONS.findIndex(
-      (o) => o.emoji === review.avatar,
-    );
-    selectedAvatarIndex = avatarIdx >= 0 ? avatarIdx : 0;
-    renderAvatarPicker();
-
-    // Stars
-    selectedStars = review.stars;
-    paintStars(selectedStars);
-
-    // UI: switch to edit mode
-    if (submitBtn) submitBtn.textContent = "Wijziging opslaan ✓";
-    if (cancelBtn) cancelBtn.hidden = false;
-    if (formTitle) formTitle.dataset.editMode = "true";
-
-    // Highlight editing card
-    renderWall();
-
-    // Scroll to form
-    document
-      .querySelector(".home-review-form-wrapper")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function cancelEdit() {
-    editingId = null;
-    selectedAvatarIndex = 0;
-    selectedStars = 5;
-
-    const form = document.getElementById("review-form");
-    const charLeft = document.getElementById("review-char-left");
-    const submitBtn = document.querySelector(".review-submit-btn");
-    const cancelBtn = document.getElementById("review-cancel-btn");
-    const formTitle = document.querySelector(".home-review-form-title");
-
-    form?.reset();
-    if (charLeft) charLeft.textContent = "200";
-    if (submitBtn) submitBtn.textContent = "Reactie plaatsen 🎉";
-    if (cancelBtn) cancelBtn.hidden = true;
-    if (formTitle) delete formTitle.dataset.editMode;
-
-    renderAvatarPicker();
-    renderStarPicker();
-    renderWall();
   }
 
   // ── avatar picker ──────────────────────────────────────────────────────
@@ -238,7 +127,6 @@
     `,
     ).join("");
 
-    // Remove old listener by cloning
     const fresh = container.cloneNode(true);
     container.replaceWith(fresh);
 
@@ -292,7 +180,6 @@
     const textarea = document.getElementById("review-text");
     const charLeft = document.getElementById("review-char-left");
     const submitBtn = form?.querySelector(".review-submit-btn");
-    const cancelBtn = document.getElementById("review-cancel-btn");
 
     if (!form) return;
 
@@ -303,9 +190,7 @@
       if (charLeft) charLeft.textContent = 200 - (textarea.value.length || 0);
     });
 
-    cancelBtn?.addEventListener("click", cancelEdit);
-
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const name = nameInput?.value.trim() || "";
@@ -320,82 +205,51 @@
       }
 
       const opt = AVATAR_OPTIONS[selectedAvatarIndex];
-      const reviews = readReviews();
 
-      if (editingId) {
-        // ── Update existing review ──
-        const idx = reviews.findIndex((r) => r.id === editingId);
-        if (idx !== -1) {
-          reviews[idx] = {
-            ...reviews[idx],
-            name: name.slice(0, 40),
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Verzenden…";
+      }
+
+      // Remove any previous error
+      form.querySelector(".review-error-msg")?.remove();
+
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: "c1dfef04-ebf7-457f-808d-8e837b280a88",
+            subject: "Nieuwe ouderreactie via arabicokids.com",
+            naam: name,
+            beoordeling: `${selectedStars} sterren`,
             avatar: opt.emoji,
-            avatarBg: opt.bg,
-            stars: selectedStars,
-            text: text.slice(0, 200),
-            edited: true,
-          };
-          writeReviews(reviews);
+            ervaring: text,
+            botcheck: form.querySelector('[name="botcheck"]')?.checked || false,
+          }),
+        });
+
+        const json = await res.json();
+
+        if (json.success) {
+          const wrapper = document.querySelector(".home-review-form-wrapper");
+          if (wrapper) {
+            wrapper.innerHTML = `<p class="review-success-msg" role="alert">Bedankt! Je reactie wordt beoordeeld en verschijnt binnenkort online 🎉</p>`;
+          }
+        } else {
+          throw new Error(json.message || "Submission failed");
         }
-        editingId = null;
-
-        if (submitBtn) submitBtn.textContent = "Reactie plaatsen 🎉";
-        if (cancelBtn) cancelBtn.hidden = true;
-        const formTitle = document.querySelector(".home-review-form-title");
-        if (formTitle) delete formTitle.dataset.editMode;
-
-        renderWall();
-        form.reset();
-        selectedAvatarIndex = 0;
-        selectedStars = 5;
-        if (charLeft) charLeft.textContent = "200";
-        renderAvatarPicker();
-        renderStarPicker();
+      } catch {
+        const errP = document.createElement("p");
+        errP.className = "review-error-msg";
+        errP.setAttribute("role", "alert");
+        errP.textContent = "Er ging iets mis. Probeer het later opnieuw.";
+        form.querySelector(".review-form-footer")?.prepend(errP);
 
         if (submitBtn) {
-          const orig = submitBtn.textContent;
-          submitBtn.textContent = "Opgeslagen! ✓";
-          submitBtn.disabled = true;
-          setTimeout(() => {
-            submitBtn.textContent = orig;
-            submitBtn.disabled = false;
-          }, 2200);
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Reactie plaatsen 🎉";
         }
-      } else {
-        // ── Add new review ──
-        const review = {
-          id: `u${Date.now()}`,
-          name: name.slice(0, 40),
-          avatar: opt.emoji,
-          avatarBg: opt.bg,
-          stars: selectedStars,
-          text: text.slice(0, 200),
-          date: new Date().toISOString().slice(0, 10),
-        };
-        reviews.push(review);
-        writeReviews(reviews);
-
-        renderWall();
-        form.reset();
-        selectedAvatarIndex = 0;
-        selectedStars = 5;
-        if (charLeft) charLeft.textContent = "200";
-        renderAvatarPicker();
-        renderStarPicker();
-
-        if (submitBtn) {
-          const orig = submitBtn.textContent;
-          submitBtn.textContent = "Geplaatst! 🎉";
-          submitBtn.disabled = true;
-          setTimeout(() => {
-            submitBtn.textContent = orig;
-            submitBtn.disabled = false;
-          }, 2800);
-        }
-
-        document
-          .getElementById("reviews-wall")
-          ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     });
   }
