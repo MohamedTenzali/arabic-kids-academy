@@ -1,5 +1,15 @@
 (function () {
-  const DEFAULT_REVIEWS = [];
+  const DEFAULT_REVIEWS = [
+    {
+      id: "sofia-20260614",
+      avatar: "👩",
+      avatarBg: "linear-gradient(135deg,#ff6fae,#ff9fbf)",
+      stars: 5,
+      text: "Top website en ook alles is gratis lekker oefenen",
+      name: "Sofia",
+      date: "2026-06-14"
+    }
+  ];
 
   const AVATAR_OPTIONS = [
     // Kinderen
