@@ -1,24 +1,5 @@
 (function () {
-  const DEFAULT_REVIEWS = [
-    {
-      id: "d1",
-      name: "Fatima A.",
-      avatar: "👩",
-      avatarBg: "linear-gradient(135deg,#6b3bf5,#4db6ff)",
-      stars: 5,
-      text: "Mijn dochter vraagt zelf elke avond om te oefenen!",
-      date: "2026-01-15",
-    },
-    {
-      id: "d2",
-      name: "Youssef B.",
-      avatar: "👨",
-      avatarBg: "linear-gradient(135deg,#ff6fae,#ffc83d)",
-      stars: 5,
-      text: "Eindelijk een app die écht geschikt is voor jonge kinderen.",
-      date: "2026-01-10",
-    },
-  ];
+  const DEFAULT_REVIEWS = [];
 
   const AVATAR_OPTIONS = [
     // Kinderen
