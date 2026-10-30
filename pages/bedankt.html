@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="nl">
   <head>
     <meta charset="UTF-8">
@@ -297,6 +297,8 @@
 
       const btn = document.getElementById('download-btn');
       btn.href = boek.pdf;
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
       btn.setAttribute('download', boek.bestand);
 
       const promo = document.getElementById('other-book-promo');
