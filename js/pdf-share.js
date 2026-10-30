@@ -58,6 +58,9 @@
     @media (prefers-reduced-motion: reduce) {
       .pdf-share-sheet { animation: none; }
     }
+    /* The display values above (and .primary-button/.secondary-button) override the hidden attribute */
+    .pdf-share-backdrop[hidden],
+    .pdf-share-actions [hidden] { display: none !important; }
   `;
 
   let sheet = null;
