@@ -1,5 +1,15 @@
 (function () {
-  const DEFAULT_REVIEWS = [];
+  const DEFAULT_REVIEWS = [
+    {
+      id: "fatima-20261030",
+      avatar: "🧕",
+      avatarBg: "linear-gradient(135deg,#12a594,#65d685)",
+      stars: 5,
+      text: "Mijn dochter oefent elke dag de letters, ze vindt het geweldig!",
+      name: "Fatima",
+      date: "2026-10-30"
+    }
+  ];
 
   const AVATAR_OPTIONS = [
     // Kinderen
