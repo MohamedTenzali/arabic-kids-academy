@@ -669,7 +669,7 @@ if (lettersGrid && appLetters.length) {
             })}
             ${
               worksheetPath
-                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" download="Schrijfblad-${letterName}.pdf" aria-label="Download schrijf-PDF voor de letter ${letterName}">
+                ? `<a class="sound-button letter-write-button" href="${worksheetPath}" target="_blank" rel="noopener noreferrer" download="Schrijfblad-${letterName}.pdf" aria-label="Download schrijf-PDF voor de letter ${letterName}">
                     <span class="letter-button-icon" aria-hidden="true">
                       <svg viewBox="0 0 24 24" focusable="false">
                         <path d="M12 3v13M8 12l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
