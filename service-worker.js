@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-64";
+const CACHE_NAME = "arabicokids-v2026-65";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -59,10 +59,6 @@ const CORE_CACHE = [
   "images/worksheets/worksheet-letters.svg",
   "images/worksheets/worksheet-sounds.svg",
   "images/worksheets/worksheet-words.svg",
-  "pdf/worksheets/gratis-letters-placeholder.pdf",
-  "pdf/worksheets/niveau-1-placeholder.pdf",
-  "pdf/worksheets/niveau-2-placeholder.pdf",
-  "pdf/worksheets/niveau-3-placeholder.pdf",
   "pdf/pdf-letters/alif.pdf.pdf",
   "pdf/pdf-letters/baa.pdf.pdf",
   "pdf/pdf-letters/taa.pdf.pdf",
