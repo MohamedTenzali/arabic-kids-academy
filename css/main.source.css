@@ -9147,9 +9147,18 @@ h2 {
 
 .reviews-empty {
   grid-column: 1 / -1;
+  justify-self: center;
+  inline-size: min(100%, 520px);
+  margin: 0;
+  padding-block: 24px;
+  padding-inline: 20px;
+  border: 2px dashed rgba(107, 59, 245, 0.2);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 800;
   text-align: center;
-  color: var(--color-muted);
-  padding: 24px 0;
 }
 
 .home-review-meta {
@@ -9332,6 +9341,7 @@ h2 {
 
 .review-submit-btn {
   min-width: 200px;
+  min-block-size: 64px;
   font-size: 1rem;
 }
 
