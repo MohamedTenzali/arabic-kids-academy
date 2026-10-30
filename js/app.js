@@ -335,7 +335,7 @@ const letterWorksheetPaths = {
   noon:       "pdf/pdf-letters/Noon.pdf.pdf",
   ha:         "pdf/pdf-letters/Ha.pdf.pdf",
   waw:        "pdf/pdf-letters/Waw.pdf.pdf",
-  yaa:        "docs/letter-worksheets/yaa.pdf",
+  yaa:        "pdf/pdf-letters/Yaa.pdf",
 };
 const getLetterWorksheetPath = (letter) => {
   const path = letter.worksheetSrc || letterWorksheetPaths[letter.id] || "";
