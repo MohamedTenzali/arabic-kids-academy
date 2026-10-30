@@ -10846,9 +10846,14 @@ h2 {
   box-shadow: 0 0 0 3px rgba(107, 59, 245, 0.12);
 }
 
+/* Single column so subject + message span the full width (overrides the 2-col .contact-form at 720px+) */
+.contact-form-new {
+  grid-template-columns: 1fr;
+}
+
 .contact-form-row-pair {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-3);
 }
 
