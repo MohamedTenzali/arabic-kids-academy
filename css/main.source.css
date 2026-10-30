@@ -3901,6 +3901,12 @@ h2 {
   box-shadow: 0 12px 24px rgba(107, 59, 245, 0.22);
 }
 
+/* Binnenkort label (same pill as boeken.html), left-aligned like the card content */
+.worksheet-card .books-coming-tag {
+  justify-self: start;
+  margin-top: var(--space-2);
+}
+
 .worksheet-card-green {
   --worksheet-tint: rgba(101, 214, 133, 0.22);
 }
