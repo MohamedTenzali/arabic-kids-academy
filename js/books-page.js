@@ -31,7 +31,7 @@ const renderBookCard = (book, options = {}) => {
         <div class="ml-embedded" data-form="${escapeHtml(book.mailerliteFormId)}"></div>
       </div>`
     : book.pdfPath
-    ? `<a class="primary-button book-download" href="${escapeHtml(getAssetHref(book.pdfPath))}" download>
+    ? `<a class="primary-button book-download" href="${escapeHtml(getAssetHref(book.pdfPath))}" target="_blank" rel="noopener noreferrer" download>
         <span class="book-download-lock" aria-hidden="true">PDF</span>
         <span>${escapeHtml(book.buttonText || "Download PDF")}</span>
         <small>Direct downloaden</small>
