@@ -11232,3 +11232,14 @@ h2 {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Zo oefen je zonder stress: 2x2 op mobiel/tablet, 4 stappen naast elkaar op desktop */
+.parent-info .parent-info-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .parent-info .parent-info-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
