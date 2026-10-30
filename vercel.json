@@ -10,6 +10,11 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/pages/download-book.html",
+      "destination": "/download-book.html",
+      "permanent": true
     }
   ],
   "headers": [
