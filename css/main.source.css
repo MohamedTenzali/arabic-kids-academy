@@ -11243,3 +11243,13 @@ h2 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* Werkbladkaarten: Download-knoppen onderaan uitgelijnd */
+.worksheet-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.worksheet-card .primary-button {
+  margin-block-start: auto;
+}
