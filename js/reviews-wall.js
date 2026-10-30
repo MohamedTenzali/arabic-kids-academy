@@ -1,15 +1,5 @@
 (function () {
-  const DEFAULT_REVIEWS = [
-    {
-      id: "sofia-20260614",
-      avatar: "👩",
-      avatarBg: "linear-gradient(135deg,#ff6fae,#ff9fbf)",
-      stars: 5,
-      text: "Top website en ook alles is gratis lekker oefenen",
-      name: "Sofia",
-      date: "2026-06-14"
-    }
-  ];
+  const DEFAULT_REVIEWS = [];
 
   const AVATAR_OPTIONS = [
     // Kinderen
@@ -75,7 +65,7 @@
     if (!wall) return;
 
     if (DEFAULT_REVIEWS.length === 0) {
-      wall.innerHTML = `<p class="reviews-empty">Nog geen ervaringen. Wees de eerste!</p>`;
+      wall.innerHTML = `<p class="reviews-empty"><span aria-hidden="true">💬</span> Nog geen ervaringen. Wees de eerste!</p>`;
       return;
     }
 
