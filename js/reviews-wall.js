@@ -1,6 +1,15 @@
 (function () {
   const DEFAULT_REVIEWS = [
     {
+      id: "mohamed-20261030",
+      avatar: "🧑‍🦲",
+      avatarBg: "linear-gradient(135deg,#e83a60,#ff9f43)",
+      stars: 5,
+      text: "Top website en ook gratis. Top, bedankt!",
+      name: "Mohamed",
+      date: "2026-10-30"
+    },
+    {
       id: "fatima-20261030",
       avatar: "🧕",
       avatarBg: "linear-gradient(135deg,#12a594,#65d685)",
