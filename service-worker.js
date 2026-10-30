@@ -1,4 +1,4 @@
-const CACHE_NAME = "arabicokids-v2026-67";
+const CACHE_NAME = "arabicokids-v2026-68";
 const APP_ROOT = self.registration.scope;
 const INDEX_URL = new URL("index.html", APP_ROOT).href;
 const CORE_CACHE = [
@@ -30,7 +30,6 @@ const CORE_CACHE = [
   "pages/about.html",
   "pages/bedankt.html",
   "pages/boek-niveau-1.html",
-  "pages/download-book.html",
   "pages/letters.html",
   "pages/letter-forms.html",
   "pages/boeken.html",
