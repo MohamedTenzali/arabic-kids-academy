@@ -8,12 +8,12 @@ const isPagesPath = window.location.pathname.includes("/pages/");
 const getPageHref = (page) => `${isPagesPath ? "" : "pages/"}${page}`;
 const getAssetHref = (path) => `${isPagesPath ? "../" : ""}${path}`;
 const levelStartPages = {
-  beginner: "letters.html",
-  advanced: "vowels.html?type=short&level=advanced",
-  expert: "quiz.html?mode=mixed&level=expert",
+  beginner: "/letters.html",
+  advanced: "/klinkers.html?type=short&level=advanced",
+  expert: "/quiz.html?mode=mixed&level=expert",
 };
 const getLevelStartHref = (levelId) =>
-  getPageHref(levelStartPages[levelId] || `roadmap.html?level=${encodeURIComponent(levelId)}`);
+  levelStartPages[levelId] || getPageHref(`roadmap.html?level=${encodeURIComponent(levelId)}`);
 
 document.querySelectorAll(".aka-footer .footer-contact").forEach((footerContact) => {
   if (footerContact.querySelector(".footer-support-inline")) {
@@ -678,7 +678,7 @@ if (lettersGrid && appLetters.length) {
                     </span>
                     <span class="sound-name">Download</span>
                   </a>`
-                : `<a class="sound-button letter-write-button" href="werkbladen.html" aria-label="Bekijk schrijfwerkbladen voor de letter ${letterName}">
+                : `<a class="sound-button letter-write-button" href="/werkbladen.html" aria-label="Bekijk schrijfwerkbladen voor de letter ${letterName}">
                     <span class="letter-button-icon" aria-hidden="true">
                       <svg viewBox="0 0 24 24" focusable="false">
                         <path d="M4 20h5l10-10a2.8 2.8 0 0 0-4-4L5 16l-1 4Z" />
@@ -742,16 +742,16 @@ if (letterSoundsIndex && appLetters.length) {
 
     const query = params.toString();
 
-    return `vowels.html${query ? `?${query}` : ""}`;
+    return `/klinkers.html${query ? `?${query}` : ""}`;
   };
 
   const letterLinks = visibleVowelLetters
     .map((letter) => {
       const sounds = getVowelSounds(letter, activeVowelGroup);
-      const detailHref = `vowel-letter.html?letter=${encodeURIComponent(letter.id)}${
+      const detailHref = `/pages/vowel-letter.html?letter=${encodeURIComponent(letter.id)}${
         activeVowelGroup ? `&type=${encodeURIComponent(activeVowelGroup)}` : ""
       }&level=${encodeURIComponent(activeProgressLevelId)}&page=${encodeURIComponent(activeVowelPage)}`;
-      const formsHref = `letter-forms.html?letter=${encodeURIComponent(letter.id)}`;
+      const formsHref = `/pages/letter-forms.html?letter=${encodeURIComponent(letter.id)}`;
       const formWorksheetPath = getLetterFormWorksheetPath(letter);
       const isShortVowelCard = activeVowelGroup === "short";
 
@@ -1501,7 +1501,7 @@ if (quizCard && appLetters.length && window.createLetterQuiz) {
         <p class="letter-meta">Luister nog eens naar moeilijke letters en speel daarna opnieuw.</p>
         <div class="quiz-result-actions">
           <button class="primary-button" type="button" id="restart-quiz">Opnieuw oefenen</button>
-          <a class="secondary-button" href="roadmap.html?level=beginner">Terug naar leerroute</a>
+          <a class="secondary-button" href="/pages/roadmap.html?level=beginner">Terug naar leerroute</a>
         </div>
       </div>
     `;
